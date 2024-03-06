@@ -1,0 +1,25 @@
+<div style="background-color: #f3f3f3;padding: 30px;font-size: 13px;">
+	<div style="margin: auto;background: #fff;padding: 20px;">
+
+		<img loading="lazy" src="{{ absolute_url(asset('img/logo/lockup-color-min.png')) }}" width="100px" alt="">
+
+		<p>Bonjour <strong>Mr/Mme</strong>,</p>
+
+		<p>Le code de confirmation de votre email pour l'activation de votre compte est :</p>
+
+		<div style="width: max-content;padding:15px;background:#f3f3f3;">
+			<strong style="font-size: 1.5em;font-weight:bold;">{{ code }}</strong>
+		</div>
+
+		<p>
+			Besoin d'aide ? Consultez la <a href="#">FAQ</a>.
+			<a href="#">Conditions générales</a>
+		</p>
+
+		<p>
+			Cordialement, <br> L'équipe {{ appName }}
+		</p>
+
+		<p style="text-align: center;">©{{ appName }} - Tous droits réservés</p>
+	</div>
+</div>

@@ -1,3 +1,7 @@
-body {
-    background-color: lightgray;
+label.require::after{
+    content: ' *';
+    color: red;
+}
+.terms{
+    display: flex;
 }

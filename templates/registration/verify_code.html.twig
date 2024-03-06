@@ -1,0 +1,30 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}Confirmation de votre email{% endblock %}
+
+{% block titre %}Confirmation de votre email{% endblock %}
+
+{% block text %}
+   Un code de confirmation à été envoyer a l'adresse email : <strong>"{{ userEmail }}"</strong>
+	Entrez ce code de Confirmation pour activer votre compte
+{% endblock %}
+
+{% block body %}
+
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    {{ form_start(form) }}
+
+        {{ form_row(form.code) }}
+
+        <button type="submit" class="btn">Confirmer et activer mon compte</button>
+
+    {{ form_end(form) }}
+
+    <form action="{{ path('app_send_new_code') }}" method="post">
+      <p>Je n'ai reçu aucun code de confirmation !<button type="submit">renvoyer de nouveau le code</button></p>
+    </form>
+
+{% endblock %}

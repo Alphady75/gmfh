@@ -1,0 +1,33 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}Créer un nouveau compte {{ compte }}{% endblock %}
+
+{% block titre %}Créer un nouveau compte {{ compte }}{% endblock %}
+{% block text %}{% endblock %}
+
+{% block body %}
+
+{% include "partials/auth/_register_links.html.twig" %}
+
+{% for flashError in app.flashes('verify_email_error') %}
+<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+{% endfor %}
+
+{{ form_start(registrationForm) }}
+{{ form_row(registrationForm.email) }}
+{{ form_row(registrationForm.plainPassword) }}
+
+<div class="terms">
+    {{ form_widget(registrationForm.agreeTerms) }}
+    <label for="registration_form_agreeTerms">J'accepte les termes et condititions d'utilisation</label>
+</div>
+{{ form_errors(registrationForm.agreeTerms) }}
+
+<button type="submit" class="btn">Créer mon compte</button>
+{{ form_end(registrationForm) }}
+
+<div>
+    <p>J'ai déjà un compte ! <a href="{{ path('app_login') }}">Me connecter</a></p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}Félicitation! votre compte à bien été activé{% endblock %}
+
+{% block titre %}Félicitation! votre compte à bien été activé{% endblock %}
+
+{% block text %}
+Nous vous remercions d'avoir confirmé votre adresse e-mail <strong>{{ userEmail }}</strong> avec succès. Nous sommes
+ravis de vous compter parmi nos utilisateurs !
+{% endblock %}
+
+{% block body %}
+
+<p>
+   Votre confirmation nous permet de vous offrir une expérience utilisateur optimale et de vous tenir informé(e) des
+   dernières actualités, offres spéciales et mises à jour de notre plateforme.</p>
+<p>
+   N'hésitez pas à explorer notre site pour découvrir toutes nos fonctionnalités et services. Si vous avez des questions
+   ou des préoccupations, n'hésitez pas à nous contacter à tout moment. Notre équipe se fera un plaisir de vous aider.
+</p>
+
+<p>Encore une fois, merci de votre confiance et bienvenue parmi nous !</p>
+
+<a href="{{ path('app_login', {redirect: 'user_complete_compte'}) }}">Me connecter maintenant !</a>
+
+{% endblock %}
