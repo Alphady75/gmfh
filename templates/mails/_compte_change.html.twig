@@ -1,0 +1,32 @@
+<div style="background-color: #f3f3f3;padding: 30px;font-size: 13px;">
+	<div style="margin: auto;background: #fff;padding: 20px;">
+
+		<img loading="lazy" src="{{ absolute_url(asset('img/logo-dark.png')) }}" width="100px" alt="">
+
+		<br>
+
+		<p>Cher(e) Membre,</p>
+		
+		<p>Nous vous informons que le statut de votre compte sur <strong>{{ appName }}</strong> a été modifié. Nous tenons à vous informer des changements suivants :</p>
+		
+		<p>Statut précédent du compte : <strong>{{lastStatut}}</strong></p>
+		<p>Nouveau statut du compte : <strong>{{newStatut}}</strong></p>
+		<p>Date et heure du changement : {{ 'now'|date('d/m/Y à H:i') }}</p>
+      <p>Raisons du changement de statut du compte :</p>
+		<p>{{ activite.raison }}</p>
+		
+		<p>Si vous avez des questions ou des préoccupations concernant ce changement de statut de compte, n'hésitez pas à nous contacter à <a href="mailto:{{ appEmail }}">{{ appEmail }}</a> et notre équipe se fera un plaisir de vous aider.</p>
+		
+		<p>Merci de votre compréhension et de votre collaboration.</p>
+		
+		<p>
+			Cordialement,
+			<br>
+			L'équipe
+			{{ appName }}
+		</p>
+
+		<p style="text-align: center;">©{{ appName }}
+			- Tous droits réservés</p>
+	</div>
+</div>

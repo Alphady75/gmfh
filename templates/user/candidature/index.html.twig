@@ -1,0 +1,11 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Candidatures ({{ candidatures.getTotalItemCount }}){% endblock %}
+{% block titre %}Candidatures ({{ candidatures.getTotalItemCount }}){% endblock %}
+{% block text %}Candidatures{% endblock %}
+
+{% block body %}
+
+    {% include "user/candidature/_table.html.twig" %}
+    
+{% endblock %}

@@ -1,0 +1,32 @@
+<div style="background-color: #f3f3f3;padding: 30px;font-size: 13px;">
+	<div style="margin: auto;background: #fff;padding: 20px;text-align:center;">
+
+		<img loading="lazy" src="{{ absolute_url(asset('img/logo-dark.png')) }}" width="100px" alt="">
+
+		<br>
+
+		<p>Bonjour cher(e)<strong>Membre</strong>,</p>
+
+		<p>Votre code de réinitialisation pour votre mot de passe est :</p>
+
+		<div style="width: max-content;padding:15px 25px;background:#f3f3f3;margin:auto;">
+			<strong style="font-size: 1.5em;font-weight:bold;">{{ code }}</strong>
+		</div>
+
+		<p>
+			Besoin d'aide ? Consultez la
+			<a href="#">FAQ</a>.
+			<a href="#">Conditions générales</a>
+		</p>
+
+		<p>
+			Cordialement,
+			<br>
+			L'équipe
+			{{ appName }}
+		</p>
+
+		<p style="text-align: center;">©{{ appName }}
+			- Tous droits réservés</p>
+	</div>
+</div>

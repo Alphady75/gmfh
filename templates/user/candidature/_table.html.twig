@@ -1,0 +1,69 @@
+
+{% include "user/candidature/_filters.html.twig" %}
+
+<div class="table-responsive table-knp">
+   <table class="table twm-table table-hover table-borderless">
+      <thead>
+         <tr>
+            <th>Candidat</th>
+            <th>Date</th>
+            <th>Statut</th>
+            <th class="text-end">Actions</th>
+         </tr>
+      </thead>
+      <tbody>
+         {% for candidature in candidatures %}
+         <tr>
+            <td>
+               <div class="twm-DT-candidates-list">
+                  <div class="twm-media">
+                     <div class="twm-media-pic">
+                        <img
+                           src="{{ candidature.user.photo ? vich_uploader_asset(candidature.user, 'photoFile') | imagine_filter('mediumavatar') : asset('img/avatar.jpg') | imagine_filter('mediumavatar') }}"
+                           alt="">
+                     </div>
+                  </div>
+                  <div class="twm-mid-content">
+                     <a href="#" class="twm-job-title">
+                        <h4>
+                           {{ candidature.user.nom }} {{ candidature.user.prenom }}
+                        </h4>
+                        <p class="twm-candidate-address">
+                           <i class="feather-map-pin"></i>{{ candidature.offre.localisation }}
+                        </p>
+                     </a>
+
+                  </div>
+
+               </div>
+            </td>
+            <td>{{ candidature.created ? candidature.created|date('d/m/Y') : '' }}</td>
+            <td>
+               <span class="badge bg-{{ candidature.etat }}">{{ candidature.statut }}</span>
+            </td>
+            <td class="text-end">
+               <div class="twm-table-controls">
+                  <ul class="twm-DT-controls-icon list-unstyled">
+                     <li>
+                        <a href="{{ path('user_candidature_show', {id: candidature.id}) }}" title="Voir les détails"
+                           data-bs-toggle="tooltip" data-bs-placement="top">
+                           <span class="fa fa-eye"></span>
+                        </a>
+                     </li>
+                  </ul>
+               </div>
+            </td>
+         </tr>
+         {% else %}
+         <tr>
+            <td colspan="4">{% include "partials/base/_nodata.html.twig" %}</td>
+         </tr>
+         {% endfor %}
+      </tbody>
+   </table>
+   {{ knp_pagination_render(candidatures, null, {}, {
+   'align': 'center',
+   'size': 'large',
+   'rounded': true,
+   }) }}
+</div>

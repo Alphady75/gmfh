@@ -10,12 +10,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[UniqueEntity(fields: ['email'], message: 'Il existe déjà un compte avec cette adresse email')]
-#[UniqueEntity(fields: ['telephone'], message: 'Il existe déjà un compte avec ce numéro de téléphone')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+/**
+ * @Vich\Uploadable
+ */
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
 {
     use Timestamp;
 
@@ -57,8 +62,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 180, nullable: true)]
     private $villeResidence;
 
+    /**
+     * @Vich\UploadableField(mapping="userslogos", fileNameProperty="logo")
+     * @var File|null
+     * @Assert\Image(maxSize="10M", maxSizeMessage="Image trop volumineuse maximum 10Mb")
+     * @Assert\Image(mimeTypes = {"image/jpeg", "image/jpg", "image/png"}, mimeTypesMessage = "Mauvais format d'image (jpeg, jpg et png)")
+    **/
+    private $logoFile;
+
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $logo;
+
+    /**
+     * @Vich\UploadableField(mapping="usersphotos", fileNameProperty="photo")
+     * @var File|null
+     * @Assert\Image(maxSize="10M", maxSizeMessage="Image trop volumineuse maximum 10Mb")
+     * @Assert\Image(mimeTypes = {"image/jpeg", "image/jpg", "image/png"}, mimeTypesMessage = "Mauvais format d'image (jpeg, jpg et png)")
+    **/
+    private $photoFile;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $photo;
@@ -75,20 +96,59 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $siteWeb;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Competence::class)]
-    private $competences;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Competence::class, cascade: ['persist'])]
+    private Collection $competences;
 
-    #[ORM\OneToMany(mappedBy: 'name', targetEntity: Service::class)]
-    private $services;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Service::class, cascade: ['persist'])]
+    private Collection $services;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Post::class)]
-    private $posts;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Post::class, cascade: ['persist'])]
+    private Collection $posts;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avis::class)]
-    private $avis;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avis::class, cascade: ['persist'])]
+    private Collection $avis;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Ville::class)]
-    private $villes;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Ville::class, cascade: ['persist'])]
+    private Collection $villes;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Realisation::class, cascade: ['persist'])]
+    private Collection $realisations;
+
+    /**
+     * @Vich\UploadableField(mapping="userscv", fileNameProperty="cv")
+     * @var File|null
+    **/
+    private $cvFile;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $cv;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Candidature::class, orphanRemoval: true, cascade: ['persist'])]
+    private Collection $candidatures;
+
+    #[ORM\Column(type: 'boolean')]
+    private $completed;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Activite::class, orphanRemoval: true)]
+    private $activites;
+
+    #[ORM\Column(type: 'json', nullable: true)]
+    private $testexperience;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Offre::class, orphanRemoval: true)]
+    private $offres;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $apropo;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $nameSlug;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $societe;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class, orphanRemoval: true)]
+    private $articles;
 
     public function __construct()
     {
@@ -97,6 +157,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->posts = new ArrayCollection();
         $this->avis = new ArrayCollection();
         $this->villes = new ArrayCollection();
+        $this->realisations = new ArrayCollection();
+        $this->candidatures = new ArrayCollection();
+        $this->activites = new ArrayCollection();
+        $this->offres = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -167,6 +232,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function serialize() {
+
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+        ));
+
+    }
+
+    public function unserialize($serialized) {
+
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+        ) = unserialize($serialized);
     }
 
     public function getTelephone(): ?string
@@ -277,6 +361,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $logoFile
+     */
+    public function setLogoFile(?File $logoFile = null): void
+    {
+        $this->logoFile = $logoFile;
+
+        if (null !== $logoFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->setUpdated(new \DateTimeImmutable());
+        }
+    }
+
+    public function getLogoFile(): ?File
+    {
+        return $this->logoFile;
+    }
+
     public function getPhoto(): ?string
     {
         return $this->photo;
@@ -287,6 +390,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->photo = $photo;
 
         return $this;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $photoFile
+     */
+    public function setPhotoFile(?File $photoFile = null): void
+    {
+        $this->photoFile = $photoFile;
+
+        if (null !== $photoFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->setUpdated(new \DateTimeImmutable());
+        }
+    }
+
+    public function getPhotoFile(): ?File
+    {
+        return $this->photoFile;
     }
 
     public function getNiu(): ?string
@@ -379,7 +501,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->services->contains($service)) {
             $this->services[] = $service;
-            $service->setName($this);
+            $service->setUser($this);
         }
 
         return $this;
@@ -389,8 +511,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->services->removeElement($service)) {
             // set the owning side to null (unless already changed)
-            if ($service->getName() === $this) {
-                $service->setName(null);
+            if ($service->getUser() === $this) {
+                $service->setUser(null);
             }
         }
 
@@ -481,6 +603,252 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($ville->getUser() === $this) {
                 $ville->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Realisation[]
+     */
+    public function getRealisations(): Collection
+    {
+        return $this->realisations;
+    }
+
+    public function addRealisation(Realisation $realisation): self
+    {
+        if (!$this->realisations->contains($realisation)) {
+            $this->realisations[] = $realisation;
+            $realisation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRealisation(Realisation $realisation): self
+    {
+        if ($this->realisations->removeElement($realisation)) {
+            // set the owning side to null (unless already changed)
+            if ($realisation->getUser() === $this) {
+                $realisation->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCompleted(): ?bool
+    {
+        return $this->completed;
+    }
+
+    public function setCompleted(bool $completed): self
+    {
+        $this->completed = $completed;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Candidature[]
+     */
+    public function getCandidatures(): Collection
+    {
+        return $this->candidatures;
+    }
+
+    public function addCandidature(Candidature $candidature): self
+    {
+        if (!$this->candidatures->contains($candidature)) {
+            $this->candidatures[] = $candidature;
+            $candidature->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidature(Candidature $candidature): self
+    {
+        if ($this->candidatures->removeElement($candidature)) {
+            // set the owning side to null (unless already changed)
+            if ($candidature->getUser() === $this) {
+                $candidature->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCv(): ?string
+    {
+        return $this->cv;
+    }
+
+    public function setCv(?string $cv): self
+    {
+        $this->cv = $cv;
+
+        return $this;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $cvFile
+     */
+    public function setCvFile(?File $cvFile = null): void
+    {
+        $this->cvFile = $cvFile;
+
+        if (null !== $cvFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->setUpdated(new \DateTimeImmutable());
+        }
+    }
+
+    public function getCvFile(): ?File
+    {
+        return $this->photoFile;
+    }
+
+    public function __toString()
+    {
+        return $this->getEmail();
+    }
+
+    /**
+     * @return Collection|Activite[]
+     */
+    public function getActivites(): Collection
+    {
+        return $this->activites;
+    }
+
+    public function addActivite(Activite $activite): self
+    {
+        if (!$this->activites->contains($activite)) {
+            $this->activites[] = $activite;
+            $activite->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivite(Activite $activite): self
+    {
+        if ($this->activites->removeElement($activite)) {
+            // set the owning side to null (unless already changed)
+            if ($activite->getUser() === $this) {
+                $activite->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTestexperience(): ?array
+    {
+        return $this->testexperience;
+    }
+
+    public function setTestexperience(?array $testexperience): self
+    {
+        $this->testexperience = $testexperience;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offre[]
+     */
+    public function getOffres(): Collection
+    {
+        return $this->offres;
+    }
+
+    public function addOffre(Offre $offre): self
+    {
+        if (!$this->offres->contains($offre)) {
+            $this->offres[] = $offre;
+            $offre->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffre(Offre $offre): self
+    {
+        if ($this->offres->removeElement($offre)) {
+            // set the owning side to null (unless already changed)
+            if ($offre->getUser() === $this) {
+                $offre->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getApropo(): ?string
+    {
+        return $this->apropo;
+    }
+
+    public function setApropo(?string $apropo): self
+    {
+        $this->apropo = $apropo;
+
+        return $this;
+    }
+
+    public function getNameSlug(): ?string
+    {
+        return $this->nameSlug;
+    }
+
+    public function setNameSlug(string $nameSlug): self
+    {
+        $this->nameSlug = $nameSlug;
+
+        return $this;
+    }
+
+    public function getSociete(): ?string
+    {
+        return $this->societe;
+    }
+
+    public function setSociete(?string $societe): self
+    {
+        $this->societe = $societe;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getUser() === $this) {
+                $article->setUser(null);
             }
         }
 

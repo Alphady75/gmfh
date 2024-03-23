@@ -1,0 +1,98 @@
+{{ form_start(form, {attr: {class: 'form'}}) }}
+
+<div class="row">
+	<div class="col-sm-8">
+
+		{% include "user/post/form/_galerie.html.twig" %}
+
+		<div class="panel panel-defaulte bg-white">
+			<div class="panel-heading wt-panel-heading p-a20">
+				<h4 class="panel-tittle m-0">Détails</h4>
+			</div>
+			<div class="panel-body wt-panel-body p-a20 m-b30">
+				{{ form_row(form.name) }}
+				{{ form_row(form.categorie) }}
+				{{ form_row(form.souscategorie) }}
+				<label for="post_tarif">Prix de l'annonce</label>
+				<div class="row d-flex align-items-center">
+					<div class="col-7 pe-1">{{ form_row(form.tarif) }}</div>
+					<div class="col-5 ps-1">{{ form_row(form.devise) }}</div>
+				</div>
+				
+				{{ form_row(form.description) }}
+			</div>
+		</div>
+
+		<div class="panel panel-defaulte bg-white">
+			<div class="panel-heading wt-panel-heading p-a20">
+				<h4 class="panel-tittle m-0">Ajouter plus d'options</h4>
+			</div>
+			<div class="panel-body wt-panel-body p-a20 m-b30">
+				<div class="row">
+					<div class="col-sm-4">
+						<fieldset>
+							<legend class="col-form-label">Conditions</legend>
+							{{ form_row(form.promo) }}
+							<div class="prixpromo">
+								{{ form_row(form.tarifPromo) }}	
+							</div>
+							{{ form_row(form.negociable) }}
+							{{ form_row(form.livraison) }}
+						</fieldset>
+					</div>
+					<div class="col-sm-4">
+						{{ form_row(form.etat) }}
+					</div>
+					<div class="col-sm-4">
+						{{ form_row(form.statut) }}
+					</div>
+				</div>
+			</div>
+		</div>
+      <div class="create-banner bg-white">
+         <div class="d-flex align-items-center mb-3">
+            <img src="{{ asset('img/booster.svg') }}" class="img-fluid" alt="">
+            <h5 class="page-titre ms-auto">Booster votre annonce
+            </h5>
+         </div>
+
+         <p>Le boostage d'une annonce d'emploi présente plusieurs avantages significatifs, tant pour l'entreprise
+            recrutant que pour les candidats potentiels</p>
+
+         {% include "partials/booster/_offre_modal.html.twig" %}
+
+         {{ form_row(form.boosted) }}
+
+      </div>
+	</div>
+	<div class="col-sm-4 rightSidebar">
+		<div class="side-bar-2">
+			<div class="panel panel-defaulte bg-white">
+				<div class="panel-heading wt-panel-heading p-a20">
+					<h4 class="panel-tittle m-0">
+						<i class="fa fa-info-circle text-warning"></i>
+						Conseils de sécurité
+					</h4>
+				</div>
+				<div class="panel-body wt-panel-body p-a20 m-b30">
+					<div class="ps-3">
+						<ul class="mb-3">
+							<li>Utilisez un bref titre et une description de l'élément.</li>
+							<li>Assurez-vous de publier dans la bonne catégorie.</li>
+							<li>Ajoutez de belles photos à votre annonce.</li>
+							<li>Mettre un prix raisonnable.</li>
+							<li>Vérifiez l'élément avant de le publier.</li>
+						</ul>
+					</div>
+					<p class="text-muted">Vérifiez bien toute les informations de l'élément avant de le publier</p>
+					<button class="site-button button w-100" type="submit">
+						<span class="btnFetch d-block w-100">
+							{{ button_label|default('Publier') }}
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{ form_end(form, {render_rest: false}) }}

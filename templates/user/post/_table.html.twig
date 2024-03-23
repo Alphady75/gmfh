@@ -1,0 +1,91 @@
+{% include "user/post/_filters.html.twig" %}
+
+<div class="table-responsive table-knp">
+	<table class="table twm-table table-hover table-borderless">
+		<thead>
+			<tr>
+				<th>Annonce</th>
+				<th>Tarif</th>
+				<th>Statut</th>
+				<th>Publier</th>
+				<th class="text-end">actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for post in posts %}
+				<tr>
+					<td>
+						<div class="twm-bookmark-list d-flex">
+							<div class="twm-media">
+								<div class="twm-media-pic">
+									{% if post.medias|length >= 1 %}
+										<img src="{{ post.medias[0] ? vich_uploader_asset(post.medias[0], 'imageFile') | imagine_filter('mediumavatar') : asset('img/banner.jpg') | imagine_filter('mediumavatar') }}" alt="logo" class="radius">
+									{% else %}
+
+										<img src="{{ asset('img/banner.jpg') | imagine_filter('mediumavatar') }}" class="radius" alt="logo">
+									{% endif %}
+								</div>
+							</div>
+							<div class="twm-mid-content ps-2">
+								<a href="{{ path('user_post_edit', {'slug': post.slug}) }}" class="twm-job-title">
+									<h4>{{ post.name }}</h4>
+								</a>
+								<p class="twm-bookmark-address">
+									<i class="fa fa-tag"></i>
+									{{ post.souscategorie ?? 'Non classé...' }}
+								</p>
+							</div>
+
+						</div>
+					</td>
+					<td>{{ post.tarif ~ currency }}</td>
+					<td>
+						<span class="badge bg-{{ post.online ? 'success' : 'secondary' }} rounded-pill">
+							{{ post.online ? 'Active' : 'Masquer' }}
+						</span>
+                  {% if post.boosted %}
+						<span class="badge bg-warning rounded-pill">
+							Booster
+						</span>
+                  {% endif %}
+					</td>
+					<td>{{ post.created ? post.created|ago }}</td>
+					<td>
+						<div class="twm-table-controls">
+							<ul class="twm-DT-controls-icon list-unstyled">
+								<li>
+									<a href="{{ path('user_post_show', {id: post.id}) }}" title="Voir l'post" data-bs-toggle="tooltip" data-bs-placement="top">
+										<span class="fa fa-eye"></span>
+									</a>
+								</li>
+								<li>
+									<button title="Delete" data-bs-toggle="tooltip" data-bs-placement="top">
+										<span class="far fa-trash-alt"></span>
+									</button>
+								</li>
+							</ul>
+						</div>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">{% include "partials/base/_nodata.html.twig" %}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<th>Annonce</th>
+				<th>Tarif</th>
+				<th>Statut</th>
+				<th>Publier</th>
+				<th class="text-end">actions</th>
+			</tr>
+		</tfoot>
+	</table>
+	{{ knp_pagination_render(posts, null, {}, {
+         'align': 'right',
+         'size': 'large',
+         'rounded': true,
+         }) }}
+</div>

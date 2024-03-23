@@ -1,0 +1,15 @@
+{{ form_start(form, {attr: {class: 'filter-form'}}) }}
+
+<div class="row align-items-baseline mb-0">
+   <div class="col-3 pe-0">{{ form_row(form.query) }}</div>
+   <div class="col-3 pe-0">{{ form_row(form.secteur) }}</div>
+   <div class="col-2 ms-auto pe-0">{{ form_row(form.status) }}</div>
+   <div class="col-2 pe-0">{{ form_row(form.limit) }}</div>
+   <div class="col-2 text-end">
+      <button class="btn btn-outline-dark radius">
+         <i class="fa fa-filter"></i>
+         Filtrer
+      </button>
+   </div>
+</div>
+{{ form_end(form) }}

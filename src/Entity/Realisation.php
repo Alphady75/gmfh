@@ -5,9 +5,15 @@ namespace App\Entity;
 use App\Entity\Traits\Timestamp;
 use App\Repository\RealisationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RealisationRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[Vich\Uploadable]
 class Realisation
 {
     use Timestamp;
@@ -20,11 +26,23 @@ class Realisation
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
+    /**
+     * @var File|null
+     **/
+    #[Assert\Image(maxSize: '10M', maxSizeMessage: 'Image trop volumineuse maximum 10Mb')]
+    #[Assert\Image(mimeTypes: ["image/jpeg", "image/jpg", "image/png"], mimeTypesMessage: "Mauvais format d'image (jpeg, jpg et png)")]
+    #[Vich\UploadableField(mapping: 'realisations', fileNameProperty: 'image')]
+    private $imageFile;
+
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $image;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private $description;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'realisations')]
+    #[JoinColumn(onDelete: 'CASCADE')]
+    private $user;
 
     public function getId(): ?int
     {
@@ -65,5 +83,41 @@ class Realisation
         $this->description = $description;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->setUpdated(new \DateTimeImmutable());
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
     }
 }

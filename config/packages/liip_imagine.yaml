@@ -2,3 +2,28 @@
 liip_imagine:
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"
+
+    filter_sets:
+        entreprisebanner:
+            filters:
+                thumbnail:
+                    size: [756, 304]
+                    mode: outbound
+
+        verylargeavatar:
+            filters:
+                thumbnail:
+                    size: [200, 200]
+                    mode: outbound
+
+        largeavatar:
+            filters:
+                thumbnail:
+                    size: [150, 150]
+                    mode: outbound
+
+        mediumavatar:
+            filters:
+                thumbnail:
+                    size: [85, 85]
+                    mode: outbound

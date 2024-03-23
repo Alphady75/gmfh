@@ -20,10 +20,28 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, [
-                'label' => 'Adresse email',
+            ->add('nom', TextType::class, [
+                'label' => false,
                 'attr' => [
-                    'placeholder' => 'Ex: john@gmail.com'
+                    'placeholder' => 'Nom(s)',
+                ],
+                'constraints' => [
+                    new NotBlank(),
+                ]
+            ])
+            ->add('prenom', TextType::class, [
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Prénom(s)',
+                ],
+                'constraints' => [
+                    new NotBlank(),
+                ]
+            ])
+            ->add('email', EmailType::class, [
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Email (Ex: email@gmail.com)'
                 ],
                 'constraints' => [
                     new NotBlank(),
@@ -32,6 +50,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                'required' => false,
                 'label' => false,
                 'constraints' => [
                     new IsTrue([
@@ -42,9 +61,9 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
-                'label' => "Mot de passe",
+                'label' => false,
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password', 'placeholder' => 'Mot de passe'],
+                'attr' => ['autocomplete' => 'new-password', 'placeholder' => 'Mot de passe', 'class' => 'focus'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez entrer un mot de passe',

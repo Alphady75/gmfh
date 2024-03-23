@@ -1,0 +1,31 @@
+<div style="background-color: #f3f3f3;padding: 30px;font-size: 13px;">
+   <div style="margin: auto;background: #fff;padding: 20px;text-align:center;">
+
+      <img loading="lazy" src="{{ absolute_url(asset('img/logo-dark.png')) }}" width="100px" alt="">
+
+      <p>Cher(e) Administrateur/Administratrice,</p>
+
+      <p>Vous recevez ce message car un utilisateur a soumis un nouveau formulaire de contact sur {{ appName }}.
+         Voici les détails de la demande :</p>
+
+      <p>Nom de l'utilisateur : {{ nom }}</p>
+      <p>Adresse e-mail de l'utilisateur : {{ useremail }}</p>
+      <p>Sujet : {{ sujet }}</p>
+
+      <p>Message :</p>
+      <p>{{ message }}</p>
+
+      <p>Merci de prendre en charge cette demande dès que possible et de contacter l'utilisateur pour lui fournir une réponse appropriée.</p>
+
+      <p>
+         Besoin d'aide ? Consultez la <a href="#">FAQ</a>.
+         <a href="#">Conditions générales</a>
+      </p>
+
+      <p>
+         Cordialement, <br> L'équipe {{ appName }}
+      </p>
+
+      <p style="text-align: center;">©{{ appName }} - Tous droits réservés</p>
+   </div>
+</div>

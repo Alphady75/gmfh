@@ -1,0 +1,24 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Félicitation votre annonce a été Booster!{% endblock %}
+{% block titre %}Félicitation votre annonce a été Booster!{% endblock %}
+{% block text %}Votre post{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+
+{% block body %}
+
+<div class="row">
+   <div class="col-sm-10 mx-auto">
+      <div class="create-banner bg-white">
+         <div class="d-flex align-items-center mb-3">
+            <img src="{{ asset('img/success.svg') }}" class="img-fluid" alt="">
+            <h5 class="page-titre ms-auto">Félicitation votre annonce #{{ post }} à été Booster avec succès</h5>
+         </div>
+
+         {% include "partials/booster/_post_infos.html.twig" %}
+
+      </div>
+   </div>
+</div>
+
+{% endblock %}

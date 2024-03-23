@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
+use App\Security\LoginFormAuthenticator;
 use App\Service\GenererCodeService;
 use App\Service\MailerService;
 use App\Service\UserService;
@@ -15,6 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/inscription-particulier')]
 class ParticulierController extends AbstractController
@@ -27,13 +30,14 @@ class ParticulierController extends AbstractController
         private UserService $userService,
         private MailerService $mailerService,
         private UserRepository $userRepository,
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
+        private SluggerInterface $slugger
     ) {
         $this->emailVerifier = $emailVerifier;
     }
 
     #[Route('/', name: 'particulier_register', methods: ['POST', 'GET'])]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, LoginFormAuthenticator $authenticator, UserAuthenticatorInterface $userAuthenticator): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -57,21 +61,22 @@ class ParticulierController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+            
+            $noms = $form->get('nom')->getData() . ' ' . $form->get('prenom')->getData();
             $user->setCodeIsVerified($codeConfirmation);
+            $user->setCompleted(false);
+            $user->setNameSlug($this->slugger->slug(strtolower($noms)));
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
             # Envoie du mail à l'utilisateur
             $this->mailerService->sendCodeToConfirmEmailCode($user->getEmail(), $codeConfirmation);
 
-            return $this->redirectToRoute('app_confirm_code', [], 301);
-
-            /*return $userAuthenticator->authenticateUser(
+            return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
                 $request
-            );*/
+            );
         }
 
         return $this->render('registration/register.html.twig', [

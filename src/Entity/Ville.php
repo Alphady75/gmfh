@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Traits\Timestamp;
 use App\Repository\VilleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 #[ORM\Entity(repositoryClass: VilleRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -21,6 +22,7 @@ class Ville
     private $name;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'villes')]
+    #[JoinColumn(onDelete: 'CASCADE')]
     private $user;
 
     public function getId(): ?int
@@ -50,5 +52,10 @@ class Ville
         $this->user = $user;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

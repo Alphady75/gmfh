@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\Timestamp;
 use App\Repository\AvisRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 #[ORM\Entity(repositoryClass: AvisRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Avis
 {
+    use Timestamp;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -17,9 +22,11 @@ class Avis
     private $description;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'avis')]
+    #[JoinColumn(onDelete: 'CASCADE')]
     private $user;
 
     #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'avis')]
+    #[JoinColumn(onDelete: 'CASCADE')]
     private $post;
 
     public function getId(): ?int

@@ -1,6 +1,6 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
-    form_themes: ['bootstrap_4_layout.html.twig']
+    form_themes: ['bootstrap_5_layout.html.twig']
     #form_themes: ['bootstrap_4_Horizontal_layout.html.twig']
     globals:
         appName: "GAMFAH"
@@ -10,12 +10,13 @@ twig:
         site: "https://niosso.com/"
         concepteur: "By conception"
         messenger: "https://m.me/niossocgb"
-        email: "supportcg@niosso.com"
+        appEmail: "supportcg@niosso.com"
         bayesite: "https://www.bayeconception.com/"
         bayeemail: "contact@bayeconception.com"
         baye: "Baye conception"
         mtnMomo: "+242 06 535 65 26"
         airtelMomo: "En attente"
+        tinyApiKey: "mivqhpa71d4t5vade4gfu8tzp94wa6ev5xpzmbbhv5totjbo"
 
 when@test:
     twig:

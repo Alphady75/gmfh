@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SecteursActivite index{% endblock %}
+
+{% block body %}
+    <h1>SecteursActivite index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for secteurs_activite in secteurs_activites %}
+            <tr>
+                <td>{{ secteurs_activite.id }}</td>
+                <td>{{ secteurs_activite.name }}</td>
+                <td>{{ secteurs_activite.created ? secteurs_activite.created|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ secteurs_activite.updated ? secteurs_activite.updated|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_secteurs_activite_show', {'id': secteurs_activite.id}) }}">show</a>
+                    <a href="{{ path('admin_secteurs_activite_edit', {'id': secteurs_activite.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_secteurs_activite_new') }}">Create new</a>
+{% endblock %}

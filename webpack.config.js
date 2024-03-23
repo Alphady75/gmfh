@@ -21,6 +21,15 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('collection', './public/js/collection.js')
+    .addEntry('select2', './public/js/select2.js')
+    .addEntry('offresecteurs', './public/js/offresecteurs.js')
+    .addEntry('mce', './public/js/tinymce.js')
+    .addEntry('loadbtn', './public/js/loadbtn.js')
+    .addEntry('favoris', './public/js/favoris.js')
+    .addEntry('desablebtn', './public/js/desablebtn.js')
+    .addEntry('annonceimg', './public/js/annonceimg.js')
+    .addEntry('annoncecategorie', './public/js/annoncecategorie.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
@@ -31,6 +40,7 @@ Encore
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
+    .addStyleEntry('responsive', './assets/styles/responsive.css')
 
     /*
      * FEATURE CONFIG

@@ -18,6 +18,7 @@ class RequestCodeType extends AbstractType
                 'label' => 'Entrez adresse email',
                 'attr' => [
                     'placeholder' => 'Entrez adresse email',
+                    'class' => 'focus'
                 ],
                 'constraints' => [
                     new NotBlank(),

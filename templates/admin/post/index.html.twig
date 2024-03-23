@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post index{% endblock %}
+
+{% block body %}
+    <h1>Post index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Image</th>
+                <th>Tarif</th>
+                <th>Description</th>
+                <th>Online</th>
+                <th>Etat</th>
+                <th>Negociable</th>
+                <th>Livraison</th>
+                <th>Promo</th>
+                <th>Vedette</th>
+                <th>Statut</th>
+                <th>TarifPromo</th>
+                <th>Boosted</th>
+                <th>Devise</th>
+                <th>Urgent</th>
+                <th>IsSelled</th>
+                <th>SellPlateform</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.name }}</td>
+                <td>{{ post.slug }}</td>
+                <td>{{ post.image }}</td>
+                <td>{{ post.tarif }}</td>
+                <td>{{ post.description }}</td>
+                <td>{{ post.online ? 'Yes' : 'No' }}</td>
+                <td>{{ post.etat }}</td>
+                <td>{{ post.negociable ? 'Yes' : 'No' }}</td>
+                <td>{{ post.livraison ? 'Yes' : 'No' }}</td>
+                <td>{{ post.promo ? 'Yes' : 'No' }}</td>
+                <td>{{ post.vedette ? 'Yes' : 'No' }}</td>
+                <td>{{ post.statut }}</td>
+                <td>{{ post.tarifPromo }}</td>
+                <td>{{ post.boosted ? 'Yes' : 'No' }}</td>
+                <td>{{ post.devise }}</td>
+                <td>{{ post.urgent ? 'Yes' : 'No' }}</td>
+                <td>{{ post.isSelled ? 'Yes' : 'No' }}</td>
+                <td>{{ post.sellPlateform }}</td>
+                <td>{{ post.created ? post.created|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ post.updated ? post.updated|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_post_show', {'id': post.id}) }}">show</a>
+                    <a href="{{ path('admin_post_edit', {'id': post.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="22">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_post_new') }}">Create new</a>
+{% endblock %}

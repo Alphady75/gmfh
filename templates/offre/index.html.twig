@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recrutement{% endblock %}
+
+{% block body %}
+<!-- INNER PAGE BANNER -->
+<div class="wt-bnr-inr overlay-wraper bg-center" style="background-image:url({{ asset('img/h7-banner.jpg') }});">
+  <div class="overlay-main site-bg-white opacity-01"></div>
+  <div class="container">
+    <div class="wt-bnr-inr-entry">
+      <div class="banner-title-outer">
+        <div class="banner-title-name">
+          <h2 class="wt-title">Les métiers les plus passionnants</h2>
+        </div>
+      </div>
+      <!-- BREADCRUMB ROW -->
+
+      <div>
+        <ul class="wt-breadcrumb breadcrumb-style-2">
+          <li>
+            <a href="{{ path('accueil') }}">Accueil</a>
+          </li>
+          <li>Grille d'emplois</li>
+        </ul>
+      </div>
+
+      <!-- BREADCRUMB ROW END -->
+    </div>
+  </div>
+</div>
+<!-- INNER PAGE BANNER END -->
+
+
+<!-- OUR BLOG START -->
+<div class="section-full p-t120  p-b90 site-bg-white">
+
+
+  <div class="container">
+    <div class="row">
+    
+      <div class="col-lg-4 col-md-12 rightSidebar">
+
+        {% include "offre/composants/_sidebar.html.twig" %}
+
+      </div>
+
+      <div class="col-lg-8 col-md-12">
+        <!--Filter Short By-->
+        <div class="product-filter-wrap d-flex justify-content-between align-items-center m-b30">
+          <span class="woocommerce-result-count-left">Affichage de 2,150 emplois</span>
+
+          <form class="woocommerce-ordering twm-filter-select" method="get">
+            <span class="woocommerce-result-count">Trier par</span>
+            <select class="wt-select-bar-2 selectpicker" data-live-search="true" data-bv-field="size">
+              <option>Most Recent</option>
+              <option>Freelance</option>
+              <option>Full Time</option>
+              <option>Internship</option>
+              <option>Part Time</option>
+              <option>Temporary</option>
+            </select>
+            <select class="wt-select-bar-2 selectpicker" data-live-search="true" data-bv-field="size">
+              <option>Show 10</option>
+              <option>Show 20</option>
+              <option>Show 30</option>
+              <option>Show 40</option>
+              <option>Show 50</option>
+              <option>Show 60</option>
+            </select>
+          </form>
+
+        </div>
+
+        <div class="row">
+        
+          {% for offre in offres %}
+          <!--Block ten-->
+          <div class="col-lg-6 col-md-12 m-b30">
+
+            {% include "offre/composants/_card.html.twig" with {'offre': offre} %}
+
+          </div>
+          {% endfor %}
+
+        </div>
+
+        {% include "offre/composants/_pagination.html.twig" %}
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- OUR BLOG END -->
+{% endblock %}

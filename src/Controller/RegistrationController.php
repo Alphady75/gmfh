@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\User\CheckCodeType;
+use App\Form\User\ProfilEntrepriseType;
+use App\Form\User\ProfilParticulierType;
+use App\Form\User\ProfilPersonnelType;
 use App\Form\User\RequestCodeType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
@@ -19,8 +22,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
+#[Route('/inscription')]
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
@@ -31,14 +36,28 @@ class RegistrationController extends AbstractController
         private UserService $userService,
         private MailerService $mailerService,
         private UserRepository $userRepository,
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
+        private SluggerInterface $slugger
     ) {
         $this->emailVerifier = $emailVerifier;
     }
 
-    #[Route('/inscription', name: 'app_register', methods: ['POST', 'GET'])]
+    #[Route('/creer-un-compte', name: 'app_register', methods: ['POST', 'GET'])]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginFormAuthenticator $authenticator): Response
     {
+        /** @var User */
+        $loginUser = $this->getUser();
+
+        if ($loginUser) {
+
+            if ($loginUser->getCompleted() == false) {
+                # Redirect to complete profil
+                return $this->redirectToRoute('register_complete_compte');
+            }
+
+            return $this->redirectToRoute('user_espace');
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -48,12 +67,14 @@ class RegistrationController extends AbstractController
             # Génération & enregistrement du code de vérification email en session
             $codeConfirmation = $this->genererCodeService->generateUniqueCode();
             $this->genererCodeService->setCodeInSession($codeConfirmation);
-            
+
             # Save user Email in session
             $this->userService->setUserEmailInSession($form->get('email')->getData());
-
+            $noms = $form->get('nom')->getData() . ' ' . $form->get('prenom')->getData();
             $user->setRoles(['ROLE_PERSONNEL']);
+            $user->setCompleted(false);
             $user->setCompte('PERSONNEL');
+            $user->setNameSlug($this->slugger->slug(strtolower($noms)));
             # encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -69,13 +90,15 @@ class RegistrationController extends AbstractController
             # Envoie du mail à l'utilisateur
             $this->mailerService->sendCodeToConfirmEmailCode($user->getEmail(), $codeConfirmation);
 
-            return $this->redirectToRoute('app_confirm_code', [], 301);
+            # Après inscription on rédirige l'utilisateur vers la page por completer son profil
+            # return $this->redirectToRoute('app_confirm_code', [], 301);
 
-            /*return $userAuthenticator->authenticateUser(
+            $this->addFlash('success', 'Votre compte a bien été crée veuillez confirmer votre email');
+            return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
                 $request
-            );*/
+            );
         }
 
         return $this->render('registration/register.html.twig', [
@@ -107,11 +130,14 @@ class RegistrationController extends AbstractController
                 $this->entityManager->flush();
 
                 # Redirect where to connect then complete profil
-                # return $this->redirectToRoute('app_login', ['redirect' => 'user_complete_compte']);
-                return $this->redirectToRoute('register_success', [], 301);
+                $this->addFlash('success', "Votre adresse email a bien été confirmée");
+
+                return $this->redirectToRoute('register_complete_compte', [], 301);
+
+                #return $this->redirectToRoute('register_success', [], 301);
 
             } else {
-                $this->addFlash('danger', 'Code de confirmation du compte');
+                $this->addFlash('danger', 'Code de confirmation du compte incorrect');
             }
         }
 
@@ -121,6 +147,50 @@ class RegistrationController extends AbstractController
         ]);
 
         return new Response();
+    }
+
+    #[Route('/completer-mon-compte', name: 'register_complete_compte', methods: ['GET', 'POST'])]
+    public function completeCompte(Request $request): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+
+        if ($user == null) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $userCompte = $user->getCompte();
+        $formType = ProfilParticulierType::class;
+
+        if ($userCompte == 'PERSONNEL') {
+            $formType = ProfilPersonnelType::class;
+        }
+
+        if ($userCompte == 'ENTREPRISE') {
+            $formType = ProfilEntrepriseType::class;
+        }
+
+        $form = $this->createForm($formType, $user, [
+            'step' => 'registration'
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($userCompte == 'ENTREPRISE') {
+                $user->setNameSlug($form->get('societe')->getData());
+            }
+            $user->setCompleted(true);
+            $this->entityManager->flush();
+
+            $this->addFlash('success', "Votre compte à bien été mis à jour");
+            return $this->redirectToRoute('user_redirect', [], 301);
+        }
+
+        return $this->render('registration/complete_compte.html.twig', [
+            'form' => $form->createView(),
+            'userCompte' => $userCompte,
+        ]);
     }
 
     #[Route('/inscription-reussi', name: 'register_success')]
@@ -149,7 +219,7 @@ class RegistrationController extends AbstractController
             $user = $this->userRepository->findOneBy(['email' => $form->get('email')->getData()]);
 
             if ($user) {
-            
+
                 # Générate new code
                 $newCode = $this->genererCodeService->generateUniqueCode();
 
@@ -159,8 +229,7 @@ class RegistrationController extends AbstractController
                 # Mise à jour du code de confirmation email
                 $user->setCodeIsVerified($newCode);
                 $this->entityManager->flush();
-
-            }else {
+            } else {
                 # Set user from form in session
                 $this->userService->setUserEmailInSession($form->get('email')->getData());
             }
@@ -199,6 +268,7 @@ class RegistrationController extends AbstractController
     #[Route('/resend-code', name: 'app_send_new_code', methods: ['POST'])]
     public function resendCode()
     {
+        #$userEmail = $this->userService->getUserEmailInSession();
         $userEmail = $this->userService->getUserEmailInSession();
 
         if ($userEmail) {

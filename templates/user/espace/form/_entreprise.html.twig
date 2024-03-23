@@ -1,0 +1,88 @@
+{{ form_start(form, {attr: {class: 'p-3'}}) }}
+
+<div class="entreprise-photo">
+	<label for="profil_entreprise_photoFile_file" class="entreprise-banner">
+		<img src="{% if app.user.photo %}{{ vich_uploader_asset(app.user, 'photoFile') | imagine_filter('entreprisebanner')}}{% else %}{{ asset('img/banner.png') | imagine_filter('entreprisebanner')}}{% endif %}"
+			class="photo-banner img-fluid" alt="Bannier de compte">
+	</label>
+	<div class="hidden-file">{{ form_widget(form.photoFile) }}</div>
+	<div class="banner-error">
+		{{ form_errors(form.photoFile) }}
+	</div>
+</div>
+<div class="logo-block-img">
+	<label for="profil_entreprise_logoFile_file" class="logo-avatar">
+		<img src="{% if app.user.logo %}{{ vich_uploader_asset(app.user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/avatar.jpg') | imagine_filter('largeavatar') }}{% endif %}"
+			class="rounded-circle logo-img img-fluid img-thumbnail" alt="Avatar de compte">
+	</label>
+	<div class="hidden-file">{{ form_widget(form.logoFile) }}</div>
+	{{ form_errors(form.logoFile) }}
+</div>
+
+<div class="panel panel-defaulte bg-white">
+	<div class="panel-heading wt-panel-heading p-a20">
+		<h4 class="panel-tittle m-0">Informations de l'entreprise
+			<span class="text-danger">*</span>
+		</h4>
+	</div>
+	<div class="panel-body wt-panel-body p-a20 m-b30">
+		<div class="row">
+			<div class="col-sm-6">{{ form_row(form.niu) }}</div>
+			<div class="col-sm-6">{{ form_row(form.telephone) }}</div>
+			<div class="col-sm-6">{{ form_row(form.localisation) }}</div>
+			<div class="col-sm-6">{{ form_row(form.nomResponsable) }}</div>
+			<div class="col-sm-12">{{ form_row(form.siteWeb) }}</div>
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-defaulte bg-white">
+	<div class="panel-heading wt-panel-heading p-a20">
+		<h4 class="panel-tittle m-0">Services que vous souhaitez offrir (facultatif).
+			<span class="text-danger">*</span>
+		</h4>
+	</div>
+	<div class="panel-body wt-panel-body p-a20 m-b30">
+		{{ form_row(form.services) }}
+	</div>
+</div>
+
+<div class="panel panel-defaulte bg-white">
+	<div class="panel-heading wt-panel-heading p-a20">
+		<h4 class="panel-tittle m-0">Périmètre (Dans quelles villes)
+			<span class="text-danger">*</span>
+		</h4>
+	</div>
+	<div class="panel-body wt-panel-body p-a20 m-b30">
+		{{ form_row(form.villes) }}
+	</div>
+</div>
+
+<h5>Realisations (facultatif).</h5>
+<div class="pb-3">
+	<div id="realisations" class="row" data-prototype="{{ include("user/espace/collection/_realisation.html.twig",
+		{form: form.realisations.vars.prototype})|e("html_attr") }}"
+		data-index="{{ form.realisations|length > 0 ? form.realisations|last.vars.name + 1 : 0 }}">
+		{% for realisation in form.realisations %}
+		<div class="col-sm-6">
+			{{ include("user/espace/collection/_realisation.html.twig", {form: realisation}) }}
+		</div>
+		{% endfor %}
+	</div>
+	{{ form_errors(form.realisations) }}
+	<div class="py-3 text-left">
+		<button type="button" class="btn btn-new btn-small btn btn-white shadow border-light"
+			data-collection="#realisations">
+			<i class="fa fa-plus"></i>
+			Ajouter une realisation
+		</button>
+	</div>
+</div>
+
+<button class="site-button button" type="submit">
+	<span class="btnFetch d-block w-100">
+		{{ button_label|default('Enregistrer') }}
+	</span>
+</button>
+
+{{ form_end(form, {render_rest: false}) }}

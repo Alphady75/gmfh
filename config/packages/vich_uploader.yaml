@@ -1,7 +1,38 @@
 vich_uploader:
     db_driver: orm
 
-    #mappings:
-    #    products:
-    #        uri_prefix: /images/products
-    #        upload_destination: '%kernel.project_dir%/public/images/products'
+    mappings:
+        userslogos:
+            uri_prefix: /uploads/images/users/logos
+            upload_destination: '%kernel.project_dir%/public/uploads/images/users/logos'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+
+        usersphotos:
+            uri_prefix: /uploads/images/users/photos
+            upload_destination: '%kernel.project_dir%/public/uploads/images/users/photos'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+
+        userscv:
+            uri_prefix: /uploads/images/users/cv
+            upload_destination: '%kernel.project_dir%/public/uploads/images/users/cv'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+
+        annonces:
+            uri_prefix: /uploads/images/annonces
+            upload_destination: '%kernel.project_dir%/public/uploads/images/annonces'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+
+        realisations:
+            uri_prefix: /uploads/images/realisations
+            upload_destination: '%kernel.project_dir%/public/uploads/images/realisations'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true

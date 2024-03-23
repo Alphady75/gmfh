@@ -1,0 +1,61 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Publier votre annonce{% endblock %}
+{% block titre %}Publier votre annonce{% endblock %}
+{% block text %}Publier votre annonce{% endblock %}
+
+{% block body %}
+
+{{ include('user/post/_form.html.twig') }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+{{ encore_entry_script_tags('annonceimg') }}
+{{ encore_entry_script_tags('annoncecategorie') }}
+
+<script>
+	/*document.addEventListener("DOMContentLoaded", function () {
+		var addButton = document.getElementById('add_image_button');
+		var maxImages = 3;
+		var imageCount = localStorage.getItem('imageCount') || 0; // Récupérer le nombre de clics depuis le stockage local
+
+		if (imageCount >= maxImages) {
+			addButton.style.display = 'none'; // Masquer le bouton si le nombre maximum d'images est atteint
+		}
+
+		addButton.addEventListener('click', function () {
+			imageCount++;
+			localStorage.setItem('imageCount', imageCount); // Enregistrer le nombre de clics dans le stockage local
+
+			if (imageCount >= maxImages) {
+				addButton.style.display = 'none'; // Masquer le bouton d'ajout une fois le nombre maximum d'images atteint
+			}
+		});
+	});*/
+
+	// Sélection du bouton
+	let bouton = document.getElementById("add_image_button");
+
+	// Initialisation du compteur de clics
+	let compteurClics = 0;
+
+	// Fonction pour masquer le bouton après trois clics
+	function masquerApresTroisClics() {
+		compteurClics++;
+		if (compteurClics === 3) {
+			bouton.style.display = "none";
+		}
+	}
+
+	// Ajout d'un écouteur d'événements pour le clic sur le bouton
+	bouton.addEventListener("click", masquerApresTroisClics);
+	
+   $('#post_promo').change(function () {
+      $('.prixpromo').slideToggle();
+   })
+</script>
+{% endblock %}

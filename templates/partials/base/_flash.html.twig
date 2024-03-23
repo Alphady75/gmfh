@@ -3,13 +3,13 @@
     <div class="alert alert-{{ type }} alert-dismissible fade show p-3 rounded">
       <strong class="text-{{ type }} alert-title">
         {% if type == 'danger' %}
-          Echec!
+          <i class="fa fa-exclamation-triangle"></i>
         {% elseif type == 'warning' %}
-          Attention!
+        <i class="fa fa-exclamation-triangle"></i>
         {% elseif type == 'info' %}
-          En cours de validation!
+        <i class="fa fa-info-circle"></i>
         {% elseif type == 'success' %}
-          Succès!
+        <i class="fa fa-check-circle"></i>
         {% endif %}
       </strong>
       {{ message }}

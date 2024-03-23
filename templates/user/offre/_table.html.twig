@@ -1,0 +1,91 @@
+{% include "user/offre/_filters.html.twig" %}
+
+<div class="table-responsive table-knp">
+	<table class="table twm-table table-hover table-borderless">
+		<thead>
+			<tr>
+				<th>Titre de l'offre</th>
+				<th>Nombre de personne</th>
+				<th>Publier</th>
+				<th>Date d'application</th>
+				<th>Statut</th>
+				<th class="text-end">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for offre in offres %}
+				<tr>
+					<td>
+						<div class="twm-bookmark-list p-0 m-0">
+							<div class="twm-mid-content p-0 m-0">
+								<a href="{{ path('user_offre_edit', {'slug': offre.slug}) }}" class="twm-job-title">
+									<h4>{{ offre.name|u.truncate(20, '...') }}</h4>
+								</a>
+								<p class="twm-bookmark-address">
+									<i class="feather-map-pin"></i>
+									{{ offre.localisation ?? 'Aucune localisation...' }}
+								</p>
+							</div>
+
+						</div>
+					</td>
+					<td>
+						<div class="twm-jobs-category">
+							<span class="twm-bg-sky">{{ offre.effectifRecrutement }}</span>
+						</div>
+					</td>
+					<td>
+						<div class="twm-job-post-duration">{{ offre.created|ago }}</div>
+					</td>
+					<td>{{ offre.dateDebut|date('d/m/Y') }}</td>
+					<td>
+						<span class="badge bg-{{ offre.status == "Actif" ? 'success' : 'secondary' }}">
+							{{ offre.status }}
+						</span>
+						{% if offre.boosted %}
+						<span class="badge bg-warning">
+							Booster
+						</span>
+						{% endif %}
+					</td>
+					<td>
+						<div class="twm-table-controls">
+							<ul class="twm-DT-controls-icon list-unstyled">
+								<li>
+									<a href="{{ path('user_offre_edit', {slug: offre.slug}) }}" title="Voir l'offre" data-bs-toggle="tooltip" data-bs-placement="top">
+										<span class="fa fa-eye"></span>
+									</a>
+								</li>
+								<li>
+									<button title="Delete" data-bs-toggle="tooltip" data-bs-placement="top">
+										<span class="far fa-trash-alt"></span>
+									</button>
+								</li>
+							</ul>
+						</div>
+					</td>
+				</tr>
+
+			{% else %}
+				<tr>
+					<td colspan="6">{% include "partials/base/_nodata.html.twig" %}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<th>Titre de l'offre</th>
+				<th>Nombre de personne</th>
+				<th>Publier</th>
+				<th>Date d'application</th>
+				<th>Statut</th>
+				<th class="text-end">Actions</th>
+			</tr>
+		</tfoot>
+	</table>
+	{{ knp_pagination_render(offres, null, {}, {
+         'align': 'right',
+         'size': 'large',
+         'rounded': true,
+         }) }}
+</div>

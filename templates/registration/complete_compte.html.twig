@@ -1,0 +1,42 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}Completez votre compte{% endblock %}
+
+{% block titre %}Completez votre compte{% endblock %}
+{% block text %}{% endblock %}
+
+{% block body %}
+
+{% if userCompte == 'PERSONNEL' %}
+
+{% include "registration/form/_personnel.html.twig" %}
+
+{% endif %}
+
+{% if userCompte == 'PARTICULIER' %}
+
+{% include "registration/form/_particulier.html.twig" %}
+
+{% endif %}
+
+{% if userCompte == 'ENTREPRISE' %}
+
+{% include "registration/form/_entreprise.html.twig" %}
+
+{% endif %}
+
+{% endblock %}
+
+{% block footer %}
+{% if app.user == null %}
+<p class="text-center">J'ai déjà un compte ! <a href="{{ path('app_login') }}">Me connecter</a></p>
+{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+{% include "partials/espace/_script_complete_profil.html.twig" %}
+
+{% endblock %}

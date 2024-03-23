@@ -1,0 +1,127 @@
+{{ form_start(form) }}
+
+<div class="side-bar">
+
+	<div class="sidebar-elements search-bx">
+
+		<div class="form-group mb-4">
+			<h4 class="section-head-small mb-4">Secteurs d'activité</h4>
+			{{ form_widget(form.secteur) }}
+		</div>
+
+		<div class="form-group mb-4">
+			<h4 class="section-head-small mb-4">Mots clés</h4>
+			<div class="input-group">
+				{{ form_widget(form.query) }}
+				<button class="btn" type="button">
+					<i class="feather-search"></i>
+				</button>
+			</div>
+		</div>
+
+		<div class="form-group mb-4">
+			<h4 class="section-head-small mb-4">Localisation</h4>
+			<div class="input-group">
+				{{ form_widget(form.localisation) }}
+				<button class="btn" type="button">
+					<i class="feather-map-pin"></i>
+				</button>
+			</div>
+		</div>
+
+		<div class="twm-sidebar-ele-filter">
+			<h4 class="section-head-small mb-4">Type de contrat</h4>
+			<ul>
+				<li>
+					<div class="form-check p-0">
+						{{ form_widget(form.typeContrat) }}
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="twm-sidebar-ele-filter">
+			<h4 class="section-head-small mb-4">Horaires</h4>
+			<ul>
+				<li>
+					<div class="form-check p-0">
+						{{ form_widget(form.horaires) }}
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="twm-sidebar-ele-filter">
+			<h4 class="section-head-small mb-4">Type of employment</h4>
+			<ul>
+				<li>
+					<div class="form-check">
+						<input type="radio" class="form-check-input" id="Freelance1">
+						<label class="form-check-label" for="Freelance1">Freelance</label>
+					</div>
+				</li>
+				<li>
+					<div class="form-check">
+						<input type="radio" class="form-check-input" id="FullTime1">
+						<label class="form-check-label" for="FullTime1">Full Time</label>
+					</div>
+				</li>
+
+				<li>
+					<div class="form-check">
+						<input type="radio" class="form-check-input" id="Intership1">
+						<label class="form-check-label" for="Intership1">Intership</label>
+					</div>
+				</li>
+
+				<li>
+					<div class="form-check">
+						<input type="radio" class="form-check-input" id="Part-Time1">
+						<label class="form-check-label" for="Part-Time1">Part Time</label>
+					</div>
+				</li>
+
+			</ul>
+			
+			<button class="site-button" type="submit">
+				<span class="btnFetch d-block w-100 text-center">
+					{{ button_label|default('Rechercher') }}&nbsp;
+					<i class="fa fa-search"></i>
+				</span>
+			</button>
+		</div>
+
+	</div>
+
+	<div class="widget tw-sidebar-tags-wrap">
+		<h4 class="section-head-small mb-4">Tags</h4>
+
+		<div class="tagcloud">
+			<a href="job-list.html">General</a>
+			<a href="job-list.html">Jobs
+			</a>
+			<a href="job-list.html">Payment</a>
+			<a href="job-list.html">Application
+			</a>
+			<a href="job-list.html">Work</a>
+			<a href="job-list.html">Recruiting</a>
+			<a href="job-list.html">Employer</a>
+			<a href="job-list.html">Income</a>
+			<a href="job-list.html">Tips</a>
+		</div>
+	</div>
+
+
+</div>
+
+<div class="twm-advertisment" style="background-image:url(images/add-bg.jpg);">
+	<div class="overlay"></div>
+	<h4 class="twm-title">Recruiting?</h4>
+	<p>Get Best Matched Jobs On your
+		<br>
+		Email. Add Resume NOW!
+	</p>
+	<a href="about-1.html" class="site-button white">Read More</a>
+</div>
+
+{{ form_start(form) }}

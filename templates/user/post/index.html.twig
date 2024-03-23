@@ -1,0 +1,16 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Annonces ({{ posts.getTotalItemCount }}){% endblock %}
+{% block titre %}Annonces ({{ posts.getTotalItemCount }}){% endblock %}
+{% block text %}Annonces ({{ posts.getTotalItemCount }}){% endblock %}
+
+{% block right %}
+<a href="{{ path('user_post_new') }}" class="site-button mt-3"><i class="fa fa-plus"></i> Publier votre annonce</a>
+{% endblock %}
+
+{% block body %}
+
+
+{% include "user/post/_table.html.twig" %}
+
+{% endblock %}

@@ -1,9 +1,48 @@
-{% extends 'base.html.twig' %}
+{% extends 'espace.html.twig' %}
 
-{% block title %}Completer mon profil{% endblock %}
+{% block title %}
+	{{ app.user.completed == false ? "Completer votre profil" : "Mise à jour du profil" }}
+{% endblock %}
+{% block titre %}
+	{{ app.user.completed == false ? "Completer votre profil" : "Mise à jour du profil" }}
+{% endblock %}
+{% block text %}
+	{{ app.user.completed == false ? "Completer votre profil" : "Mise à jour du profil" }}
+{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
 
 {% block body %}
 
-<h1>Completer mon profil</h1>
+	<div class="row">
+		<div class="col-sm-10 mx-auto">
+			<h2 class="page-titre">{{ app.user.completed == false ? "Completer votre profil" : "Mise à jour du profil" }}</h2>
+
+			{% if userCompte == 'PERSONNEL' %}
+
+				{% include "user/espace/form/_personnel.html.twig" %}
+
+			{% endif %}
+
+			{% if userCompte == 'PARTICULIER' %}
+
+				{% include "user/espace/form/_particulier.html.twig" %}
+
+			{% endif %}
+
+			{% if userCompte == 'ENTREPRISE' %}
+
+				{% include "user/espace/form/_entreprise.html.twig" %}
+
+			{% endif %}
+
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+
+	{% include "partials/espace/_script_complete_profil.html.twig" %}
 
 {% endblock %}

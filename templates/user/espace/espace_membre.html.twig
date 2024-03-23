@@ -1,0 +1,11 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Espace membre{% endblock %}
+{% block text %}{{ app.user }}{% endblock %}
+
+{% block body %}
+
+<p>Bienvenu sur l'espace membre</p>
+<p>Type de compte: {{ app.user.compte }}</p>
+
+{% endblock %}

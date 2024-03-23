@@ -14,9 +14,9 @@ class CheckCodeType extends AbstractType
     {
         $builder
             ->add('code', TextType::class, [
-                'label' => 'Entrez votre code de confirmation',
+                'label' => false,
                 'attr' => [
-                    'placeholder' => 'Entrez votre code de confirmation',
+                    'placeholder' => 'Entrez votre code de confirmation', 'class' => "focus text-center",
                 ],
                 'constraints' => [
                     new NotBlank(),

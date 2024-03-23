@@ -33,7 +33,7 @@ class Competence
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -50,5 +50,10 @@ class Competence
         $this->user = $user;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

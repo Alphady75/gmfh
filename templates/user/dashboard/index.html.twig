@@ -1,0 +1,80 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Tableau de bord
+{% endblock %}
+{% block titre %}Tableau de bord
+{% endblock %}
+{% block text %}Tableau de bord
+{% endblock %}
+
+{% block body %}
+	<div class="twm-dash-b-blocks mb-5">
+		<div class="row">
+			<div class="col-xl-3 col-lg-6 col-md-12 mb-3">
+				<div class="panel panel-default">
+					<div class="panel-body wt-panel-body gradi-3 dashboard-card ">
+						<div class="wt-card-wrap">
+							<div class="wt-card-icon">
+								<i class="far fa fa-bookmark"></i>
+							</div>
+							<div class="wt-card-right wt-total-listing-review counter ">{{ posts|length }}</div>
+							<div class="wt-card-bottom">
+								<h4 class="m-b0">Toute les annonces</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-6 col-md-12 mb-3">
+				<div class="panel panel-default">
+					<div class="panel-body wt-panel-body gradi-1 dashboard-card ">
+						<div class="wt-card-wrap">
+							<div class="wt-card-icon">
+								<i class="far fa fa-suitcase"></i>
+							</div>
+							<div class="wt-card-right wt-total-active-listing counter ">{{ offres|length }}</div>
+							<div class="wt-card-bottom ">
+								<h4 class="m-b0">Offres d'emploi</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-6 col-md-12 mb-3">
+				<div class="panel panel-default">
+					<div class="panel-body wt-panel-body gradi-2 dashboard-card ">
+						<div class="wt-card-wrap">
+							<div class="wt-card-icon">
+								<i class="far fa fa-user-friends"></i>
+							</div>
+							<div class="wt-card-right  wt-total-listing-view counter ">{{ totalcandidatures|length }}</div>
+							<div class="wt-card-bottom">
+								<h4 class="m-b0">Candidatures</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-6 col-md-12 mb-3">
+				<div class="panel panel-default">
+					<div class="panel-body wt-panel-body gradi-4 dashboard-card ">
+						<div class="wt-card-wrap">
+							<div class="wt-card-icon">
+								<i class="far fa-bell"></i>
+							</div>
+							<div class="wt-card-right wt-total-listing-bookmarked counter ">18</div>
+							<div class="wt-card-bottom">
+								<h4 class="m-b0">Notifications</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+    <h3 class="page-titre">Candidatures ({{ candidatures.getTotalItemCount }})</h3>
+		{% include "user/candidature/_table.html.twig" %}
+
+	</div>
+
+{% endblock %}
