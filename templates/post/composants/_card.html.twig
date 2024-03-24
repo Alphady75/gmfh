@@ -1,0 +1,46 @@
+<div class="blog-post twm-blog-post-h5-outer">
+   <div class="wt-post-media">
+      <a href="{{ path('post_details', {slug: post.slug}) }}">
+         {% if post.medias|length >= 1 %}
+         <img src="{{ post.medias[0] ? vich_uploader_asset(post.medias[0], 'imageFile') | imagine_filter('medium') : asset('img/banner.png') | imagine_filter('medium') }}"
+            alt="logo" class="radius">
+         {% else %}
+
+         <img src="{{ asset('img/banner.png') | imagine_filter('medium') }}" class="radius" alt="logo">
+         {% endif %}
+      </a>
+   </div>
+   <div class="wt-post-info">
+      <div class="post-author">
+         <div class="post-author-pic">
+            <div class="p-a-pic">
+               {% if post.user.compte == 'ENTREPRISE' %}
+               <img src="{{ post.user.logo ? vich_uploader_asset(post.user, 'logoFile') | imagine_filter('mediumavatar') : asset('img/avatar.jpg') | imagine_filter('mediumavatar') }}"
+                  alt="{{ appName }} {{ post.user }}">
+
+               {% else %}
+               <img src="{{ post.user.photo ? vich_uploader_asset(post.user, 'photoFile') | imagine_filter('mediumavatar') : asset('img/avatar.jpg') | imagine_filter('mediumavatar') }}"
+                  alt="{{ appName }} {{ post.user }}">
+               {% endif %}
+
+            </div>
+            <div class="p-a-info">
+               <a href="{{ path('post_details', {slug: post.slug}) }}">{{ post.user }}</a>
+               <p>{{ post.created|ago }}</p>
+            </div>
+         </div>
+         <div class="post-categories">
+            <a href="{{ path('post_details', {slug: post.slug}) }}">{{ post.categorie }}</a>
+         </div>
+      </div>
+      <div class="wt-post-title ">
+         <h4 class="post-title">
+            <a href="{{ path('post_details', {slug: post.slug}) }}">{{ post }}</a>
+         </h4>
+      </div>
+      <div class="wt-post-readmore ">
+         <a href="{{ path('post_details', {slug: post.slug}) }}" class="site-button-link site-text-primary">En savoir
+            plus</a>
+      </div>
+   </div>
+</div>

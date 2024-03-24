@@ -1,28 +1,120 @@
-{{ form_start(form, {attr: {class: 'p-4'}}) }}
+{{ form_start(form, {attr: {class: ''}}) }}
+<div class="espace-membre my-4">
+	<div class="row">
+		<div class="col-sm-7">
+			<div class="card-profile bg-white radius shadow mb-2">
+				<div class="card-profile-img-top">
+					<div class="d-flex justify-content-between align-items-end">
+						<span class="custom-badge bg-blue text-light shadow-sm border border-light">Compte
+							{{ app.user.compte }}</span>
+						<span class="text-light">Membre
+							{{ app.user.created|ago }}</span>
+					</div>
+				</div>
+				<div class="card-profile-body d-flex justify-content-between align-items-end">
+					<div>
+						<label for="profil_personnel_photoFile_file" class="card-profile-avatar">
+							<img src="{% if app.user.photo %}{{ vich_uploader_asset(app.user, 'photoFile' ) }}{% else %}{{ asset('img/avatar.jpg') }}{% endif %}" class="rounded-circle photo img-fluid" alt="Avatar de compte">
+							<label class="btn" for="profil_personnel_photoFile_file">
+								<i class="text-blue fa fa-camera"></i>
+							</label>
+						</label>
+						<div class="hidden-file">{{ form_widget(form.photoFile) }}</div>
+						{{ form_errors(form.photoFile) }}
+						<h5>{{ app.user }}</h5>
+						<span>{{ app.user.email }}</span>
+					</div>
+					<div>
+						<span class="custom-badge bg-{{ app.user.isVerified ? 'success' : 'warning' }} text-light">Email
+							{{
+							app.user.isVerified ? 'confirmer' : 'non confirmer' }}</span>
+					</div>
+				</div>
+			</div>
 
-<div class="mb-4">
-	<label for="profil_personnel_photoFile_file" class="avatar-img">
-		<img
-			src="{% if app.user.photo %}{{ vich_uploader_asset(app.user, 'photoFile' )  }}{% else %}{{ asset('img/avatar.jpg')  }}{% endif %}"
-			class="rounded-circle photo img-fluid" alt="Avatar de compte">
-		<button class="btn" type="button"><i class="text-blue fa fa-camera"></i></button>
-	</label>
+			<h4 class="panel-tittle m-a0 py-3">Informations personnelles</h4>
+			<div class="panel panel-default radius">
+				<div class="panel-body wt-panel-body py-2 p-a20 m-b30 bg-white shadow-sm radius">
+					<div>
+						{{ form_row(form.nom) }}
+						{{ form_row(form.prenom) }}
+						{{ form_row(form.apropo) }}
+					</div>
+				</div>
+			</div>
 
-	<div class="hidden-file">{{ form_widget(form.photoFile) }}</div>
-	{{ form_errors(form.photoFile) }}
+			<h4 class="panel-tittle m-a0 pb-3">Coordonnées</h4>
+			<div class="panel panel-default radius">
+				<div class="panel-body wt-panel-body py-2 p-a20 m-b30 bg-white shadow-sm radius">
+					<div class="d-flex align-items-start">
+						<i class="fa fa-phone text-primary"></i>
+						<div class="ps-2 pt-0 w-100">
+							{{ form_row(form.telephone) }}
+						</div>
+					</div>
+
+					<div class="d-flex align-items-start">
+						<i class="fa fa-map-marker-alt text-primary"></i>
+						<div class="ps-2 pt-0 w-100">
+							{{ form_row(form.localisation) }}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="text-start">
+				<button class="site-button button" formnovalidate type="submit">
+					<span class="btnFetch d-block w-100">
+						{{ button_label|default('Enregistrer les modifications') }}
+					</span>
+				</button>
+			</div>
+		</div>
+		<div class="col-sm-5 rightSidebar">
+			<div class="panel panel-default">
+				<div class="panel-heading wt-panel-heading p-a20">
+					<div class="row">
+						<div class="col-7">
+							<h4 class="panel-tittle mb-0 pb-1">Statut du compte</h4>
+							<span class="custom-badge bg-blue text-light shadow border border-light mt-0">
+								{{ app.user.compte }}
+							</span>
+						</div>
+						<div class="col-5 text-end">
+							<a href="{{ path('user_change_compte') }}" class="ms-auto btn btn-outline-primary radius btn-sm">
+								<i class="fa fa-edit"></i>
+								Modifier</a>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body wt-panel-body py-2 p-a20 m-b30 bg-white radius shadow-sm">
+					<p class="new-compte-text">Explorez de nouvelles opportunités professionnelles avec facilité ! Créez un compte <strong>personnel/client</strong> sur <strong>{{ appName }}</strong> pour télécharger votre CV, postuler à des offres personnalisées et suivre l'avancement de vos candidatures en temps réel. Votre prochaine grande opportunité vous attend, commencez dès maintenant !</p>
+				</div>
+			</div>
+			<div class="side-bar-2">
+				<div class="panel panel-defaulte bg-white">
+					<div class="panel-heading wt-panel-heading p-a20">
+						<h4 class="panel-tittle m-0">
+							<i class="fa fa-info-circle text-primary"></i>
+							Suppression du compte
+						</h4>
+					</div>
+					<div class="panel-body wt-panel-body p-a20 m-b30">
+						<div class="ps-3">
+							<p class="new-compte-text">
+								<strong>Attention</strong>
+								: Après la suppression de votre compte, vous ne pourrez pas récupérer vos informations, historiques ou contenus associés à votre compte.</p>
+							<p class="new-compte-text">Veuillez considérer les points suivants avant de continuer :</p>
+							<ul class="new-compte-text mb-3">
+								<li>Toutes les informations de profil, y compris votre nom, adresse e-mail et autres détails personnels, seront supprimées.</li>
+								<li>Toutes les publications, commentaires ou activités liées à votre compte seront également effacées et ne pourront pas être récupérées.</li>
+								<li>Les abonnements ou services associés à votre compte seront annulés et vous perdrez l'accès à tout contenu ou fonctionnalité réservés aux membres.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
-<h5 class="mb-4"><i class="text-blue fa fa-user-circle"></i> Informations individuelles</h5>
-
-<div class="row">
-	<div class="col-sm-6">{{ form_row(form.nom) }}</div>
-	<div class="col-sm-6">{{ form_row(form.prenom) }}</div>
-	<div class="col-sm-6">{{ form_row(form.villeResidence) }}</div>
-	<div class="col-sm-6">{{ form_row(form.telephone) }}</div>
-</div>
-
-<div>
-	<button class="site-button" type="submit">{{ button_label|default('Poursuivre') }}</button>
-</div>
-
 {{ form_end(form, {render_rest: false}) }}

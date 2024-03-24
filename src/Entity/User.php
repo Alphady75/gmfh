@@ -59,9 +59,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     #[ORM\Column(type: 'string', length: 90, nullable: true)]
     private $prenom;
 
-    #[ORM\Column(type: 'string', length: 180, nullable: true)]
-    private $villeResidence;
-
     /**
      * @Vich\UploadableField(mapping="userslogos", fileNameProperty="logo")
      * @var File|null
@@ -150,6 +147,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class, orphanRemoval: true)]
     private $articles;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class)]
+    private $comments;
+
     public function __construct()
     {
         $this->competences = new ArrayCollection();
@@ -162,6 +162,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
         $this->activites = new ArrayCollection();
         $this->offres = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -333,18 +334,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
     public function setPrenom(?string $prenom): self
     {
         $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getVilleResidence(): ?string
-    {
-        return $this->villeResidence;
-    }
-
-    public function setVilleResidence(?string $villeResidence): self
-    {
-        $this->villeResidence = $villeResidence;
 
         return $this;
     }
@@ -714,7 +703,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
 
     public function __toString()
     {
-        return $this->getEmail();
+        return $this->getNom() . ' ' . $this->getPrenom();
     }
 
     /**
@@ -849,6 +838,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serial
             // set the owning side to null (unless already changed)
             if ($article->getUser() === $this) {
                 $article->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
             }
         }
 

@@ -1,47 +1,44 @@
 {% extends 'espace.html.twig' %}
 
 {% block title %}
-	{{ app.user.completed == false ? "Completer votre profil" : "Mise à jour du profil" }}
+	{{ app.user.completed == false ? "Completer votre profil" : "Mon compte" }}
 {% endblock %}
 {% block titre %}
-	{{ app.user.completed == false ? "Completer votre profil" : "Mise à jour du profil" }}
+	{{ app.user.completed == false ? "Completer votre profil" : "Mon compte" }}
 {% endblock %}
 {% block text %}
-	{{ app.user.completed == false ? "Completer votre profil" : "Mise à jour du profil" }}
+	{{ app.user.completed == false ? "Completer votre profil" : "Mon compte" }}
 {% endblock %}
-
-{% block breadcrumbs %}{% endblock %}
 
 {% block body %}
 
-	<div class="row">
-		<div class="col-sm-10 mx-auto">
-			<h2 class="page-titre">{{ app.user.completed == false ? "Completer votre profil" : "Mise à jour du profil" }}</h2>
+	{% if userCompte == 'PERSONNEL' %}
 
-			{% if userCompte == 'PERSONNEL' %}
+		{% include "user/espace/form/_personnel.html.twig" %}
 
-				{% include "user/espace/form/_personnel.html.twig" %}
+	{% endif %}
 
-			{% endif %}
+	{% if userCompte == 'PARTICULIER' %}
 
-			{% if userCompte == 'PARTICULIER' %}
+		{% include "user/espace/form/_particulier.html.twig" %}
 
-				{% include "user/espace/form/_particulier.html.twig" %}
+	{% endif %}
 
-			{% endif %}
+	{% if userCompte == 'ADMINISTRATEUR' %}
 
-			{% if userCompte == 'ENTREPRISE' %}
+		{% include "user/espace/form/_personnel.html.twig" %}
 
-				{% include "user/espace/form/_entreprise.html.twig" %}
+	{% endif %}
 
-			{% endif %}
+	{% if userCompte == 'ENTREPRISE' %}
 
-		</div>
-	</div>
+		{% include "user/espace/form/_entreprise.html.twig" %}
+
+	{% endif %}
+
 {% endblock %}
 
 {% block javascripts %}
-	{{ parent() }}
 
 	{% include "partials/espace/_script_complete_profil.html.twig" %}
 

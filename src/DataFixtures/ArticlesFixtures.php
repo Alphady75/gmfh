@@ -27,6 +27,7 @@ class ArticlesFixtures extends Fixture implements DependentFixtureInterface
             $article->setCategorie($categorie);
             $article->setSlug('article-'.$nbarticles);
             $article->setOnline($faker->numberBetween(0, 1));
+            $article->setComplet(1);
             $manager->persist($article);
 
             // Enregistre l'utilisateur dans une référence

@@ -38,7 +38,6 @@ class ProfilEntrepriseType extends AbstractType
                     ]
                 ])->add('niu', TextType::class, [
                     'label' => "NIU",
-                    'help' => "Numéro d'identification unique (NIU)",
                     'attr' => [
                         'placeholder' => "Numéro d'identification unique (NIU)",
                     ],
@@ -144,7 +143,7 @@ class ProfilEntrepriseType extends AbstractType
                     ]
                 ])
                 ->add('services', EntityType::class, [
-                    'label' => false,
+                    'label' => "Services que vous souhaitez offrir",
                     'class' => Service::class,
                     'multiple' => true,
                     'required' => false,
@@ -165,7 +164,7 @@ class ProfilEntrepriseType extends AbstractType
                     'required' => false
                 ])
                 ->add('villes', EntityType::class, [
-                    'label' => false,
+                    'label' => "Périmètre (Dans quelles villes)",
                     'class' => Ville::class,
                     'multiple' => true,
                     'required' => false,
@@ -216,7 +215,8 @@ class ProfilEntrepriseType extends AbstractType
                 ->add('apropo', TextareaType::class, [
                     'label' => "A propos (Facultatif)",
                     'attr' => [
-                        'placeholder' => 'Présentez votre entreprise en quelques mots'
+                        'placeholder' => 'Présentez votre entreprise en quelques mots',
+                        'class' => 'mce'
                     ],
                     'required' => false
                 ]);

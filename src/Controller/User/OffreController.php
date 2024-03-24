@@ -4,6 +4,7 @@ namespace App\Controller\User;
 
 use App\Entity\Dto\Offre as DtoOffre;
 use App\Entity\Offre;
+use App\Entity\User;
 use App\Form\Dto\OffreType as DtoOffreType;
 use App\Form\User\OffreType;
 use App\Repository\OffreRepository;
@@ -42,16 +43,7 @@ class OffreController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-        $offre = $this->offreRepository->findOneBy(['user' => $user, 'complet' => 0]);
-
-        if (!$offre){
-            $offre = new Offre();
-            $offre->setUser($user);
-            $offre->setComplet(false);
-            $offre->setBoosted(false);
-            $this->entityManager->persist($offre);
-            $this->entityManager->flush();
-        }
+        $offre = $this->createIfNotExist($user);
 
         $form = $this->createForm(OffreType::class, $offre);
         $form->handleRequest($request);
@@ -115,5 +107,29 @@ class OffreController extends AbstractController
         }
 
         return $this->redirectToRoute('user_offre', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * Create if does not exist
+     *
+     * @param Offre $offre
+     * @param User $user
+     * @return Offre
+     */
+    public function createIfNotExist(User $user)
+    {
+        $offre = $this->offreRepository->findOneBy(['user' => $user, 'complet' => 0]);
+
+        if (!$offre){
+
+            $offre = new Offre();
+            $offre->setUser($user);
+            $offre->setComplet(false);
+            $offre->setBoosted(false);
+            $this->entityManager->persist($offre);
+            $this->entityManager->flush();
+        }
+
+        return $offre;
     }
 }

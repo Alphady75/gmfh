@@ -2,9 +2,9 @@ $(document).ready(function () {
    $(".btnFetch").click(function () {
       // disable button
       $(this).prop("disabled", true);
-      // add spinner to button
+      // add spinner to button class="spinner-border" role="status"
       $(this).html(
-         `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Traitement en cours...`
+         `<div class="spinner-border text-light spinner-border-sm" role="status" aria-hidden="true"><span class="visually-hidden">Traitement en cours...</span></div>`
       );
    });
 });

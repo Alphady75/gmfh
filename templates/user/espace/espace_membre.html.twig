@@ -5,7 +5,71 @@
 
 {% block body %}
 
-<p>Bienvenu sur l'espace membre</p>
-<p>Type de compte: {{ app.user.compte }}</p>
+<div class="row espace-membre my-4">
+   <div class="col-sm-12">
+      <div class="card-profile bg-white radius shadow-sm">
+         <div class="card-profile-img-top" style="background-image: url({{ asset('img/banner.png') }})!important;">
+            <div class="d-flex justify-content-between align-items-end">
+               <span class="custom-badge bg-blue text-light">{{ app.user.compte }}</span>
+               <span class="text-light">Membre {{ app.user.created|ago }}</span>
+            </div>
+         </div>
+         <div class="card-profile-body d-flex justify-content-between align-items-end">
+            <div class="">
+               <div class="card-profile-avatar">
+                  {% if app.user.compte == 'ENTREPRISE' %}
+                  <img
+                     src="{{ app.user.logo ? vich_uploader_asset(app.user, 'logoFile') | imagine_filter('largeavatar') : asset('img/avatar.jpg') | imagine_filter('largeavatar') }}"
+                     alt="{{ appName }} {{ app.user.email }}" class="rounded-circle">
+
+                  {% else %}
+                  <img
+                     src="{{ app.user.photo ? vich_uploader_asset(app.user, 'photoFile') | imagine_filter('largeavatar') : asset('img/avatar.jpg') | imagine_filter('largeavatar') }}"
+                     alt="{{ appName }} {{ app.user.email }}" class="rounded-circle">
+                  {% endif %}
+               </div>
+               <h5>{{ app.user }}</h5>
+               <p>{{ app.user.apropo }}</p>
+            </div>
+            <div class="w-30">
+               <a href="{{ path('user_complete_compte') }}" class="btn btn-outline-primary radius">
+                  <i class="fa fa-user-edit"></i> Mettre à jour le compte</a>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-sm-12">
+      <div class="panel panel-default mt-4">
+         <div class="panel-body wt-panel-body py-2 p-a20 m-b30 bg-white radius shadow-sm">
+            <div class="d-flex align-items-start">
+               <i class="fa fa-envelope mt-2 text-primary"></i>
+               <div class="ps-2 pt-0">
+                  <h6 class="pt-2">Statut du compte</h6>
+                  <span class="custom-badge bg-{{ app.user.isVerified ? 'success text-light' : 'warning' }}">{{ app.user.isVerified ? 'Actif' : 'Inactif' }}</span>
+                  <span class="custom-badge bg-{{ app.user.isVerified ? 'success text-light' : 'warning' }}">Email {{
+                     app.user.isVerified ? 'vérifier' : 'non confirmer' }}</span>
+               </div>
+            </div>
+         </div>
+      </div>
+      <h4 class="panel-tittle m-a0 pb-3">Coordonnées</h4>
+      <div class="panel panel-default radius">
+         <div class="panel-body wt-panel-body py-2 p-a20 m-b30 bg-white shadow-sm radius">
+            <div class="d-flex align-items-start">
+               <i class="fa fa-phone mt-2 text-primary"></i>
+               <div class="ps-2 pt-0">
+                  <h6 class="pt-2">{{ app.user.telephone }}</h6>
+               </div>
+            </div>
+            <div class="d-flex align-items-start">
+               <i class="fa fa-envelope mt-2 text-primary"></i>
+               <div class="ps-2 pt-0 d-flex align-items-center">
+                  <h6 class="pt-2">{{ app.user.email }}</h6>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
 
 {% endblock %}

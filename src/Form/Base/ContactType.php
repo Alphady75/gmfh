@@ -54,7 +54,7 @@ class ContactType extends AbstractType
             ->add('message', TextareaType::class, [
                 'attr' => [
                     'placeholder' => 'Ecrivez votre message...',
-                    'class' => 'focus contact-area',
+                    'class' => 'focus textarea-style-1',
                 ],
                 'constraints' => [
                     new NotBlank()

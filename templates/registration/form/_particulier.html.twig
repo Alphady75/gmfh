@@ -5,9 +5,9 @@
 <div class="mb-4">
 	<label for="profil_particulier_photoFile_file" class="avatar-img">
 		<img src="{% if app.user.photo %}{{ vich_uploader_asset(app.user, 'photoFile' ) }}{% else %}{{ asset('img/avatar.jpg') }}{% endif %}" class="rounded-circle photo img-fluid" alt="Avatar de compte">
-		<button class="btn" type="button">
+		<label class="btn" for="profil_particulier_photoFile_file">
 			<i class="text-blue fa fa-camera"></i>
-		</button>
+		</label>
 	</label>
 
 	<div class="hidden-file">{{ form_widget(form.photoFile) }}</div>
@@ -21,7 +21,7 @@
 <div class="row">
 	<div class="col-sm-6">{{ form_row(form.nom) }}</div>
 	<div class="col-sm-6">{{ form_row(form.prenom) }}</div>
-	<div class="col-sm-6">{{ form_row(form.villeResidence) }}</div>
+	<div class="col-sm-6">{{ form_row(form.localisation) }}</div>
 	<div class="col-sm-6">{{ form_row(form.telephone) }}</div>
 </div>
 

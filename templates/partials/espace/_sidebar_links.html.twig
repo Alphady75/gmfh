@@ -1,0 +1,79 @@
+<li class="{{ app.request.attributes.get('_route') == 'user_dashboard' ? 'active' : '' }}">
+  <a href="{{ path('user_dashboard') }}">
+    <i class="fa fa-chart-pie"></i>
+    <span class="admin-nav-text">Tableau de Bord</span>
+  </a>
+</li>
+
+<li class="{{ app.request.attributes.get('_route') == 'user_complete_compte' ? 'active' : '' }}">
+  <a href="{{ path('user_complete_compte') }}">
+    <i class="fa fa-user-tie"></i>
+    <span class="admin-nav-text">
+      Mon profil <span class="ms-auto badge bg-success rounded-pill">{{ app.user.compte }}</span></span>
+  </a>
+</li>
+
+<li>
+  <a href="javascript:;">
+    <i class="fa fa-suitcase"></i>
+    <span class="admin-nav-text">Offres d'emplois</span>
+  </a>
+  <ul class="sub-menu">
+    <li>
+      <a href="{{ path('user_offre_new') }}">
+        <span class="admin-nav-text">Publier une offre</span>
+      </a>
+    </li>
+    <li>
+      <a href="{{ path('user_offre') }}">
+        <span class="admin-nav-text">Gestion des offres</span>
+      </a>
+    </li>
+  </ul>
+</li>
+<li class="{{ app.request.attributes.get('_route') == 'user_candidatures' ? 'active' : '' }}">
+  <a href="{{ path('user_candidatures') }}">
+    <i class="fa fa-user-friends"></i>
+    <span class="admin-nav-text">Candidatures</span>
+  </a>
+</li>
+<li>
+  <a href="javascript:;">
+    <i class="fa fa-bookmark"></i>
+    <span class="admin-nav-text">Annonces</span>
+  </a>
+  <ul class="sub-menu">
+    <li>
+      <a href="{{ path('user_post_new') }}">
+        <span class="admin-nav-text">Publier votre annonce</span>
+      </a>
+    </li>
+    <li>
+      <a href="{{ path('user_posts') }}">
+        <span class="admin-nav-text">Gestion des annonces</span>
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="javascript:;">
+    <i class="fa fa-envelope"></i>
+    <span class="admin-nav-text">Messages
+      <sup class="twm-msg-noti">5</sup>
+    </span>
+  </a>
+  <ul class="sub-menu">
+    <li>
+      <a href="dash-messages.html">
+        <span class="admin-nav-text">MSG Style-1</span>
+      </a>
+    </li>
+  </ul>
+</li>
+
+<li>
+  <a href="dash-resume-alert.html">
+    <i class="fa fa-bell"></i>
+    <span class="admin-nav-text">Notification</span>
+  </a>
+</li>

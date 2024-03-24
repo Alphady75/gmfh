@@ -30,6 +30,7 @@ Encore
     .addEntry('desablebtn', './public/js/desablebtn.js')
     .addEntry('annonceimg', './public/js/annonceimg.js')
     .addEntry('annoncecategorie', './public/js/annoncecategorie.js')
+    .addEntry('articleimg', './public/js/articleimg.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

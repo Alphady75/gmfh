@@ -55,7 +55,7 @@ class RegistrationController extends AbstractController
                 return $this->redirectToRoute('register_complete_compte');
             }
 
-            return $this->redirectToRoute('user_espace');
+            return $this->redirectToRoute('user_dashboard');
         }
 
         $user = new User();

@@ -4,7 +4,7 @@
 	<label for="profil_entreprise_logoFile_file" class="avatar-img">
 		<img src="{% if app.user.logo %}{{ vich_uploader_asset(app.user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}"
 			class="rounded-circle logo-img img-fluid img-thumbnail" alt="Avatar de compte">
-			<button class="btn" type="button"><i class="text-blue fa fa-camera"></i></button>
+			<label class="btn" for="profil_entreprise_logoFile_file" ><i class="text-blue fa fa-camera"></i></label>
 	</label>
 	<div class="hidden-file">{{ form_widget(form.logoFile) }}</div>
 	{{ form_errors(form.logoFile) }}
@@ -12,12 +12,12 @@
 </div>
 
 <div class="row">
-	<div class="col-sm-6">{{ form_row(form.societe) }}</div>
+	<div class="col-sm-12">{{ form_row(form.societe) }}</div>
 	<div class="col-sm-6">{{ form_row(form.niu) }}</div>
 	<div class="col-sm-6">{{ form_row(form.telephone) }}</div>
-	<div class="col-sm-6">{{ form_row(form.localisation) }}</div>
-	<div class="col-sm-6">{{ form_row(form.nomResponsable) }}</div>
-	<div class="col-sm-6">{{ form_row(form.siteWeb) }}</div>
+	<div class="col-sm-12">{{ form_row(form.localisation) }}</div>
+	<div class="col-sm-12">{{ form_row(form.nomResponsable) }}</div>
+	<div class="col-sm-12">{{ form_row(form.siteWeb) }}</div>
 </div>
 
 <h5>Services que vous souhaitez offrir (facultatif).</h5>

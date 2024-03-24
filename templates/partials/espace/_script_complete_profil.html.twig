@@ -1,3 +1,7 @@
+{{ encore_entry_script_tags('app') }}
+{{ encore_entry_script_tags('loadbtn') }}
+{{ encore_entry_script_tags('desablebtn') }}
+
 {% if app.user.compte == 'PARTICULIER' %}
 <script>
    const img = document.querySelector('.photo');
@@ -17,6 +21,8 @@
 {% endif %}
 
 {% if app.user.compte == 'ENTREPRISE' %}
+{{ encore_entry_script_tags('mce') }}
+{{ encore_entry_script_tags('collection') }}
 <script>
 
    const logoImg = document.querySelector('.logo-img');
@@ -49,7 +55,7 @@
 </script>
 {% endif %}
 
-{% if app.user.compte == 'PERSONNEL' %}
+{% if app.user.compte == 'PERSONNEL' or app.user.compte == 'ADMINISTRATEUR' %}
 <script>
    const photo = document.querySelector('.photo');
    const fichier = document.querySelector('#profil_personnel_photoFile_file');
@@ -72,13 +78,13 @@
       $(".js-select2-competences").select2({
          tags: true,
          tokenSeparators: [',']
-      }).on('change', function(e){
+      }).on('change', function (e) {
          let competenceLabel = $(this).find("[data-select2-tag=true]");
-         if(competenceLabel.length && $.inArray(competenceLabel.val(), $(this).val() !== -1)){
+         if (competenceLabel.length && $.inArray(competenceLabel.val(), $(this).val() !== -1)) {
             $.ajax({
-               url: '/competence/ajax/add/'+competenceLabel.val(),
+               url: '/competence/ajax/add/' + competenceLabel.val(),
                type: "POST"
-            }).done(function(data){
+            }).done(function (data) {
                console.log(data)
                competenceLabel.replaceWith(`<option selected value="${data.id}">${competenceLabel.val()}</option>`)
             })
@@ -92,13 +98,13 @@
       $(".js-select2-services").select2({
          tags: true,
          tokenSeparators: [',']
-      }).on('change', function(e){
+      }).on('change', function (e) {
          let serviceLabel = $(this).find("[data-select2-tag=true]");
-         if(serviceLabel.length && $.inArray(serviceLabel.val(), $(this).val() !== -1)){
+         if (serviceLabel.length && $.inArray(serviceLabel.val(), $(this).val() !== -1)) {
             $.ajax({
-               url: '/service/ajax/add/'+serviceLabel.val(),
+               url: '/service/ajax/add/' + serviceLabel.val(),
                type: "POST"
-            }).done(function(data){
+            }).done(function (data) {
                console.log(data)
                serviceLabel.replaceWith(`<option selected value="${data.id}">${serviceLabel.val()}</option>`)
             })
@@ -112,13 +118,13 @@
       $(".js-select2-villes").select2({
          tags: true,
          tokenSeparators: [',']
-      }).on('change', function(e){
+      }).on('change', function (e) {
          let villeLabel = $(this).find("[data-select2-tag=true]");
-         if(villeLabel.length && $.inArray(villeLabel.val(), $(this).val() !== -1)){
+         if (villeLabel.length && $.inArray(villeLabel.val(), $(this).val() !== -1)) {
             $.ajax({
-               url: '/ville/ajax/add/'+villeLabel.val(),
+               url: '/ville/ajax/add/' + villeLabel.val(),
                type: "POST"
-            }).done(function(data){
+            }).done(function (data) {
                console.log(data)
                villeLabel.replaceWith(`<option selected value="${data.id}">${villeLabel.val()}</option>`)
             })

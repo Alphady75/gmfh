@@ -108,7 +108,7 @@ class OffreType extends AbstractType
                 'required' => false,
                 'by_reference' => false,
                 'query_builder' => function (ExperiencesRepository $exp) {
-                    return $exp->createQueryBuilder('e')->orderBy('e.description', 'ASC');
+                    return $exp->createQueryBuilder('e')->orderBy('e.name', 'ASC');
                 },
                 'attr' => [
                     'class' => 'js-select2-experiences'
@@ -231,7 +231,7 @@ class OffreType extends AbstractType
                     'placeholder' => "Salaire moyen (Ex: $2000)"
                 ],
             ])->add('devise', ChoiceType::class, [
-                'label' => false,
+                'label' => "Devise (monnaie)",
                 'help' => "Devise (monnaie)",
                 'choices' => [
                     '$' => '$',
@@ -263,7 +263,7 @@ class OffreType extends AbstractType
                 ],
             ])
             ->add('anneeExperience', TextType::class, [
-                'label' => "Nombre d'année d'expérience",
+                'label' => "Nombre d'année d'expérience pour le poste",
                 'help' => "Facultatif",
                 'required' => false,
                 'attr' => [

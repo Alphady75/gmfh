@@ -26,12 +26,12 @@ class UsersFixtures extends Fixture
             if ($nbUsers == 1) {
 
                 $user->setEmail('admin@gmail.com');
-                $user->setRoles(['ROLE_ADMIN']);
-                $user->setCompte('Administrateur');
+                $user->setRoles(['ROLE_ADMINISTRATEUR']);
+                $user->setCompte('ADMINISTRATEUR');
 
             } else {
 
-                $user->setCompte($faker->randomElement(['PERSONNEL', 'ENTREPRISE']));
+                $user->setCompte($faker->randomElement(['PERSONNEL', 'ENTREPRISE', 'PARTICULIER']));
 
                 if ($user->getCompte() == 'PERSONNEL') {
                     $user->setEmail('client' . $nbUsers . '@gmail.com');
@@ -43,6 +43,11 @@ class UsersFixtures extends Fixture
                     $user->setSociete($faker->company);
                     $user->setNiu($faker->companySuffix);
                     $user->setSiteWeb($faker->domainName);
+
+                } elseif ($user->getCompte() == 'PARTICULIER') {
+
+                    $user->setRoles(['ROLE_PARTICULIER']);
+                    $user->setEmail('particulier' . $nbUsers . '@gmail.com');
                 }
             }
 
@@ -50,7 +55,7 @@ class UsersFixtures extends Fixture
             $user->setPrenom($faker->firstName());
             $user->setNom($faker->lastName());
             $user->setTelephone($faker->phoneNumber);
-            $user->setVilleResidence($faker->city);
+            $user->setlocalisation($faker->city);
             $user->setApropo($faker->realText(300));
             $user->setNameSlug($faker->firstName() . '-' . $faker->lastName());
             $user->setResetPasswordCode($faker->numberBetween(100000, 900000));

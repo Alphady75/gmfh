@@ -53,10 +53,11 @@ class ProfilParticulierType extends AbstractType
                     new NotBlank(),
                 ]
             ])
-            ->add('villeResidence', TextType::class, [
+            ->add('localisation', TextType::class, [
                 'label' => 'Ville de résidence',
                 'attr' => [
                     'placeholder' => 'Ville de résidence',
+                    'class' => 'focus',
                 ],
                 'constraints' => [
                     new NotBlank(),
@@ -71,7 +72,7 @@ class ProfilParticulierType extends AbstractType
                 'required' => false
             ])
             ->add('competences', EntityType::class, [
-                'label' => false,
+                'label' => "Vos competences (Facultatif)",
                 'class' => Competence::class,
                 'multiple' => true,
                 'required' => false,
@@ -84,7 +85,7 @@ class ProfilParticulierType extends AbstractType
                 ],
             ])
             ->add('services', EntityType::class, [
-                'label' => false,
+                'label' => "Services que vous souhaitez offrir",
                 'class' => Service::class,
                 'multiple' => true,
                 'by_reference' => false,
@@ -99,7 +100,7 @@ class ProfilParticulierType extends AbstractType
                 ]
             ])
             ->add('villes', EntityType::class, [
-                'label' => false,
+                'label' => "Périmètre (Dans quelles villes)",
                 'class' => Ville::class,
                 'multiple' => true,
                 'required' => false,
@@ -112,9 +113,10 @@ class ProfilParticulierType extends AbstractType
                 ],
             ])
             ->add('apropo', TextareaType::class, [
-                'label' => "A propos (Facultatif)",
+                'label' => "Présentez-vous en quelques mots (Facultatif)",
                 'attr' => [
-                    'placeholder' => 'Présentez-vous en quelques mots'
+                    'placeholder' => 'Présentez-vous en quelques mots',
+                    'class' => 'textarea-style-1'
                 ],
                 'required' => false
             ]);

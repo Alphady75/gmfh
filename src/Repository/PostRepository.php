@@ -62,13 +62,13 @@ class PostRepository extends ServiceEntityRepository
 
         if (!empty($search->getMinPrice())) {
             $query = $query
-                ->andWhere('p.prix >= :minPrice')
+                ->andWhere('p.tarif >= :minPrice')
                 ->setParameter('minPrice', $search->getMinPrice());
         }
 
         if (!empty($search->getMaxPrice())) {
             $query = $query
-                ->andWhere('p.prix <= :maxPrice')
+                ->andWhere('p.tarif <= :maxPrice')
                 ->setParameter('maxPrice', $search->getMaxPrice());
         }
 
@@ -82,6 +82,104 @@ class PostRepository extends ServiceEntityRepository
             $query = $query
                 ->andWhere('v.id = :vil')
                 ->setParameter('vil', $search->getVille());
+        }
+
+        if (!empty($search->getEtat())) {
+            $query = $query
+                ->andWhere('p.etat = :etat')
+                ->setParameter('etat', $search->getEtat());
+        }
+
+        if (!empty($search->getPromo())) {
+            $query = $query
+                ->andWhere('p.promo = 1');
+        }
+
+        if (!empty($search->getlivraison())) {
+            $query = $query
+                ->andWhere('p.livraison = 1');
+        }
+
+        if (!empty($search->getIsSelled())) {
+            $query = $query
+                ->andWhere('p.isSelled = 1');
+        }
+
+        if (!empty($search->getVedette())) {
+            $query = $query
+                ->andWhere('p.vedette = 1');
+        }
+
+        if (!empty($search->getUrgent())) {
+            $query = $query
+                ->andWhere('p.urgent = 1');
+        }
+
+        if (!empty($search->getNegociable())) {
+            $query = $query
+                ->andWhere('p.negociable = 1');
+        }
+
+        if (!empty($search->getMinDate())) {
+            $query = $query
+                ->where('p.created >= :from')
+                ->setParameter('from', $search->getMinDate());
+        }
+
+        if (!empty($search->getMaxDate())) {
+            $query = $query
+                ->andWhere('p.created <= :to')
+                ->setParameter('to', $search->getMaxDate());
+        }
+
+        return $this->paginator->paginate(
+            $query,
+            $search->page,
+            12
+        );
+    }
+
+
+    /**
+     * Recupère les annonces en lien avec une recherche
+     * @return PaginationInterface
+     */
+    public function visiteurFilter(DtoPost $search): PaginationInterface
+    {
+        $query = $this->createQueryBuilder('p')
+            ->select('u', 'p')
+            ->select('cat', 'p')
+            ->leftjoin('p.user', 'u')
+            ->leftjoin('p.categorie', 'cat')
+            ->andWhere('p.online = 1')
+            ->orderBy('p.created', 'DESC');
+
+        if (!empty($search->getQuery())) {
+            $query = $query
+                ->andWhere('p.name LIKE :query')
+                ->orWhere('cat.name LIKE :catname')
+                ->setParameters([
+                    'query' => "%{$search->getQuery()}%",
+                    'catname' => "%{$search->getQuery()}%",
+                ]);
+        }
+
+        if (!empty($search->getMinPrice())) {
+            $query = $query
+                ->andWhere('p.tarif >= :minPrice')
+                ->setParameter('minPrice', $search->getMinPrice());
+        }
+
+        if (!empty($search->getMaxPrice())) {
+            $query = $query
+                ->andWhere('p.tarif <= :maxPrice')
+                ->setParameter('maxPrice', $search->getMaxPrice());
+        }
+
+        if (!empty($search->getCategorie())) {
+            $query = $query
+                ->andWhere('cat.id = :cat')
+                ->setParameter('cat', $search->getCategorie());
         }
 
         if (!empty($search->getEtat())) {

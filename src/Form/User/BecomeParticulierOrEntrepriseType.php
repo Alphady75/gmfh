@@ -31,7 +31,10 @@ class BecomeParticulierOrEntrepriseType extends AbstractType
             ->add('raisons', TextareaType::class, [
                 'label' => false,
                 'mapped' => false,
-                'attr' => ['placeholder' => 'Evoquez quelques raisons'],
+                'attr' => [
+                    'placeholder' => 'Evoquez quelques raisons',
+                    'class' => 'focus',
+                ],
                 'constraints' => [
                     new NotBlank()
                 ]

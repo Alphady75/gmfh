@@ -1,88 +1,164 @@
-{{ form_start(form, {attr: {class: 'p-3'}}) }}
+{{ form_start(form, {attr: {class: ''}}) }}
+<div class="espace-membre my-4">
+	{{ form_errors(form) }}
+	<div class="row">
+		<div class="col-sm-7">
+			<div class="card-profile bg-white radius shadow mb-2">
+				<div class="card-profile-img-top">
+					<div class="d-flex justify-content-between align-items-end compte-infos">
+						<span class="text-light">Membre
+							{{ app.user.created|ago }}</span>
+					</div>
+					<div class="compagny-banner">
+						<img src="{% if app.user.photo %}{{ vich_uploader_asset(app.user, 'photoFile') | imagine_filter('entreprisebanner')}}{% else %}{{ asset('img/banner.png') | imagine_filter('entreprisebanner')}}{% endif %}"
+							class="photo-banner img-fluid" alt="Bannier de compte">
+							<label class="btn custom-badge" for="profil_entreprise_photoFile_file">
+								<i class="text-blue fa fa-camera"></i> <small>Image de l'entrprise</small>
+							</label>
+					</div>
+				</div>
+				<div class="card-profile-body d-flex justify-content-between align-items-end">
+					<div>
+						<label for="profil_entreprise_logoFile_file" class="card-profile-avatar">
+							<img src="{% if app.user.logo %}{{ vich_uploader_asset(app.user, 'logoFile' ) }}{% else %}{{ asset('img/avatar.jpg') }}{% endif %}"
+								class="rounded-circle logo-img img-fluid border" alt="Avatar de compte">
+							<label for="profil_entreprise_logoFile_file" class="btn" type="label">
+								<i class="text-blue fa fa-camera"></i>
+							</label>
+						</label>
+						<div class="hidden-file">{{ form_widget(form.logoFile) }}</div>
+						{{ form_errors(form.logoFile) }}
+						<h5>{{ app.user }}</h5>
+						<span>{{ app.user.email }}</span>
 
-<div class="entreprise-photo">
-	<label for="profil_entreprise_photoFile_file" class="entreprise-banner">
-		<img src="{% if app.user.photo %}{{ vich_uploader_asset(app.user, 'photoFile') | imagine_filter('entreprisebanner')}}{% else %}{{ asset('img/banner.png') | imagine_filter('entreprisebanner')}}{% endif %}"
-			class="photo-banner img-fluid" alt="Bannier de compte">
-	</label>
-	<div class="hidden-file">{{ form_widget(form.photoFile) }}</div>
-	<div class="banner-error">
-		{{ form_errors(form.photoFile) }}
-	</div>
-</div>
-<div class="logo-block-img">
-	<label for="profil_entreprise_logoFile_file" class="logo-avatar">
-		<img src="{% if app.user.logo %}{{ vich_uploader_asset(app.user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/avatar.jpg') | imagine_filter('largeavatar') }}{% endif %}"
-			class="rounded-circle logo-img img-fluid img-thumbnail" alt="Avatar de compte">
-	</label>
-	<div class="hidden-file">{{ form_widget(form.logoFile) }}</div>
-	{{ form_errors(form.logoFile) }}
-</div>
+						<div class="hidden-file">{{ form_widget(form.photoFile) }}</div>
+						{{ form_errors(form.photoFile) }}
+					</div>
+					<div>
+						<span class="custom-badge bg-{{ app.user.isVerified ? 'success' : 'warning' }} text-light">Email
+							{{ app.user.isVerified ? 'confirmer' : 'non confirmer' }}</span>
+					</div>
+				</div>
+			</div>
 
-<div class="panel panel-defaulte bg-white">
-	<div class="panel-heading wt-panel-heading p-a20">
-		<h4 class="panel-tittle m-0">Informations de l'entreprise
-			<span class="text-danger">*</span>
-		</h4>
-	</div>
-	<div class="panel-body wt-panel-body p-a20 m-b30">
-		<div class="row">
-			<div class="col-sm-6">{{ form_row(form.niu) }}</div>
-			<div class="col-sm-6">{{ form_row(form.telephone) }}</div>
-			<div class="col-sm-6">{{ form_row(form.localisation) }}</div>
-			<div class="col-sm-6">{{ form_row(form.nomResponsable) }}</div>
-			<div class="col-sm-12">{{ form_row(form.siteWeb) }}</div>
+			<h4 class="panel-tittle m-a0 py-3">Informations de l'entreprise</h4>
+			<div class="panel panel-default radius">
+				<div class="panel-body wt-panel-body py-2 p-a20 m-b30 bg-white shadow-sm radius">
+					<div class="col-sm-12">{{ form_row(form.societe) }}</div>
+					<div class="col-sm-12">{{ form_row(form.niu) }}</div>
+					<div class="col-sm-12">{{ form_row(form.nomResponsable) }}</div>
+					<div class="col-sm-12">{{ form_row(form.siteWeb) }}</div>
+					<div class="col-sm-12">{{ form_row(form.apropo) }}</div>
+				</div>
+			</div>
+
+			<h4 class="panel-tittle m-a0 pb-3">Coordonnées</h4>
+			<div class="panel panel-default radius">
+				<div class="panel-body wt-panel-body py-2 p-a20 m-b30 bg-white shadow-sm radius">
+					<div class="d-flex align-items-start">
+						<i class="fa fa-phone text-primary"></i>
+						<div class="ps-2 pt-0 w-100">
+							{{ form_row(form.telephone) }}
+						</div>
+					</div>
+
+					<div class="d-flex align-items-start">
+						<i class="fa fa-map-marker-alt text-primary"></i>
+						<div class="ps-2 pt-0 w-100">
+							{{ form_row(form.localisation) }}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h4 class="panel-tittle m-a0 pb-3">Informations supplémentaires</h4>
+			<div class="panel panel-default radius">
+				<div class="panel-body wt-panel-body p-a20 m-b30 bg-white radius">
+					{{ form_row(form.services) }}
+					{{ form_row(form.villes) }}
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-5 rightSidebar">
+			<div class="panel panel-default">
+				<div class="panel-heading wt-panel-heading p-a20">
+					<div class="row">
+						<div class="col-7">
+							<h4 class="panel-tittle mb-0 pb-1">Statut du compte</h4>
+							<span class="custom-badge bg-blue text-light shadow border border-light mt-0">
+								COMPTE
+								{{ app.user.compte }}
+							</span>
+						</div>
+						<div class="col-5 text-end">
+							<a href="{{ path('user_change_compte') }}" class="ms-auto btn custom-badge radius btn-sm">
+								<i class="fa fa-edit"></i>
+								Modifier</a>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body wt-panel-body py-2 p-a20 m-b30 bg-white radius shadow-sm">
+					<p class="new-compte-text">Trouvez les talents dont votre entreprise a besoin en un clin d'œil ! Créez un compte <strong>entreprise</strong> sur <strong>{{ appName }}</strong> pour publier des annonces et offres d'emploi, accéder à une base de données de candidats qualifiés et simplifier votre processus de recrutement. Rejoignez-nous dès maintenant pour trouver les meilleurs collaborateurs !</p>
+				</div>
+			</div>
+			<div class="side-bar-2">
+				<div class="panel panel-defaulte bg-white">
+					<div class="panel-heading wt-panel-heading p-a20">
+						<h4 class="panel-tittle m-0">
+							<i class="fa fa-info-circle text-primary"></i>
+							Suppression du compte
+						</h4>
+					</div>
+					<div class="panel-body wt-panel-body p-a20 m-b30">
+						<div class="ps-3">
+							<p class="new-compte-text">
+								<strong>Attention</strong>
+								: Après la suppression de votre compte, vous ne pourrez pas récupérer vos informations,
+								historiques ou contenus associés à votre compte.
+							</p>
+							<p class="new-compte-text">Veuillez considérer les points suivants avant de continuer :</p>
+							<ul class="mb-3 new-compte-text">
+								<li>Toutes les informations de profil, y compris votre nom, adresse e-mail et autres détails
+									personnels, seront supprimées.</li>
+								<li>Toutes les publications, commentaires ou activités liées à votre compte seront également
+									effacées et ne pourront pas être récupérées.</li>
+								<li>Les abonnements ou services associés à votre compte seront annulés et vous perdrez l'accès à
+									tout contenu ou fonctionnalité réservés aux membres.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+	
+	<h5>Realisations (facultatif).</h5>
+			<div class="pb-3">
+				<div id="realisations" class="row" data-prototype="{{ include("user/espace/collection/_realisation.html.twig", {form: form.realisations.vars.prototype})|e("html_attr")
+					}}" data-index="{{ form.realisations|length > 0 ? form.realisations|last.vars.name + 1 : 0 }}">
+					{% for realisation in form.realisations %}
+					<div class="col-sm-6">
+						{{ include("user/espace/collection/_realisation.html.twig", {form: realisation}) }}
+					</div>
+					{% endfor %}
+				</div>
+				{{ form_errors(form.realisations) }}
+				<div class="py-3 text-left">
+					<button type="button" class="btn btn-new btn-small btn btn-white shadow border-light"
+						data-collection="#realisations">
+						<i class="fa fa-plus"></i>
+						Ajouter une realisation
+					</button>
+				</div>
+			</div>
+
+			<div class="text-start">
+				<button class="site-button button" formnovalidate type="submit">
+					<span class="btnFetch d-block w-100">
+						{{ button_label|default('Enregistrer les modifications') }}
+					</span>
+				</button>
+			</div>
 </div>
-
-<div class="panel panel-defaulte bg-white">
-	<div class="panel-heading wt-panel-heading p-a20">
-		<h4 class="panel-tittle m-0">Services que vous souhaitez offrir (facultatif).
-			<span class="text-danger">*</span>
-		</h4>
-	</div>
-	<div class="panel-body wt-panel-body p-a20 m-b30">
-		{{ form_row(form.services) }}
-	</div>
-</div>
-
-<div class="panel panel-defaulte bg-white">
-	<div class="panel-heading wt-panel-heading p-a20">
-		<h4 class="panel-tittle m-0">Périmètre (Dans quelles villes)
-			<span class="text-danger">*</span>
-		</h4>
-	</div>
-	<div class="panel-body wt-panel-body p-a20 m-b30">
-		{{ form_row(form.villes) }}
-	</div>
-</div>
-
-<h5>Realisations (facultatif).</h5>
-<div class="pb-3">
-	<div id="realisations" class="row" data-prototype="{{ include("user/espace/collection/_realisation.html.twig",
-		{form: form.realisations.vars.prototype})|e("html_attr") }}"
-		data-index="{{ form.realisations|length > 0 ? form.realisations|last.vars.name + 1 : 0 }}">
-		{% for realisation in form.realisations %}
-		<div class="col-sm-6">
-			{{ include("user/espace/collection/_realisation.html.twig", {form: realisation}) }}
-		</div>
-		{% endfor %}
-	</div>
-	{{ form_errors(form.realisations) }}
-	<div class="py-3 text-left">
-		<button type="button" class="btn btn-new btn-small btn btn-white shadow border-light"
-			data-collection="#realisations">
-			<i class="fa fa-plus"></i>
-			Ajouter une realisation
-		</button>
-	</div>
-</div>
-
-<button class="site-button button" type="submit">
-	<span class="btnFetch d-block w-100">
-		{{ button_label|default('Enregistrer') }}
-	</span>
-</button>
-
 {{ form_end(form, {render_rest: false}) }}

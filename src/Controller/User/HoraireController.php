@@ -5,7 +5,7 @@ namespace App\Controller\User;
 use App\Entity\Horaires;
 use App\Repository\HorairesRepository;
 use App\Repository\OffreRepository;
-use App\Repository\horaresActiviteRepository;
+use App\Repository\horairesActiviteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,7 +17,7 @@ class HoraireController extends AbstractController
     {
     }
 
-    #[Route('/horares/ajax/add/{label}/{offreID}', name: 'user_horare_add', methods: ['POST'])]
+    #[Route('/horaires/ajax/add/{label}/{offreID}', name: 'user_horare_add', methods: ['POST'])]
     public function add(string $label, $offreID): JsonResponse
     {
         $check = $this->horairesRepository->findOneBy([

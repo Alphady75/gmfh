@@ -40,10 +40,10 @@ class EspaceMembreController extends AbstractController
         /** @var User */
         $user = $this->getUser();
         $userCompte = $user->getCompte();
-        $formType = ProfilParticulierType::class;
+        $formType = ProfilPersonnelType::class;
 
-        if ($userCompte == 'PERSONNEL') {
-            $formType = ProfilPersonnelType::class;
+        if ($userCompte == 'PARTICULIER') {
+            $formType = ProfilParticulierType::class;
         }
 
         if ($userCompte == 'ENTREPRISE') {

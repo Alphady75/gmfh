@@ -28,7 +28,7 @@ label.required::after {
 }
 
 .radius {
-    border-radius: 10px !important;
+    border-radius: 10px!important;
 }
 
 /** Compte inactif **/
@@ -43,7 +43,7 @@ label.required::after {
 
 .text-blue,
 .text-primary {
-    color: var(--secondary-color) !important;
+    color: var(--primary-color) !important;
 }
 
 .btn-new {
@@ -80,6 +80,8 @@ label.required::after {
     height: 120px;
 }
 
+.article-img .btn,
+.card-profile .card-profile-body .card-profile-avatar .btn,
 .avatar-img .btn {
     position: absolute;
     z-index: 0;
@@ -88,6 +90,22 @@ label.required::after {
     background: var(--white-color);
     border-radius: 10px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.08);
+}
+
+.article-img {
+    width: 220px;
+    height: 220px;
+    border-radius: 15px;
+    margin: auto;
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+.article-img img {
+    width: 220px;
+    height: 220px;
+    border-radius: 15px;
 }
 
 .collection-form {
@@ -336,60 +354,249 @@ button[disabled] {
     grid-gap: 5px;
     /* Ajoutez un espacement entre les blocs */
 }
-.espace table .badge{
-    border-radius: 20px!important;
-    padding: 8px 20px!important;
+
+.espace table .badge {
+    border-radius: 20px !important;
+    padding: 8px 20px !important;
 }
-.table-knp{
+
+.table-knp {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2), 0 2px 2px rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12);
     border-radius: 10px;
 }
+
 .filter-form input,
-.filter-form select{
-    background: var(--white-color)!important;
-    border: 1px solid var(--light-color)!important;
+.filter-form select {
+    background: var(--white-color) !important;
+    border: 1px solid var(--light-color) !important;
     font-size: 13px;
 }
+
 .filter-form input[type=text],
 .filter-form .search-btn,
-.filter-form select{
+.filter-form select {
     font-size: 13px;
-    height: 43px!important;
-    padding: 0px 10px!important;
+    height: 43px !important;
+    padding: 0px 10px !important;
 }
-.espace table th{
-    font-weight: 700!important;
+
+.espace table th {
+    font-weight: 700 !important;
 }
-.radius{
-    border-radius: 10px!important;
+
+.radius {
+    border-radius: 15px !important;
 }
-.pagination li{
-    margin-left: 8px!important;
-    border-radius: 10px!important;
-    border: none!important;
+
+.pagination li {
+    margin-left: 8px !important;
+    border-radius: 10px !important;
+    border: none !important;
     color: var(--primary-color);
-    box-shadow: none!important;
+    box-shadow: none !important;
 }
+
 .pagination li,
-.pagination li a, 
-.pagination li span{
-    border-radius: 10px!important;
-    border: none!important;
+.pagination li a,
+.pagination li span {
+    border-radius: 10px !important;
+    border: none !important;
     color: var(--primary-color);
-    box-shadow: none!important;
+    box-shadow: none !important;
 }
-.page-item.active .page-link{
-    background: var(--primary-color)!important;
-    border-color: var(--primary-color)!important;
+
+.page-item.active .page-link {
+    background: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
 }
-.pagination li a:hover{
+
+.pagination li a:hover {
     background: var(--primary-color);
     color: var(--white-color);
 }
+
 .page-item span,
-.page-item:not(:first-child) .page-link{
-    border: none!important;
+.page-item:not(:first-child) .page-link {
+    border: none !important;
 }
-.contact-area{
+
+.textarea-style-1 {
     height: 150px;
+}
+
+@-webkit-keyframes spinner-border-ltr {
+    to {
+        transform: rotate(1turn)
+    }
+}
+
+@keyframes spinner-border-ltr {
+    to {
+        transform: rotate(1turn)
+    }
+}
+
+@-webkit-keyframes spinner-border-rtl {
+    to {
+        transform: rotate(-1turn)
+    }
+}
+
+@keyframes spinner-border-rtl {
+    to {
+        transform: rotate(-1turn)
+    }
+}
+
+.spinner-border {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: text-bottom
+}
+
+[dir] .spinner-border {
+    border: .25em solid;
+    border-radius: 50%
+}
+
+[dir=ltr] .spinner-border {
+    border-right-color: transparent;
+    -webkit-animation: spinner-border-ltr .75s linear infinite;
+    animation: spinner-border-ltr .75s linear infinite
+}
+
+[dir=rtl] .spinner-border {
+    border-left-color: transparent;
+    -webkit-animation: spinner-border-rtl .75s linear infinite;
+    animation: spinner-border-rtl .75s linear infinite
+}
+
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem
+}
+
+[dir] .spinner-border-sm {
+    border-width: .2em
+}
+
+@-webkit-keyframes spinner-grow {
+    0% {
+        transform: scale(0)
+    }
+
+    50% {
+        opacity: 1;
+        transform: none
+    }
+}
+
+@keyframes spinner-grow {
+    0% {
+        transform: scale(0)
+    }
+
+    50% {
+        opacity: 1;
+        transform: none
+    }
+}
+
+.spinner-grow {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: text-bottom;
+    opacity: 0
+}
+
+[dir] .spinner-grow {
+    background-color: currentColor;
+    border-radius: 50%
+}
+
+[dir=ltr] .spinner-grow, [dir=rtl] .spinner-grow {
+    -webkit-animation: spinner-grow .75s linear infinite;
+    animation: spinner-grow .75s linear infinite
+}
+
+.spinner-grow-sm {
+    width: 1rem;
+    height: 1rem
+}
+.espace-membre{
+   
+}
+.card-profile{
+    overflow: hidden;
+    position: relative;
+}
+.card-profile .card-profile-img-top{
+    padding: 20px;
+    height: 180px;
+    background-color: var(--secondary-color);
+}
+.card-profile .card-profile-img-top .compagny-banner{
+    position: absolute;
+    object-fit: contain;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+.card-profile .card-profile-img-top .compagny-banner:hover{
+    cursor: pointer;
+}
+.compagny-banner .btn{
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    right: 10px;
+}
+.card-profile .card-profile-img-top .compagny-banner img{
+    width: 100%;
+    height: 100%;
+}
+.compte-infos{
+    z-index: 1;
+    position: relative;
+}
+.card-profile .card-profile-body{
+    padding: 20px;
+    background: var(--white-color);
+    position: relative;
+}
+.card-profile .card-profile-body .card-profile-avatar{
+    width: 100px;
+    background: var(--white-color);
+    margin-top: -70px;
+    height: 100px;
+    margin-bottom: 20px;
+    position: relative;
+    display: block;
+}
+.card-profile .card-profile-body .card-profile-avatar:hover{
+    cursor: pointer;
+}
+.card-profile .card-profile-body .card-profile-avatar img{
+    width: 100%;
+    height: 100%;
+}
+.custom-badge{
+    padding: 3px 15px;
+    margin-top: 10px;
+    margin-right: 10px;
+    display: inline-block;
+    color: var(--dark-color);
+    border-radius: 10px;
+    font-size: 14px;
+    background-color: var(--light-color);
+}
+.espace-membre i{
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
+.bg-blue{
+    background: var(--secondary-color)!important;
 }

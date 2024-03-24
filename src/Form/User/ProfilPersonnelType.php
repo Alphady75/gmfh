@@ -39,12 +39,13 @@ class ProfilPersonnelType extends AbstractType
                 'label' => 'Prenom',
                 'attr' => [
                     'placeholder' => 'Entrez votre prenom',
+                    'class' => 'focus',
                 ],
                 'constraints' => [
                     new NotBlank(),
                 ]
             ])
-            ->add('villeResidence', TextType::class, [
+            ->add('localisation', TextType::class, [
                 'label' => 'Ville de résidence',
                 'help' => 'Facultatif',
                 'attr' => [
@@ -57,12 +58,11 @@ class ProfilPersonnelType extends AbstractType
                 'help' => 'Facultatif',
                 'attr' => [
                     'placeholder' => 'Ex: 06 980 80 90',
-                    'class' => 'focus',
                 ],
                 'required' => false
             ])
             ->add('apropo', TextareaType::class, [
-                'label' => "A propos (Facultatif)",
+                'label' => "Présentez-vous en quelques mots (Facultatif)",
                 'attr' => [
                     'placeholder' => 'Présentez-vous en quelques mots'
                 ],

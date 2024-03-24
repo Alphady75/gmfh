@@ -10,6 +10,18 @@ liip_imagine:
                     size: [756, 304]
                     mode: outbound
 
+        large:
+            filters:
+                thumbnail:
+                    size: [720, 460]
+                    mode: outbound
+
+        medium:
+            filters:
+                thumbnail:
+                    size: [720, 460]
+                    mode: outbound
+
         verylargeavatar:
             filters:
                 thumbnail:

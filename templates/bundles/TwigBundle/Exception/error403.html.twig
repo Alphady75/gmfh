@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Erreur 403{% endblock %}
+
+{% block body %}
+<section class="error-part">
+   <div class="container">
+      <div class="error">
+         <h1>403</h1>
+         <h2>Oops! Quelque chose s'est mal passé?</h2>
+         <a href="{{ path('pays_accueil', {prefix: currentpays().prefix}) }}" class="btn btn-outline"><i class="fas fa-home"></i><span>Aller à la page d'accueil</span></a>
+      </div>
+   </div>
+</section>
+{% endblock %}
+
+{% block stylesheets %}
+   <link rel="stylesheet" href="{{ asset('themes/base/css/custom/404.css') }}">
+   {{ parent() }}
+{% endblock %}

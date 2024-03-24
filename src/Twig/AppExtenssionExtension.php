@@ -76,7 +76,7 @@ class AppExtenssionExtension extends AbstractExtension
      * @return array
      */
     public function getArticleCategories(){
-        return $this->articleCategorieRepository->findBy(['name' => 'ASC']);
+        return $this->articleCategorieRepository->findBy([], ['name' => 'ASC']);
     }
 
     /**
@@ -85,6 +85,6 @@ class AppExtenssionExtension extends AbstractExtension
      * @return array
      */
     public function getArticleTags(){
-        return $this->tagRepository->findBy(['name' => 'ASC']);
+        return $this->tagRepository->findBy([], ['name' => 'ASC']);
     }
 }

@@ -33,7 +33,7 @@
          let horaireLabel = $(this).find("[data-select2-tag=true]");
          if (horaireLabel.length && $.inArray(horaireLabel.val(), $(this).val() !== -1)) {
             $.ajax({
-               url: '/horares/ajax/add/' + horaireLabel.val() + '/' + {{ offre.id }},
+               url: '/horaires/ajax/add/' + horaireLabel.val() + '/' + {{ offre.id }},
          type: "POST"
       }).done(function (data) {
          console.log(data)

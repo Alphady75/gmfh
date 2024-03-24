@@ -1,20 +1,90 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PostController!{% endblock %}
+{% block title %}Annonces
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<!-- INNER PAGE BANNER -->
+	<div class="wt-bnr-inr overlay-wraper bg-center" style="background-image:url({{ asset('img/h7-banner.jpg') }});">
+		<div class="overlay-main site-bg-white opacity-01"></div>
+		<div class="container">
+			<div class="wt-bnr-inr-entry">
+				<div class="banner-title-outer">
+					<div class="banner-title-name">
+						<h2 class="wt-title">Annonces</h2>
+					</div>
+				</div>
+				<!-- BREADCRUMB ROW -->
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+				<div>
+					<ul class="wt-breadcrumb breadcrumb-style-2">
+						<li>
+							<a href="{{ path('accueil') }}">Accueil</a>
+						</li>
+						<li>Annonces</li>
+					</ul>
+				</div>
+				<!-- BREADCRUMB ROW END -->
+			</div>
+		</div>
+	</div>
+	<!-- INNER PAGE BANNER END -->
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/ESPACE DE TRAVAIL/HL CONCEPTION/EN COURS/GAMFAH/src/Controller/PostController.php'|file_link(0) }}">src/Controller/PostController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/ESPACE DE TRAVAIL/HL CONCEPTION/EN COURS/GAMFAH/templates/post/index.html.twig'|file_link(0) }}">templates/post/index.html.twig</a></code></li>
-    </ul>
-</div>
+	<!-- OUR BLOG START -->
+	<div class="section-full p-t120 p-b90 site-bg-white">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-lg-4 col-md-12 rightSidebar">
+
+					{% include "post/composants/_sidebar.html.twig" %}
+
+				</div>
+
+				<div class="col-lg-8 col-md-12">
+					<!--Filter Short By-->
+					<div class="product-filter-wrap d-flex justify-content-between align-items-center m-b30">
+						<span class="woocommerce-result-count-left">Affichage de 2,150 emplois</span>
+
+						<form class="woocommerce-ordering twm-filter-select" method="get">
+							<span class="woocommerce-result-count">Trier par</span>
+							<select class="wt-select-bar-2 selectpicker" data-live-search="true" data-bv-field="size">
+								<option>Most Recent</option>
+								<option>Freelance</option>
+								<option>Full Time</option>
+								<option>Internship</option>
+								<option>Part Time</option>
+								<option>Temporary</option>
+							</select>
+							<select class="wt-select-bar-2 selectpicker" data-live-search="true" data-bv-field="size">
+								<option>Show 10</option>
+								<option>Show 20</option>
+								<option>Show 30</option>
+								<option>Show 40</option>
+								<option>Show 50</option>
+								<option>Show 60</option>
+							</select>
+						</form>
+
+					</div>
+
+					<div class="row">
+
+						{% for post in posts %}
+							<div class="col-md-6">
+								<!--Block one-->
+								{% include "post/composants/_card.html.twig" %}
+							</div>
+						{% endfor %}
+
+					</div>
+
+					{% include "post/composants/_pagination.html.twig" %}
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- OUR BLOG END -->
 {% endblock %}
