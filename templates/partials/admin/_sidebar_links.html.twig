@@ -1,0 +1,138 @@
+<li class="{{ app.request.attributes.get('_route') == 'admin_dashboard' ? 'active' : '' }}">
+	<a href="{{ path('admin_dashboard') }}">
+		<i class="fa fa-chart-pie"></i>
+		<span class="admin-nav-text">Tableau de Bord</span>
+	</a>
+</li>
+
+<li class="{{ app.request.attributes.get('_route') == 'user_complete_compte' ? 'active' : '' }}">
+	<a href="{{ path('user_complete_compte') }}">
+		<i class="fa fa-user-tie"></i>
+		<span class="admin-nav-text">
+			Profil
+			<span class="ms-auto badge bg-success rounded-pill">{{ app.user.compte }}</span>
+		</span>
+	</a>
+</li>
+<li class="{{ app.request.attributes.get('_route') == 'admin_secteurs_activite_index' ? 'active' : '' }}{{ app.request.attributes.get('_route') == 'admin_secteurs_activite_new' ? 'active' : '' }}{{ app.request.attributes.get('_route') == 'admin_secteurs_activite_edit' ? 'active' : '' }}">
+	<a href="{{ path('admin_secteurs_activite_index') }}">
+		<i class="fa fa-user-tie"></i>
+		<span class="admin-nav-text">
+			Secteur d'activité
+		</span>
+	</a>
+</li>
+<li class="{{ app.request.attributes.get('_route') == '' ? 'active' : '' }}">
+	<a href="javascript:;">
+		<i class="fa fa-suitcase"></i>
+		<span class="admin-nav-text">Offres d'emplois</span>
+	</a>
+	<ul class="sub-menu">
+		<li>
+			<a href="{{ path('user_offre_new') }}">
+				<span class="admin-nav-text">Publier une offre</span>
+			</a>
+		</li>
+		<li>
+			<a href="{{ path('admin_offres') }}">
+				<span class="admin-nav-text">Toute les offres</span>
+			</a>
+		</li>
+	</ul>
+</li>
+
+<li class="{{ app.request.attributes.get('_route') == 'admin_candidature_index' ? 'active' : '' }}{{ app.request.attributes.get('_route') == 'user_candidature_show' ? 'active' : '' }}">
+	<a href="{{ path('admin_candidature_index') }}">
+		<i class="fa fa-user-tie"></i>
+		<span class="admin-nav-text">
+			Candidatures
+		</span>
+	</a>
+</li>
+
+<li>
+	<a href="javascript:;">
+		<i class="fa fa-suitcase"></i>
+		<span class="admin-nav-text">Blog</span>
+	</a>
+	<ul class="sub-menu">
+		<li>
+			<a href="{{ path('admin_categorie_index') }}">
+				<span class="admin-nav-text">Catégories articles</span>
+			</a>
+		</li>
+		<li>
+			<a href="{{ path('admin_article_new') }}">
+				<span class="admin-nav-text">Publier un article</span>
+			</a>
+		</li>
+		<li>
+			<a href="{{ path('admin_article_index') }}">
+				<span class="admin-nav-text">Tout les articles</span>
+			</a>
+		</li>
+	</ul>
+</li>
+
+<li>
+	<a href="javascript:;">
+		<i class="fa fa-bookmark"></i>
+		<span class="admin-nav-text">Annonces</span>
+	</a>
+	<ul class="sub-menu">
+		<li>
+			<a href="{{ path('user_post_new') }}">
+				<span class="admin-nav-text">Publier un service</span>
+			</a>
+		</li>
+		<li>
+			<a href="{{ path('admin_post_index') }}">
+				<span class="admin-nav-text">Toute les annonces</span>
+			</a>
+		</li>
+		<li>
+			<a href="{{ path('admin_categorie_index') }}">
+				<span class="admin-nav-text">Catégories</span>
+			</a>
+		</li>
+	</ul>
+</li>
+<li>
+	<a href="javascript:;">
+		<i class="fa fa-users"></i>
+		<span class="admin-nav-text">Comptes utilisateurs</span>
+	</a>
+	<ul class="sub-menu">
+		<li>
+			<a href="{{ path('user_post_new') }}">
+				<span class="admin-nav-text">Créer un nouveau compte</span>
+			</a>
+		</li>
+		<li>
+			<a href="{{ path('admin_user_index') }}">
+				<span class="admin-nav-text">Gestion des comptes</span>
+			</a>
+		</li>
+	</ul>
+</li>
+<li class="{{ app.request.attributes.get('_route') == 'admin_stripe_index' ? 'active' : '' }}{{ app.request.attributes.get('_route') == 'admin_stripe_new' ? 'active' : '' }}">
+	<a href="{{ path('admin_stripe_index') }}">
+		<i class="fa fa-wallet"></i>
+		<span class="admin-nav-text">
+			Plans d'abonnements
+		</span>
+	</a>
+</li>
+<li>
+	<a href="javascript:;">
+		<i class="fa fa-cogs"></i>
+		<span class="admin-nav-text">Configurations</span>
+	</a>
+	<ul class="sub-menu">
+		<li>
+			<a href="{{ path('admin_stripe_index') }}">
+				<span class="admin-nav-text">Produit Stripe</span>
+			</a>
+		</li>
+	</ul>
+</li>

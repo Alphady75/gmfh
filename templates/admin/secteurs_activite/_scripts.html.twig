@@ -1,0 +1,27 @@
+{{ encore_entry_script_tags('app') }}
+{{ encore_entry_script_tags('mce') }}
+{{ encore_entry_script_tags('loadbtn') }}
+{{ encore_entry_script_tags('desablebtn') }}
+{{ encore_entry_script_tags('articleimg') }}
+
+<script>
+
+   $(function () {
+     $(".js-select2-soussecteurs").select2({ tags: true, tokenSeparators: [','] }).on('change', function (e) {
+        let soussecteurLabel = $(this).find("[data-select2-tag=true]");
+        if (soussecteurLabel.length && $.inArray(soussecteurLabel.val(), $(this).val() !== -1)) {
+           $.ajax({
+              url: '/soussecteurs/ajax/add/' + soussecteurLabel.val() + '/' + {{ secteuractivite.id }},
+               type: "POST"
+            }).done(function (data) {
+               console.log(data)
+               soussecteurLabel.replaceWith(`<option selected value="${data.id
+                  }">${soussecteurLabel.val()
+                  }</option>`)
+            })
+         }
+      })
+
+   })
+
+</script>

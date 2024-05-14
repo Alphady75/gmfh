@@ -1,0 +1,167 @@
+<div class="grid-two cadidature-proccess">
+	{% if candidature.acceptationDate == null %}
+		<a href="#" class="custom-button bg-blue w-100 text-center mb-3" data-bs-toggle="modal" data-bs-target="#trier-dash-modale">
+			Accepter
+		</a>
+	{% endif %}
+
+	{% if candidature.acceptationDate and candidature.dateEvaluation == null %}
+		<a href="#" class="custom-button bg-blue w-100 text-center mb-3" data-bs-toggle="modal" data-bs-target="#evaluer-dash-modale">
+			Évaluer le candidat
+		</a>
+	{% endif %}
+
+	{% if candidature.dateEvaluation and candidature.dateEntretien == null %}
+		<a href="#" class="custom-button bg-blue w-100 text-center mb-3" data-bs-toggle="modal" data-bs-target="#entretien-dash-modale">
+			Organiser l'entretien
+		</a>
+	{% endif %}
+
+	{% if candidature.dateEntretien and candidature.dateSelection == null %}
+		<a href="#" class="custom-button bg-blue w-100 text-center mb-3" data-bs-toggle="modal" data-bs-target="#selection-dash-modale">
+			Sélectionner
+		</a>
+	{% endif %}
+
+	{% if candidature.dateSelection == null %}
+		<a href="#" class="custom-button bg-danger w-100 text-center mb-3" data-bs-toggle="modal" data-bs-target="#rejet-dash-modale">
+			Rejeter
+		</a>
+	{% endif %}
+</div>
+
+<div class="modal fade twm-model-popup" id="trier-dash-modale" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title text-start">Acceptation de la candidature pour le poste de {{ candidature.offre.intitulePoste }}</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				{{ form_start(trieForm, {class: ''}) }}
+
+				{% include "candidature/composants/_candidat.html.twig" with {user: candidature.user} %}
+				<h6>Bref résumé du profil du candidat</h6>
+				<p>{{ candidature.candidatPresentation }}</p>
+
+				{{ form_widget(trieForm) }}
+
+				<button type="submit" class="custom-button button w-100 bg-blue w-100">
+					<span class="btnFetch d-block w-100">
+						Accepter la candidature
+					</span>
+				</button>
+
+				{{ form_end(trieForm) }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade twm-model-popup" id="evaluer-dash-modale" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title text-start">Évaluation des compétences du Candidat</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				{{ form_start(evaluationForm, {class: ''}) }}
+				{% include "candidature/composants/_candidat.html.twig" with {user: candidature.user} %}
+				<p>Examiner les fichiers du candidat (CV, Lettre de Motivation...) pour évaluer son adéquation avec les exigences du poste.</p>
+
+				<h6>
+					<i class="fa fa-link"></i>
+					Fichiers</h6>
+				<div class="mb-3">
+					{% if candidature.cv %}
+
+						<a href="{{ vich_uploader_asset(candidature, 'cvFile') }}" target="_blank" class="custom-badge">CV</a>
+
+					{% endif %}
+
+					{% if candidature.cv %}
+
+						<a href="{{ vich_uploader_asset(candidature, 'lettreMotivationFile') }}" target="_blank" class="custom-badge">Lettre de motivation</a>
+
+					{% endif %}
+				</div>
+				{{ form_widget(evaluationForm) }}
+				<button type="submit" class="custom-button button w-100 bg-blue w-100">
+					<span class="btnFetch d-block w-100">
+						Poursuivre
+					</span>
+				</button>
+				{{ form_end(evaluationForm) }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade twm-model-popup" id="entretien-dash-modale" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title text-start">Entretien avec le candidat</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				{{ form_start(entretienForm, {class: ''}) }}
+				{% include "candidature/composants/_candidat.html.twig" with {user: candidature.user} %}
+				{{ form_widget(entretienForm) }}
+				<button type="submit" class="custom-button button w-100 bg-blue w-100">
+					<span class="btnFetch d-block w-100">
+						Poursuivre
+					</span>
+				</button>
+				{{ form_end(entretienForm) }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade twm-model-popup" id="selection-dash-modale" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title text-start">Sélection définitive de la candidature</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				{{ form_start(selectionForm, {class: ''}) }}
+				{% include "candidature/composants/_candidat.html.twig" with {user: candidature.user} %}
+				{{ form_widget(selectionForm) }}
+				<button type="submit" class="custom-button button w-100 bg-blue w-100">
+					<span class="btnFetch d-block w-100">
+						Poursuivre
+					</span>
+				</button>
+				{{ form_end(selectionForm) }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade twm-model-popup" id="rejet-dash-modale" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title text-start">Rejeter la candidature</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				{{ form_start(rejetForm, {class: ''}) }}
+				{% include "candidature/composants/_candidat.html.twig" with {user: candidature.user} %}
+				{{ form_widget(rejetForm) }}
+				<button type="submit" class="custom-button bg-blue button w-100">
+					<span class="btnFetch d-block w-100">
+						Terminer
+					</span>
+				</button>
+				{{ form_end(rejetForm) }}
+			</div>
+		</div>
+	</div>
+</div>

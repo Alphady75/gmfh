@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pack d'abonnements
+{% endblock %}
+
+{% block body %}
+<div class="twm-home3-banner-section site-bg-white bg-cover"
+  style="background-image:url({{ asset('img/h7-banner.jpg') }})">
+  <div class="twm-home3-inner-section">
+    <div class="twm-bnr-mid-section">
+      <h1 class="twm-bnr-title-light">Abonnements</h1>
+      <div>
+        <ul class="wt-breadcrumb breadcrumb-style-2">
+          <li>
+            <a href="{{ path('accueil') }}" class="text-light">Accueil</a>
+          </li>
+          <li>Abonnements</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PRICING TABLE SECTION START -->
+<div class="section-full p-t90 p-b90 site-bg-white tw-pricing-area">
+
+  <div class="container">
+
+    <!-- TITLE START-->
+    <div class="section-head left wt-small-separator-outer">
+      <div class="wt-small-separator site-text-primary">
+        <div>Choisissez votre forfait</div>
+      </div>
+      <h2 class="wt-title">Économisez jusqu'à 10 % de votre revenu</h2>
+    </div>
+    <!-- TITLE END-->
+
+    <div class="section-content">
+      <div class="pricing-block-outer">
+        <div class="row justify-content-center">
+          {% for service in services %}
+          <div class="col-lg-4 col-md-6 p-table-highlight m-b30">
+            {% include "abonnement/composants/_card.html.twig" %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- PRICING TABLE SECTION END -->
+{% endblock %}

@@ -1,0 +1,13 @@
+<a href="{{ app.user ? path('favoris_post_new', {id: post.id}) : path('app_login') }}" class="{{ app.user ? 'js-favoris' : '' }} btn btn-sm">
+
+	{% if app.user and post.isAddedByUser(app.user) %}
+
+	<i class="fa fa-heart" aria-hidden="true"></i>
+
+	{% else %}
+
+	<i class="far fa-heart" aria-hidden="true"></i>
+
+	{% endif %}
+	
+</a>

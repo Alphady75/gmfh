@@ -1,0 +1,15 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Ajouter plan d'abonnement pour les utilisateurs{% endblock %}
+{% block titre %}Ajouter plan d'abonnement pour les utilisateurs{% endblock %}
+{% block text %}Ajouter plan d'abonnement pour les utilisateurs{% endblock %}
+
+{% block body %}
+
+    {{ include('admin/stripe/_form.html.twig') }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {% include "admin/stripe/_scripts.html.twig" %}
+{% endblock %}

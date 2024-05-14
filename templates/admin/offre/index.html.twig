@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offre index{% endblock %}
+
+{% block body %}
+    <h1>Offre index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>IntitulePoste</th>
+                <th>Description</th>
+                <th>Localisation</th>
+                <th>DateDebut</th>
+                <th>InfosContrat</th>
+                <th>EffectifRecrutement</th>
+                <th>LieuTravail</th>
+                <th>Langues</th>
+                <th>TypeContrat</th>
+                <th>Complet</th>
+                <th>Boosted</th>
+                <th>Status</th>
+                <th>AnneeExperience</th>
+                <th>Salaire</th>
+                <th>Qualification</th>
+                <th>Periodicite</th>
+                <th>DateFin</th>
+                <th>Devise</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offre in offres %}
+            <tr>
+                <td>{{ offre.id }}</td>
+                <td>{{ offre.name }}</td>
+                <td>{{ offre.slug }}</td>
+                <td>{{ offre.IntitulePoste }}</td>
+                <td>{{ offre.description }}</td>
+                <td>{{ offre.localisation }}</td>
+                <td>{{ offre.dateDebut ? offre.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ offre.infosContrat }}</td>
+                <td>{{ offre.effectifRecrutement }}</td>
+                <td>{{ offre.lieuTravail }}</td>
+                <td>{{ offre.langues ? offre.langues|join(', ') : '' }}</td>
+                <td>{{ offre.typeContrat ? offre.typeContrat|join(', ') : '' }}</td>
+                <td>{{ offre.complet ? 'Yes' : 'No' }}</td>
+                <td>{{ offre.boosted ? 'Yes' : 'No' }}</td>
+                <td>{{ offre.status }}</td>
+                <td>{{ offre.anneeExperience }}</td>
+                <td>{{ offre.salaire }}</td>
+                <td>{{ offre.qualification }}</td>
+                <td>{{ offre.periodicite }}</td>
+                <td>{{ offre.dateFin ? offre.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ offre.devise }}</td>
+                <td>{{ offre.created ? offre.created|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ offre.updated ? offre.updated|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_offre_show', {'id': offre.id}) }}">show</a>
+                    <a href="{{ path('admin_offre_edit', {'id': offre.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="24">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_offre_new') }}">Create new</a>
+{% endblock %}

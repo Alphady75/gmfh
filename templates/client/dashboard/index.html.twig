@@ -1,0 +1,102 @@
+{% extends 'client.html.twig' %}
+
+{% block title %}Espace client{% endblock %}
+{% block titre %}Espace client{% endblock %}
+{% block text %}Espace client{% endblock %}
+
+{% block body %}
+
+<div class="twm-dash-b-blocks mb-4">
+    <div class="row">
+        <div class="col-sm-6 col-md-6 mb-3">
+            <div class="panel panel-default radius">
+                <div class="panel-body wt-panel-body gradi-3 dashboard-card ">
+                    <div class="wt-card-wrap">
+                        <div class="wt-card-icon">
+                            <i class="far fa fa-heart"></i>
+                        </div>
+                        <div class="wt-card-bottom">
+                            <h4 class="m-b0">Favoris</h4>
+                        </div>
+                        <div class="wt-card-right wt-total-listing-review counter ">{{ favoris|length }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 mb-3">
+            <div class="panel panel-default radius">
+                <div class="panel-body wt-panel-body gradi-3 dashboard-card ">
+                    <div class="wt-card-wrap">
+                        <div class="wt-card-icon">
+                            <i class="far fa fa-user-check"></i>
+                        </div>
+                        <div class="wt-card-bottom">
+                            <h4 class="m-b0">Candidatures</h4>
+                        </div>
+                        <div class="wt-card-right wt-total-listing-review counter ">{{ candidatures|length }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 mb-3">
+            <div class="panel panel-default radius">
+                <div class="panel-body wt-panel-body gradi-3 dashboard-card ">
+                    <div class="wt-card-wrap">
+                        <div class="wt-card-icon">
+                            <i class="far fa fa-comments"></i>
+                        </div>
+                        <div class="wt-card-bottom">
+                            <h4 class="m-b0">Avis</h4>
+                        </div>
+                        <div class="wt-card-right wt-total-listing-review counter ">{{ favoris|length }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 mb-3">
+            <div class="panel panel-default radius">
+                <div class="panel-body wt-panel-body gradi-3 dashboard-card ">
+                    <div class="wt-card-wrap">
+                        <div class="wt-card-icon">
+                            <i class="far fa fa-bell"></i>
+                        </div>
+                        <div class="wt-card-bottom">
+                            <h4 class="m-b0">Signaler</h4>
+                        </div>
+                        <div class="wt-card-right wt-total-listing-review counter ">{{ signalers|length }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row d-flex align-items-baseline">
+    <div class="col-sm-8">
+        <h3 class="page-titre">Vos alertes pour emplois</h3>
+    </div>
+    <div class="col-sm-4">
+        <div class="py-3 text-right">
+            <a href="{{ path('client_alert_index') }}" class="custom-badge mt-0"><i class="fa fa-bell"></i> Tout afficher</a>
+        </div>
+    </div>
+</div>
+
+{% include "client/alert/composants/_data.html.twig" %}
+
+<br>
+
+<div class="row d-flex align-items-baseline">
+    <div class="col-sm-8">
+        <h3 class="page-titre">Dernières candidatures</h3>
+    </div>
+    <div class="col-sm-4">
+        <div class="py-3 text-right">
+            <a href="{{ path('client_candidatures') }}" class="custom-badge mt-0">Tout afficher</a>
+        </div>
+    </div>
+</div>
+
+{% include "client/candidature/composants/_data.html.twig" %}
+
+{% endblock %}

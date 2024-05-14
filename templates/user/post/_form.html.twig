@@ -1,0 +1,104 @@
+{{ form_start(form, {attr: {class: 'form'}}) }}
+
+<div class="row">
+	<div class="col-sm-8">
+
+		<div class="panel panel-defaulte bg-white">
+			<div class="panel-heading wt-panel-heading p-a20">
+				<h4 class="panel-tittle m-0">
+					<i class="fa fa-camera"></i>
+					Galérie</h4>
+			</div>
+			<div class="panel-body wt-panel-body p-a20 m-b30">
+				<p>Ajouter des images (maximum 3)</p>
+				<div class="row">
+					<div class="col-sm-4 col-6">
+						<label for="post_imageFile_file" class="card-post radius mb-0">
+							<img src="{% if post.image %}{{ vich_uploader_asset(post, 'imageFile' ) }}{% else %}{{ asset('img/banner.png') }}{% endif %}" class="img-fluid radius img-un" alt="">
+							<label for="post_imageFile_file" class="btn-upload btn bg-white radius box-shadow" type="label">
+								<i class="text-blue fa fa-camera"></i>
+							</label>
+						</label>
+						<small class="d-block mb-2 text-center">Image pricipale</small>
+						<div class="hidden-file">{{ form_widget(form.imageFile) }}</div>
+						{{ form_errors(form.imageFile) }}
+					</div>
+					<div class="col-sm-4 col-6">
+						<label for="post_imageDeuxFile_file" class="card-post radius">
+							<img src="{% if post.imageDeux %}{{ vich_uploader_asset(post, 'imageDeuxFile' ) }}{% else %}{{ asset('img/banner.png') }}{% endif %}" class="img-fluid radius img-deux" alt="">
+							<label for="post_imageDeuxFile_file" class="btn-upload btn bg-white radius box-shadow" type="label">
+								<i class="text-blue fa fa-camera"></i>
+							</label>
+						</label>
+						<div class="hidden-file">{{ form_widget(form.imageDeuxFile) }}</div>
+						{{ form_errors(form.imageDeuxFile) }}
+					</div>
+					<div class="col-sm-4 col-6">
+						<label for="post_imageTroisFile_file" class="card-post radius">
+							<img src="{% if post.imageTrois %}{{ vich_uploader_asset(post, 'imageTroisFile' ) }}{% else %}{{ asset('img/banner.png') }}{% endif %}" class="img-fluid radius img-trois" alt="">
+							<label for="post_imageTroisFile_file" class="btn-upload btn bg-white radius box-shadow" type="label">
+								<i class="text-blue fa fa-camera"></i>
+							</label>
+						</label>
+						<div class="hidden-file">{{ form_widget(form.imageTroisFile) }}</div>
+						{{ form_errors(form.imageTroisFile) }}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-defaulte bg-white">
+			<div class="panel-heading wt-panel-heading p-a20">
+				<h4 class="panel-tittle m-0">Détails</h4>
+			</div>
+			<div class="panel-body wt-panel-body p-a20 m-b30">
+				{{ form_row(form.name) }}
+				{{ form_row(form.categorie) }}
+				{{ form_row(form.souscategorie) }}
+				<label for="post_tarif">Prix de le service</label>
+				<div class="row d-flex align-items-center">
+					<div class="col-7 pe-1">{{ form_row(form.tarif) }}</div>
+					<div class="col-5 ps-1">{{ form_row(form.devise) }}</div>
+				</div>
+
+				{{ form_row(form.description) }}
+			</div>
+		</div>
+
+		<div class="panel panel-defaulte bg-white">
+			<div class="panel-heading wt-panel-heading p-a20">
+				<h4 class="panel-tittle m-0">Ajouter plus d'options</h4>
+			</div>
+			<div class="panel-body wt-panel-body p-a20 m-b30">
+				<div class="row">
+					<div class="col-sm-4">
+						<fieldset>
+							<legend class="col-form-label">Conditions</legend>
+							{{ form_row(form.promo) }}
+							<div class="prixpromo">
+								{{ form_row(form.tarifPromo) }}
+							</div>
+							{{ form_row(form.negociable) }}
+							{{ form_row(form.livraison) }}
+						</fieldset>
+					</div>
+					<div class="col-sm-4">
+						{{ form_row(form.etat) }}
+					</div>
+					<div class="col-sm-4">
+						{{ form_row(form.statut) }}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{% include "user/espace/form/_realisations.html.twig" %}
+
+	</div>
+	<div class="col-sm-4 rightSidebar">
+
+		{% include "user/post/form/_security.html.twig" %}
+
+	</div>
+</div>
+{{ form_end(form, {render_rest: false}) }}

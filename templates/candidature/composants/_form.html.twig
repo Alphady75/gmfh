@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+<h2 class="page-title text-dark text-start">Postuler pour le poste de #{{ offre.intitulePoste }}</h2>
+{{ form_row(form.cvFile) }}
+{{ form_row(form.lettreMotivationFile) }}
+
+<h4 class="twm-s-title pb-2 mb-2">Présentez-vous au recruteur</h4>
+{{ form_rest(form) }}
+<div class="fixed-bottom-sm large-btn">
+	{% include "candidature/composants/_candidate_btn.html.twig" %}
+</div>
+{{ form_start(form) }}

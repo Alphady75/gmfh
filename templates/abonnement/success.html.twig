@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Félicitation
+	{{ app.user.nom }}
+	{{ app.user.prenom }}
+{% endblock %}
+
+{% block titre %}Félicitation
+	{{ app.user.nom }}
+	{{ app.user.prenom }}
+{% endblock %}
+
+{% block body %}
+
+	<section class="py-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 mx-auto">
+					<div>
+						<h6 class="text-center py-3 text-light">Félicitation {{ app.user.compte == 'ENTREPRISE' ? app.user.societe : app.user }} </h6>
+						<p class="text-muted m-0">Vous venez de souscrire à l'offre
+							<span class="badge bg-warning rounded-pill">{{ stripe.name }}</span>
+						</p>
+						<p>Vous serez facturez à partir de
+							<span class="h4 font-weight-bold">{{ stripe.tarif }}</span>
+							<span>{{ stripe.devise }}/{{ stripe.typeTarification }}</span>
+						</p>
+            {% include "abonnement/composants/_card.html.twig" with {service: stripe} %}
+						<p class="pt-4">Pour des reclamations et d'autres raisons, vous pouvez nous contacté:</p>
+						<a href="mailto:{{ appEmail }}" class="font-weight-bold">{{ appEmail }}</a>
+
+						<div class="py-2">
+							<a href="" class="custom-button">
+								Détails de mon abonnement &longrightarrow;</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

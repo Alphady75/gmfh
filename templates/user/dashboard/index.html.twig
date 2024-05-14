@@ -1,0 +1,106 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Tableau de bord
+{% endblock %}
+{% block titre %}Tableau de bord
+{% endblock %}
+{% block text %}Tableau de bord
+{% endblock %}
+
+{% block body %}
+<div class="twm-dash-b-blocks mb-5">
+
+	
+
+	<div class="row mb-4">
+		<div class="col-sm-4 pb-3">
+
+			{% if app.user.abonnement %}
+
+			{% include "partials/user/_abonnement.html.twig" with {service: app.user.abonnement.stripe} %}
+		
+			{% else %}
+			<div class="card h-100 radius bg-white border-0 hiden-over">
+				<div class="card-header bg-white border-0">
+					<h4 class="m-b0"><i class="far fa fa-info-circle text-warning"></i> Aucun abonnement</h4>
+				</div>
+				<div class="card-body text-center">
+					{% include "partials/base/_nodata.html.twig" %}
+					<a href="{{ path('abonnements') }}" class="custom-button p-2 mt-3" target="_blank">Souscrivez à un plan</a>
+				</div>
+			</div>		
+			{% endif %}
+		</div>
+		<div class="col-sm-8">
+
+			<div class="row">
+				<div class="col-sm-6 col-md-6 pb-3">
+					<div class="panel panel-default">
+						<div class="panel-body wt-panel-body gradi-3 dashboard-card ">
+							<div class="wt-card-wrap">
+								<div class="wt-card-icon">
+									<i class="far fa fa-bookmark"></i>
+								</div>
+								<div class="wt-card-bottom">
+									<h4 class="m-b0">Toute les annonces</h4>
+								</div>
+								<div class="wt-card-right wt-total-listing-review counter ">{{ posts|length }}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-6 pb-3">
+					<div class="panel panel-default">
+						<div class="panel-body wt-panel-body gradi-1 dashboard-card ">
+							<div class="wt-card-wrap">
+								<div class="wt-card-icon">
+									<i class="far fa fa-suitcase"></i>
+								</div>
+								<div class="wt-card-bottom ">
+									<h4 class="m-b0">Offres d'emploi</h4>
+								</div>
+								<div class="wt-card-right wt-total-active-listing counter ">{{ offres|length }}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-6 pb-3">
+					<div class="panel panel-default">
+						<div class="panel-body wt-panel-body gradi-2 dashboard-card ">
+							<div class="wt-card-wrap">
+								<div class="wt-card-icon">
+									<i class="far fa fa-user-friends"></i>
+								</div>
+								<div class="wt-card-bottom">
+									<h4 class="m-b0">Candidatures</h4>
+								</div>
+								<div class="wt-card-right  wt-total-listing-view counter ">{{ totalcandidatures|length
+									}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-body wt-panel-body gradi-4 dashboard-card ">
+							<div class="wt-card-wrap">
+								<div class="wt-card-icon">
+									<i class="far fa-bell"></i>
+								</div>
+								<div class="wt-card-bottom">
+									<h4 class="m-b0">Alertes</h4>
+								</div>
+								<div class="wt-card-right wt-total-listing-bookmarked counter ">{{ app.user.alerts|length }}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<h3 class="page-titre">Candidatures ({{ candidatures.getTotalItemCount }})</h3>
+	{% include "user/candidature/_table.html.twig" %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        userslogos:
+            uri_prefix: /uploads/images/users/logos
+            upload_destination: '%kernel.project_dir%/public/uploads/images/users/logos'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+
+        usersphotos:
+            uri_prefix: /uploads/images/users/photos
+            upload_destination: '%kernel.project_dir%/public/uploads/images/users/photos'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+
+        userscv:
+            uri_prefix: /uploads/images/users/cv
+            upload_destination: '%kernel.project_dir%/public/uploads/images/users/cv'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+
+        annonces:
+            uri_prefix: /uploads/images/annonces
+            upload_destination: '%kernel.project_dir%/public/uploads/images/annonces'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+
+        realisations:
+            uri_prefix: /uploads/images/realisations
+            upload_destination: '%kernel.project_dir%/public/uploads/images/realisations'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+
+        articles:
+            uri_prefix: /uploads/images/articles
+            upload_destination: '%kernel.project_dir%/public/uploads/images/articles'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+
+        candidaturescv:
+            uri_prefix: /uploads/images/candidatures/cv
+            upload_destination: '%kernel.project_dir%/public/uploads/images/candidatures/cv'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+
+        candidatureslettres:
+            uri_prefix: /uploads/images/candidatures/lettres_motivation
+            upload_destination: '%kernel.project_dir%/public/uploads/images/candidatures/lettres_motivation'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true
+
+        chatfichiers:
+            uri_prefix: /uploads/images/chatfichiers
+            upload_destination: '%kernel.project_dir%/public/uploads/images/chatfichiers'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: true
+            delete_on_remove: true

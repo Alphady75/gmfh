@@ -1,0 +1,15 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Edition du secteur d'activité #{{ secteuractivite }}{% endblock %}
+{% block titre %}Edition du secteur d'activité #{{ secteuractivite }}{% endblock %}
+{% block text %}Edition du secteur d'activité #{{ secteuractivite }}{% endblock %}
+
+{% block body %}
+
+    {{ include('admin/secteurs_activite/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {% include "admin/secteurs_activite/_scripts.html.twig" %}
+{% endblock %}

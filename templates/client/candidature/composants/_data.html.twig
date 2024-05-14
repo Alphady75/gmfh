@@ -1,0 +1,16 @@
+<div class="row">
+    {% for candidature in candidatures %}
+    <div class="col-sm-6">
+        {% include "client/candidature/composants/_offre.html.twig" with {offre: candidature.offre} %}
+    </div>
+    {% else %}
+        <div class="col-12">
+
+            {% include "partials/base/_nodata.html.twig" %}
+
+            <div class="py-3 text-center">
+                <a href="{{ path('offres') }}" class="custom-button p-2"><i class="fa fa-user-check"></i> Trouver un emploi</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+	<head>
+
+		<!-- META -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="keywords" content=""/>
+		<meta name="author" content=""/>
+		<meta name="robots" content=""/>
+		<meta
+		name="description" content=""/>
+
+		<!-- FAVICONS ICON -->
+		<link rel="icon" href="{{ asset('img/logo/logo-g/favicon.png') }}" sizes="32x32" type="image/x-icon"/>
+		<link
+		rel="shortcut icon" type="image/x-icon" href="{{ asset('img/logo/logo-g/favicon.png') }}" sizes="32x32"/>
+
+		<!-- PAGE TITLE HERE -->
+		<title>
+			{% block title %}{% endblock %}
+		</title>
+
+		<!-- MOBILE SPECIFIC -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/bootstrap.min.css') }}">
+		<!-- BOOTSTRAP STYLE SHEET -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/font-awesome.min.css') }}">
+		<!-- FONTAWESOME STYLE SHEET -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/feather.css') }}">
+		<!-- FEATHER ICON SHEET -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/owl.carousel.min.css') }}">
+		<!-- OWL CAROUSEL STYLE SHEET -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/magnific-popup.min.css') }}">
+		<!-- MAGNIFIC POPUP STYLE SHEET -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/lc_lightbox.css') }}">
+		<!-- Lc light box popup -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/bootstrap-select.min.css') }}">
+		<!-- BOOTSTRAP SLECT BOX STYLE SHEET  -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/dataTables.bootstrap5.min.css') }}">
+		<!-- DATA table STYLE SHEET  -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/select.bootstrap5.min.css') }}">
+		<!-- DASHBOARD select bootstrap  STYLE SHEET  -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/dropzone.css') }}">
+		<!-- DROPZONE STYLE SHEET -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/scrollbar.css') }}">
+		<!-- CUSTOM SCROLL BAR STYLE SHEET -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/datepicker.css') }}">
+		<!-- DATEPICKER STYLE SHEET -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/flaticon.css') }}">
+		<!-- Flaticon -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/swiper-bundle.min.css') }}">
+		<!-- Swiper Slider -->
+		<link rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/style.css') }}">
+		<!-- MAIN STYLE SHEET -->
+
+		<!-- THEME COLOR CHANGE STYLE SHEET -->
+		<link
+		rel="stylesheet" class="skin" type="text/css" href="{{ asset('themes/base/css/skins-type/skin-6.css') }}"> <!-- SIDE SWITCHER STYLE SHEET -->
+		<link
+		rel="stylesheet" type="text/css" href="{{ asset('themes/base/css/switcher.css') }}">
+
+		<!-- SELECT2 CSS CDN -->
+		<link
+		href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+			{{ encore_entry_link_tags('responsive') }}
+		{% endblock %}
+
+	</head>
+
+	<body
+		data-turbo="false" class="espace">
+
+		<!-- LOADING AREA START ===== -->
+		<div class="loading-area">
+			<div class="loading-box"></div>
+			<div class="loading-pic">
+				<div class="wrapper">
+					<div class="cssload-loader"></div>
+				</div>
+			</div>
+		</div>
+		<!-- LOADING AREA  END ====== -->
+
+		<div class="page-wraper">
+
+			{% if app.user.isVerified == true %}
+
+				<!-- HEADERT ====== -->
+				{% include "partials/espace/_header.html.twig" %}
+
+				<!-- Sidebar Holder -->
+				{% include "partials/espace/_sidebar.html.twig" %}
+
+				<!-- Page Content Holder -->
+				<div id="content">
+
+					<div class="content-admin-main">
+						{% block breadcrumbs %}
+							<div class="row d-flex align-items-center justify-content-center">
+								<div class="col-sm-6">
+									{% block left %}
+										<div class="wt-admin-right-page-header clearfix">
+											<h2>
+												{% block titre %}Espace membre
+												{% endblock %}
+											</h2>
+											<div class="breadcrumbs">
+												<a href="{{ path('user_espace') }}">Espace membre</a>
+												<span>
+													{% block text %}{%
+                  endblock %}
+												</span>
+											</div>
+										</div>
+									{% endblock %}
+								</div>
+								<div class="col-sm-6 text-end center-mobile pb-3">
+									{% block right %}
+										<a href="{{ path('user_offre_new') }}" class="btn custom-button p-2 mb-2">
+											<i class="fa fa-plus-circle"></i>
+											Publier une offre d’emploi
+										</a>
+										<a href="{{ path('user_post_new') }}" class="btn custom-button-light p-2 bg-blue mb-2">
+											<i class="fa fa-plus-circle"></i>
+											Publier un service</a>
+									{% endblock %}
+								</div>
+							</div>
+						{% endblock %}
+
+						{% include "partials/base/_flash.html.twig" %}
+
+						{% block body %}{% endblock %}
+
+					</div>
+
+				</div>
+
+				<!--Logout Profile Popup-->
+				<div class="modal fade twm-model-popup" id="logout-dash-profile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<h4 class="modal-title">Voulez-vous vous déconnecter de votre profil ?</h4>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="custom-button" data-bs-dismiss="modal">Non</button>
+								<a href="{{ path('app_logout') }}" class="custom-button outline-primary">Oui</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			{% endif %}
+
+			{% if app.user.isVerified == false %}
+				{% include "partials/espace/_compte_inactif.html.twig" %}
+			{% endif %}
+		</div>
+
+
+		<!-- JAVASCRIPT  FILES ========================================= -->
+		<script src="{{ asset('themes/base/js/jquery-3.6.0.min.js') }}"></script>
+		<!-- JQUERY.MIN JS -->
+		<script src="{{ asset('themes/base/js/popper.min.js') }}"></script>
+		<!-- POPPER.MIN JS -->
+		<script src="{{ asset('themes/base/js/bootstrap.min.js') }}"></script>
+		<!-- BOOTSTRAP.MIN JS -->
+		<script src="{{ asset('themes/base/js/magnific-popup.min.js') }}"></script>
+		<!-- MAGNIFIC-POPUP JS -->
+		<script src="{{ asset('themes/base/js/waypoints.min.js') }}"></script>
+		<!-- WAYPOINTS JS -->
+		<script src="{{ asset('themes/base/js/counterup.min.js') }}"></script>
+		<!-- COUNTERUP JS -->
+		<script src="{{ asset('themes/base/js/waypoints-sticky.min.js') }}"></script>
+		<!-- STICKY HEADER -->
+		<script src="{{ asset('themes/base/js/isotope.pkgd.min.js') }}"></script>
+		<!-- MASONRY  -->
+		<script src="{{ asset('themes/base/js/imagesloaded.pkgd.min.js') }}"></script>
+		<!-- MASONRY  -->
+		<script src="{{ asset('themes/base/js/owl.carousel.min.js') }}"></script>
+		<!-- OWL  SLIDER  -->
+		<script src="{{ asset('themes/base/js/theia-sticky-sidebar.js') }}"></script>
+		<!-- STICKY SIDEBAR  -->
+		<script src="{{ asset('themes/base/js/lc_lightbox.lite.js') }}"></script>
+		<!-- IMAGE POPUP -->
+		<script src="{{ asset('themes/base/js/bootstrap-select.min.js') }}"></script>
+		<!-- Form js -->
+		<script src="{{ asset('themes/base/js/dropzone.js') }}"></script>
+		<!-- IMAGE UPLOAD  -->
+		<script src="{{ asset('themes/base/js/jquery.scrollbar.js') }}"></script>
+		<!-- scroller -->
+		<script src="{{ asset('themes/base/js/bootstrap-datepicker.js') }}"></script>
+		<!-- scroller -->
+		<script src="{{ asset('themes/base/js/jquery.dataTables.min.js') }}"></script>
+		<!-- Datatable -->
+		<script src="{{ asset('themes/base/js/dataTables.bootstrap5.min.js') }}"></script>
+		<!-- Datatable -->
+		<script src="{{ asset('themes/base/js/chart.js') }}"></script>
+		<!-- Chart -->
+		<script src="{{ asset('themes/base/js/bootstrap-slider.min.js') }}"></script>
+		<!-- Price range slider -->
+		<script src="{{ asset('themes/base/js/swiper-bundle.min.js') }}"></script>
+		<!-- Swiper JS -->
+		<script src="{{ asset('themes/base/js/custom.js') }}"></script>
+		<!-- CUSTOM FUCTIONS  -->
+		<script src="{{ asset('themes/base/js/switcher.js') }}"></script>
+		<!-- SHORTCODE FUCTIONS  -->
+
+		<!-- SELECT2 JS -->
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+		<!-- CKEDITOR JS -->
+		<script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+
+		<!-- GOOGLE MAPPLACE API -->
+		<script async src="https://maps.googleapis.com/maps/api/js?key={{ google_map_place_key }}&libraries=places&callback=initMap"></script>
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+			{{ encore_entry_script_tags('collection') }}
+			{{ encore_entry_script_tags('select2') }}
+			{{ encore_entry_script_tags('offresecteurs') }}
+			{{ encore_entry_script_tags('mce') }}
+			{{ encore_entry_script_tags('loadbtn') }}
+			{{ encore_entry_script_tags('desablebtn') }}
+			{{ encore_entry_script_tags('hideflash') }}
+			{{ encore_entry_script_tags('googlemap') }}
+		{% endblock %}
+
+	</body>
+
+</html>

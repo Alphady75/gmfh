@@ -1,0 +1,29 @@
+<div class="panel panel-defaulte bg-white">
+   <div class="panel-heading wt-panel-heading p-a20">
+      <h4 class="panel-tittle m-0">
+         <i class="fa fa-camera text-blue"></i>
+         Galérie
+      </h4>
+   </div>
+   <div class="panel-body wt-panel-body p-a20 m-b30">
+      <p>Ajouter des images (maximum 3)</p>
+      <div id="medias" class="row" data-prototype="{{ include("user/post/collection/_media.html.twig", {form:
+         form.medias.vars.prototype})|e("html_attr") }}"
+         data-index="{{ form.medias|length > 0 ? form.medias|last.vars.name + 1 : 0 }}">
+         {% for media in form.medias %}
+         <div class="col-sm-6">
+            {{ include("user/post/collection/_media.html.twig", {form: media}) }}
+         </div>
+         {% endfor %}
+      </div>
+      {{ form_errors(form.medias) }}
+
+      <div class="py-3 text-left">
+         <button type="button" class="btn btn-new btn-small btn btn-white text-primary border-light" data-collection="#medias"
+            id="add_image_button">
+            <i class="fa fa-plus"></i>
+            Ajouter une image
+         </button>
+      </div>
+   </div>
+</div>

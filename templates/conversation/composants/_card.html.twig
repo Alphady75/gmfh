@@ -1,0 +1,44 @@
+<div class="wt-dashboard-msg-search-list-wrap {{ userconversation == conversation ? 'active' : '' }}">
+
+	{% if userconversation.user1.id == app.user.id %}
+
+		<a href="{{ path('conversation_details', {'token': userconversation.token}) }}" class="msg-user-info clearfix">
+			<div class="msg-user-info-pic">
+				{% if userconversation.user2.compte == 'ENTREPRISE' %}
+					<img src="{% if userconversation.user2.logo %}{{ vich_uploader_asset(userconversation.user2, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ userconversation.user2.compte == 'ENTREPRISE' ? userconversation.user2.societe ? : userconversation.user2 }}">
+				{% else %}
+					<img src="{% if userconversation.user2.photo %}{{ vich_uploader_asset(userconversation.user2, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/avatar.jpg') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ userconversation.user2.compte == 'ENTREPRISE' ? userconversation.user2.societe ? : userconversation.user2 }}">
+				{% endif %}
+			</div>
+			<div class="msg-user-info-text">
+				<div class="msg-user-name">
+					{{ userconversation.user2.compte == 'ENTREPRISE' ? userconversation.user2.societe : userconversation.user2 }}
+				</div>
+				<div class="msg-user-discription {{ userconversation.lastmessage.lu == 1 ? 'lu' : 'non-lu' }}">
+					{{ include('conversation/composants/_last_message.html.twig') }}
+				</div>
+			</div>
+		</a>
+
+	{% elseif userconversation.user2.id == app.user.id %}
+
+		<a href="{{ path('conversation_details', {'token': userconversation.token}) }}" class="msg-user-info clearfix">
+			<div class="msg-user-info-pic">
+				{% if userconversation.user1.compte == 'ENTREPRISE' %}
+					<img src="{% if userconversation.user1.logo %}{{ vich_uploader_asset(userconversation.user1, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ userconversation.user1.compte == 'ENTREPRISE' ? userconversation.user1.societe ? : userconversation.user1 }}">
+				{% else %}
+					<img src="{% if userconversation.user1.photo %}{{ vich_uploader_asset(userconversation.user1, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/avatar.jpg') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ userconversation.user1.compte == 'ENTREPRISE' ? userconversation.user1.societe ? : userconversation.user1 }}">
+				{% endif %}
+			</div>
+			<div class="msg-user-info-text">
+				<div class="msg-user-name">
+					{{ userconversation.user1.compte == 'ENTREPRISE' ? userconversation.user1.societe : userconversation.user1 }}
+				</div>
+				<div class="msg-user-discription {{ userconversation.lastmessage.lu == 1 ? 'lu' : 'non-lu' }}">
+					{{ include('conversation/composants/_last_message.html.twig') }}
+				</div>
+			</div>
+		</a>
+
+	{% endif %}
+</div>

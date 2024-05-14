@@ -1,0 +1,26 @@
+{% include "user/post/_filters.html.twig" %}
+
+<div class="row">
+
+	{% for post in posts %}
+	<div class="col-md-4">
+		<!--Block one-->
+		{% include "post/composants/_card.html.twig" %}
+
+		<div class="pb-3 text-center">
+			<a href="{{ path('user_post_edit', {slug: post.slug}) }}" title="Modifier l'offre" data-bs-toggle="tooltip" class="custom-badge"
+				data-bs-placement="top">
+				<span class="fa fa-edit"></span>
+			</a>
+			{% include "user/post/_delete_form.html.twig" %}
+		</div>
+	</div>
+	{% else %}
+	<div class="col-12">
+		{% include "partials/base/_nodata.html.twig" %}
+	</div>
+	{% endfor %}
+
+</div>
+
+{% include "post/composants/_pagination.html.twig" %}

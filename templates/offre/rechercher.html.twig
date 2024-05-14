@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les métiers les plus passionnants
+{% endblock %}
+
+{% block header %}
+	{% include "partials/base/_header.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+	{{ form_start(form, {attr: {class: 'mb-0 filter'}}) }}
+	<!--Banner Start-->
+	<div class="twm-home3-banner-section site-bg-white bg-cover" style="background-image:url({{ asset('img/service/5.jpg') }})">
+		<div class="twm-home3-inner-section">
+			<div class="twm-bnr-mid-section">
+				<div class="twm-bnr-title-light">Trouvez l'emploi de vos rêves</div>
+				<div class="twm-bnr-discription">Tapez votre mot-clé, puis cliquez sur Trouver pour trouver votre emploi idéal.
+				</div>
+
+				{% include "offre/composants/_banner_form.html.twig" %}
+
+			</div>
+		</div>
+
+	</div>
+	<!--Banner End-->
+
+	<div class="section-full p-t90 p-b90 site-bg-gray twm-job-categories-area">
+
+		<div class="container">
+
+			<div class="wt-separator-two-part">
+				<div class="row wt-separator-two-part-row">
+					<div
+						class="col-xl-5 col-lg-5 col-md-12 wt-separator-two-part-left">
+						<!-- TITLE START-->
+						<div class="section-head left wt-small-separator-outer">
+							<div class="wt-small-separator site-text-primary">
+								<div>A la une</div>
+							</div>
+							<h2 class="wt-title">Offres urgente</h2>
+						</div>
+						<!-- TITLE END-->
+					</div>
+
+					<div class="col-xl-6 col-lg-6 col-md-12 wt-separator-two-part-right text-end none-mobile">
+						<a href="{{ path('offres') }}" class="custom-button-light" for="visite_offre_query">Tout afficher</a>
+					</div>
+
+				</div>
+			</div>
+
+			{% include "offre/composants/_boosted.html.twig" %}
+
+			<div class="block-mobile py-3 text-center">
+				<a href="{{ path('offres') }}" class="custom-button">Tout afficher</a>
+			</div>
+
+		</div>
+
+	</div>
+	<!-- JOBS CATEGORIES SECTION END -->
+
+	{{ form_end(form, {render_rest: false}) }}
+
+{% endblock %}

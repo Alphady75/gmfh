@@ -1,0 +1,29 @@
+<div class="twm-tabs-style-2 mb-0 pb-0">
+   <ul class="nav nav-tabs register-links" id="myTab2" role="tablist">
+      <!--Login Candidate--
+      <li class="nav-item">
+         <a href="{{ path('app_register') }}" class="nav-link {{ app.request.attributes.get('_route') == 'app_register' ? 'active' : '' }}">Personel (client)</a>
+      </li>
+      <!--Login Employer-->
+      <li class="nav-item">
+         <a href="{{ path('particulier_register') }}" class="nav-link {{ app.request.attributes.get('_route') == 'particulier_register' ? 'active' : '' }}">Particulier</a>
+      </li>
+      <li class="nav-item">
+         <a href="{{ path('entreprise_register') }}" class="nav-link {{ app.request.attributes.get('_route') == 'entreprise_register' ? 'active' : '' }}">Entreprise</a>
+      </li>
+   </ul>
+</div>
+
+{% if app.request.attributes.get('_route') == 'app_register'%}
+<p class="new-compte-text">Explorez de nouvelles opportunités professionnelles avec facilité ! Créez un compte <strong>personnel/client</strong> sur <strong>{{ appName }}</strong> pour télécharger votre CV, postuler à des offres personnalisées et suivre l'avancement de vos candidatures en temps réel. Votre prochaine grande opportunité vous attend, commencez dès maintenant !</p>
+{% endif %}
+
+{% if app.request.attributes.get('_route') == 'particulier_register'%}
+<p class="new-compte-text">Vendez vos services de manière efficace et rentable avec <strong>{{ appName }}</strong> ! Créez un compte <strong>particulier</strong> pour publier vos annonces, atteindre une audience ciblée et gérer vos offres en toute simplicité. Maximisez vos ventes et développez votre activité dès aujourd'hui !</p>
+{% endif %}
+
+{% if app.request.attributes.get('_route') == 'entreprise_register'%}
+<p class="new-compte-text">Trouvez les talents dont votre entreprise a besoin en un clin d'œil ! Créez un compte <strong>entreprise</strong> sur <strong>{{ appName }}</strong> pour publier des annonces et offres d'emploi, accéder à une base de données de candidats qualifiés et simplifier votre processus de recrutement. Rejoignez-nous dès maintenant pour trouver les meilleurs collaborateurs !</p>
+
+<h5>Nom(s) et prénom(s) du responsable <span class="text-danger">*</span></h5>
+{% endif %}

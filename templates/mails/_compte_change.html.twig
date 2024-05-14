@@ -1,0 +1,26 @@
+{% extends "mails.html.twig" %}
+
+{% block body %}
+	<p>Cher(e) Membre,</p>
+
+	<p>Nous vous informons que le statut de votre compte sur
+		<strong>{{ appName }}</strong>
+		a été modifié. Nous tenons à vous informer des changements suivants :</p>
+
+	<p>Statut précédent du compte :
+		<strong>{{lastStatut}}</strong>
+	</p>
+	<p>Nouveau statut du compte :
+		<strong>{{newStatut}}</strong>
+	</p>
+	<p>Date et heure du changement :
+		{{ 'now'|date('d/m/Y à H:i') }}</p>
+	<p>Raisons du changement de statut du compte :</p>
+	<p>{{ activite.raison }}</p>
+
+	<p>Si vous avez des questions ou des préoccupations concernant ce changement de statut de compte, n'hésitez pas à nous contacter à
+		<a href="mailto:{{ appEmail }}">{{ appEmail }}</a>
+		et notre équipe se fera un plaisir de vous aider.</p>
+
+	<p>Merci de votre compréhension et de votre collaboration.</p>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CGU{% endblock %}
+
+{% block body %}
+<!-- INNER PAGE BANNER -->
+<div class="wt-bnr-inr overlay-wraper bg-center" style="background-image:url({{ asset('img/h7-banner.jpg') }});">
+	<div class="overlay-main site-bg-white opacity-01"></div>
+	<div class="container">
+		<div class="wt-bnr-inr-entry">
+			<div class="banner-title-outer">
+				<div class="banner-title-name">
+					<h1 class="wt-title text-light">CGU</h1>
+				</div>
+			</div>
+			<!-- BREADCRUMB ROW -->
+
+			<div>
+				<ul class="wt-breadcrumb breadcrumb-style-2">
+					<li>
+						<a href="{{ path('accueil') }}" class="text-light">Accueil</a>
+					</li>
+					<li>CGU</li>
+				</ul>
+			</div>
+
+			<!-- BREADCRUMB ROW END -->
+		</div>
+	</div>
+</div>
+<!-- INNER PAGE BANNER END -->
+
+<!-- FAQ START -->
+<div class="section-full p-t120  p-b90 site-bg-white">
+
+	<div class="container">
+
+	</div>
+
+</div>
+<!-- FAQ END -->
+{% endblock %}

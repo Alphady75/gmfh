@@ -1,0 +1,40 @@
+{% extends "mails.html.twig" %}
+
+{% block body %}
+
+<p>
+  Objet : Nouvelle candidature pour {{ candidature.offre.intitulePoste }}
+</p>
+
+<p>Cher {{ candidature.offre.user }},</p>
+
+<p>
+  Nous avons le plaisir de vous informer qu'une nouvelle candidature a été
+  soumise pour le poste de {{ candidature.offre.intitulePoste }}. Vous
+  trouverez ci-dessous les détails du candidat :
+</p>
+
+<p>
+  Nom du candidat : <strong>{{ candidature.user }}</strong>
+</p>
+
+<p>
+  Poste recherché : <strong>{{ candidature.offre.intitulePoste }}</strong>
+</p>
+
+<p>Résumé de la candidature :</p>
+
+<p>{{ candidature.candidatPresentation }}.</p>
+
+<p>
+  Vous pouvez consulter la candidature complète dans votre espace
+  recruteur sur notre site web.
+</p>
+
+<p>
+  Nous vous remercions pour votre intérêt à recruter à travers notre
+  plateforme {{ appName }}. N'hésitez pas à nous contacter si vous avez
+  des questions ou besoin d'assistance.
+</p>
+
+{% endblock %}

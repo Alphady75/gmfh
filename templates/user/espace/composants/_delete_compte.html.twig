@@ -1,0 +1,9 @@
+<form method="post" class="d-inline" action="{{ path('user_delete_compte', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer le compte?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+	<button class="custom-button w-100 bg-danger" type="submit">
+		<span class="btnFetch d-block w-100">
+			<i class="fa fa-user-lock"></i>
+			Supprimer le compte
+		</span>
+	</button>
+</form>

@@ -1,0 +1,23 @@
+<div class="twm-jobs-grid-style1 mb-3">
+   <div class="twm-media">
+      {% if offre.user.compte == 'ENTREPRISE' %}
+         <img src="{% if offre.user.logo %}{{ vich_uploader_asset(offre.user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ offre }}">
+      {% else %}
+         <img src="{% if offre.user.photo %}{{ vich_uploader_asset(offre.user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ offre }}">
+      {% endif %}
+   </div>
+   <div class="twm-jobs-category green">
+      <span class="twm-bg-sky bg-{{ candidature.statusColor }}">{{ candidature.status }}</span>
+   </div>
+   <div class="twm-mid-content">
+      <a href="{{ path('offre_details', {slug: offre.slug}) }}" class="twm-job-title">
+         <h4 class="twm-job-title">{{ offre.name|u.truncate(20, '...') }}</h4>
+      </a>
+      <p class="twm-job-address">{{ offre.localisation }}</p>
+      <a href="{{ offre.user.siteWeb ?? '#' }}"
+         class="twm-job-websites site-text-primary">{{ offre.user.siteWeb ?? 'Aucun site...' }}</a>
+   </div>
+   <div class="twm-right-content">
+      <a href="{{ path('suivis_candidature', {token: candidature.token}) }}" class="twm-jobs-browse site-text-primary">Suivre ma candidature</a>
+   </div>
+</div>

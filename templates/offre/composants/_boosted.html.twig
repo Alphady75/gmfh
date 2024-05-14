@@ -1,0 +1,17 @@
+<div class="twm-job-categories-section">
+
+	<div class="job-categories-style1">
+		<div class="owl-carousel job-categories-carousel owl-btn-left-bottom ">
+
+			{% for offre in offres %}
+
+				<div class="item">
+					{% include "offre/composants/_card.html.twig" %}
+				</div>
+
+			{% endfor %}
+
+		</div>
+	</div>
+
+</div>

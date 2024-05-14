@@ -1,0 +1,37 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}Connexion
+{% endblock %}
+{% block titre %}Connexion
+{% endblock %}
+{% block text %}Connectez-vous à votre compte
+	{{ appName }}
+{% endblock %}
+
+{% block body %}
+
+	{% if error %}
+		<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+	{% endif %}
+
+	{% if app.user %}
+		<div class="mb-3">
+			Vous êtes connecté en tant que
+			{{ app.user.username }},
+			<a href="{{ path('app_logout') }}">Déconnexion</a>
+		</div>
+	{% endif %}
+
+	{% if app.user %}
+
+		{% else %}
+
+			{% include "security/_form.html.twig" %}
+
+	{% endif %}
+
+{% endblock %}
+
+{% block footer %}
+	{% include "partials/auth/_login_links.html.twig" %}
+{% endblock %}

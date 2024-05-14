@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annuaire
+{% endblock %}
+
+{% block body %}
+
+
+	{{ form_start(form) }}
+	<!--Banner Start-->
+	<div class="twm-home3-banner-section site-bg-white bg-cover" style="background-image:url({{ asset('img/h7-banner.jpg') }})">
+		<div class="twm-home3-inner-section">
+			<div class="twm-bnr-mid-section pb-3">
+				<h1 class="twm-bnr-title-light">{{ appName }}
+					Annuaires</h1>
+				<div class="twm-bnr-discription">Tapez votre mot-clé, puis Rechercher.
+				</div>
+				<div class="row">
+					<div class="col-sm-12 mx-auto">
+						<div class="twm-bnr-search-bar">
+							<div
+								class="row">
+								<!--Title-->
+								<div class="form-group col-xl-3 col-lg-6 col-md-6">
+									<label>Qui ?</label>
+									{{ form_widget(form.query) }}
+								</div>
+
+								<!--All Category-->
+								<div class="form-group col-xl-3 col-lg-6 col-md-6">
+									<label class="ps-2">Secteur d'activité</label>
+									{{ form_widget(form.secteur) }}
+								</div>
+
+								<!--Location-->
+								<div class="form-group col-xl-3 col-lg-6 col-md-6">
+									<label>Localisation</label>
+									<div class="twm-inputicon-box">
+										{{ form_widget(form.localisation) }}
+										<i class="twm-input-icon fas fa-map-marker-alt ms-auto"></i>
+									</div>
+								</div>
+								<div class="form-group col-xl-3 ps-0 col-lg-6 col-md-6 text-end center-mobile">
+									{% include "annuaire/composants/_trier.html.twig" %}
+									<button type="submit" class="custom-button">
+										<span class="btnFetch text-center">
+											<i class="fa fa-search me-2"></i>
+											<span class="none-mobile"></span>
+										</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="twm-bnr-h-page7-jobs p-t50 pb-0">
+					<div class="twm-hed-title">
+						<h4 class="twm-title">les emplois dans votre périmetre</h4>
+					</div>
+					<div class="twm-bnr-h7-carousal">
+						<div class="swiper h-page7-jobs-slider">
+							<div class="swiper-wrapper">
+
+								{% for secteur in secteurs(10) %}
+
+									<div
+										class="swiper-slide">
+										<!--7-->
+										<div class="job-categories-home-7">
+											<div class="job-categories-home-7-top">
+												<div class="twm-media cat-bg-clr-3">
+													<div class="flaticon-project-management"></div>
+												</div>
+												<div class="twm-content">
+													<div class="twm-jobs-available">{{ secteur.offres|length }}
+														Emploi{{ secteur.offres|length > 1 ? 's' : '' }}</div>
+												</div>
+											</div>
+											<a href="{{ path('offres_secteur', {slug: secteur.slug}) }}">{{ secteur.name|u.truncate(20, '...') }}</a>
+										</div>
+									</div>
+
+								{% endfor %}
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!--Banner End-->
+
+
+	<!-- OUR BLOG START -->
+	<div class="section-full p-t50  p-b50 site-bg-white">
+		<div class="container">
+			<div
+				class="row">
+
+				<!--div class="col-lg-3 col-md-12 rightSidebar none-mobile">
+												
+																	 include "annuaire/composants/_sidebar.html.twig" %}
+												
+																</div-->
+
+				<div
+					class="col-lg-12 col-md-12">
+					<!--Filter Short By-->
+					<div class="product-filter-wrap d-flex justify-content-center text-center align-items-center m-b30">
+						<span class="woocommerce-result-count-left">Affichage de
+							{{ users|length }}
+							sur
+							{{ users.getTotalItemCount
+						}}</span>
+
+					</div>
+
+					<div class="twm-candidates-grid-wrap">
+						{% if users|length > 0 %}
+
+							<div class="grid-four">
+								{% for user in users %}
+									{% include "annuaire/composants/_user.html.twig" %}
+								{% endfor %}
+							</div>
+						{% else %}
+							<div>
+								{% include "partials/base/_nodata.html.twig" %}
+							</div>
+						{% endif %}
+					</div>
+
+					<div class="pagination-outer">
+						<div class="">
+							<div class="">
+								{{ knp_pagination_render(users, null, {}, {
+							'align': 'center',
+							'size': 'medium',
+							'rounded': true,
+							}) }}
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- OUR BLOG END -->
+	{{ form_end(form) }}
+
+{% endblock %}

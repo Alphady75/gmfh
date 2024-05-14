@@ -1,0 +1,20 @@
+<div class="header-nav-btn-section">
+	{% if app.user %}
+		<div class="twm-nav-btn-right">
+			{% include "partials/user/_profile.html.twig" %}
+		</div>
+	{% else %}
+		<div class="twm-nav-btn-left">
+			<a class="twm-nav-sign-up" href="{{ path('app_register') }}">
+				<i class="feather-user"></i>
+				Inscription
+			</a>
+		</div>
+		<div class="twm-nav-btn-left none-mobile">
+			<a class="twm-nav-sign-up" href="{{ path('app_login') }}">
+				<i class="feather-log-in"></i>
+				Connexion
+			</a>
+		</div>
+	{% endif %}
+</div>

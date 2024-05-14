@@ -1,0 +1,8 @@
+<a href="{{ path('user_candidatures') }}" class="btn custom-button-light p-2 {{ app.request.attributes.get('_route') == 'user_candidatures' ? 'bg-blue' : '' }} mb-2">
+	<i class="fa fa-user-friends"></i>
+	Reçu
+</a>
+<a href="{{ path('user_candidatures_appliquer') }}" class="btn custom-button-light p-2 {{ app.request.attributes.get('_route') == 'user_candidatures_appliquer' ? 'bg-blue' : '' }} mb-2">
+	<i class="fa fa-user-check"></i>
+	Appliquée
+</a>

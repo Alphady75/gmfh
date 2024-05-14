@@ -1,0 +1,43 @@
+<div class="section-full p-t50 p-b50 site-bg-gray twm-bg-ring-wrap2">
+	<div class="twm-bg-ring-right"></div>
+	<div class="twm-bg-ring-left"></div>
+	<div class="container">
+
+		<div class="wt-separator-two-part">
+			<div class="row wt-separator-two-part-row">
+				<div
+					class="col-xl-7 col-lg-7 col-md-12 wt-separator-two-part-left">
+					<!-- TITLE START-->
+					<div class="section-head left wt-small-separator-outer bottom-padding">
+						<div class="wt-small-separator site-text-primary">
+							<div>Recommandées</div>
+						</div>
+						<h2 class="wt-title">Annuaire</h2>
+					</div>
+					<!-- TITLE END-->
+				</div>
+				<div class="col-xl-5 col-lg-5 col-md-12 wt-separator-two-part-right text-right none-mobile">
+					<a href="{{ path('annuaire') }}" class="custom-button">Tout afficher</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="section-content">
+			<div class="twm-jobs-grid-wrap">
+				<div class="row">
+					{% for entreprise in entreprises(6) %}
+						<div class="col-sm-4">
+							{% include "annuaire/composants/_user.html.twig" with {user: entreprise} %}
+						</div>
+					{% endfor %}
+				</div>
+
+			</div>
+		</div>
+
+		<div class="block-mobile py-3 text-center">
+			<a href="{{ path('annuaire') }}" class="custom-button">Tout afficher</a>
+		</div>
+
+	</div>
+</div>

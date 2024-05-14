@@ -1,0 +1,22 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-light mb-3 border" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+	<i class="fa fa-info-circle text-muted"></i> Avantages du Boostage
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="h5"><i class="fa fa-info-circle text-warning"></i> Avantages du Boostage d'une offre d'emploi</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+            {% include "partials/booster/_offre_infos.html.twig" %}
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light" data-bs-dismiss="modal">Compris</button>
+			</div>
+		</div>
+	</div>
+</div>

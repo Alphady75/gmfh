@@ -1,0 +1,34 @@
+<div class="hpage-7-featured-block">
+	<div class="inner-content">
+		<a href="{{ path('annuaire_profile', {nameSlug: user.nameSlug}) }}">
+			<div class="top-content-wrap">
+				<div class="top-content">
+					<span class="job-time">Membre</span>
+					<span class="job-post-time">{{ user.created|ago }}</span>
+				</div>
+				<div class="mid-content">
+					<div class="company-logo">
+						<img src="{% if user.logo %}{{ vich_uploader_asset(user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}"
+							class="rounded-circle" alt="{{ user.societe }}">
+					</div>
+					<div class="company-info">
+						<a href="{{ path('annuaire_profile', {nameSlug: user.nameSlug}) }}" class="company-name">{{ user.societe
+							}}</a>
+						<p class="company-address">{{ user.localisation }}</p>
+					</div>
+				</div>
+			</div>
+		</a>
+		<div class="bottom-content">
+			<a href="{{ path('annuaire_profile', {nameSlug: user.nameSlug}) }}"><h4 class="job-name-title">{{ user.secteuractivite.name|u.truncate(20, '...') }}</h4></a>
+			<!--div class="job-payment">
+				<span>$130</span>/ Month
+			</div-->
+		</div>
+		<div class="aply-btn-area">
+			<a href="{{ path('annuaire_profile', {nameSlug: user.nameSlug}) }}" class="aplybtn">
+				<i class="fa fa-check"></i>
+			</a>
+		</div>
+	</div>
+</div>

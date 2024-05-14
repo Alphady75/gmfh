@@ -1,0 +1,37 @@
+{% include "user/offre/_filters.html.twig" %}
+
+<div class="row">
+	{% for offre in offres %}
+	<div class="col-sm-4">
+		{% include "offre/composants/_card.html.twig" %}
+		<div class="text-center p-0 mb-4">
+			{% if is_granted('ROLE_ADMINISTRATEUR') %}
+
+			{% if offre.signalers|length > 0 %}
+				<span class="custom-badge bg-warning text-primary">
+					<i class="fa fa-bell"></i> Signalée ({{offre.signalers|length == 1 ? 'une' : offre.signalers|length}} fois)
+				</span>
+			{% endif %}
+
+			<a href="{{ path('user_offre_show', {slug: offre.slug}) }}" class="custom-badge">
+				Afficher
+			</a>
+
+			{% endif %}
+			<a href="{{ path('user_offre_edit', {slug: offre.slug}) }}" title="Détails de l'offre" data-bs-toggle="tooltip" class="custom-badge"
+				data-bs-placement="top">
+				<span class="fa fa-edit"></span>
+			</a>
+		</div>
+	</div>
+	{% else %}
+	<div class="col-12">
+		{% include "partials/base/_nodata.html.twig" %}
+	</div>
+	{% endfor %}
+</div>
+{{ knp_pagination_render(offres, null, {}, {
+'align': 'center',
+'size': 'medium',
+'rounded': true,
+}) }}

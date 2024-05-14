@@ -1,0 +1,61 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Produit stripe ({{ stripes.getTotalItemCount }}){% endblock %}
+{% block titre %}Produit stripe ({{ stripes.getTotalItemCount }}){% endblock %}
+{% block text %}Produit stripe ({{ stripes.getTotalItemCount }}){% endblock %}
+
+{% block right %}
+<a href="{{ path('admin_stripe_new') }}" class="custom-button text-center mt-3">
+  <i class="fa fa-plus"></i>
+  Ajouter un produit
+</a>
+{% endblock %}
+
+{% block body %}
+
+<div class="table-responsive table-knp">
+  <table class="table twm-table table-hover table-borderless table-striped">
+    <thead>
+      <tr>
+        <th>#Id</th>
+        <th>Abonnement</th>
+        <th>Tarif</th>
+        <th>Clé Stripe</th>
+        <th>Abonnée</th>
+        <th class="text-end">actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for stripe in stripes %}
+      <tr>
+        <td>{{ stripe.id }}</td>
+        <td>{{ stripe.name }}</td>
+        <td>{{ stripe.tarif }} {{ stripe.devise }}</td>
+        <td>{{ stripe.stripeKey }}</td>
+        <td><span class="custom-badge">{{ stripe.abonnements|length }}</span></td>
+        <td class="text-end">
+          <a href="{{ path('admin_stripe_edit', {'id': stripe.id}) }}" class="btn btn-sm">
+            <i class="fa fa-edit"></i>
+          </a>
+          {% include "admin/stripe/_delete_form.html.twig" %}
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5">
+          {% include "partials/base/_nodata.html.twig" %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="">
+  {{ knp_pagination_render(stripes, null, {}, {
+  'align': 'center',
+  'size': 'medium',
+  'rounded': true,
+  }) }}
+</div>
+
+{% endblock %}

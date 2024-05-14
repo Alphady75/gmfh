@@ -1,0 +1,19 @@
+{% extends 'check.html.twig' %}
+
+{% block title %}Félicitation ! {{ candidature.user }}.{% endblock %}
+
+{% block img %}{{ asset('img/success.svg') }}{% endblock %}
+
+{% block body %}
+
+<h5 class="mb-0 pb-1 mt-3">Félicitation ! {{ candidature.user }}.</h5>
+
+<p class="mb-0 pb-1">
+   Nous sommes ravis de vous informer que votre candidature pour le poste de 
+   <strong>{{ candidature.offre.intitulePoste }}</strong> a été soumise avec succès.
+</p>
+
+<a href="{{ path('offres') }}" class="custom-button-light text-blue me-2">Continuer votre exploration</a>
+<a href="{{ path('suivis_candidature', {token: candidature.token}) }}" class="custom-button"><i class="fa fa-eye"></i> Suivre ma candidature</a>
+
+{% endblock %}

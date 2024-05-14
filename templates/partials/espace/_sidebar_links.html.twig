@@ -1,0 +1,54 @@
+<li class="{{ app.request.attributes.get('_route') == 'user_dashboard' ? 'active' : '' }}">
+	<a href="{{ path('user_dashboard') }}">
+		<i class="fa fa-chart-pie"></i>
+		<span class="admin-nav-text">Tableau de Bord</span>
+	</a>
+</li>
+
+<li class="{{ app.request.attributes.get('_route') == 'user_complete_compte' ? 'active' : '' }}">
+	<a href="{{ path('user_complete_compte') }}">
+		<i class="fa fa-user-tie"></i>
+		<span class="admin-nav-text">
+			Mon profil
+			<span class="ms-auto badge bg-success rounded-pill">{{ app.user.compte }}</span>
+		</span>
+	</a>
+</li>
+<li class="{{ app.request.attributes.get('_route') == 'user_offre' ? 'active' : '' }}">
+	<a href="{{ path('user_offre') }}">
+		<i class="fa fa-suitcase"></i>
+		<span class="admin-nav-text">
+			Offres d'emplois
+		</span>
+	</a>
+</li>
+<li class="{{ app.request.attributes.get('_route') == 'user_candidatures' ? 'active' : '' }}">
+	<a href="{{ path('user_candidatures') }}">
+		<i class="fa fa-user-friends"></i>
+		<span class="admin-nav-text">Candidatures</span>
+	</a>
+</li>
+<li class="{{ app.request.attributes.get('_route') == 'user_posts' ? 'active' : '' }}">
+	<a href="{{ path('user_posts') }}">
+		<i class="fa fa-bookmark"></i>
+		<span class="admin-nav-text">Annonces</span>
+	</a>
+</li>
+<li class="{{ app.request.attributes.get('_route') == 'user_alert_index' ? 'active' : '' }} {{ app.request.attributes.get('_route') == 'user_alert_new' ? 'active' : '' }}">
+  <a href="{{ path('user_alert_index') }}">
+    <i class="fa fa-bell"></i>
+    <span class="admin-nav-text">Alertes</span>
+  </a>
+</li>
+<li class="{{ app.request.attributes.get('_route') == 'partenaire_posts_favoris' ? 'active' : '' }}">
+  <a href="{{ path('partenaire_posts_favoris') }}">
+    <i class="fa fa-heart"></i>
+    <span class="admin-nav-text">Favoris</span>
+  </a>
+</li>
+<li class="{{ app.request.attributes.get('_route') == 'partenaire_users_favoris' ? 'active' : '' }}">
+  <a href="{{ path('partenaire_users_favoris') }}">
+    <i class="fa fa-user-tag"></i>
+    <span class="admin-nav-text">Suivis</span>
+  </a>
+</li>

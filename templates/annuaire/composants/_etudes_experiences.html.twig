@@ -1,0 +1,33 @@
+{% if user.experiences is not empty %}
+
+<h4 class="twm-s-title">Parcours professionnel</h4>
+<div class="twm-timing-list-wrap">
+    {% for experience in user.experiences %}
+    <div class="twm-timing-list">
+        <div class="twm-time-list-date">{{ experience.startAt|date('d/m/Y') }} - {{ experience.endAt|date('d/m/Y') }}</div>
+        <div class="twm-time-list-title">{{ experience.entreprise }}</div>
+        <div class="twm-time-list-position">{{ experience.poste }}</div>
+        <div class="twm-time-list-discription">
+            <p>{{ experience.description }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if user.etudes is not empty %}
+<h4 class="twm-s-title">Etudes & Diplômes</h4>
+<div class="twm-timing-list-wrap">
+    {% for etude in user.etudes %}
+    <div class="twm-timing-list">
+        <div class="twm-time-list-date">{{ etude.annee }}</div>
+        <div class="twm-time-list-title">{{ etude.diplome }}</div>
+        <div class="twm-time-list-position">{{ etude.ecole }}</div>
+        <div class="twm-time-list-discription">
+            <p>{{ etude.description }}.</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endif %}

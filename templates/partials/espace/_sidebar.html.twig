@@ -1,0 +1,30 @@
+<nav id="sidebar-admin-wraper" class="">
+  <div class="page-logo">
+    <a href="{{ path('user_espace') }}"><img src="{{ asset('img/logo/trans/3.png') }}" alt=""></a>
+  </div>
+
+  <div class="admin-nav scrollbar-macosx">
+    <ul>
+      <li class="">
+        <a href="{{ path('accueil') }}">
+          <i class="fa fa-home"></i>
+          <span class="admin-nav-text">Accueil</span>
+        </a>
+      </li>
+
+      {% if app.user.compte == "ADMINISTRATEUR" %}
+        {% include "partials/admin/_sidebar_links.html.twig" %}
+      {% else %}
+        {% include "partials/espace/_sidebar_links.html.twig" %}
+      {% endif %}
+
+      <li>
+        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#logout-dash-profile">
+          <i class="fa fa-share-square"></i>
+          <span class="admin-nav-text">Déconnexion</span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</nav>

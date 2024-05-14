@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les métiers les plus passionnants{% endblock %}
+
+{% block header %}
+{% include "partials/base/_header.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+{{ form_start(form, {attr: {class: 'mb-4'}}) }}
+<!--Banner Start-->
+<div class="twm-home3-banner-section site-bg-white bg-cover"
+  style="background-image:url({{ asset('img/service/5.jpg') }})">
+  <div class="twm-home3-inner-section">
+    <div class="twm-bnr-mid-section">
+      <h1 class="twm-bnr-title-light">Les métiers les plus passionnants</h1>
+      <div class="twm-bnr-discription">Tapez votre mot-clé, puis cliquez sur Trouver pour trouver votre emploi idéal.
+      </div>
+
+      {% include "offre/composants/_banner_form.html.twig" %}
+
+    </div>
+  </div>
+</div>
+<!--Banner End-->
+
+<!-- OUR BLOG START -->
+<div class="section-full p-t40 p-b90">
+  <div class="container">
+
+    {% include "offre/composants/_form_filter.html.twig" %}
+
+    <div class="row pt-4">
+      {% for offre in offres %}
+      <!--Block ten-->
+      <div class="col-sm-4 col-md-4">
+        {% include "offre/composants/_card.html.twig" with {'offre': offre} %}
+      </div>
+      {% else %}
+      <div class="col-12">
+        {% include "partials/base/_nodata.html.twig" %}
+      </div>
+      {% endfor %}
+    </div>
+
+    {% include "offre/composants/_pagination.html.twig" %}
+
+  </div>
+</div>
+<!-- OUR BLOG END -->
+
+{{ form_end(form) }}
+
+{% endblock %}

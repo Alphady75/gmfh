@@ -1,0 +1,19 @@
+{% extends "mails.html.twig" %}
+
+{% block body %}
+	<p>Objet : Confirmation de soumission de candidature pour
+		{{ candidature.offre.intitulePoste }}</p>
+
+	<p>Cher(e)
+		{{ candidature.user }},</p>
+
+	<p>Nous sommes ravis de vous informer que votre candidature pour le poste de
+		{{ candidature.offre.intitulePoste }}
+		a été soumise avec succès.</p>
+
+	<p>Votre profil a été transmis à notre équipe de recrutement pour examen. Nous vous remercions de l'intérêt que vous portez à rejoindre notre entreprise et nous vous encourageons à consulter régulièrement notre site web pour d'autres opportunités qui pourraient correspondre à votre profil.</p>
+
+	<p>Si votre candidature est retenue pour passer à la prochaine étape du processus de recrutement, nous vous contacterons directement pour organiser une entrevue.</p>
+
+	<p>En attendant, nous vous souhaitons bonne chance dans votre recherche d'emploi et nous vous remercions encore pour l'intérêt que vous portez à notre entreprise.</p>
+{% endblock %}

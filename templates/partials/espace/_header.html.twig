@@ -1,0 +1,140 @@
+<header
+	id="header-admin-wrap" class="header-admin-fixed">
+
+	<!-- Header Start -->
+	<div id="header-admin">
+		<div
+			class="container">
+
+			<!-- Left Side Content -->
+			<div class="header-left">
+				<div class="nav-btn-wrap">
+					<a class="nav-btn-admin" id="sidebarCollapse">
+						<span class="fa fa-angle-left"></span>
+					</a>
+				</div>
+			</div>
+			<!-- Left Side Content End -->
+
+			<!-- Right Side Content -->
+			<div class="header-right">
+				<ul
+					class="header-widget-wrap">
+					<!--Message-->
+					<li class="header-widget dashboard-message-dropdown">
+
+						<div class="dropdown">
+							<a href="{{ path('conversations') }}" class="jobzilla-admin-messange">
+								<i class="fa fa-envelope"></i>
+								{% if messageNonLu(app.user)|length > 0 %}
+									<span class="notification-animate">
+										{{ messageNonLu(app.user)|length }}
+									</span>
+								{% endif %}
+							</a>
+						</div>
+
+					</li>
+					<!--Message-->
+					<li class="header-widget dashboard-message-dropdown">
+
+						<div class="dropdown">
+							<a href="{{ path('partenaire_posts_favoris') }}" class="jobzilla-admin-messange">
+								<i class="fas fa-heart"></i>
+								{% if userfavoris(app.user)|length > 0 %}
+									<span class="notification-animate">
+										{{ userfavoris(app.user)|length }}
+									</span>
+								{% endif %}
+							</a>
+						</div>
+
+					</li>
+
+          {% if is_granted('ROLE_ADMINISTRATEUR') %}
+					<!--Notification-->
+					<li class="header-widget dashboard-noti-dropdown">
+
+						<div class="dropdown">
+							<a href="javascript:;" class="dropdown-toggle jobzilla-admin-notification" id="ID-NOTI_dropdown" data-bs-toggle="dropdown">
+								<i class="far fa-bell"></i>
+                {% if signalers()|length > 0 %}
+								<span class="notification-animate">{{ signalers()|length }}</span>
+                {% endif %}
+							</a>
+							<div class="dropdown-menu" aria-labelledby="ID-NOTI_dropdown">
+								<div class="dashboard-widgets-header">Toute vos notifications</div>
+								<div class="noti-list dashboard-widget-scroll">
+									<ul>
+                    {% for signale in lastsignalers(4) %}
+										<li>
+											<a href="{{ path('admin_signaler_show', {id: signale.id}) }}">
+												<span class="noti-icon">
+													<i class="far fa-bell"></i>
+												</span>
+												<span class="noti-texting">{{ signale.user }}
+													<b>{{ signale.abus }}.</b>
+												</span>
+											</a>
+										</li>
+                    {% endfor %}
+									</ul>
+
+									<div class="noti-view-all">
+										<a href="{{ path('admin_signaler_index') }}">Toute les notifications</a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</li>
+          {% endif %}
+
+					<!--Account-->
+					<li class="header-widget">
+						<div class="dashboard-user-section">
+							<div class="listing-user">
+								<div class="dropdown">
+									<a href="javascript:;" class="dropdown-toggle" id="ID-ACCOUNT_dropdown" data-bs-toggle="dropdown">
+										<div class="user-name text-black">
+											<span>
+
+												{% if app.user.compte == 'ENTREPRISE' %}
+													<img src="{{ app.user.logo ? vich_uploader_asset(app.user, 'logoFile') | imagine_filter('mediumavatar') : asset('img/banner.png') | imagine_filter('mediumavatar') }}" alt="{{ appName }} {{ app.user.email }}">
+
+												{% else %}
+													<img src="{{ app.user.photo ? vich_uploader_asset(app.user, 'photoFile') | imagine_filter('mediumavatar') : asset('img/avatar.jpg') | imagine_filter('mediumavatar') }}" alt="{{ appName }} {{ app.user.email }}">
+												{% endif %}
+
+											</span>
+											{{ app.user.compte == 'ENTREPRISE' ? app.user.societe : app.user }}
+										</div>
+									</a>
+									<div class="dropdown-menu" aria-labelledby="ID-ACCOUNT_dropdown">
+										<ul>
+											<li><a href="{{path('user_dashboard')}}"><i class="fa fa-home"></i>Tableau
+												                          de Bord</a></li>
+											<li><a href="{{ path('conversations') }}"><i class="fa fa-envelope"></i>Messages</a></li>
+											<li><a href="{{path('user_complete_compte')}}"><i class="fa fa-user"></i>{{ app.user.completed ==
+                          false ? "Completer votre profil" : "Profil"
+                          }}</a></li>
+											<li><a href="{{path('user_update_acces')}}"><i class="fa fa-key"></i>Mes
+												                          accès</a></li>
+											<li><a href="{{path('app_logout')}}"><i class="fa fa-share-square"></i>Déconnexion</a></li>
+										</ul>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+			<!-- Right Side Content End -->
+
+		</div>
+	</div>
+	<!-- Header End -->
+
+</header>

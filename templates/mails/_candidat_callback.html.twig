@@ -1,0 +1,26 @@
+{% extends "mails.html.twig" %}
+
+{% block body %}
+
+<p>Objet : <strong>Notification concernant votre candidature</strong></p>
+
+<p>Cher/Chère {{ candidature.user }},</p>
+
+<p>
+  Nous tenons à vous remercier pour l'intérêt que vous avez manifesté à
+  l'égard du poste de
+  <strong>{{ candidature.offre.intitulePoste }}</strong>. Après un processus de sélection approfondi, nous souhaitons
+  vous
+  informer du statut de votre candidature.
+</p>
+
+<p>[{{ candidature.status }}]</p>
+<p>{{ message }}</p>
+
+<p>
+  Nous tenons à vous remercier à nouveau pour avoir pris le temps de
+  postuler à notre offre et vous souhaitons le meilleur pour vos projets
+  professionnels à venir.
+</p>
+
+{% endblock %}

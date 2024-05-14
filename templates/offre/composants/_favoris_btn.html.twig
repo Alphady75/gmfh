@@ -1,0 +1,13 @@
+<a href="{{ app.user ? path('favoris_offre_new', {id: offre.id}) : path('app_login') }}" class="{{ app.user ? 'js-favoris' : '' }} btn btn-sm">
+
+	{% if app.user and offre.isAddedByUser(app.user) %}
+
+	<i class="fa fa-heart" aria-hidden="true"></i>
+
+	{% else %}
+
+	<i class="far fa-heart" aria-hidden="true"></i>
+
+	{% endif %}
+	
+</a>

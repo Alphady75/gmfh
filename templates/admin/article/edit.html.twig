@@ -1,0 +1,61 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Mise à jour de l'article #{{ article }}
+{% endblock %}
+{% block titre %}Mise à jour de l'article #{{ article }}
+{% endblock %}
+{% block text %}Mise à jour de l'article #{{ article }}
+{% endblock %}
+
+{% block body %}
+
+{{ include('admin/article/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+<div class="row">
+    <div class="col-sm-8">
+        <div class="panel panel-defaulte bg-white">
+            <div class="panel-heading wt-panel-heading p-a20">
+                <h4 class="panel-tittle m-0">
+                    <i class="fa fa-info-circle text-danger"></i>
+                    Suppréssion de l'article
+                </h4>
+            </div>
+            <div class="panel-body wt-panel-body p-a20 m-b30">
+                <h5>Important : Avant de supprimer cet article</h5>
+
+                <p>Supprimer un article de blog de la base de données comporte plusieurs risques, notamment:</p>
+
+                <ul class="ps-3">
+                    <li>
+                        <strong>Perte de contenu : </strong>Supprimer un article de la base de données entraîne la perte permanente de son contenu. Si ce contenu est important pour les lecteurs ou s'il est référencé ailleurs sur Internet, sa suppression peut avoir un impact négatif sur l'expérience utilisateur et la réputation du site.
+                    </li>
+                    <li>
+                        <strong>Impact sur le référencement :</strong>Les articles de blog contribuent souvent au référencement naturel (SEO) d'un site web. En supprimant un article, vous supprimez également les liens entrants, les mots-clés et autres éléments qui contribuent au classement de votre site dans les moteurs de recherche. Cela peut entraîner une diminution du trafic organique et de la visibilité en ligne.
+                    </li>
+                    <li>
+                        <strong>Erreurs de navigation :</strong>Si d'autres pages ou articles font référence à l'article supprimé, les liens deviendront cassés, ce qui peut perturber la navigation des utilisateurs sur le site et nuire à l'expérience utilisateur.
+                    </li>
+                    <li>
+                        <strong>Historique et analyse :</strong>
+                        Supprimer un article peut fausser les données analytiques et statistiques liées au contenu du site. Cela peut rendre difficile l'analyse de la performance passée du contenu et la prise de décisions basées sur ces données.
+                    </li>
+                    <li>
+                        <strong>Effet sur les utilisateurs :</strong>
+                        Les utilisateurs peuvent être déçus ou frustrés si un contenu qu'ils ont précédemment consulté ou bookmarké disparaît soudainement. Cela peut affecter la confiance des utilisateurs dans le site et les inciter à chercher des sources d'information plus fiables.
+                    </li>
+                </ul>
+
+                {% include "admin/article/_delete_form.html.twig" %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% include "admin/article/_scripts.html.twig" %}
+
+{% endblock %}

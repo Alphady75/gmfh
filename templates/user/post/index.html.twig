@@ -1,0 +1,21 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Services ({{ posts.getTotalItemCount }})
+{% endblock %}
+{% block titre %}Services ({{ posts.getTotalItemCount }})
+{% endblock %}
+{% block text %}Services ({{ posts.getTotalItemCount }})
+{% endblock %}
+
+{% block right %}
+	<a href="{{ path('user_post_new') }}" class="custom-button mt-3">
+		<i class="fa fa-plus"></i>
+		Publier un service</a>
+{% endblock %}
+
+{% block body %}
+
+
+	{% include "user/post/_table.html.twig" %}
+
+{% endblock %}

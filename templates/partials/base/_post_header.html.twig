@@ -1,0 +1,74 @@
+<header class="site-header header-full-width mobile-sider-drawer-menu shadow-none post-navbar">
+
+	<div class="sticky-header main-bar-wraper  navbar-expand-lg">
+		<div class="main-bar">
+
+			<div class="container-fluid clearfix">
+
+				<div class="logo-header">
+					<button type="button" id="go-back" class="header-widget btn">
+						<i class="fas fa-arrow-left"></i>
+					</button>
+					<div class="logo-header-inner logo-header-one">
+						<a href="{{ path('accueil') }}">
+							<img src="{{ asset('img/logo/trans/3.png') }}" alt="{{ appName }} Logo" class="on-scroll-show">
+						</a>
+					</div>
+				</div>
+
+				<!-- Header Right Section-->
+				<div class="extra-nav header-2-nav ms-auto">
+					<div class="extra-cell">
+						<div class="header-nav-btn-section">
+							<div class="twm-nav-btn-left ms-auto">
+								<a href="{{ app.user ? path('favoris_post_new', {id: post.id}) : path('app_login') }}" class="{{ app.user ? 'js-favoris' : '' }} twm-nav-sign-up bg-transparent">
+
+									{% if app.user and post.isAddedByUser(app.user) %}
+
+										<i class="fa fa-heart mx-auto" aria-hidden="true"></i>
+
+									{% else %}
+
+										<i class="far fa-heart mx-auto" aria-hidden="true"></i>
+
+									{% endif %}
+
+								</a>
+							</div>
+							<div class="twm-nav-btn-left block-mobile ms-auto">
+								<a class="twm-nav-sign-up" href="https://api.whatsapp.com/send?text=Salut ! J’ai trouvé cette annonce sur {{ appName }}, peut-être que ça pourrait t’intéresser. Consultez le service en cliquant sur le lien ci-dessous 👇{{ absolute_url(path('post_details', {slug: post.slug})) }}">
+									<i class="fas fa-share-alt" aria-hidden="true"></i>
+								</a>
+							</div>
+
+							{% if app.user %}
+
+								{% else %}
+
+									<div class="twm-nav-btn-left none-mobile">
+										<a class="twm-nav-sign-up bg-transparent text-blue" href="{{ path('app_login') }}">
+											SE CONNEXION
+										</a>
+									</div>
+
+							{% endif %}
+
+							<div class="twm-nav-btn-left none-mobile">
+								<a class="twm-nav-sign-up bg-first text-light" href="{{ path('user_post_new') }}">
+									<i class="fas fa-plus-circle"></i>
+									DEPOSER UN SERVICE
+								</a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- SITE Search -->
+		{% include "partials/base/_search_form.html.twig" %}
+	</div>
+
+
+</header>

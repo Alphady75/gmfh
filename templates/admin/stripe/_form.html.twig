@@ -1,0 +1,48 @@
+{{ form_start(form, {attr: {class: 'form'}}) }}
+
+<div class="row">
+	<div class="col-sm-8">
+		<div class="panel panel-defaulte bg-white">
+			<div class="panel-body wt-panel-body p-a20 m-b30">
+				<div class="create-banner d-flex align-items-center bg-white">
+					<img src="{{ asset('img/emploi.png') }}" class="img-fluid" alt="">
+					<h5 class="page-titre ms-auto">
+						Informations Sur <br> l'offre d'abonnement
+					</h5>
+				</div>
+				{{ form_row(form.name) }}
+				<div class="row">
+					<div class="col-sm-7">{{ form_row(form.tarif) }}</div>
+					<div class="col-sm-5">{{ form_row(form.devise) }}</div>
+					<div class="col-sm-12">{{ form_row(form.typeTarification) }}</div>
+					<div class="col-sm-12">{{ form_row(form.stripeKey) }}</div>
+					<div class="col-sm-12">{{ form_row(form.composants) }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-4 rightSidebar">
+		<div class="side-bar-2">
+			<div class="panel panel-defaulte bg-white">
+				<div class="panel-heading wt-panel-heading p-a20">
+					<h4 class="panel-tittle m-0">
+						<i class="fa fa-info-circle text-warning"></i>
+						Conseils de sécurité
+					</h4>
+				</div>
+				<div class="panel-body wt-panel-body p-a20 m-b30">
+					{{ form_row(form.recommanded) }}
+					<p class="text-muted">Vérifiez bien toute les informations de l'élément avant de le publier</p>
+					<button class="custom-button button w-100" formnovalidate type="submit">
+						<span class="btnFetch d-block w-100">
+							{{ button_label|default('Enregistrer') }}
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{ form_end(form, {render_rest: false}) }}

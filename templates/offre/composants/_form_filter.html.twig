@@ -1,0 +1,143 @@
+<div class="bg-white">
+	<div class="radius site-bg-white filter-form mb-2">
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+				Type de contrat
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+				{{ form_widget(form.typeContrat) }}
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+				Horaires
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+				{{ form_widget(form.horaires) }}
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+				Expériences requises
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+				{{ form_widget(form.experiences) }}
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+				Langues
+			</button>
+			<div class="dropdown-menu text-capitalize" aria-labelledby="dropdownMenuButton1">
+				{{ form_widget(form.langues) }}
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+				Salaire
+			</button>
+			<div class="dropdown-menu text-capitalize" aria-labelledby="dropdownMenuButton1">
+				{{ form_row(form.minSalaire) }}
+				{{ form_row(form.maxSalaire) }}
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+				Périodicité
+			</button>
+			<div class="dropdown-menu text-capitalize" aria-labelledby="dropdownMenuButton1">
+				{{ form_row(form.periodicite) }}
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+				Lieu de travail
+			</button>
+			<div class="dropdown-menu text-capitalize" aria-labelledby="dropdownMenuButton1">
+				{{ form_row(form.lieuTravail) }}
+			</div>
+		</div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+				Genre
+			</button>
+			<div class="dropdown-menu text-capitalize" aria-labelledby="dropdownMenuButton1"></div>
+		</div>
+		<div class="dropdown filter-form-select">
+			<button type="submit" class="btn">
+				<span class="btnFetch d-block w-100 text-center">
+					{{ button_label|default('Trier') }}&nbsp;
+					<i class="fa fa-filter"></i>
+				</span>
+			</button>
+		</div>
+		{% if clear == true %}
+			<div class="dropdown">
+				<a href="{{ path('offres') }}" class="btn text-danger">
+					<span class="btnFetch">
+						<i class="fa fa-filter me-0"></i>x
+					</span>
+				</a>
+			</div>
+		{% endif %}
+	</div>
+
+	{% if previousSearches.keywords is not empty or previousSearches.secteur is not empty or previousSearches.localisation is not empty %}
+
+		<div class="row py-3 d-flex align-items-top">
+			<div class="col-sm-9">
+				<div>
+					<span class="me-3">
+						<i class="fa fa-search"></i>
+						Recherches résentes:
+					</span>
+					{% if previousSearches.keywords is not empty %}
+						<span class="alert-badge">{{ previousSearches.keywords }}</span>
+					{% endif %}
+					{% if previousSearches.secteur is not empty %}
+						<span class="alert-badge">{{ previousSearches.secteur }}</span>
+					{% endif %}
+					{% if previousSearches.localisation is not empty %}
+						<span class="alert-badge">{{ previousSearches.localisation }}</span>
+					{% endif %}
+				</div>
+				{% if app.user and app.user.alerts is not empty %}
+
+					<div>
+						<span class="me-3 text-primary">
+							<i class="fa fa-bell"></i>
+							Votre alertes :
+						</span>
+						{% for alert in alerts(app.user, 2) %}
+							{% for secteur in alert.secteurs %}
+								<span class="alert-badge">{{ secteur }}</span>
+							{% endfor %}
+							<span class="alert-badge">{{ alert.query }}</span>
+							<span class="alert-badge">{{ alert.localisation }}</span>
+
+							<a href="{{ path('client_alert_remove', {id: alert.id}) }}" class="btn btn-sm text-primary mt-0 alert-badge" title="Supprimer l'alerte">
+								<i class="fa fa-trash-alt"></i>
+							</a>
+						{% endfor %}
+					</div>
+
+				{% endif %}
+			</div>
+			<div class="col-sm-3 text-end">
+				<a href="{{ path('active_alert') }}" class="custom-button-light p-2 new-alerte">
+					<i class="{{ app.user and app.user.alerts|length > 1 ? 'fa' : 'far' }} fa-bell text-primary"></i>
+					Créer une alerte</a>
+			</div>
+		</div>
+
+	{% endif %}
+
+	<div class="product-filter-wrap d-flex justify-content-between align-items-end pb-0 pt-3">
+		<span class="woocommerce-result-count-left">
+			Affichage de
+			{{ offres|length }}
+			offre{{ offres|length > 1 ? 's' : '' }}
+			d'emploi{{ offres|length > 1 ? 's' : '' }}
+		</span>
+	</div>
+</div>

@@ -1,0 +1,43 @@
+<div class="table-responsive table-knp">
+	<table class="table twm-table table-hover table-borderless table-striped">
+        <tbody>
+            {% for alert in alerts %}
+            <tr>
+                <td>
+                    <strong>{{ alert.query }}</strong> -
+                    <span><i class="fa fa-map-marker-alt"></i> {{ alert.localisation }}</span>
+                    <br>
+                    {% for secteur in alert.secteurs %}
+                        <span class="custom-badge">{{ secteur }}</span>
+                    {% endfor %}
+
+                    <p class="pt-3"><small><i class="fa fa-time"></i> {{ alert.created ? alert.created|ago }}</small></p>
+                </td>
+                <td>
+                    <span class="custom-badge text-light bg-{{ alert.active ? 'success' : 'warning' }} mt-0">{{ alert.active ? 'Activée' : 'Désactivée' }}</span>
+                </td>
+                <td class="text-end">
+                    <div class="d-flex">
+                    <a href="{{ path('client_alert_edit', {'id': alert.id}) }}" class="" title="Modifier l'alerte">
+                        <i class="fa fa-edit"></i>
+                    </a>
+
+                    {% include "client/alert/_desable_form.html.twig" %}
+
+                    {% include "client/alert/_delete_form.html.twig" %}
+                </div>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3" class="text-center">
+                    <p class="pb-3 text-center">Aucune alerte pour le moment</p>
+                    <a href="{{ path('client_alert_new') }}" class="custom-button-light">
+                        <i class="fa fa-bell"></i> Créer une alerte
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

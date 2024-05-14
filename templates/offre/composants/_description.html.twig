@@ -1,0 +1,50 @@
+<h4 class="twm-s-title">Description de l'offre</h4>
+
+{{ offre.description|raw }}
+
+<h4 class="twm-s-title">Expériences requises pour ce poste:</h4>
+<ul class="description-list-2">
+	{% for experience in offre.experiences %}
+		<li>
+			<i class="feather-check"></i>
+			{{ experience }}
+		</li>
+	{% else %}
+		<li>
+			<i class="feather-check"></i>
+			Aucune expériences requises
+		</li>
+	{% endfor %}
+</ul>
+
+<h4 class="twm-s-title">Responsabilités pour ce poste:</h4>
+<ul class="description-list-2">
+	{% for responsabilite in offre.responsabilites %}
+		<li>
+			<i class="feather-check"></i>
+			{{ responsabilite }}
+		</li>
+	{% else %}
+		<li>
+			<i class="feather-check"></i>
+			Non mentionner
+		</li>
+	{% endfor %}
+</ul>
+
+<div class="widget tw-sidebar-tags-wrap">
+	<h4 class="section-head-small mb-4">Horaires de tratail</h4>
+
+	<div class="tagcloud">
+		{% for horaire in offre.horaires %}
+			<a href="javascript:void(0)">{{ horaire }}</a>
+		{% endfor %}
+	</div>
+</div>
+
+<h4 class="twm-s-title">Localisation</h4>
+<div class="twm-m-map mb-5">
+	<div class="twm-m-map-iframe">
+		<iframe height="310" src="https://maps.google.com/maps?&q={{ offre.user.localisation|replace({' ':'+'}) }}&output=embed"></iframe>
+	</div>
+</div>

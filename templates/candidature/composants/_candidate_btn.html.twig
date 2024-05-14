@@ -1,0 +1,14 @@
+<button type="{{ app.user ? 'submit' : 'button' }}" class="custom-button my-3 {{ app.user and offre.isCandidateByUser(app.user) ? 'desactive bg-secondary' : 'button' }}" data-turbo="false">
+
+	{% if app.user and offre.isCandidateByUser(app.user) %}
+
+		Appliquer
+
+	{% else %}
+		<span class="btnFetch d-block w-100">
+			Postuler maintenant
+			<i class="fa fa-paper-plane"></i>
+		</span>
+	{% endif %}
+
+</button>

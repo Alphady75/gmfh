@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{{ article }}
+{% endblock %}
+
+{% block body %}
+<!-- OUR BLOG START -->
+<div class="section-full p-b90 bg-white">
+	<div class="container">
+
+		<!-- BLOG SECTION START -->
+		<div class="section-content">
+			<div class="row d-flex justify-content-center">
+
+				<div class="col-lg-8 col-md-12">
+					<!-- BLOG START -->
+					<div class="blog-post-single-outer">
+						<div class="blog-post-single bg-white my-4">
+
+							<div class="wt-post-info">
+
+								{% if article.image %}
+
+								<div class="wt-post-media m-b30">
+									<img src="{{ vich_uploader_asset(article, 'imageFile' ) | imagine_filter('blogbanner') }}"
+										alt="{{ article }}">
+								</div>
+
+								{% endif %}
+
+								<div class="wt-post-title ">
+									<div class="wt-post-meta-list">
+										<div class="wt-list-content post-date">Le
+											{{ article.created|date('d/m/Y') }}</div>
+										<div class="wt-list-content post-author">Par
+											{{ article.user }}</div>
+									</div>
+									<h1 class="post-title">{{ article }}</h1>
+
+								</div>
+
+								<div class="wt-post-discription">
+
+									{{ article.description|raw }}
+
+								</div>
+
+								<div class="twm-posts-author mt-4 pb-0">
+									<div class="twm-post-author-pic">
+										<img
+											src="{% if article.user.photo %}{{ vich_uploader_asset(article.user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/avatar.jpg') | imagine_filter('largeavatar') }}{% endif %}"
+											alt="{{ article.user }}" class="rounded-circle">
+									</div>
+									<div class="twm-post-author-content">
+										<span>{{ article.created|ago }}</span>
+										<strong>{{ article.user }}</strong>
+									</div>
+								</div>
+								<h4 class="twm-s-title">Partager l'article</h4>
+								<div class="twm-social-tags mb-5">
+									<a href="https://www.facebook.com/sharer.php?u=" {{ absolute_url(path('blog_details', {slug:
+										article.slug} )) }}" class=" fb-clr">
+										<i class="fab fa-facebook-f"></i>
+										Facebook
+									</a>
+									<a href="https://api.whatsapp.com/send?text=Salut ! J’ai trouvé cet article sur {{ appName }}, peut-être que ça pourrait t’intéresser. Consultez l'article en cliquant sur le lien ci-dessous 👇{{ absolute_url(path('blog_details', {slug: article.slug} )) }}"
+										class="whats-clr">
+										<i class="fab fa-whatsapp"></i>
+										Whatsapp</a>
+									<a href="#" class="pinte-clr bg-dark" id="ShareButton">
+										<i class="fa fa-link"></i>
+										Copier le lien</a>
+								</div>
+
+
+							</div>
+
+
+						</div>
+
+						{% include "blog/composants/_comments.html.twig" %}
+
+					</div>
+				</div>
+
+				<div class="col-lg-4 col-md-12 rightSidebar">
+
+					{% include "blog/composants/_sidebar.html.twig" %}
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+<!-- OUR BLOG END -->
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+<script>
+	$(() => $('#ShareButton').on("click", () => navigator.clipboard.writeText(window.location.href)));
+</script>
+
+{% endblock %}

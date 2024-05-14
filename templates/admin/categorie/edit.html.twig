@@ -1,0 +1,17 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Edition de la catégorie #{{ categorie }}{% endblock %}
+{% block titre %}Edition de la catégorie #{{ categorie }}{% endblock %}
+{% block text %}Edition de la catégorie #{{ categorie }}{% endblock %}
+
+{% block right %}{{ include('admin/categorie/_delete_form.html.twig') }}{% endblock %}
+
+{% block body %}
+
+    {{ include('admin/categorie/_form.html.twig', {'button_label': 'Enregistrer les mise à jour'}) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {% include "admin/categorie/_scripts.html.twig" %}
+{% endblock %}

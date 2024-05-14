@@ -1,0 +1,66 @@
+
+<a href="{{ app.user.compte == "PERSONNEL" ? path('client_favoris') : path('partenaire_posts_favoris')}}" class="btn bg-transparent me-1 navbar-notif">
+  <i class="far fa-heart"></i>
+  {% if userfavoris(app.user)|length > 0 %}
+  <span class="notification-animate">
+    {{ userfavoris(app.user)|length }}
+  </span>
+  {% endif %}
+</a>
+<a href="{{ path('conversations') }}" class="btn bg-transparent me-1 navbar-notif">
+  <i class="far fa-envelope"></i>
+  {% if messageNonLu(app.user)|length > 0 %}
+  <span class="notification-animate">
+    {{ messageNonLu(app.user)|length }}
+  </span>
+  {% endif %}
+</a>
+<div class="btn-group">
+  <button type="button" class="btn btn-white nav-avatar p-0 text-light" data-bs-toggle="dropdown" aria-expanded="false">
+    {% if app.user.compte == 'ENTREPRISE' %}
+    <img
+      src="{{ app.user.logo ? vich_uploader_asset(app.user, 'logoFile') | imagine_filter('mediumavatar') : asset('img/avatar.jpg') | imagine_filter('mediumavatar') }}"
+      alt="{{ appName }} {{ app.user.email }}">
+
+    {% else %}
+    <img
+      src="{{ app.user.photo ? vich_uploader_asset(app.user, 'photoFile') | imagine_filter('mediumavatar') : asset('img/avatar.jpg') | imagine_filter('mediumavatar') }}"
+      alt="{{ appName }} {{ app.user.email }}">
+    {% endif %}
+  </button>
+  <ul class="dropdown-menu box-shadow border-0 radius">
+    <li class="text-center pt-2">
+      {% if app.user.compte == 'ENTREPRISE' %}
+      <img
+        src="{{ app.user.logo ? vich_uploader_asset(app.user, 'logoFile') | imagine_filter('mediumavatar') : asset('img/avatar.jpg') | imagine_filter('mediumavatar') }}"
+        alt="{{ appName }} {{ app.user.email }}" class="rounded-circle">
+
+      {% else %}
+      <img
+        src="{{ app.user.photo ? vich_uploader_asset(app.user, 'photoFile') | imagine_filter('mediumavatar') : asset('img/avatar.jpg') | imagine_filter('mediumavatar') }}"
+        alt="{{ appName }} {{ app.user.email }}" class="rounded-circle">
+      {% endif %}
+      <div class="pt-1">
+        <strong class="d-block pb-0 mb-0">{{ app.user.compte == "ENTREPRISE" ? app.user.societe : app.user
+          }}</strong>
+        <small>{{ app.user.compte == "ENTREPRISE" ? app.user.secteuractivite : app.user.qualification }}</small>
+      </div>
+    </li>
+    <li>
+      <a class="dropdown-item" href="{{ path('user_redirect') }}">Espace <span
+          class="badge badge-primary rounded-pill">{{ app.user.compte }}</span></a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="{{ path('user_offre') }}">Offres d'emplois</a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="{{ path('user_posts') }}">Annonces</a>
+    </li>
+    <li>
+      <hr class="dropdown-divider">
+    </li>
+    <li>
+      <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fa fa-share-square"></i> Déconnexion</a>
+    </li>
+  </ul>
+</div>

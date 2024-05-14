@@ -1,0 +1,46 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}Créer un nouveau compte{% endblock %}
+
+{% block titre %}Créer un nouveau compte{% endblock %}
+{% block text %}
+
+{% include "partials/auth/_register_links.html.twig" %}
+
+{% endblock %}
+
+{% block turbo %}{% endblock %}
+
+{% block body %}
+
+{% for flashError in app.flashes('verify_email_error') %}
+<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+{% endfor %}
+
+{{ form_start(registrationForm) }}
+<div class="row">
+    <div class="col-6">{{ form_row(registrationForm.nom) }}</div>
+    <div class="col-6">{{ form_row(registrationForm.prenom) }}</div>
+</div>
+{{ form_row(registrationForm.email) }}
+{{ form_row(registrationForm.plainPassword) }}
+
+<div class="terms">
+    {{ form_widget(registrationForm.agreeTerms) }}
+    <label for="registration_form_agreeTerms">J'accepte les <a href="{{ path('cgu') }}" class="text-primary">termes</a> et <a href="{{ path('cgu') }}" class="text-primary">condititions
+            d'utilisation</a></label>
+</div>
+{{ form_errors(registrationForm.agreeTerms) }}
+
+<button type="submit" class="custom-button my-3 button w-100" data-turbo="false">
+    <span class="btnFetch d-block w-100">
+        Créer mon compte
+    </span>
+</button>
+{{ form_end(registrationForm) }}
+
+{% endblock %}
+
+{% block footer %}
+<p class="text-center">J'ai déjà un compte ! <a href="{{ path('app_login') }}" class="text-primary">Me connecter</a></p>
+{% endblock %}

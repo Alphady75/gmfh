@@ -1,0 +1,4 @@
+<form method="post" class="d-inline" action="{{ path('client_alert_desactive', {'id': alert.id}) }}" onsubmit="return confirm('Voulez-vous vraiment désactiver cette alerte?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('desactive' ~ alert.id) }}">
+    <button class="" title="{{ alert.active ? 'Désactiver l\'alerte' : 'Activer l\'alerte' }}"><i class="fa fa-{{ alert.active ? 'stop' : 'play' }}"></i></button>
+</form>

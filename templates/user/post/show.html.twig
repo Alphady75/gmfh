@@ -1,0 +1,102 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Apperçu du service - {{ post }}
+{% endblock %}
+{% block titre %}Apperçu du service
+{% endblock %}
+{% block text %}<span class="custom-badge bg-{{ post.online ? 'success text-light' : 'warning text-dark' }}">Service {{ post.online ? 'En ligne' : 'Hors ligne' }}</span>
+
+{% if post.boosted == 1 %}
+		<span class="custom-badge bg-warning status">Boostée</span>
+	{% endif %}
+{% endblock %}
+
+{% block right %}
+
+	{% if post.online %}
+		<form method="post" class="d-inline" action="{{ path('user_post_desactive', {'id': post.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir masquer cette service?');">
+			<input type="hidden" name="_token" value="{{ csrf_token('desactive' ~ post.id) }}">
+			<button class="custom-button-light text-warning mt-0">
+				<span class="btnFetch d-block">
+					<i class="fa fa-eye-slash"></i>
+					Masquer</span>
+			</button>
+		</form>
+	{% else %}
+		<form method="post" class="d-inline" action="{{ path('user_post_publier', {'id': post.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir publier ce service?');">
+			<input type="hidden" name="_token" value="{{ csrf_token('publier' ~ post.id) }}">
+			<button class="custom-button mt-0">
+				<span class="btnFetch d-block">
+					<i class="fa fa-paper-plane"></i>
+					Publier</span>
+			</button>
+		</form>
+	{% endif %}
+	{% if post.boosted == 0 %}
+	<a href="{{ path('booster_post', {slug: post.slug}) }}" class="custom-button-light">Booster</a>
+	{% endif %}
+	<a href="{{ path('user_post_edit', {'slug': post.slug}) }}" class="custom-button-light pe-2 ps-2">
+		<i class="fa fa-edit"></i>
+		Mettre à jour
+	</a>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="section-full p-t50">
+	<!-- Job Detail V.2 START -->
+	<div class="twm-job-detail-2-wrap p-t90">
+		<div class="row d-flex justify-content-center">
+
+			<div class="col-lg-8 col-md-12">
+
+				{% if post.user.abonnement %}
+					{% include "post/composants/_slider_multiple.html.twig" %}
+
+				{% else %}
+					{% include "post/composants/_slider_simple.html.twig" %}
+				{% endif %}
+
+				<!-- Candidate detail START -->
+				<div class="cabdidate-de-info">
+
+					<h4 class="twm-s-title m-t0">{{ post }}</h4>
+
+					<h4 class="twm-s-title">Partager l'service</h4>
+					<div class="twm-social-tags mb-5">
+						<a href="#" class=" fb-clr">
+							<i class="fab fa-facebook-f"></i>
+							Facebook
+						</a>
+						<a href="#" class="whats-clr">
+							<i class="fab fa-whatsapp"></i>
+							Whatsapp</a>
+						<a href="#" class="pinte-clr bg-dark" id="ShareButton">
+							<i class="fa fa-link"></i>
+							Copier le lien</a>
+					</div>
+
+					{% include "post/composants/_details.html.twig" %}
+
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-12 rightSidebar">
+
+				{% include "post/composants/_infos.html.twig" %}
+
+			</div>
+
+		</div>
+	</div>
+	<!-- Job Detail V.2 END -->
+
+	<form method="post" class="d-inline" action="{{ path('user_post_delete', {'id': post.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cette service?');">
+		<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+		<button class="custom-button bg-danger text-light mt-0">
+			<i class="fa fa-trash-alt"></i>
+			Supprimer l'service</button>
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+<div class="twm-candidates-grid-style1 mb-5 box-shadow border-0">
+	<div class="twm-media">
+		<div class="twm-media-pic">
+			{% if user.compte == 'ENTREPRISE' %}
+				<img src="{% if user.logo %}{{ vich_uploader_asset(user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ user }}">
+			{% else %}
+				<img src="{% if user.photo %}{{ vich_uploader_asset(user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ user }}">
+			{% endif %}
+		</div>
+	</div>
+	<div class="twm-mid-content">
+		<a href="{{ path('annuaire_profile', {nameSlug: user.nameSlug}) }}" class="twm-job-title">
+			<h4>
+				{{ user.compte == 'ENTREPRISE' ? user.societe : user }}
+			</h4>
+		</a>
+		<p>{{ user.compte == 'ENTREPRISE' ? user.secteuractivite : user.qualification }}</p>
+
+		{% if app.user.compte != 'ADMINISTRATEUR' %}
+		<a href="{{ path('suivis_candidature', {token: candidature.token}) }}" class="twm-view-prifile site-text-primary">Suivre la candidature</a>&nbsp;|&nbsp;
+		{% endif %}
+		
+		<a href="{{ path('user_candidature_show', {token: candidature.token}) }}" class="twm-view-prifile site-text-primary">Détails</a>
+		<div class="twm-fot-content">
+			<div class="w-100 text-center">
+				<a href="{{ path('user_candidature_show', {token: candidature.token}) }}" class="text-center twm-job-title font-weight-bold">
+				 <i class="fa fa-user-friends"></i>	Candidature au poste de #<strong>{{ candidature.offre.intitulePoste }}</strong> pour <strong title="{{ candidature.offre.name }}">#{{ candidature.offre.name|u.truncate(30, '...') }}</strong>
+				</a>
+				<span class="custom-badge bg-{{ candidature.statusColor }} text-light">{{ candidature.status }}</span>
+			</div>
+		</div>
+	</div>
+</div>

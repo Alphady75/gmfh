@@ -1,0 +1,59 @@
+<div id="carouselExampleControls" class="post-slider carousel slide hide-over radius bg-dark mb-3 carousel-fade" data-bs-ride="carousel">
+	<div class="carousel-indicators">
+		{% if post.image %}
+			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		{% endif %}
+		
+		{% if post.imageDeux %}
+			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		{% endif %}
+		
+		{% if post.imageTrois %}
+			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 2"></button>
+		{% endif %}
+
+
+	</div>
+	<div class="carousel-inner">
+
+		{% if post.image %}
+
+			<div class="carousel-item active">
+				<div class="tw-service-gallery-thumb">
+					<a class="elem" href="{{ post ? vich_uploader_asset(post, 'imageFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}" title="{{ post }}" data-lcl-author="" data-lcl-thumb="{{ post ? vich_uploader_asset(post, 'imageFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}">
+						<img src="{{ post ? vich_uploader_asset(post, 'imageFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}" alt="" class="radius">
+					</a>
+				</div>
+			</div>
+
+		{% endif %}
+
+		{% if post.imageDeux %}
+			<div class="carousel-item">
+				<div class="tw-service-gallery-thumb">
+					<a class="elem" href="{{ post ? vich_uploader_asset(post, 'imageDeuxFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}" title="{{ post }}" data-lcl-author="" data-lcl-thumb="{{ post ? vich_uploader_asset(post, 'imageDeuxFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}">
+						<img src="{{ post ? vich_uploader_asset(post, 'imageDeuxFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}" alt="" class="radius">
+					</a>
+				</div>
+			</div>
+		{% endif %}
+
+		{% if post.imageTrois %}
+			<div class="carousel-item">
+				<div class="tw-service-gallery-thumb">
+					<a class="elem" href="{{ post ? vich_uploader_asset(post, 'imageTroisFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}" title="{{ post }}" data-lcl-author="" data-lcl-thumb="{{ post ? vich_uploader_asset(post, 'imageTroisFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}">
+						<img src="{{ post ? vich_uploader_asset(post, 'imageTroisFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}" alt="" class="radius">
+					</a>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Précédent</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Suivant</span>
+	</button>
+</div>

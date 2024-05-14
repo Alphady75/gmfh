@@ -1,0 +1,20 @@
+<h5 class="my-4">Realisations (facultative).</h5>
+<div class="pb-3 sous-form">
+   <div id="realisations" class="row" data-prototype="{{ include("user/espace/collection/_realisation.html.twig",
+      {form: form.realisations.vars.prototype})|e("html_attr") }}"
+      data-index="{{ form.realisations|length > 0 ? form.realisations|last.vars.name + 1 : 0 }}">
+      {% for realisation in form.realisations %}
+      <div class="col-sm-6">
+         {{ include("user/espace/collection/_realisation.html.twig", {form: realisation}) }}
+      </div>
+      {% endfor %}
+   </div>
+   {{ form_errors(form.realisations) }}
+   <div class="py-3 text-left">
+      <button type="button" class="btn btn-new btn-small btn btn-white text-primary border-light"
+         data-collection="#realisations">
+         <i class="fa fa-plus"></i>
+         Ajouter une realisation
+      </button>
+   </div>
+</div>

@@ -1,0 +1,4 @@
+<form method="post" class="d-inline" action="{{ path('admin_gere_offre', {'id': signaler.offre.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir éffectuer cette action?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('gereoffre' ~ signaler.offre.id) }}">
+    <button class="btn btn-sm text-{{ signaler.offre.bloquer ? 'warning' : 'primary' }}"><i class="fa fa-{{ signaler.offre.bloquer ? 'lock' : 'lock-open' }}"></i> {{ signaler.offre.bloquer ? 'Bloquer' : 'Débloquer' }}</button>
+</form>

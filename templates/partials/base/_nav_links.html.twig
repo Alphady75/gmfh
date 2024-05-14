@@ -1,0 +1,17 @@
+<ul class="nav navbar-nav">
+  <li class="{{ app.request.attributes.get('_route') == 'apropos' ? 'active' : '' }}">
+    <a href="{{ path('apropos') }}">A propos</a>
+  </li>
+  <li class="{{ app.request.attributes.get('_route') == 'posts' ? 'active' : '' }}">
+    <a href="{{ path('posts') }}">Services</a>
+  </li>
+  <li class="{{ app.request.attributes.get('_route') == 'offres' ? 'active' : '' }}">
+    <a href="{{ path('offres') }}">Recrutement</a>
+  </li>
+  <li class="{{ app.request.attributes.get('_route') == 'annuaire' ? 'active' : '' }}">
+    <a href="{{ path('annuaire') }}">Annuaires</a>
+  </li>
+  <li class="{{ app.request.attributes.get('_route') == 'blog' ? 'active' : '' }}">
+    <a href="{{ path('blog') }}">Blog</a>
+  </li>
+</ul>

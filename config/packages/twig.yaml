@@ -1,0 +1,27 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    form_themes: ['bootstrap_5_layout.html.twig']
+    #form_themes: ['bootstrap_4_Horizontal_layout.html.twig']
+    globals:
+        appName: "GAMFAH"
+        currency: " CFA"
+        codepays: "+237"
+        pays: "Maroc"
+        site: "https://niosso.com/"
+        concepteur: "By conception"
+        messenger: "https://m.me/niossocgb"
+        appEmail: "supportcg@niosso.com"
+        bayesite: "https://www.bayeconception.com/"
+        bayeemail: "contact@bayeconception.com"
+        app_environement: '%env(APP_ENV)%'
+        google_map_place_key: '%env(GOOGLE_MAP_PLACE_KEY)%'
+        baye: "Baye conception"
+        stripe_public_key_test: '%env(STRIPE_PUBLIC_KEY_TEST)%'
+        stripe_public_key_live: '%env(STRIPE_PUBLIC_KEY_LIVE)%'
+        mtnMomo: "+242 06 535 65 26"
+        airtelMomo: "En attente"
+        tinyApiKey: "mivqhpa71d4t5vade4gfu8tzp94wa6ev5xpzmbbhv5totjbo"
+
+when@test:
+    twig:
+        strict_variables: true

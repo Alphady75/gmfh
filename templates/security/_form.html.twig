@@ -1,0 +1,30 @@
+<form method="post" id="twm-login-candidate">
+	<div class="from-group mb-3">
+		<input type="email" value="{{ last_username }}" placeholder="Email (Ex: doe@gmail.com)" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+	</div>
+	<div class="form-group mb-3">
+		<input type="password" placeholder="Mot de passe" name="password" id="inputPassword" class="form-control focus" autocomplete="current-password" required>
+		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+	</div>
+
+	<div class="twm-forgot-wrap">
+		<div class="form-group mb-3">
+			<div class="form-check">
+				<input type="checkbox" name="_remember_me" class="form-check-input" id="Password4">
+				<label class="form-check-label rem-forgot" for="Password4">Restez connecté
+					<a href="{{ path('app_forgot_password_request') }}" class="site-text-primary">
+						Mot de passe oublié!
+					</a>
+				</label>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group mb-4">
+		<button class="custom-button button w-100" type="submit">
+			<span class="btnFetch d-block w-100">
+				Connexion
+			</span>
+		</button>
+	</div>
+</form>

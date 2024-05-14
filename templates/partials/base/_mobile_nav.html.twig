@@ -1,0 +1,50 @@
+<nav class="mobile-nav">
+	<div class="container">
+		<div class="mobile-group">
+			<a href="{{ path('accueil') }}" class="mobile-widget">
+				<i class="fas fa-home"></i>
+				<span>Accueil</span>
+			</a>
+
+			<a href="{{ path('posts') }}" class="mobile-widget">
+				<i class="fas fa-list"></i>
+				<span>Annonces</span>
+			</a>
+
+			<a href="{{ path('user_post_new') }}" class="mobile-widget plus-btn alert-publish">
+				<i class="fas fa-camera"></i>
+				<span>Publier</span>
+				<span id="alert"></span>
+			</a>
+
+      {% if app.user %}
+			<a href="{{ path('user_redirect') }}" class="mobile-widget">
+				<i class="fas fa-user"></i>
+				<span>Compte</span>
+			</a>
+      {% else %}
+			<a href="{{ path('offres') }}" class="mobile-widget">
+				<i class="far fa fa-suitcase"></i>
+				<span>Recrutement</span>
+			</a>
+      {% endif %}
+
+      {% if app.user %}
+			<a href="{{ app.user.compte == "PERSONNEL" ? path('client_favoris') : path('partenaire_posts_favoris')}}" class="mobile-widget">
+				<i class="fas fa-heart"></i>
+				<span>Favoris</span>
+				{% if userfavoris(app.user)|length > 0 %}
+					<sup>
+						<sup>{{ userfavoris(app.user)|length }}</sup>
+					</sup>
+				{% endif %}
+			</a>
+			{% else %}
+			<a href="{{ path('app_register') }}" class="mobile-widget">
+				<i class="fas fa-user"></i>
+				<span>S'inscrire</span>
+			</a>
+      {% endif %}
+		</div>
+	</div>
+</nav>

@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog - {{ tag }}{% endblock %}
+
+{% block body %}
+<!-- INNER PAGE BANNER -->
+<div class="wt-bnr-inr overlay-wraper bg-center"
+  style="background-image:url({{ asset('themes/base/images/banner/1.jpg') }});">
+  <div class="overlay-main site-bg-white opacity-01"></div>
+  <div class="container">
+    <div class="wt-bnr-inr-entry">
+      <div class="banner-title-outer">
+        <div class="banner-title-name">
+          <h2 class="wt-title">Blog - {{ tag }}</h2>
+        </div>
+      </div>
+      <!-- BREADCRUMB ROW -->
+
+      <div>
+        <ul class="wt-breadcrumb breadcrumb-style-2">
+          <li><a href="{{ path('accueil') }}">Accueil</a></li>
+          <li><a href="{{ path('blog') }}">Blog</a></li>
+          <li>{{ tag }}</li>
+        </ul>
+      </div>
+
+      <!-- BREADCRUMB ROW END -->
+    </div>
+  </div>
+</div>
+<!-- INNER PAGE BANNER END -->
+
+
+<!-- OUR BLOG START -->
+<div class="section-full p-t120  p-b90 site-bg-white">
+  <div class="container">
+
+    <div class="masonry-wrap row d-flex">
+
+      {% for article in articles %}
+      <!--Block one-->
+      <div class="masonry-item col-lg-4 col-md-12">
+
+        {% include "blog/composants/_card.html.twig" with {article: article} %}
+
+      </div>
+      {% endfor %}
+
+    </div>
+
+    <div class="">
+      <div class="">
+        {{ knp_pagination_render(articles, null, {}, {
+        'align': 'center',
+        'size': 'medium',
+        'rounded': true,
+        }) }}
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- OUR BLOG END -->
+{% endblock %}

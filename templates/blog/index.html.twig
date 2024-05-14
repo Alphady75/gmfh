@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog
+{% endblock %}
+
+{% block body %}
+<div class="twm-home3-banner-section site-bg-white bg-cover bg-cover-less"
+  style="background-image:url({{ asset('img/service/3.jpeg') }})">
+  <div class="twm-home3-inner-section">
+    <div class="twm-bnr-mid-section">
+      <h1 class="twm-bnr-title-light">Blog</h1>
+      <div>
+        <ul class="wt-breadcrumb breadcrumb-style-2">
+          <li>
+            <a href="{{ path('accueil') }}" class="text-light">Accueil</a>
+          </li>
+          <li>Blog</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- OUR BLOG START -->
+<div class="section-full p-t50  p-b90 site-bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-12">
+
+        <div class="row">
+          {% for article in articles %}
+          <!--Block one-->
+          <div class="col-sm-6">
+            {% include "blog/composants/_card.html.twig" with {article: article} %}
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="">
+          {{ knp_pagination_render(articles, null, {}, {
+          'align': 'center',
+          'size': 'medium',
+          'rounded': true,
+          }) }}
+        </div>
+
+      </div>
+
+      <div class="col-lg-4 col-md-12 rightSidebar">
+
+        {% include "blog/composants/_sidebar.html.twig" %}
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- OUR BLOG END -->
+{% endblock %}

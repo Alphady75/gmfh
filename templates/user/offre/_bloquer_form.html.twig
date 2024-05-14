@@ -1,0 +1,6 @@
+<form method="post" class="d-inline" action="{{ path('user_offre_delete', {'id': offre.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir bloquer cet élément?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ offre.id) }}">
+	<button title="bloquer" class="custom-button bg-warning" data-bs-toggle="tooltip" data-bs-placement="top" type="submit">
+		<span class="fa fa-lock"></span> Bloquer 
+	</button>
+</form>

@@ -1,0 +1,65 @@
+# Documentation on how to configure the bundle can be found at: https://symfony.com/doc/current/bundles/LiipImagineBundle/basic-usage.html
+liip_imagine:
+    # valid drivers options include "gd" or "gmagick" or "imagick"
+    driver: "gd"
+
+    filter_sets:
+        entreprisebanner:
+            filters:
+                thumbnail:
+                    size: [756, 304]
+                    mode: outbound
+
+        annuairebanner:
+            filters:
+                thumbnail:
+                    size: [1920, 500]
+                    mode: outbound
+
+        large:
+            filters:
+                thumbnail:
+                    size: [720, 660]
+                    mode: outbound
+
+        medium:
+            filters:
+                thumbnail:
+                    size: [720, 460]
+                    mode: outbound
+
+        blog:
+            filters:
+                thumbnail:
+                    size: [720, 698]
+                    mode: outbound
+
+        blogbanner:
+            filters:
+                thumbnail:
+                    size: [770, 470]
+                    mode: outbound
+
+        realisation:
+            filters:
+                thumbnail:
+                    size: [300, 250]
+                    mode: outbound
+
+        verylargeavatar:
+            filters:
+                thumbnail:
+                    size: [200, 200]
+                    mode: outbound
+
+        largeavatar:
+            filters:
+                thumbnail:
+                    size: [150, 150]
+                    mode: outbound
+
+        mediumavatar:
+            filters:
+                thumbnail:
+                    size: [85, 85]
+                    mode: outbound

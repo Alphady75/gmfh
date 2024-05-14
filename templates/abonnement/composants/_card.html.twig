@@ -1,0 +1,35 @@
+<div class="pricing-table-1 circle-yellow">
+  {% if service.recommanded %}
+  <div class="p-table-recommended">Recommender</div>
+  {% endif %}
+  <div class="p-table-title">
+    <h4 class="wt-title">
+      {{service}}
+    </h4>
+  </div>
+  <div class="p-table-inner">
+
+    <div class="p-table-price">
+      <span>${{ service.tarif }}/</span>
+      <p>{{ service.typeTarification }}</p>
+    </div>
+    <div class="p-table-list">
+      <ul>
+        {% for composant in service.composants %}
+        <li>
+          <i class="feather-check"></i>
+          {{composant}}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% if app.request.attributes.get('_route') == 'abonnements' %}
+
+    <form method="post" action="{{ path('stripe_abonnement_checkout', {'stripeKey': service.stripeKey }) }}"
+      class="p-table-btn">
+      <button type="submit" class="custom-button">S'abonner maintenant</button>
+    </form>
+
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,48 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Offres d'emplois favoris ({{ favoris.getTotalItemCount }}){% endblock %}
+{% block titre %}Offres d'emplois favoris ({{ favoris.getTotalItemCount }}){% endblock %}
+{% block text %}Offres d'emplois favoris ({{ favoris.getTotalItemCount }}){% endblock %}
+
+{% block right %}
+	{% include "user/favoris/_nav.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+	<div class="row">
+		{% for favori in favoris %}
+			{% if favori.post %}
+				<div class="col-sm-4">
+					{% include "user/favoris/_post.html.twig" with {post: favori.post} %}
+				</div>
+			{% endif %}
+
+			{% if favori.offre %}
+				<div class="col-sm-4">
+					{% include "user/favoris/_offre.html.twig" with {offre: favori.offre} %}
+				</div>
+			{% endif %}
+
+			{% if favori.user %}
+				<div class="col-sm-4">
+					{% include "user/favoris/_user.html.twig" with {user: favori.user} %}
+				</div>
+			{% endif %}
+		{% else %}
+			<div class="col-12">
+				{% include "partials/base/_nodata.html.twig" %}
+			</div>
+		{% endfor %}
+	</div>
+
+	<div class="">
+		{{ knp_pagination_render(favoris, null, {}, {
+        'align': 'center',
+        'size': 'medium',
+        'rounded': true,
+        }) }}
+	</div>
+
+{% endblock %}
+

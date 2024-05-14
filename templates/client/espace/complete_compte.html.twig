@@ -1,0 +1,21 @@
+{% extends 'client.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+{% block titre %}{% endblock %}
+{% block text %}Mon profil{% endblock %}
+
+{% block titreVisible %}{% endblock %}
+
+{% block body %}
+
+	{% include "client/espace/form/_personnel.html.twig" %}
+
+{% endblock %}
+
+{% block javascripts %}
+
+	{{ parent() }}
+
+	{% include "partials/espace/_script_complete_profil.html.twig" %}
+
+{% endblock %}

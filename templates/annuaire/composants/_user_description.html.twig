@@ -1,0 +1,59 @@
+<div class="cabdidate-de-info">
+
+	<h4 class="twm-s-title m-t0">A propos de
+		{{ user.compte == 'ENTREPRISE' ? user.societe : user }}
+	</h4>
+
+	{{ user.apropo|raw }}
+
+	{% if user.compte == 'PARTICULIER' %}
+		{% include "annuaire/composants/_etudes_experiences.html.twig" %}
+	{% endif %}
+
+
+	<h4 class="twm-s-title">Offres d'emplois disponible</h4>
+	<div class="twm-jobs-list-wrap">
+		<div
+			class="row">
+			<!--Block one-->
+			{% for offre in offres %}
+				<div class="col-lg-6 col-md-12 m-b30">
+
+					{% include "offre/composants/_card.html.twig" %}
+
+				</div>
+			{% else %}
+				<div class="col-12">
+					<p class="text-start">Aucune offre disponible...</p>
+				</div>
+			{% endfor %}
+
+		</div>
+	</div>
+
+	<h4 class="twm-s-title mt-2">Services</h4>
+	<div class="twm-jobs-list-wrap">
+		<div
+			class="row">
+			<!--Block one-->
+			{% for post in posts %}
+				<div class="col-lg-6 col-md-12 m-b30">
+
+					{% include "post/composants/_card.html.twig" %}
+
+				</div>
+			{% else %}
+				<div class="col-12">
+					<p class="text-start">Aucune post disponible...</p>
+				</div>
+			{% endfor %}
+
+		</div>
+	</div>
+
+	{{ knp_pagination_render(offres, null, {}, {
+										'align': 'center',
+										'size': 'medium',
+										'rounded': true,
+									}) }}
+</div>

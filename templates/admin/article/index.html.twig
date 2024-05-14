@@ -1,0 +1,54 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Articles ({{ articles.getTotalItemCount }})
+{% endblock %}
+{% block titre %}Articles ({{ articles.getTotalItemCount }})
+{% endblock %}
+{% block text %}Articles ({{ articles.getTotalItemCount }})
+{% endblock %}
+
+{% block right %}
+<a href="{{ path('admin_article_new') }}" class="custom-button mt-3">
+	<i class="fa fa-plus"></i>
+	Publier un article</a>
+{% endblock %}
+
+{% block body %}
+<div class="masonry-wrap row d-flex">
+
+	{% for article in articles %}
+	<!--Block one-->
+	<div class="masonry-item col-lg-4 col-md-12">
+
+		{% include "blog/composants/_card.html.twig" with {article: article} %}
+
+		<div class="text-center mb-3">
+			<a href="{{ path('admin_article_edit', {slug: article.slug}) }}" title="Mettre à jour l'article" data-bs-toggle="tooltip"
+				class="custom-badge text-primary" data-bs-placement="top">
+				<span class="fa fa-edit"></span>
+			</a>
+		
+		{% include "admin/article/_delete_form.html.twig" %}
+
+		</div>
+
+	</div>
+	{% else %}
+	<div class="col-12">
+		{% include "partials/base/_nodata.html.twig" %}
+	</div>
+	{% endfor %}
+
+</div>
+
+<div class="">
+	<div class="">
+		{{ knp_pagination_render(articles, null, {}, {
+		'align': 'center',
+		'size': 'medium',
+		'rounded': true,
+		}) }}
+	</div>
+</div>
+
+{% endblock %}

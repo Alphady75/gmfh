@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post{% endblock %}
+
+{% block body %}
+    <h1>Post</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ post.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ post.name }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ post.slug }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ post.image }}</td>
+            </tr>
+            <tr>
+                <th>Tarif</th>
+                <td>{{ post.tarif }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ post.description }}</td>
+            </tr>
+            <tr>
+                <th>Online</th>
+                <td>{{ post.online ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ post.etat }}</td>
+            </tr>
+            <tr>
+                <th>Negociable</th>
+                <td>{{ post.negociable ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Livraison</th>
+                <td>{{ post.livraison ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Promo</th>
+                <td>{{ post.promo ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Vedette</th>
+                <td>{{ post.vedette ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ post.statut }}</td>
+            </tr>
+            <tr>
+                <th>TarifPromo</th>
+                <td>{{ post.tarifPromo }}</td>
+            </tr>
+            <tr>
+                <th>Boosted</th>
+                <td>{{ post.boosted ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Devise</th>
+                <td>{{ post.devise }}</td>
+            </tr>
+            <tr>
+                <th>Urgent</th>
+                <td>{{ post.urgent ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>IsSelled</th>
+                <td>{{ post.isSelled ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>SellPlateform</th>
+                <td>{{ post.sellPlateform }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{{ post.created ? post.created|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated</th>
+                <td>{{ post.updated ? post.updated|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_post_index') }}">back to list</a>
+
+    <a href="{{ path('admin_post_edit', {'id': post.id}) }}">edit</a>
+
+    {{ include('admin/post/_delete_form.html.twig') }}
+{% endblock %}

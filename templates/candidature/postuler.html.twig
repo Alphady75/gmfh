@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidature pour le poste de #{{ offre.intitulePoste }}{% endblock %}
+
+{% block mobilenav %}{% endblock %}
+
+{% block body %}
+<!-- INNER PAGE BANNER -->
+<div class="wt-bnr-inr overlay-wraper bg-center" style="background-image:url({{ asset('img/service/5.jpg') }});">
+   <div class="overlay-main site-bg-white"></div>
+</div>
+<!-- INNER PAGE BANNER END -->
+
+<!-- OUR BLOG START -->
+<div class="section-full  p-t120 p-b90 section-top-less">
+  <div class="container">
+    <h1 class="page-title text-center pb-3">Candidature pour le poste de #{{ offre.intitulePoste }}</h1>
+    <!-- BLOG SECTION START -->
+    <div class="section-content">
+      <div class="row d-flex justify-content-center">
+
+        <div class="col-lg-8 col-md-12">
+          <!-- Candidate detail START -->
+          <div class="cabdidate-de-info bg-white radius p-3">
+
+            {% include "candidature/composants/_form.html.twig" %}
+
+            {% include "offre/composants/_description.html.twig" %}
+
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-12 rightSidebar">
+
+          {% include "offre/composants/_infos.html.twig" %}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- OUR BLOG END -->
+
+{% endblock %}

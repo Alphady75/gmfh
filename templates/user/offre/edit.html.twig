@@ -1,0 +1,58 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Mise à jour de l'offre d'emploi #{{ offre }}{% endblock %}
+{% block titre %}Mise à jour de l'offre d'emploi #{{ offre }}{% endblock %}
+{% block text %}<span class="custom-badge bg-{{ offre.status == 'Actif' ? 'success text-light' : 'warning text-dark' }} status">Offre d'emploi {{ offre.status == 'Actif' ? 'Active' : 'Inactive' }}</span>{% endblock %}
+
+{% block body %}
+
+{{ include('user/offre/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+<div class="row">
+    <div class="col-sm-8">
+        <div class="panel panel-defaulte bg-white">
+            <div class="panel-heading wt-panel-heading p-a20">
+                <h4 class="panel-tittle m-0">
+                    <i class="fa fa-info-circle text-danger"></i>
+                    Suppréssion de l'offre
+                </h4>
+            </div>
+            <div class="panel-body wt-panel-body p-a20 m-b30">
+                <h5>Important : Avant de supprimer cette offre d'emploi</h5>
+
+                <p>Nous vous informons que la suppression de cette offre d'emploi de notre base de données peut
+                    entraîner
+                    plusieurs inconvénients :</p>
+
+                <ul class="ps-3">
+                    <li>
+                        <strong>Perte de candidatures qualifiées :</strong>Les candidats ayant postulé à cette offre ne
+                        pourront plus être contactés ni pris en considération pour ce poste.
+                    </li>
+                    <li>
+                        <strong>Difficulté à suivre l'historique :</strong> La conservation de cette offre d'emploi dans notre système permet de garder un historique précieux pour les besoins de rapports, d'analyses et de références ultérieures.
+                    </li>
+                    <li>
+                        <strong>Image de l'entreprise :</strong>La suppression d'offres d'emploi peut donner une
+                        impression d'instabilité ou de désorganisation aux candidats potentiels qui consultent notre plateforme.
+                    </li>
+                    <li>
+                        <strong>Temps et efforts supplémentaires :</strong>
+                        Si cette offre d'emploi doit être republiée ultérieurement, cela nécessitera une nouvelle saisie de données, ce qui implique des coûts en temps et en ressources.
+                    </li>
+                </ul>
+
+                {% include "user/offre/_delete_form.html.twig" %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% include "user/offre/_scripts.html.twig" %}
+
+{% endblock %}

@@ -1,0 +1,243 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Tableau de bord admin
+{% endblock %}
+{% block titre %}Tableau de bord admin
+{% endblock %}
+{% block text %}Tableau de bord admin
+{% endblock %}
+
+{% block body %}
+<div class="twm-dash-b-blocks mb-5">
+	<div class="row">
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-3 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-bookmark"></i>
+						</div>
+						<div class="wt-card-bottom">
+							<h4 class="m-b0">Total annonces</h4>
+						</div>
+						<div class="wt-card-right wt-total-listing-review counter ">{{ totalpost }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-1 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-calendar-check"></i>
+						</div>
+						<div class="wt-card-bottom ">
+							<h4 class="m-b0">Annonces publiées</h4>
+						</div>
+						<div class="wt-card-right wt-total-active-listing counter ">{{ postonline}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-2 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-calendar-times"></i>
+						</div>
+						<div class="wt-card-bottom">
+							<h4 class="m-b0">Annonces non publiées</h4>
+						</div>
+						<div class="wt-card-right  wt-total-listing-view counter ">{{ totalpost - postonline }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-4 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-donate"></i>
+						</div>
+						<div class="wt-card-bottom">
+							<h4 class="m-b0">Boostées</h4>
+						</div>
+						<div class="wt-card-right wt-total-listing-bookmarked counter ">{{ postbooster }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-3 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-suitcase"></i>
+						</div>
+						<div class="wt-card-bottom">
+							<h4 class="m-b0">Total offres</h4>
+						</div>
+						<div class="wt-card-right wt-total-listing-review counter ">{{ totaloffre }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-1 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-calendar-check"></i>
+						</div>
+						<div class="wt-card-bottom ">
+							<h4 class="m-b0">Offres publiées</h4>
+						</div>
+						<div class="wt-card-right wt-total-active-listing counter ">{{ offreonline}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-2 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-calendar-times"></i>
+						</div>
+						<div class="wt-card-bottom">
+							<h4 class="m-b0">Offres non publiées</h4>
+						</div>
+						<div class="wt-card-right  wt-total-listing-view counter ">{{ totaloffre - offreonline }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-4 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-donate"></i>
+						</div>
+						<div class="wt-card-bottom">
+							<h4 class="m-b0">Offres Boostées</h4>
+						</div>
+						<div class="wt-card-right wt-total-listing-bookmarked counter ">{{ offrebooster }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-3 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-user-friends"></i>
+						</div>
+						<div class="wt-card-bottom">
+							<h4 class="m-b0">Total utilisateurs</h4>
+						</div>
+						<div class="wt-card-right wt-total-listing-review counter ">{{ totaluser }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-1 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-user-friends"></i>
+						</div>
+						<div class="wt-card-bottom ">
+							<h4 class="m-b0">Administrateurs</h4>
+						</div>
+						<div class="wt-card-right wt-total-active-listing counter ">{{ admins }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-2 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-user-friends"></i>
+						</div>
+						<div class="wt-card-bottom">
+							<h4 class="m-b0">Particuliers</h4>
+						</div>
+						<div class="wt-card-right  wt-total-listing-view counter ">{{ particuliers }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-4 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-user-friends"></i>
+						</div>
+						<div class="wt-card-bottom">
+							<h4 class="m-b0">Clients</h4>
+						</div>
+						<div class="wt-card-right wt-total-listing-bookmarked counter ">{{ clients }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-3 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-bookmark"></i>
+						</div>
+						<div class="wt-card-bottom">
+							<h4 class="m-b0">Total articles</h4>
+						</div>
+						<div class="wt-card-right wt-total-listing-review counter ">{{ totalarticle }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-1 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-calendar-check"></i>
+						</div>
+						<div class="wt-card-bottom ">
+							<h4 class="m-b0">Articles publiés</h4>
+						</div>
+						<div class="wt-card-right wt-total-active-listing counter ">{{ articleonline }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4 mb-3">
+			<div class="panel panel-default">
+				<div class="panel-body wt-panel-body gradi-2 dashboard-card pb-3">
+					<div class="wt-card-wrap">
+						<div class="wt-card-icon">
+							<i class="far fa fa-calendar-times"></i>
+						</div>
+						<div class="wt-card-bottom">
+							<h4 class="m-b0">Articles non publiés</h4>
+						</div>
+						<div class="wt-card-right  wt-total-listing-view counter ">{{ totalarticle - articleonline }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

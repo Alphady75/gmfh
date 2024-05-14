@@ -1,0 +1,177 @@
+@media(max-width: 700px) {
+
+    .grid-four,
+    .grid-three,
+    .grid-five {
+        display: grid;
+        grid-template-columns: repeat(2, 2fr);
+    }
+
+    .filter-form {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .like {
+        text-align: left !important;
+    }
+
+    .none-mobile {
+        display: none!important;
+    }
+
+    .block-mobile {
+        display: block!important;
+    }
+
+    .twm-job-self-bottom,
+    .cadidature-proccess,
+    .fixed-bottom-sm {
+        position: fixed !important;
+        top: auto !important;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: 8px !important;
+        background: var(--white-color) !important;
+        text-align: center;
+        justify-items: center;
+        justify-content: center;
+        margin-top: 0px !important;
+        z-index: 99999 !important;
+    }
+
+    .twm-job-self-bottom a,
+    .fixed-bottom-sm a {
+        font-size: 16px;
+    }
+
+    .large-btn .custom-button,
+    .large-btn .custom-button-light {
+        width: 100% !important;
+    }
+
+    .twm-home7-banner-section .twm-home7-inner-section .twm-bnr-mid-section .twm-bnr-search-bar {
+        max-width: 100% !important;
+    }
+
+    .mb-sm-30 {
+        margin-bottom: 30px !important;
+    }
+
+    .section-head.left.wt-small-separator-outer {
+        text-align: center;
+    }
+
+    .twm-blog-post-h5-outer .wt-post-media {
+        height: 160px;
+    }
+
+    .twm-home7-banner-section .twm-home7-inner-section .twm-bnr-mid-section .twm-bnr-title-large {
+        font-size: 24px !important;
+    }
+
+    .twm-home7-banner-section .twm-home7-inner-section .twm-bnr-mid-section .twm-bnr-title-light, .twm-home7-banner-section .twm-home7-inner-section .twm-bnr-mid-section .twm-bnr-title-large {
+        font-size: 20px !important;
+    }
+
+    .mobile-nav {
+        display: block
+    }
+    .center-mobile{
+        text-align: center!important;
+        justify-content: center;
+        align-items: center;
+    }
+    .twm-blog-post-h5-outer .wt-post-info .post-author .post-author-pic .p-a-info a {
+        font-size: .6em;
+        font-weight: 600;
+    }
+    .twm-blog-post-h5-outer .wt-post-info .post-author .post-author-pic .p-a-info p {
+        font-size: .6em;
+    }
+    .post-slider .carousel-item, .post-slider .carousel-item .tw-service-gallery-thumb {
+        height: 350px !important;
+    }
+    .post-navbar .logo-header-inner img{
+        max-width: 100px!important;
+    }
+    .twm-tabs-style-2 .nav-tabs .nav-item .nav-link{
+        font-size: 12px!important;
+    }
+    .post .mr{
+        margin-right: 3px;
+    }
+    .twm-log-reg-form-wrap .twm-log-reg-inner{
+        padding: 14px 8px;
+    }
+    .suivis-container{
+        padding-bottom: 100px!important;
+    }
+    .modal-dialog-scrollable .modal-body{
+        padding-bottom: 90px!important;
+    }
+    .custom-button,
+    .custom-button-light
+    {
+        padding: 10px 15px!important;
+    }
+    input,
+    textarea,
+    select{
+        font-size: 14px!important;
+    }
+    .twm-candidates-grid-style1 .twm-fot-content,
+    .twm-candidates-grid-style1{
+        padding: 8px;
+    }
+    .twm-candidates-grid-style1 .twm-fot-content{
+        margin: 0;
+    }
+    .twm-candidates-grid-style1 .twm-media .twm-candidates-tag span,
+    .twm-mid-content h4{
+        font-size: 14px;
+    }
+    .filter-form-select .form-select, .filter-form .dropdown .btn{
+        padding: .4rem .3rem;
+        margin: .4em .2rem;
+    }
+    .bottom-padding{
+        padding-bottom: 60px!important;
+    }
+    .dashboard-message-area{
+        padding: 0 15px;
+    }
+    .mb-sm-30{
+        margin-bottom: 30px;
+    }
+    .home .twm-blog-post-h5-outer .wt-post-media{
+        height: 240px;
+    }
+    .home-banner-section #homeCarousel .carousel-item,
+    .home-banner-section{
+        height: 130vh;
+    }
+    .d-block-sm{
+        display: block!important;
+    }
+    .filter-form-select .form-select {
+        height: 34px !important;
+    }
+    .new-alerte{
+        margin-top: 20px;
+    }
+    .twm-bnr-h-page7-jobs .twm-hed-title .twm-title{
+        margin-bottom: 0px;
+    }
+    .twm-jobs-grid-style1,
+    .twm-candidates-grid-style1{
+        margin-bottom: 70px!important;
+    }
+    .twm-home3-banner-section .twm-home3-inner-section .twm-bnr-mid-section .twm-bnr-title-light{
+        font-size: 20px;
+    }
+    .ani-circle-2{
+        
+    }
+}

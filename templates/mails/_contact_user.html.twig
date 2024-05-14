@@ -1,0 +1,28 @@
+{% extends "mails.html.twig" %}
+
+{% block body %}
+	<p>
+		<strong>Objet :</strong>
+		Message de contact depuis
+		<strong>{{ appName }}</strong>
+	</p>
+
+	<p>Bonjour
+		{{ destinataire.compte == 'ENTREPRISE' ? destinataire.societe : destinataire }},</p>
+
+	<p>Un visiteur de
+		<strong>{{ appName }}</strong>
+		a souhaité vous contacter. Voici les détails de son message :</p>
+
+	<p>Nom de l'expéditeur :
+		<strong>{{ sendername }}</strong>
+	</p>
+	<p>Adresse e-mail de l'expéditeur :
+		<a href="mailto:{{ senderemail }}">{{ senderemail }}</a>
+	</p>
+
+	<p>Message :</p>
+	<p>{{ contenu }}</p>
+
+	<p>Merci de prendre en considération ce message et de contacter l'expéditeur dès que possible.</p>
+{% endblock %}

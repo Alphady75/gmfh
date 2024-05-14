@@ -1,0 +1,19 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Publier une offre d'emploi{% endblock %}
+{% block titre %}Publier une offre d'emploi{% endblock %}
+{% block text %}Publier une offre d'emploi{% endblock %}
+
+{% block right %}{% endblock %}
+
+{% block body %}
+
+{{ include('user/offre/_form.html.twig') }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% include "user/offre/_scripts.html.twig" %}
+
+{% endblock %}

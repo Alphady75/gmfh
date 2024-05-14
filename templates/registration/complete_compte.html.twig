@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Completez votre compte{% endblock %}
+
+{% block titre %}Completez votre compte{% endblock %}
+
+{% block bodybg %}site-bg-gray{% endblock %}
+
+
+{% block header %}
+{% include "partials/base/_header_three.html.twig" %}
+{% endblock %}
+
+{% block text %}{% endblock %}
+
+{% block body %}
+
+<div class="container pt-4 p-b90">
+
+	<div class="row">
+		<div class="col-sm-8 mx-auto">
+
+			<h4 class="page-titre text-dark text-start">Completez votre compte {{ app.user.compte }}</h4>
+
+			{% if userCompte == 'PERSONNEL' %}
+
+			{% include "registration/form/_personnel.html.twig" %}
+
+			{% endif %}
+
+			{% if userCompte == 'PARTICULIER' %}
+
+			{% include "registration/form/_particulier.html.twig" %}
+
+			{% endif %}
+
+			{% if userCompte == 'ENTREPRISE' %}
+
+			{% include "registration/form/_entreprise.html.twig" %}
+
+			{% endif %}
+
+		</div>
+		<!--div class="col-sm-4 rightSidebar">
+			<div class="panel panel-default bg-white">
+				<div class="panel-heading wt-panel-heading p-a20 border-0">
+					<span class="custom-badge bg-blue text-light border border-light mt-0">
+						COMPTE {{ app.user.compte }}
+					</span>
+				</div>
+				<div class="panel-body wt-panel-body py-2 p-a20 m-b30 bg-white sm">
+					{% if app.user.compte == "ENTREPRISE" %}
+						{% include "user/espace/composants/_avantages_compte_entreprise.html.twig" %}
+					{% endif %}
+				</div>
+			</div>
+		</div-->
+	</div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+
+{% if app.user == null %}
+<p class="text-center">J'ai déjà un compte !
+	<a href="{{ path('app_login') }}">Me connecter</a>
+</p>
+{% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% include "partials/espace/_script_complete_profil.html.twig" %}
+
+{% endblock %}

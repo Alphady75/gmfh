@@ -1,0 +1,90 @@
+<div class="twm-top-wide-banner overlay-wraper" style="background-image:url({% if user.compte == 'ENTREPRISE' %}{{ user.photo ? vich_uploader_asset(user, 'photoFile' ) : asset('img/h7-banner.jpg') | imagine_filter('annuairebanner') }}{% else %}{{ asset('img/h7-banner.jpg') | imagine_filter('annuairebanner') }}{% endif %});">
+	<div class="overlay-main site-bg-primary opacity-09"></div>
+
+	<div class="twm-top-wide-banner-content container ">
+
+		<div class="twm-mid-content">
+			<div class="twm-employer-self-top">
+				<div class="twm-media">
+					{% if user.compte == 'ENTREPRISE' %}
+						<img src="{% if user.logo %}{{ vich_uploader_asset(user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ user }}">
+					{% else %}
+						<img src="{% if user.photo %}{{ vich_uploader_asset(user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ user }}">
+					{% endif %}
+				</div>
+
+				<h3 class="twm-job-title">
+					{{ user.compte == 'ENTREPRISE' ?  user.societe : user }}
+				</h3>
+				<p class="twm-employer-address">
+					<i class="feather-map-pin"></i>
+					{{ user.localisation }}</p>
+
+				<a href="{{ app.user.siteWeb ?? '#' }}" class="twm-employer-websites">{{ app.user.siteWeb ?? 'Aucun site internet...' }}</a>
+
+				<div class="twm-ep-detail-tags">
+					<button class="de-info twm-bg-green">
+						<i class="fa fa-check"></i>
+						Vérifié</button>
+					{% include "annuaire/composants/_favoris_btn.html.twig" %}
+				</div>
+			</div>
+
+			<div class="twm-employer-self-bottom">
+				<div class="twm-social-btns">
+					{% if user.facebook %}
+						<a class="btn facebook" href="{{ user.facebook }}">
+							<i class="fab fa-facebook-f"></i>
+						</a>
+					{% endif %}
+					{% if user.twitter %}
+						<a class="btn twitter" href="{{ user.facebook }}">
+							<i class="fab fa-twitter"></i>
+						</a>
+					{% endif %}
+					{% if user.instagram %}
+						<a class="btn instagram" href="{{ user.instagram }}">
+							<i class="fab fa-instagram"></i>
+						</a>
+					{% endif %}
+					{% if user.linkedin %}
+						<a class="btn linkedin" href="{{ user.linkedin }}">
+							<i class="fab fa-linkedin-in"></i>
+						</a>
+					{% endif %}
+					{% if user.youtube %}
+						<a class="btn youtube" href="{{ user.youtube }}">
+							<i class="fab fa-youtube"></i>
+						</a>
+					{% endif %}
+					{% if user.pinterest %}
+						<a class="btn pinterest" href="{{ user.pinterest }}">
+							<i class="fab fa-pinterest"></i>
+						</a>
+					{% endif %}
+					{% if user.tumblr %}
+						<a class="btn tumblr" href="{{ user.tumblr }}">
+							<i class="fab fa-tumblr"></i>
+						</a>
+					{% endif %}
+				</div>
+
+				{% if app.request.attributes.get('_route') == 'annuaire_profile' %}
+				<div class="twm-employer-btn-controls none-mobile">
+					<a href="#" class="custom-button-light outline-white" data-bs-toggle="modal" data-bs-target="#contact-dash-modale">
+						Contacter
+						{{ user.compte == 'ENTREPRISE' ? user.societe : user }}
+					</a>
+				</div>
+				{% endif %}
+				
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="ani-circle-1 rotate-center"></div>
+	<div class="ani-circle-2 rotate-center"></div>
+
+</div>

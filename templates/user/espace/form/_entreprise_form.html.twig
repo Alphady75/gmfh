@@ -1,0 +1,93 @@
+<div class="card-profile bg-white radius mb-3">
+	<div class="card-profile-img-top">
+		<div class="d-flex justify-content-between align-items-end compte-infos">
+			<span class="text-light">Membre
+				{{ app.user.created|ago }}</span>
+		</div>
+		<div class="compagny-banner">
+			<img src="{% if app.user.photo %}{{ vich_uploader_asset(app.user, 'photoFile') | imagine_filter('entreprisebanner')}}{% else %}{{ asset('img/banner.png') | imagine_filter('entreprisebanner')}}{% endif %}" class="photo-banner img-fluid" alt="Bannier de compte">
+			<label class="btn custom-badge" for="profil_entreprise_photoFile_file">
+				<i class="text-blue fa fa-camera"></i>
+				<small>Image de l'entrprise</small>
+			</label>
+		</div>
+	</div>
+	<div class="card-profile-body d-flex justify-content-between align-items-end">
+		<div>
+			<label for="profil_entreprise_logoFile_file" class="card-profile-avatar">
+				<img src="{% if app.user.logo %}{{ vich_uploader_asset(app.user, 'logoFile' ) }}{% else %}{{ asset('img/avatar.jpg') }}{% endif %}" class="rounded-circle logo-img img-fluid border" alt="Avatar de compte">
+				<label for="profil_entreprise_logoFile_file" class="btn" type="label">
+					<i class="text-blue fa fa-camera"></i>
+				</label>
+			</label>
+			<div class="hidden-file">{{ form_widget(form.logoFile) }}</div>
+			{{ form_errors(form.logoFile) }}
+			<h5>{{ app.user }}</h5>
+			<span>{{ app.user.email }}</span>
+
+			<div class="hidden-file">{{ form_widget(form.photoFile) }}</div>
+			{{ form_errors(form.photoFile) }}
+		</div>
+		<div>
+			<span class="custom-badge bg-transparent border border-{{ app.user.isVerified ? 'success' : 'warning' }} text-{{ app.user.isVerified ? 'success' : 'warning' }} status">Email
+				{{ app.user.isVerified ? 'confirmer' : 'non confirmer' }}</span>
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-default radius bg-white mb-3">
+	<div class="panel-heading wt-panel-heading p-a20">
+		<h4 class="panel-tittle m-0">
+			<i class="fa fa-info-circle text-primary"></i>
+			Informations de l'entreprise
+		</h4>
+	</div>
+	<div class="panel-body wt-panel-body py-2 p-a20 m-b30 bg-white radius">
+		<div class="col-sm-12">{{ form_row(form.societe) }}</div>
+		<div class="col-sm-12">{{ form_row(form.niu) }}</div>
+		<div class="col-sm-12">{{ form_row(form.nomResponsable) }}</div>
+		<div class="col-sm-12">{{ form_row(form.siteWeb) }}</div>
+		<div class="col-sm-12">{{ form_row(form.apropo) }}</div>
+	</div>
+</div>
+
+<div class="panel panel-default radius bg-white mb-3">
+	<div class="panel-heading wt-panel-heading p-a20">
+		<h4 class="panel-tittle m-0">Coordonnées</h4>
+	</div>
+	<div class="panel-body wt-panel-body py-2 p-a20 m-b30 bg-white radius">
+		<div class="form-group">
+			<label>Téléphone</label>
+			<div class="ls-inputicon-box">
+				{{ form_widget(form.telephone) }}
+				<i class="fs-input-icon fa fa-phone text-primary"></i>
+			</div>
+		</div>
+		{{ form_errors(form.telephone) }}
+
+		<div class="form-group">
+			<label>Localisation <small class="text-danger">*(Obligatoire)</small></label>
+			<div class="ls-inputicon-box">
+				{{ form_widget(form.localisation) }}
+				<i class="fs-input-icon fa fa-map-marker-alt"></i>
+			</div>
+		</div>
+		{{ form_errors(form.localisation) }}
+	</div>
+</div>
+
+<div class="panel panel-default bg-white radius mb-3">
+	<div class="panel-heading wt-panel-heading p-a20">
+		<h4 class="panel-tittle m-0">
+			Informations supplémentaires
+		</h4>
+	</div>
+	<div class="panel-body wt-panel-body p-a20 m-b30 bg-white radius">
+		{{ form_row(form.secteuractivite) }}
+		{{ form_row(form.soussecteuractivite) }}
+		{{ form_row(form.services) }}
+		{{ form_row(form.villes) }}
+	</div>
+</div>
+
+{% include "user/espace/form/_reseaux.html.twig" %}

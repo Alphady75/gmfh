@@ -1,0 +1,11 @@
+{{ form_start(form, {attr: {class: 'form bg-white radius p-3'}}) }}
+
+{{ form_widget(form) }}
+
+<button type="submit" class="custom-button my-3 button" data-turbo="false">
+	<span class="btnFetch d-block w-100">
+		{{ button_label|default('Enregistrer') }}
+	</span>
+</button>
+
+{{ form_end(form) }}

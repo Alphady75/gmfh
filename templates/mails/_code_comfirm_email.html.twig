@@ -1,0 +1,13 @@
+{% extends "mails.html.twig" %}
+
+{% block body %}
+<div style="text-align: center;">
+	<p>Bonjour cher(e)<strong>Membre</strong>,</p>
+
+	<p>Le code de confirmation de votre email pour l'activation de votre compte est :</p>
+
+	<div style="width: max-content;padding:15px 25px;background:#f3f3f3;margin:auto;">
+		<strong style="font-size: 1.5em;font-weight:bold;">{{ code }}</strong>
+	</div>
+</div>
+{% endblock %}

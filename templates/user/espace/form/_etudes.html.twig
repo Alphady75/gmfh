@@ -1,0 +1,22 @@
+<div class="panel panel-default radius sous-form">
+	<div class="panel-heading wt-panel-heading p-a20">
+		<h4 class="panel-tittle m-a0">Etudes & Diplômes <small>(Facultatif)</small></h4>
+		<p class="mb-0">Font référence à votre éducation formelle et aux qualifications académiques que vous avez acquises au cours de votre vie.</p>
+	</div>
+	<div class="panel-body wt-panel-body p-a20 m-b30 bg-white radius">
+		<div id="etudes" class="row" data-prototype="{{ include("user/espace/collection/_etude.html.twig", {form: form.etudes.vars.prototype})|e("html_attr") }}" data-index="{{ form.etudes|length > 0 ? form.etudes|last.vars.name + 1 : 0 }}">
+			{% for etude in form.etudes %}
+				<div class="col-sm-6">
+					{{ include("user/espace/collection/_etude.html.twig", {form: etude}) }}
+				</div>
+			{% endfor %}
+		</div>
+		{{ form_errors(form.etudes) }}
+		<div class="py-3 text-left">
+			<button type="button" class="btn btn-new btn-small btn btn-white text-primary border-light" data-collection="#etudes">
+				<i class="fa fa-plus"></i>
+				Ajouter une étude
+			</button>
+		</div>
+	</div>
+</div>

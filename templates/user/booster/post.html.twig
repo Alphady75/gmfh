@@ -1,0 +1,72 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Booster votre annonce
+{% endblock %}
+{% block titre %}Booster votre annonce #{{ post }}
+{% endblock %}
+{% block text %}Booster votre annonce
+{% endblock %}
+{% block right %}{% endblock %}
+
+{% block body %}
+
+	{{ form_start(form, {attr: {id: 'myForm'}}) }}
+
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="create-banner bg-white">
+				<div class="d-flex align-items-center mb-3">
+					<img src="{{ asset('img/booster.svg') }}" class="img-fluid" alt="">
+					<h5 class="page-titre ms-auto">Booster votre annonce
+						<br>
+						en choisissant un plan
+					</h5>
+				</div>
+
+				<p>Le boostage d'une annonce présente plusieurs avantages significatifs, tant pour l'entreprise
+            recrutant que pour les candidats potentiels</p>
+
+				{% include "partials/booster/_post_modal.html.twig" %}
+
+				<h6 for="" class="page-titre d-block mb-3">Choisissez votre plan</h6>
+				{{ form_row(form.booster)|replace({'[-br]' : '</br>'})|raw }}
+
+			</div>
+		</div>
+		<div class="col-sm-4 rightSidebar">
+			<div class="side-bar-2">
+				<div class="panel panel-defaulte">
+					<div class="panel-heading wt-panel-heading p-a20">
+						<h4 class="panel-tittle m-0">
+							<i class="fa fa-info-circle text-warning"></i>
+							Avantages du Booster
+						</h4>
+					</div>
+					<div class="panel-body wt-panel-body p-a20 m-b30">
+						<div class="ps-3">
+							<ol class="mb-3">
+								<li>Visibilité accrue.</li>
+								<li>Génération de trafic ciblé.</li>
+								<li>Amélioration des performances.</li>
+								<li>Flexibilité du ciblage.</li>
+								<li>Optimisation du retour sur investissement (ROI).</li>
+								<li>Réactivité .</li>
+							</ol>
+						</div>
+						<button class="custom-button w-100" formnovalidate type="submit">
+							<span class="btnFetch d-block w-100">
+								{{ button_label|default('Booster') }}
+							</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}

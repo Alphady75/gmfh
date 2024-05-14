@@ -1,0 +1,27 @@
+<div class="twm-candidates-grid-style1 mb-4 border-0">
+	<div class="candidate-avatar">
+		{% if user.compte == 'ENTREPRISE' %}
+			<img src="{% if user.logo %}{{ vich_uploader_asset(user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" class="rounded-circle" alt="{{ user }}">
+		{% else %}
+			<img src="{% if user.photo %}{{ vich_uploader_asset(user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" class="rounded-circle" alt="{{ user }}">
+		{% endif %}
+	</div>
+	<div class="twm-mid-content">
+		<h4>
+			{{ user.compte == 'ENTREPRISE' ? user.societe : user }}
+		</h4>
+		<p>{{ user.compte == 'ENTREPRISE' ? user.secteuractivite : user.qualification }}</p>
+		{% if user.compte != "PERSONNEL" %}
+		<a href="{{ path('annuaire_profile', {nameSlug: user.nameSlug}) }}" class="twm-view-prifile site-text-primary" target="_blank">Voir le profil</a>
+		{% endif %}
+		<h5 class="text-center site-text-primary">
+			<i class="fa fa-user-check"></i>
+			Candidature au poste de #{{ candidature.offre.intitulePoste }}
+		</h5>
+	</div>
+	<div class="twm-candidates-tag py-2">
+		<span class="custom-badge bg-{{ candidature.statusColor }} text-light">
+			{{ candidature.status }}
+		</span>
+	</div>
+</div>

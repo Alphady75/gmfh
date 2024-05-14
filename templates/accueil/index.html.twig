@@ -1,0 +1,460 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ appName }}
+{% endblock %}
+
+{% block header %}
+	{% include "partials/base/_header.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+	<section class="home-banner-section">
+		<div id="homeCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active" data-bs-interval="5000" style="background-image: url('{{ asset('img/service/5.jpg') }}');">
+				
+				</div>
+				<div class="carousel-item" data-bs-interval="5000" style="background-image: url('{{ asset('img/service/7.jpeg') }}');">
+				
+				</div>
+				<div class="carousel-item" data-bs-interval="5000" style="background-image: url('{{ asset('img/service/3.jpeg') }}');">
+				
+				</div>
+			</div>
+		</div>
+
+		<!--Banner Start-->
+		<div class="twm-home7-banner-section site-bg-white bg-cover custom-home-banner">
+			<div class="container">
+				<div class="twm-home7-inner-section">
+					{{ form_start(form, {attr: {class: 'twm-bnr-mid-section'}}) }}
+					<div class="twm-bnr-title-large">
+						Trouver le meilleur
+						<span class="text-clr-pink">Emploi</span>
+					</div>
+					<div class="twm-bnr-title-light">Pour votre carrière professionnelle</div>
+
+					<div class="twm-bnr-discription">Tapez votre mot-clé, puis cliquez sur Rechercher pour trouver votre emploi idéal.</div>
+
+					{% include "accueil/composants/_search.html.twig" %}
+
+					{{ form_end(form, {render_rest: false}) }}
+				</div>
+				<div class="twm-bnr-bottom-section">
+					<div class="twm-browse-jobs">tu mérites!</div>
+				</div>
+			</div>
+
+			<div class="twm-bnr-h-page7-jobs">
+				<div class="twm-hed-title">
+					<h4 class="twm-title">les emplois en un coup d'oeil</h4>
+				</div>
+				<div class="twm-bnr-h7-carousal">
+					<div class="swiper h-page7-jobs-slider">
+						<div class="swiper-wrapper">
+
+							{% for secteur in secteurs(10) %}
+
+								<div
+									class="swiper-slide">
+									<!--7-->
+									<div class="job-categories-home-7">
+										<div class="job-categories-home-7-top">
+											<div class="twm-media cat-bg-clr-3">
+												<div class="flaticon-project-management"></div>
+											</div>
+											<div class="twm-content">
+												<div class="twm-jobs-available">{{ secteur.offres|length }}
+													Emploi{{ secteur.offres|length > 1 ? 's' : '' }}</div>
+											</div>
+										</div>
+										<a href="{{ path('offres_secteur', {slug: secteur.slug}) }}">{{ secteur.name|u.truncate(20, '...') }}</a>
+									</div>
+								</div>
+
+							{% endfor %}
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Banner End-->
+	</section>
+
+	<!-- Recommended Jobs SECTION START -->
+	{% include "accueil/composants/_annuaire_two.html.twig" %}
+	<!-- Recommended Jobs SECTION END -->
+
+	<!-- HOW TO GET YOUR JOB SECTION START -->
+		<div class="section-full p-t50 p-b90 site-bg-gray twm-how-t-get-wrap7"> <div class="container">
+
+			<div class="twm-how-t-get-section">
+				<div class="row">
+
+					<div class="col-xl-5 col-lg-5 col-md-12">
+						<div class="twm-how-t-get-section-left">
+							<div class="section-head left wt-small-separator-outer">
+								<div class="wt-small-separator site-text-primary">
+									<div>Comment obtenir votre emploi</div>
+								</div>
+								<h2 class="wt-title">Créez votre profil de compte personnel</h2>
+								<div class="twm-how-t-get-section-right block-mobile">
+									<div class="twm-media">
+										<img src="{{ asset('img/group.png') }}" alt="#">
+									</div>
+									<div class="twm-left-img-bx bounce">
+										<div class="twm-left-img-media">
+											<img src="{{ asset('img/frame-1.png') }}" alt="#">
+										</div>
+										<div class="twm-left-img-content">
+											<h4 class="icon-title">Complète ton profil</h4>
+											<p>95% Complété</p>
+										</div>
+									</div>
+									<div class="twm-profile-card bounce2">
+										<div class="twm-profile-pic">
+											<img src="{{ asset('img/frame-2.png') }}" alt="#">
+										</div>
+										<div class="twm-profile-info">
+											<h4 class="twm-profile-name">
+												Devid Smith
+											</h4>
+											<div class="twm-profile-position">Chef maçon</div>
+											<a class="custom-button-link underline">Engagez moi!</a>
+										</div>
+									</div>
+								</div>
+								<p>Créez un compte pour les informations d'emploi que vous souhaitez, recevez une notification tous les jours et vous pouvez facilement postuler directement à l'entreprise que vous souhaitez créer et créer un compte maintenant gratuitement.</p>
+							</div>
+							<div class="twm-how-t-get-bottom mb-sm-30">
+								<a href="{{ path('app_register') }}" class="custom-button me-3">Inscription</a>
+								<div class="twm-left-icon-bx">
+									<div class="twm-left-icon-media site-bg-primary">
+										<i class="flaticon-bell site-text-white"></i>
+									</div>
+									<div class="twm-left-icon-content">
+										<h4 class="icon-title">Nouvelle entretien</h4>
+										<p>Vous avez un nouvel entretien aujourd'hui</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xl-7 col-lg-7 col-md-12">
+						<div class="twm-how-t-get-section-right none-mobile">
+							<div class="twm-media none-mobile">
+								<img src="{{ asset('img/group.png') }}" alt="#">
+							</div>
+							<div class="twm-left-img-bx bounce">
+								<div class="twm-left-img-media">
+									<img src="{{ asset('img/frame-1.png') }}" alt="#">
+								</div>
+								<div class="twm-left-img-content">
+									<h4 class="icon-title">Complète ton profil</h4>
+									<p>95% Completé</p>
+								</div>
+							</div>
+							<div class="twm-profile-card bounce2">
+								<div class="twm-profile-pic">
+									<img src="{{ asset('img/frame-2.png') }}" alt="#">
+								</div>
+								<div class="twm-profile-info">
+									<h4 class="twm-profile-name">
+										Devid Smith
+									</h4>
+									<div class="twm-profile-position">Chef maçon</div>
+									<a class="custom-button-link underline">Engagez moi!</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- HOW TO GET YOUR JOB SECTION END -->
+
+	<!-- HOW IT WORK SECTION START -->
+	<div class="section-full p-t50 p-b90 twm-how-it-work-area" style="background-image: url({{ asset('img/hiw-bg.jpg') }});">
+
+		<div
+			class="container">
+
+			<!-- TITLE START-->
+			<div class="section-head center wt-small-separator-outer  content-white text-dark">
+				<div class="wt-small-separator text-dark">
+					<div>Processus de travail</div>
+				</div>
+				<h2 class="wt-title text-dark">Suivez nos étapes, nous vous aiderons</h2>
+
+			</div>
+			<!-- TITLE END-->
+
+			<div class="twm-how-it-work-section3">
+				<div class="row">
+					<div class="col-xl-4 col-lg-6 col-md-6">
+						<div class="twm-w-process-steps-h-page-7">
+							<div class="twm-w-pro-top">
+								<div class="twm-media">
+									<span><img src="{{ asset('img/icon1.png') }}" alt="icon1"></span>
+								</div>
+								<span class="twm-large-number  text-clr-sky">01</span>
+							</div>
+							<h4 class="twm-title">Enregistrer votre compte</h4>
+							<p>Créez un compte et retrouver l'emploi de vos rêves!.</p>
+						</div>
+					</div>
+
+					<div class="col-xl-4 col-lg-6 col-md-6">
+						<div class="twm-w-process-steps-h-page-7">
+							<div class="twm-w-pro-top">
+								<div class="twm-media">
+									<span><img src="{{ asset('img/icon2.png') }}" alt="icon1"></span>
+								</div>
+								<span class="twm-large-number text-clr-pink">02</span>
+							</div>
+							<h4 class="twm-title">Postuler pour un emploi de rêve</h4>
+							<p>Vous devez créer un compte pour trouver l'emploi qui vous convient.</p>
+						</div>
+					</div>
+
+					<div class="col-xl-4 col-lg-6 col-md-6">
+						<div class="twm-w-process-steps-h-page-7">
+							<div class="twm-w-pro-top">
+								<div class="twm-media">
+									<span><img src="{{ asset('img/icon3.png') }}" alt="icon1"></span>
+								</div>
+								<span class="twm-large-number  text-clr-green">03</span>
+							</div>
+							<h4 class="twm-title">Télécharger votre CV</h4>
+							<p>Télécharger votre CV pour trouver l'emploi de vos rêves.</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- HOW IT WORK SECTION END -->
+	<!-- JOB POST START -->
+	<div class="section-full p-t90 p-b90 site-bg-gray twm-bg-ring-wrap2">
+		<div class="twm-bg-ring-right"></div>
+		<div class="twm-bg-ring-left"></div>
+		<div class="container">
+
+			<div class="wt-separator-two-part">
+				<div class="row wt-separator-two-part-row">
+					<div
+						class="col-xl-7 col-lg-7 col-md-12 wt-separator-two-part-left">
+						<!-- TITLE START-->
+						<div class="section-head left wt-small-separator-outer">
+							<div class="wt-small-separator site-text-primary">
+								<div>Toutes les offres d'emplois</div>
+							</div>
+							<h2 class="wt-title">Commencez votre carrière</h2>
+						</div>
+						<!-- TITLE END-->
+					</div>
+					<div class="col-xl-5 col-lg-5 col-md-12 wt-separator-two-part-right text-right none-mobile">
+						<a href="{{ path('offres_recherche') }}" class="custom-button">Trouvez votre emploi</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="section-content">
+				<div class="twm-jobs-grid-wrap">
+					<div class="row">
+						{% for offre in offres %}
+							<div class="col-lg-4 col-md-6">
+								{% include "offre/composants/_card.html.twig" %}
+							</div>
+						{% endfor %}
+					</div>
+
+				</div>
+			</div>
+
+			<div class="block-mobile py-3 text-center">
+				<a href="{{ path('offres_recherche') }}" class="custom-button">Trouvez votre emploi</a>
+			</div>
+
+		</div>
+	</div>
+	<!-- JOB POST END -->
+
+	<!-- TOP COMPANIES START -->
+	<div class="section-full p-t50 p-b0 site-bg-white twm-companies-wrap twm-companies-wrap-h-page-7 pos-relative">
+		<div class="twm-companies-wrap-bg-block"></div>
+		<!-- TITLE START-->
+		<div class="section-head center wt-small-separator-outer content-white">
+			<div class="wt-small-separator site-text-primary">
+				<div>Principales entreprises</div>
+			</div>
+			<h2 class="wt-title">Soyez embauché dans les meilleures entreprises</h2>
+		</div>
+		<!-- TITLE END-->
+
+		<div class="container ">
+			<div class="twm-companies-h-page-7">
+				<div class="section-content">
+					<div class="owl-carousel home-client-carousel3 owl-btn-vertical-center">
+						{% for societe in bestsocietes(10) %}
+							<div class="item">
+								<div class="ow-client-logo">
+									<div class="client-logo client-logo-media">
+										<a href="{{ path('annuaire_profile', {nameSlug: societe.nameSlug}) }}" class="radius">
+											<img src="{% if societe.logo %}{{ vich_uploader_asset(societe, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ societe.societe }}" class="radius">
+										</a>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="twm-company-approch2-outer">
+					<div class="twm-company-approch2">
+						<div
+							class="row">
+
+							<!--block 1-->
+							<div class="col-lg-4 col-md-4">
+								<div class="counter-outer-two">
+									<div class="icon-content">
+										<div class="tw-count-number site-text-primary">
+											<span class="counter">{{ nbUsers() }}</span>+
+										</div>
+										<p class="icon-content-info">Utilisateurs quotidiens</p>
+									</div>
+								</div>
+							</div>
+
+							<!--block 2-->
+							<div class="col-lg-4 col-md-4">
+								<div class="counter-outer-two">
+									<div class="icon-content">
+										<div class="tw-count-number site-text-primary">
+											<span class="counter">{{ nbPosts() }}</span>+
+										</div>
+										<p class="icon-content-info">Services ouverts</p>
+									</div>
+								</div>
+							</div>
+
+							<!--block 3-->
+							<div class="col-lg-4 col-md-4">
+								<div class="counter-outer-two">
+									<div class="icon-content">
+										<div class="tw-count-number site-text-primary">
+											<span class="counter">{{ nbOffres() }}</span>+
+										</div>
+										<p class="icon-content-info">Offres d'emplois</p>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- TOP COMPANIES END -->
+
+	<!-- OUR POST START -->
+	<div class="section-full p-t50 p-b90 site-bg-white">
+		<div class="container">
+			<div class="wt-separator-two-part">
+				<div class="row wt-separator-two-part-row">
+					<div
+						class="col-xl-6 col-lg-6 col-md-12 wt-separator-two-part-left">
+						<!-- TITLE START-->
+						<div class="section-head left wt-small-separator-outer">
+							<div class="wt-small-separator site-text-primary">
+								<div>Services</div>
+							</div>
+							<h2 class="wt-title">Derniers Services</h2>
+						</div>
+						<!-- TITLE END-->
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-12 wt-separator-two-part-right text-right none-mobile">
+						<a href="{{ path('posts') }}" class=" custom-button">Tout afficher</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- TITLE END-->
+			<div class="section-content">
+				<div class="twm-blog-post-1-outer-wrap">
+					<div class="owl-carousel twm-la-home-blog owl-btn-bottom-center">
+						{% for post in posts %}
+							<div
+								class="item home">
+								<!--Block one-->
+								{% include "post/composants/_card.html.twig" %}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="block-mobile py-3 text-center">
+				<a href="{{ path('posts') }}" class="custom-button">Tout afficher</a>
+			</div>
+		</div>
+	</div>
+	<!-- OUR POST END -->
+
+	<!-- OUR BLOG START -->
+	<div class="section-full p-t50 p-b90 site-bg-gray">
+		<div
+			class="container">
+
+			<!-- TITLE START-->
+			<div class="wt-separator-two-part">
+				<div class="row wt-separator-two-part-row">
+					<div
+						class="col-xl-6 col-lg-6 col-md-12 wt-separator-two-part-left">
+						<!-- TITLE START-->
+						<div class="section-head left wt-small-separator-outer">
+							<div class="wt-small-separator site-text-primary">
+								<div>Blog</div>
+							</div>
+							<h2 class="wt-title">Dernières actualité</h2>
+						</div>
+						<!-- TITLE END-->
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-12 wt-separator-two-part-right text-right none-mobile">
+						<a href="{{ path('posts') }}" class=" custom-button">Tout afficher</a>
+					</div>
+				</div>
+			</div>
+			<!-- TITLE END-->
+			<div class="section-content">
+				<div class="twm-blog-post-1-outer-wrap">
+					<div class="owl-carousel twm-la-home-blog owl-btn-bottom-center">
+						{% for article in articles %}
+							<div
+								class="item">
+								<!--Block one-->
+								{% include "blog/composants/_card.html.twig" %}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="block-mobile py-3 text-center">
+				<a href="{{ path('blog') }}" class="custom-button">Tout afficher</a>
+			</div>
+		</div>
+	</div>
+	<!-- OUR BLOG END -->
+
+{% endblock %}

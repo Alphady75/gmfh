@@ -1,0 +1,87 @@
+{{ form_start(form) }}
+
+<div class="side-bar">
+
+   <div class="sidebar-elements search-bx">
+
+      <div class="form-group mb-4">
+         <h4 class="section-head-small mb-4">Mots clés</h4>
+         <div class="input-group">
+            {{ form_widget(form.query) }}
+            <button class="btn" type="button">
+               <i class="feather-search"></i>
+            </button>
+         </div>
+      </div>
+
+      <div class="form-group mb-4">
+         <h4 class="section-head-small mb-4">Catégories</h4>
+         {{ form_widget(form.categorie) }}
+      </div>
+
+      <div class="form-group mb-4">
+         <h4 class="section-head-small mb-4">Tarif</h4>
+         <div class="row">
+            <div class="col-6">{{ form_row(form.minPrice) }}</div>
+            <div class="col-6">{{ form_row(form.maxPrice) }}</div>
+         </div>
+      </div>
+
+      <div class="twm-sidebar-ele-filter">
+         <h4 class="section-head-small mb-4">Options</h4>
+         <ul>
+            <li>
+               <div class="form-check p-0">
+                  {{ form_widget(form.promo) }}
+               </div>
+            </li>
+            <li>
+               <div class="form-check p-0">
+                  {{ form_row(form.etat) }}
+               </div>
+            </li>
+            <li>
+               <div class="form-check p-0">
+                  {{ form_widget(form.negociable) }}
+               </div>
+            </li>
+            <li>
+               <div class="form-check p-0">
+                  {{ form_widget(form.livraison) }}
+               </div>
+            </li>
+         </ul>
+      </div>
+
+      <button class="custom-button" type="submit">
+         <span class="btnFetch d-block w-100 text-center">
+            {{ button_label|default('Rechercher') }}&nbsp;
+            <i class="fa fa-search"></i>
+         </span>
+      </button>
+   </div>
+
+</div>
+
+<!--div class="widget tw-sidebar-tags-wrap">
+   <h4 class="section-head-small mb-4">Tags</h4>
+
+   <div class="tagcloud">
+      <a href="job-list.html">General</a>
+      <a href="job-list.html">Jobs
+      </a>
+      <a href="job-list.html">Payment</a>
+      <a href="job-list.html">Application
+      </a>
+      <a href="job-list.html">Work</a>
+      <a href="job-list.html">Recruiting</a>
+      <a href="job-list.html">Employer</a>
+      <a href="job-list.html">Income</a>
+      <a href="job-list.html">Tips</a>
+   </div>
+</div>
+
+
+</div-->
+
+{{ form_start(form) }}

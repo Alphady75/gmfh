@@ -1,0 +1,45 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Compte de #{{ user }}{% endblock %}
+{% block titre %}Compte de #{{ user }}{% endblock %}
+{% block text %}Compte de #{{ user }}{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-8 mx-auto">
+
+        <div class="panel panel-defaulte bg-white mt-4">
+            <div class="panel-heading wt-panel-heading p-a20">
+                <h4 class="panel-tittle m-0">
+                    <i class="fa fa-user text-primary"></i>
+                    #{{ user }}
+                </h4>
+            </div>
+            <div class="panel-body wt-panel-body p-a20 m-b30">
+
+                {{ include('admin/user/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
+
+            </div>
+        </div>
+
+        <div class="panel panel-defaulte bg-white mt-4">
+            <div class="panel-heading wt-panel-heading p-a20">
+                <h4 class="panel-tittle m-0">
+                    <i class="fa fa-info-circle text-primary"></i>
+                    Suppression du compte
+                </h4>
+            </div>
+            <div class="panel-body wt-panel-body p-a20 m-b30">
+
+                {% include "user/espace/composants/_delete_politique.html.twig" %}
+
+                {{ include('admin/user/_delete_form.html.twig') }}
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

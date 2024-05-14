@@ -1,0 +1,30 @@
+{% extends "mails.html.twig" %}
+
+{% block body %}
+
+<p>Votre alerte Emploi pour <strong>{{ offre.intitulePoste }}</strong></p>
+<p>Une nouvelle offre d’emploi correspond à vos préférences <strong>({{ offre.localisation }})</strong>.</p>
+
+<br>
+
+<a href="{{ absolute_url(path('offre_details', {slug: offre.slug})) }}" style="color: black;">
+    <div style="display: flex;align-items: center;">
+        {% if offre.user.compte == 'ENTREPRISE' %}
+             <img src="{% if offre.user.logo %}{{ vich_uploader_asset(offre.user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ offre }}" width="50" height="50" style="border-radius: 8px;margin-right: 8px;">
+          {% else %}
+             <img src="{% if offre.user.photo %}{{ vich_uploader_asset(offre.user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/avatar.jpg') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ offre }}" width="50" height="50" style="border-radius: 8px;margin-right: 8px;">
+          {% endif %}
+        <div>
+            <h5>{{ offre.name }}</h5>
+            <p>{{ offre.intitulePoste }}</p>
+        </div>
+    </div>
+</a>
+
+<p><a href="{{ absolute_url(path('offre_details', {slug: offre.slug})) }}">Découvrir l'offre</a></p>
+
+<p>Pour plus d'informations sur le poste et pour postuler en ligne, veuillez consulter ce lien : <a href="{{ absolute_url(path('post_candidature', {slug: offre.slug})) }}">{{ absolute_url(path('post_candidature', {slug: offre.slug})) }}</a>.</p>
+
+<p>Nous vous remercions de l'intérêt que vous portez à notre plateforme <strong>{{ appName }}</strong>.</p>
+
+{% endblock %}

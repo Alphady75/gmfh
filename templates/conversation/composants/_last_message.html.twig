@@ -1,0 +1,28 @@
+{% if userconversation.lastmessage %}
+
+	{% if userconversation.lastmessage.destinataire.id == app.user.id and userconversation.lastmessage.lu == 0 %}
+
+		{{ userconversation.lastmessage.auteur.id == app.user.id ? 'Vous:' : ''}}
+
+		{{ userconversation.lastmessage.contenu|u.truncate(10, '...') }}
+
+	{% elseif userconversation.lastmessage.destinataire.id == app.user.id and userconversation.lastmessage.lu == 1 %}
+
+		{{ userconversation.lastmessage.auteur.id == app.user.id ? 'Vous:' : ''}}
+
+		{{ userconversation.lastmessage.contenu|u.truncate(10, '...') }}
+
+	{% else %}
+
+		{{ userconversation.lastmessage.auteur.id == app.user.id ? 'Vous:' : ''}}
+
+		{{ userconversation.lastmessage.contenu|u.truncate(10, '...') }}
+
+	{% endif %}
+
+{% endif %}
+
+<small class="text-light created">
+	<i class="far fa-clock"></i>
+	{{ userconversation.lastmessage.created|ago(locale='fr')
+	}}</small>

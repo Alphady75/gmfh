@@ -1,0 +1,57 @@
+<div class="side-bar">
+
+    <div class="widget all_services_list">
+        <h4 class="section-head-small mb-4">Categories</h4>
+        <div class="all_services m-b30">
+            <ul>
+                {% for cat in articlecategories() %}
+                <li>
+                    <a href="{{ path('blog_categories', {slug: cat.slug}) }}" class="{{ categorie == cat ? 'custom-badge text-primary' : '' }}">{{ cat.name|u.truncate(20,
+                        '...') }}</a>
+                    <span class="badge">{{ cat.articles|length }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="widget recent-posts-entry">
+        <h4 class="section-head-small mb-4">Articles récents</h4>
+        <div class="section-content">
+            <div class="widget-post-bx">
+
+                {% for lasted in lastarticles(6) %}
+                <div class="widget-post clearfix">
+                    <div class="wt-post-media">
+                        <img src="{{ lasted.imageFile ? vich_uploader_asset(lasted, 'imageFile') | imagine_filter('medium') : asset('img/banner.png') | imagine_filter('medium') }}"
+                            alt="{{ lasted }}">
+                    </div>
+                    <div class="wt-post-info">
+                        <div class="wt-post-header">
+                            <span class="post-date">{{ lasted.created|date('D m Y') }}</span>
+                            <span class="post-title">
+                                <a href="{{ path('blog_details', {slug: lasted.slug}) }}">{{ lasted.name|u.truncate(20,
+                                    '...') }}</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--div class="widget tw-sidebar-tags-wrap">
+        <h4 class="section-head-small mb-4">Mots clés</h4>
+
+        <div class="tagcloud">
+            {% for tag in tags() %}
+            <a href="{{ path('blog_tags', {slug: tag.slug}) }}">{{ tag }}</a>
+            {% endfor %}
+        </div>
+    </div-->
+
+
+</div>

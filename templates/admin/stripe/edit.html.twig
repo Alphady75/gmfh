@@ -1,0 +1,15 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Edition de l'offre d'abonnement #{{ stripe }}{% endblock %}
+{% block titre %}Edition de l'offre d'abonnement #{{ stripe }}{% endblock %}
+{% block text %}Edition de l'offre d'abonnement #{{ stripe }}{% endblock %}
+
+{% block body %}
+
+    {{ include('admin/stripe/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {% include "admin/stripe/_scripts.html.twig" %}
+{% endblock %}

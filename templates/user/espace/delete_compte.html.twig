@@ -1,0 +1,51 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Suppression du compte{% endblock %}
+{% block titre %}Suppression du compte{% endblock %}
+{% block text %}Suppression du compte{% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <div class="col-sm-8 mx-auto">
+    <div class="panel panel-default">
+      <div class="panel-body wt-panel-body py-4 p-a20 m-b30 bg-white radius">
+
+        <div class="avatar-img">
+          {% if app.user.compte == 'ENTREPRISE' %}
+          <img
+            src="{% if app.user.logo %}{{ vich_uploader_asset(app.user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}"
+            alt="{{ app.user }}" class="rounded-circle photo img-fluid">
+          {% else %}
+          <img
+            src="{% if app.user.photo %}{{ vich_uploader_asset(app.user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}"
+            alt="{{ app.user }}" class="rounded-circle photo img-fluid">
+          {% endif %}
+        </div>
+        <div class="text-center py-3">
+          <h5 class="text-center p-0 m-0">{{ app.user.compte == "ENTREPRISE" ? app.user.societe : app.user }}</h5>
+          <span class="custom-badge bg-blue text-light">{{ app.user.compte }}</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="panel panel-defaulte bg-white">
+      <div class="panel-heading wt-panel-heading p-a20">
+        <h4 class="panel-tittle m-0">
+          <i class="fa fa-info-circle text-primary"></i>
+          Suppression du compte
+        </h4>
+      </div>
+      <div class="panel-body wt-panel-body p-a20 m-b30">
+
+        {% include "user/espace/composants/_delete_politique.html.twig" %}
+        
+        {% include "user/espace/composants/_delete_compte.html.twig" %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}{{ appName }} : Vérification du code de réinitialisation du mot de passe {{ pays }}{% endblock %}
+
+{% block titre %}Vérification du code de réinitialisation du mot de passe{% endblock %}
+{% block text %}
+Un code de réinitialisation à été envoyer a l'adresse email : <strong>{{ emailUser }}</strong>
+		Entrez ce code de Vérification pour réinitialiser votre mot de passe.
+{% endblock %}
+
+{% block body %}
+
+{% for flash_error in app.flashes('reset_password_error') %}
+<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+{% endfor %}
+
+{{ form_start(requestForm) }}
+
+{{ form_row(requestForm.code) }}
+
+<button type="submit" class="custom-button button w-100">
+	<span class="btnFetch">
+		<i class="fas fa-lock"></i>
+		Confirmer
+	</span>
+</button>
+{{ form_end(requestForm) }}
+
+<form action="{{ path('app_send_new_resetpass_code') }}" method="post" class="text-center pt-3">
+	<p>Je n'ai reçu aucun code ! <button type="submit" class="btn text-blue">renvoyer de nouveau</button></p>
+</form>
+
+{% endblock %}
+
+{% block footer %}
+    {% include "partials/auth/_login_links.html.twig" %}
+{% endblock %}

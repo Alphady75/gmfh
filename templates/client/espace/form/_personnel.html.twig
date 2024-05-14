@@ -1,0 +1,76 @@
+{{ form_start(form) }}
+<div class="card-profile bg-white radius mb-4">
+	<div class="card-profile-img-top">
+		<div class="d-flex justify-content-between align-items-end">
+			<span class="custom-badge bg-blue text-light shadow-sm border border-light">Compte
+				{{ app.user.compte }}</span>
+			<span class="text-light">Membre
+				{{ app.user.created|ago }}</span>
+		</div>
+	</div>
+	<div class="card-profile-body d-flex justify-content-between align-items-end">
+		<div>
+			<label for="profil_personnel_photoFile_file" class="card-profile-avatar">
+				<img src="{% if app.user.photo %}{{ vich_uploader_asset(app.user, 'photoFile' ) }}{% else %}{{ asset('img/avatar.jpg') }}{% endif %}"
+					class="rounded-circle photo img-fluid" alt="Avatar de compte">
+				<label class="btn" for="profil_personnel_photoFile_file">
+					<i class="text-blue fa fa-camera"></i>
+				</label>
+			</label>
+			<div class="hidden-file">{{ form_widget(form.photoFile) }}</div>
+			{{ form_errors(form.photoFile) }}
+			<h5>{{ app.user }}</h5>
+			<span>{{ app.user.email }}</span>
+		</div>
+		<div>
+			<span class="custom-badge bg-{{ app.user.isVerified ? 'success' : 'warning' }} text-light">Email
+				{{ app.user.isVerified ? 'confirmer' : 'non confirmer' }}</span>
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-defaulte bg-white radius">
+	<div class="panel-heading wt-panel-heading p-a20">
+		<h4 class="panel-tittle m-0">
+			<i class="fa fa-info-circle text-primary"></i>
+			Informations personnelles
+		</h4>
+	</div>
+	<div class="panel-body wt-panel-body p-a20 m-b30">
+
+		<div class="row mb-0">
+			<div class="col-sm-6">{{ form_row(form.nom) }}</div>
+			<div class="col-sm-6">{{ form_row(form.prenom) }}</div>
+
+			<div class="col-sm-12">
+				<div class="form-group">
+					<label for="">Téléphone</label>
+					<div class="ls-inputicon-box">
+						{{ form_widget(form.telephone) }}
+						<i class="fs-input-icon fa fa-phone"></i>
+					</div>
+					{{ form_errors(form.telephone) }}
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="form-group">
+					<label for="">Localisation</label>
+					<div class="ls-inputicon-box">
+						{{ form_widget(form.localisation) }}
+						<i class="fs-input-icon fa fa-map-marker-alt"></i>
+					</div>
+					{{ form_errors(form.localisation) }}
+				</div>
+			</div>
+		</div>
+		{{ form_row(form.apropo) }}
+		<div class="text-end">
+			<button class="custom-button button" formnovalidate type="submit">
+				<span class="btnFetch d-block w-100">
+					{{ button_label|default('Terminer') }}
+				</span>
+			</button>
+		</div>
+	</div>
+</div>
+{{ form_end(form, {render_rest: false}) }}

@@ -1,0 +1,87 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Détails de la notification #{{ signaler.id }}{% endblock %}
+{% block titre %}Détails de la notification #{{ signaler.id }}{% endblock %}
+{% block text %}Détails de la notification #{{ signaler.id }}{% endblock %}
+
+{% block right %}{% endblock %}
+
+{% block body %}
+
+<div class="panel panel-defaulte bg-white mt-4">
+    <div class="panel-heading wt-panel-heading p-a20">
+        <h4 class="panel-tittle m-0">
+            <i class="fa fa-info-circle text-primary"></i>
+            Détails de la notification #{{ signaler.id }}
+        </h4>
+    </div>
+    <div class="panel-body wt-panel-body p-a20 m-b30">
+
+        <div class="row">
+            <div class="col-sm-4">
+
+                {% include "admin/user/_card.html.twig" with {user: signaler.user} %}
+
+                {% if signaler.offre %}
+                    {% include "offre/composants/_card.html.twig" with {offre: signaler.offre} %}
+                {% endif %}
+
+                {% if signaler.post %}
+                    {% include "post/composants/_card.html.twig" with {post: signaler.post} %}
+                {% endif %}
+
+            </div>
+            <div class="col-sm-8">
+                <div class="table-responsive table-knp">
+                    <table class="table table-hover table-borderless">
+                        <tbody>
+                            <tr>
+                                <th>Abus</th>
+                                <td>{{ signaler.abus }}</td>
+                            </tr>
+                            <tr>
+                                <th>Message</th>
+                                <td>{{ signaler.message }}</td>
+                            </tr>
+                            <tr>
+                                <th>Date</th>
+                                <td>{{ signaler.created ? signaler.created|date('d/m/Y') : '' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Statut</th>
+                                <td>
+                                    {% if signaler.offre %}
+                                    <span class="custom-badge mt-0 bg-{{ signaler.offre.bloquer ? 'warning' : 'success text-light' }}">Offre
+                                        {{ signaler.offre.bloquer ? 'Bloquée' : 'Visible sur le site' }}</span>
+                                    {% endif %}
+
+                                    {% if signaler.post %}
+                                    <span
+                                        class="custom-badge mt-0 bg-{{ signaler.post.bloquer ? 'warning' : 'success text-light' }}">Annonce
+                                        {{ signaler.post.bloquer ? 'Bloquée' : 'Visible sur le site' }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Actions</th>
+                                <td>
+                                    {{ include('admin/signaler/_delete_form.html.twig') }}
+                                    {% if signaler.offre %}
+                                    {{ include('admin/signaler/_gerer_offre_form.html.twig') }}
+                                    {% endif %}
+
+                                    {% if signaler.post %}
+                                    {{ include('admin/signaler/_gerer_post_form.html.twig') }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

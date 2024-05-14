@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conversations{% endblock %}
+{% block footer %}{% endblock %}
+{% block mobilenav %}{% endblock %}
+
+{% block body %}
+<div class="container site-bg-gray py-3 bottom-padding">
+  <div class="row">
+    <div class="col-sm-{% if candidature == null and conversation.post != null %}8{% elseif conversation.post == null and candidature != null %}8{% else %}12{% endif %}">
+      <div class="wt-admin-dashboard-msg-2 radius hiden-over box-shadow mb-3">
+
+        {% include "conversation/composants/_sidebar.html.twig" %}
+
+        <!--Right Msg section-->
+        <div class="wt-dashboard-msg-box">
+          <div class="single-msg-user-name-box">
+            {% include "conversation/composants/_single_user.html.twig" %}
+          </div>
+          <div id="msg-chat-wrap" class="single-user-msg-conversation scrollbar-macosx" style="background: #fbfbfb;">
+
+            {% include "conversation/composants/_conseil_securite.html.twig" %}
+
+            {% for message in messages %}
+            {% include "conversation/composants/_message.html.twig" %}
+            {% endfor %}
+
+          </div>
+
+          {% include "conversation/composants/_message_form.html.twig" %}
+
+        </div>
+
+      </div>
+    </div>
+    {% if candidature %}
+    <div class="col-sm-4">
+      <div class="panel panel-default box-shadow radius bg-white offre-conversation hiden-over mb-3">
+        <div class="panel-heading wt-panel-heading p-a20 border-bottom pb-2 border-0">
+          <h4 class="panel-tittle m-a0">
+            <span>Candidature pour le poste de <strong>#{{ candidature.offre.intitulePoste }}</strong></span>
+          </h4>
+          {% include "candidature/composants/_status.html.twig" %}
+          <i class="fa fa-clock text-primary"></i> {{ candidature.created|ago }}
+        </div>
+        <div class="panel-body wt-panel-body p-a20 offre-conversation-body bg-light p-2">
+          {% include "offre/composants/_infos.html.twig" with {offre: candidature.offre} %}
+        </div>
+        <div class="panel-footer p-a20 border-top">
+          <a href="{{ path('suivis_candidature', {token: candidature.token}) }}"
+            class="custom-button bg-blue w-100 text-center">Suivre la candidature</a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% if conversation.post %}
+    <div class="col-sm-4">
+      <div class="panel panel-default box-shadow radius bg-white offre-conversation hiden-over h-100">
+        <div class="panel-heading wt-panel-heading p-a20 border-bottom pb-2 border-0">
+          <h6 class="panel-tittle h6 m-a0">
+            <span>{{ conversation.post }}</span>
+          </h6>
+          <i class="fa fa-clock text-primary"></i> {{ conversation.created|ago }}
+        </div>
+        <div class="panel-body wt-panel-body p-a20 offre-conversation-body bg-light">
+          <div class="p-2">
+            {% include "post/composants/_card.html.twig" with {post: conversation.post} %}
+            {% include "post/composants/_infos.html.twig" with {post: conversation.post} %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% endblock %}

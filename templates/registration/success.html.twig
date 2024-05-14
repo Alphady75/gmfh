@@ -1,0 +1,54 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}Félicitation! votre compte à bien été activé
+{% endblock %}
+
+{% block titre %}Félicitation! votre compte à bien été activé
+{% endblock %}
+
+{% block text %}
+Nous vous remercions d'avoir confirmé votre adresse e-mail
+<strong>{{ userEmail }}</strong>. Nous sommes
+ravis de vous compter parmi nos utilisateurs !
+{% endblock %}
+
+{% block body %}
+<div class="text-center">
+   <p>
+      Votre confirmation nous permet de vous offrir une expérience utilisateur optimale et de vous tenir informé(e) des
+      dernières actualités, offres spéciales et mises à jour de notre plateforme.
+   </p>
+   <small class="d-block">
+      N'hésitez pas à explorer notre site pour découvrir toutes nos fonctionnalités et services. Si vous avez des
+      questions
+      ou des préoccupations, n'hésitez pas à nous contacter à tout moment. Notre équipe se fera un plaisir de vous
+      aider.
+   </small>
+
+   <small class="d-block mb-3">Encore une fois, merci de votre confiance et bienvenue parmi nous !</small>
+
+   <a href="{{ path('app_login') }}" class="custom-button text-center">Me connecter maintenant !</a>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.0.0/canvas-confetti.min.js"></script>
+
+<script>
+   window.onload = function() {
+        let myCanvas = document.createElement('canvas');
+        document.body.appendChild(myCanvas);
+        myCanvas.style.position = 'fixed';
+        myCanvas.width = window.innerWidth;
+        myCanvas.height = window.innerHeight;
+        
+        confetti.create(myCanvas, {
+            resize: true,
+            useWorker: true
+        })({ particleCount: 200, spread: 200 });
+    };
+
+</script>
+{% endblock %}

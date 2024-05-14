@@ -1,0 +1,15 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Offres d'emplois ({{ offres.getTotalItemCount }}){% endblock %}
+{% block titre %}Offres d'emplois ({{ offres.getTotalItemCount }}){% endblock %}
+{% block text %}Offres d'emplois ({{ offres.getTotalItemCount }}){% endblock %}
+
+{% block right %}
+<a href="{{ path('user_offre_new') }}" class="custom-button mt-3"><i class="fa fa-plus"></i> Publier une offre d'emploi</a>
+{% endblock %}
+
+{% block body %}
+
+{% include "user/offre/_data.html.twig" %}
+
+{% endblock %}

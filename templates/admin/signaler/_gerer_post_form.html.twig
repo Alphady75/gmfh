@@ -1,0 +1,4 @@
+<form method="post" class="d-inline" action="{{ path('admin_gere_post', {'id': signaler.post.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir éffectuer cette action?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('gerepost' ~ signaler.post.id) }}">
+    <button class="btn btn-sm text-primary"><i class="fa fa-lock"></i> Bloquer</button>
+</form>

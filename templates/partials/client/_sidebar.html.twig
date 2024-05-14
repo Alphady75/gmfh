@@ -1,0 +1,49 @@
+<div class="side-bar-st-1">
+
+  <div class="twm-candidate-profile-pic">
+
+    <img src="{{ app.user.photo ? vich_uploader_asset(app.user, 'photoFile') | imagine_filter('verylargeavatar') : asset('img/avatar.jpg') | imagine_filter('verylargeavatar') }}" alt="">
+    <!--div class="upload-btn-wrapper">
+
+      <div id="upload-image-grid"></div>
+      <button class="custom-button button w-100-sm">Upload Photo</button>
+      <input type="file" name="myfile" id="file-uploader" accept=".jpg, .jpeg, .png">
+    </div-->
+
+  </div>
+
+  <div class="twm-mid-content text-center">
+    <a href="candidate-detail.html" class="twm-job-title">
+      <h4>{{ app.user }}</h4>
+    </a>
+    <p>{{ app.user.compte }}</p>
+  </div>
+
+  <div class="twm-nav-list-1">
+    <ul>
+      <li class="{{ app.request.attributes.get('_route') == 'client_dashboard' ? 'active' : '' }}">
+        <a href="{{ path('client_dashboard') }}"><i class="fa fa-chart-pie"></i> Tableau de bord</a>
+      </li>
+      <li class="{{ app.request.attributes.get('_route') == 'client_complete_compte' ? 'active' : '' }}">
+        <a href="{{ path('client_complete_compte') }}"><i class="fa fa-user"></i> Mon profil</a>
+      </li>
+      <li class="{{ app.request.attributes.get('_route') == 'client_favoris' ? 'active' : '' }}">
+        <a href="{{ path('client_favoris') }}"><i class="fa fa-heart"></i> Mes favoris</a>
+      </li>
+      <li class="{{ app.request.attributes.get('_route') == 'client_alert_index' ? 'active' : '' }}">
+        <a href="{{ path('client_alert_index') }}"><i class="fa fa-bell"></i> Alerte emplois</a>
+      </li>
+      <li class="{{ app.request.attributes.get('_route') == 'client_candidatures' ? 'active' : '' }}">
+        <a href="{{ path('client_candidatures') }}"><i class="fa fa-user-check"></i> Candidatures</a>
+      </li>
+      <li class="{{ app.request.attributes.get('_route') == 'client_change_compte' ? 'active' : '' }}">
+        <a href="{{ path('client_change_compte') }}"><i class="fa fa-fingerprint"></i> Statut du compte</a>
+      </li>
+      <li class="{{ app.request.attributes.get('_route') == 'client_update_acces' ? 'active' : '' }}">
+        <a href="{{ path('client_update_acces') }}"><i class="fa fa-key"></i>Mes accès</a>
+      </li>
+      <li><a href="{{ path('app_logout') }}"><i class="fa fa-share-square"></i> Déconnexion</a></li>
+    </ul>
+  </div>
+
+</div>

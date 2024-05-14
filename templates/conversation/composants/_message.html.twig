@@ -1,0 +1,30 @@
+<div class="single-user-comment-wrap {{ message.auteur == app.user ? 'sigle-user-reply' : '' }}">
+	<div class="row {{ message.auteur == app.user ? 'justify-content-end' : '' }}">
+		<div class="col-xl-9 col-lg-12">
+			<div class="single-user-comment-block clearfix">
+				<div class="single-user-com-pic rounded-circle">
+					{% if message.auteur.compte == 'ENTREPRISE' %}
+						<img src="{% if message.auteur.logo %}{{ vich_uploader_asset(message.auteur, 'logoFile' ) | imagine_filter('mediumavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('mediumavatar') }}{% endif %}" alt="{{ message.auteur.compte == 'ENTREPRISE' ? message.auteur.societe ? : message.auteur }}" class="rounded-circle">
+					{% else %}
+						<img src="{% if message.auteur.photo %}{{ vich_uploader_asset(message.auteur, 'photoFile' ) | imagine_filter('mediumavatar') }}{% else %}{{ asset('img/avatar.jpg') | imagine_filter('mediumavatar') }}{% endif %}" alt="{{ message.auteur.compte == 'ENTREPRISE' ? message.auteur.societe ? : message.auteur }}" class="rounded-circle">
+					{% endif %}
+				</div>
+				<div class="single-user-com-text radius">
+
+					{{ message.contenu }}
+
+					{% if message.fichier %}
+						<div class="py-2" style="font-size: 12px;">
+							<p class="pb-0 mb-0 text-dark">
+								<i class="fa fa-download"></i>
+								Fichier joint
+							</p>
+							<a href="{{ vich_uploader_asset(message, 'fichierFile') }}" target="_blank">{{ message.fichier }}</a>
+						</div>
+					{% endif %}
+				</div>
+				<div class="single-user-msg-time">{{ message.created|ago(locale='fr') }}</div>
+			</div>
+		</div>
+	</div>
+</div>

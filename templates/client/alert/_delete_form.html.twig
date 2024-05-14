@@ -1,0 +1,4 @@
+<form method="post" class="d-inline" action="{{ path('client_alert_delete', {'id': alert.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette alerte?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ alert.id) }}">
+    <button class="" title="Supprimer l'alerte"><i class="fa fa-trash-alt"></i></button>
+</form>

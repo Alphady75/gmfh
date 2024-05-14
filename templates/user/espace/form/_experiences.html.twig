@@ -1,0 +1,22 @@
+<div class="panel panel-default radius sous-form">
+	<div class="panel-heading wt-panel-heading p-a20">
+		<h4 class="panel-tittle m-a0">Parcours professionnel <small>(Facultatif)</small></h4>
+		<p class="mb-0">Fait référence à l'ensemble de vos expériences de travail, vos études, vos formations et vos réalisations d'une au cours de votre carrière.</p>
+	</div>
+	<div class="panel-body wt-panel-body p-a20 m-b30 bg-white radius">
+		<div id="experiences" class="row" data-prototype="{{ include("user/espace/collection/_experience.html.twig", {form: form.experiences.vars.prototype})|e("html_attr") }}" data-index="{{ form.experiences|length > 0 ? form.experiences|last.vars.name + 1 : 0 }}">
+			{% for experience in form.experiences %}
+				<div class="col-sm-6">
+					{{ include("user/espace/collection/_experience.html.twig", {form: experience}) }}
+				</div>
+			{% endfor %}
+		</div>
+		{{ form_errors(form.experiences) }}
+		<div class="py-3 text-left">
+			<button type="button" class="btn btn-new btn-small btn btn-white text-primary border-light" data-collection="#experiences">
+				<i class="fa fa-plus"></i>
+				Ajouter une experience
+			</button>
+		</div>
+	</div>
+</div>

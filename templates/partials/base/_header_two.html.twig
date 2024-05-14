@@ -1,0 +1,53 @@
+<header class="site-header header-full-width mobile-sider-drawer-menu">
+
+  <div class="sticky-header main-bar-wraper  navbar-expand-lg">
+    <div class="main-bar">
+
+      <div class="container-fluid clearfix">
+
+        <div class="logo-header">
+          <div class="logo-header-inner logo-header-one">
+            <a href="{{ path('accueil') }}">
+              <img src="{{ asset('img/logo/trans/3.png') }}" alt="{{ appName }} Logo" class="on-scroll-show">
+            </a>
+          </div>
+        </div>
+
+        <!-- NAV Toggle Button -->
+        <button id="mobile-side-drawer" data-target=".header-nav" data-toggle="collapse" type="button"
+          class="navbar-toggler collapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar icon-bar-first"></span>
+          <span class="icon-bar icon-bar-two"></span>
+          <span class="icon-bar icon-bar-three"></span>
+        </button>
+
+        <!-- MAIN Vav -->
+        <div class="nav-animation header-nav navbar-collapse collapse d-flex justify-content-center">
+
+          {% include "partials/base/_nav_links.html.twig" %}
+
+        </div>
+
+        <!-- Header Right Section-->
+        <div class="extra-nav header-2-nav">
+          <div class="extra-cell">
+            <div class="header-search">
+              <a href="#search" class="header-search-icon">
+                <i class="feather-search"></i>
+              </a>
+            </div>
+          </div>
+          <div class="extra-cell">
+            {% include "partials/base/_navbtn.html.twig" %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SITE Search -->
+    {% include "partials/base/_search_form.html.twig" %}
+  </div>
+
+
+</header>

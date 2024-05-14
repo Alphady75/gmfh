@@ -1,0 +1,133 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Aperçu de l'offre d'emploi #{{ offre }}
+{% endblock %}
+{% block titre %}Aperçu de l'offre d'emploi #{{ offre }}
+{% endblock %}
+{% block text %}
+	<span class="custom-badge bg-{{ offre.status == 'Actif' ? 'success text-light' : 'warning text-dark' }} status">Offre d'emploi {{ offre.status == 'Actif' ? 'Active' : 'Inactive' }}</span>
+	{% if offre.boosted == 1 %}
+		<span class="custom-badge bg-warning status">Boostée</span>
+	{% endif %}
+	
+{% endblock %}
+
+{% block right %}
+
+	{% if offre.status == 'Actif' %}
+		<form method="post" class="d-inline" action="{{ path('user_offre_masquer', {'id': offre.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir masquer cette offre d'emploi?');">
+			<input type="hidden" name="_token" value="{{ csrf_token('masquer' ~ offre.id) }}">
+			<button class="custom-button-light text-warning mt-0">
+				<span class="btnFetch d-block">
+					<i class="fa fa-eye-slash"></i>
+					Masquer</span>
+			</button>
+		</form>
+	{% else %}
+		<form method="post" class="d-inline" action="{{ path('user_offre_publier', {'id': offre.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir publier cette offre d'emploi?');">
+			<input type="hidden" name="_token" value="{{ csrf_token('publier' ~ offre.id) }}">
+			<button class="custom-button mt-0">
+				<span class="btnFetch d-block">
+					<i class="fa fa-paper-plane"></i>
+					Publier</span>
+			</button>
+		</form>
+	{% endif %}
+	{% if offre.boosted == 0 %}
+	<a href="{{ path('booster_offre', {slug: offre.slug}) }}" class="custom-button-light">Booster</a>
+	{% endif %}
+	
+	<a href="{{ path('user_offre_edit', {'slug': offre.slug}) }}" class="custom-button-light pe-2 ps-2">
+		<i class="fa fa-edit"></i>
+		Mettre à jour
+	</a>
+{% endblock %}
+
+{% block body %}
+
+	<!-- OUR BLOG START -->
+	<div class="section-full p-t50">
+		<div
+			class="container">
+			<!-- BLOG SECTION START -->
+			<div class="section-content">
+				<div class="row d-flex justify-content-center">
+
+					<div
+						class="col-lg-8 col-md-12">
+						<!-- Candidate detail START -->
+						<div class="cabdidate-de-info bg-white radius p-3">
+							<div class="twm-job-self-wrap">
+								<div class="twm-job-self-info">
+									<div class="twm-job-self-top">
+
+										{% if offre.user.compte == "ENTREPRISE" %}
+											<div class="twm-media-bg">
+												<img src="{% if offre.user.photo %}{{ vich_uploader_asset(offre.user, 'photoFile' ) | imagine_filter('entreprisebanner') }}{% else %}{{ asset('img/banner.png') | imagine_filter('entreprisebanner') }}{% endif %}" alt="#">
+											</div>
+										{% endif %}
+
+										<div class="twm-mid-content">
+
+											<div class="twm-media">
+												{% if offre.user.compte == "ENTREPRISE" %}
+													<img src="{% if offre.user.logo %}{{ vich_uploader_asset(offre.user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="#">
+												{% else %}
+
+													<img src="{% if offre.user.photo %}{{ vich_uploader_asset(offre.user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="#">
+
+												{% endif %}
+											</div>
+
+											<h4 class="twm-job-title">{{ offre }}
+												<span class="twm-job-post-duration">/
+													{{ offre.created|ago }}</span>
+											</h4>
+											<p class="twm-job-address">
+												<i class="feather-map-pin"></i>
+												{{ offre.localisation }}</p>
+											<div class="twm-job-self-mid">
+												<div class="twm-job-self-mid-left">
+													<a href="{{ offre.user.siteWeb ?? '#' }}" class="twm-job-websites site-text-primary">{{ offre.user.siteWeb ?? 'Aucun site internet...' }}</a>
+													<div class="twm-jobs-amount">{{ offre.devise }}
+														{{ offre.salaire }}
+														<span>/
+															{{ offre.periodicite }}</span>
+													</div>
+												</div>
+												<div class="twm-job-apllication-area">Fin de la candidature:
+													<span class="twm-job-apllication-date">{{ offre.dateFin|date('d/m/Y') }}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+							{% include "offre/composants/_description.html.twig" %}
+
+						</div>
+
+
+					</div>
+
+					<div class="col-lg-4 col-md-12 rightSidebar">
+
+						{% include "offre/composants/_infos.html.twig" %}
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	<!-- OUR BLOG END -->
+
+	<div class="py-3">
+		{{ include('user/offre/_delete_form.html.twig') }}
+	</div>
+
+{% endblock %}

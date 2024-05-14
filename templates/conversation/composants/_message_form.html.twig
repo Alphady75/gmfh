@@ -1,0 +1,20 @@
+{% if conversation.terminee == false %}
+
+{{ form_start(form, {attr: {class:'single-msg-reply-comment bg-white p-3 border-top'}}) }}
+
+{{ form_row(form.fichierFile) }}
+
+<div class="">
+    <div class="input-group">
+        {{ form_widget(form.contenu) }}
+        <button class="btn bg-blue radius button me-2 text-light" data-turbo="true" type="submit"><span class="btnFetch"><i class="fa fa-paper-plane"></i></span></button>
+    </div>
+</div>
+
+{{ form_end(form) }}
+
+{% else %}
+    <div class="p-3 bg-white border-top">
+        <p class="m-0 text-muted"><i class="fa fa-exclamation-triangle text-primary"></i> Conversation terminé</p>
+    </div>
+{% endif %}

@@ -1,0 +1,197 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suivis de la candidature au poste de
+	{{ candidature.offre.intitulePoste }}
+{% endblock %}
+
+{% block footer %}{% endblock %}
+{% block mobilenav %}{% endblock %}
+
+{% block body %}
+	<div class="container site-bg-gray py-3 suivis-container">
+		<div class="row">
+			{% if candidature %}
+				<div class="col-sm-6">
+					<div class="panel panel-default radius offre-conversation bg-white box-shadow mb-3">
+						<div class="panel-heading wt-panel-heading p-a20 border-0 pb-0">
+							<h4 class="panel-tittle m-a0">
+								<span>Suivi de la candidature pour le poste de
+									<strong>#{{ candidature.offre.intitulePoste }}</strong>
+								</span>
+							</h4>
+							{% include "candidature/composants/_status.html.twig" %}
+							<i class="fa fa-clock text-primary"></i>
+							{{ candidature.created|ago }}
+						</div>
+						<div class="panel-body wt-panel-body p-a20 pb-3">
+							<div class="twm-timing-list-wrap p-3 border-0 pb-0">
+
+								<div class="twm-timing-list">
+									<div class="twm-time-list-title">Soumission de la candidature
+									</div>
+									<div class="twm-time-list-date">Date
+										<span class="custom-badge">
+											<i class="fa fa-calendar-alt"></i>
+											{{ candidature.created|date('d/m/Y') }}</span>
+									</div>
+									<div class="twm-time-list-date">Intitulé du poste:
+										<strong class="text-dark">{{
+                           candidature.offre.intitulePoste }}</strong>
+									</div>
+									<div class="twm-time-list-position">
+										<i class="fa fa-envelope text-blue"></i>
+										Présentation du
+										                        candidat</div>
+									<div class="twm-time-list-discription">
+										<p>{{ candidature.candidatPresentation }}.</p>
+									</div>
+
+                  {% if candidature.offre.user == app.user %}
+                  
+									<div class="twm-time-list-position">
+										<i class="fa fa-link"></i>
+										CV & Lettre de motivation</div>
+									<div class="twm-time-list-discription">
+										{% if candidature.cv %}
+
+											<a href="{{ vich_uploader_asset(candidature, 'cvFile') }}" class="custom-badge">CV</a>
+
+										{% endif %}
+
+										{% if candidature.cv %}
+
+											<a href="{{ vich_uploader_asset(candidature, 'lettreMotivationFile') }}" class="custom-badge">Lettre de motivation</a>
+
+										{% endif %}
+									</div>
+                  
+                  {% endif %}
+
+								</div>
+
+								<div class="twm-timing-list {{ candidature.acceptationDate ? '' : 'inactif' }}">
+									<div class="twm-time-list-title">Acceptation de la candidatures</div>
+									<div class="twm-time-list-date">Date
+										<span class="custom-badge">
+											<i class="fa fa-calendar-alt"></i>
+											{{ candidature.acceptationDate|date('d/m/Y') }}
+										</span>
+									</div>
+									<div class="twm-time-list-position">
+										<i class="fa fa-envelope text-blue"></i>
+										Message du recruteur
+									</div>
+									<div class="twm-time-list-discription">
+										{{ candidature.acceptationMessage }}
+									</div>
+								</div>
+
+								<div class="twm-timing-list {{ candidature.dateEvaluation ? '' : 'inactif' }}">
+									<div class="twm-time-list-title">Évaluation des compétences</div>
+									<div class="twm-time-list-date">Date prévu:
+										<span class="custom-badge">
+											<i class="fa fa-calendar-alt"></i>
+											{{ candidature.dateEvaluation|date('d/m/Y') }}</span>
+									</div>
+									<div class="twm-time-list-discription">
+										<p>Examin des fichiers des candidats (CV, Lettre de Motivation...) pour évaluer leur adéquation
+											                           avec les exigences du poste.</p>
+
+										<h6>
+											<i class="fa fa-link"></i>
+											Fichiers</h6>
+										<div>
+											{% if candidature.cv %}
+
+												<a href="{{ vich_uploader_asset(candidature, 'cvFile') }}" class="custom-badge">CV</a>
+
+											{% endif %}
+
+											{% if candidature.cv %}
+
+												<a href="{{ vich_uploader_asset(candidature, 'lettreMotivationFile') }}" class="custom-badge">Lettre de motivation</a>
+
+											{% endif %}
+										</div>
+									</div>
+									<div class="twm-time-list-position">
+										<i class="fa fa-envelope text-blue"></i>
+										Message du recruteur
+									</div>
+									<div class="twm-time-list-discription">
+										{{ candidature.evaluationMessage }}
+									</div>
+								</div>
+
+								<div class="twm-timing-list {{ candidature.dateEntretien ? '' : 'inactif' }}">
+									<div class="twm-time-list-title">Entretien</div>
+									<div class="twm-time-list-date mb-2">
+										<span class="custom-badge bg-blue text-light">{{ candidature.entretien }}</span>
+										<span class="custom-badge bg-warning">
+											<i class="fa fa-calendar-alt"></i>
+											{{ candidature.dateEntretien|date('d/m/Y H:i') }}
+										</span>
+									</div>
+									<div class="twm-time-list-discription">
+										Réalisation de l'entretien avec le candidat présélectionnés pour l'évaluation des motivations,
+										                        compétences de base, adéquation culturelle, etc...
+									</div>
+								</div>
+
+								<div class="twm-timing-list {{ candidature.dateSelection ? '' : 'inactif' }}">
+									<div class="twm-time-list-title">Sélection du candidat</div>
+									<div class="twm-time-list-date">Date
+										<span class="custom-badge">
+											<i class="fa fa-calendar-alt"></i>
+											{{ candidature.dateSelection|date('d/m/Y') }}</span>
+									</div>
+									<div class="twm-time-list-position">
+										<i class="fa fa-info-circle text-success"></i>
+										Message du recruteur
+									</div>
+									<div class="twm-time-list-discription">
+										<p>{{ candidature.selectionMessage }}</p>
+									</div>
+								</div>
+
+							</div>
+
+							{% if candidature.offre.user == app.user %}
+
+								{% include "candidature/composants/_proccess.html.twig" %}
+
+							{% endif %}
+
+						</div>
+					</div>
+				</div>
+			{% endif %}
+			<div class="col-sm-6">
+				<div
+					class="wt-admin-dashboard-msg-2 radius hiden-over box-shadow mb-3">
+					<!--Right Msg section-->
+					<div class="wt-dashboard-msg-box radius">
+						<div class="single-msg-user-name-box">
+							{% include "conversation/composants/_single_user.html.twig" %}
+						</div>
+						<div id="msg-chat-wrap" class="single-user-msg-conversation scrollbar-macosx radius" style="background: #fbfbfb;">
+
+							{% include "conversation/composants/_conseil_securite.html.twig" %}
+
+							{% for message in messages %}
+								{% include "conversation/composants/_message.html.twig" %}
+							{% endfor %}
+
+						</div>
+
+						{% include "conversation/composants/_message_form.html.twig" %}
+
+						{% include "candidature/composants/_avis.html.twig" %}
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

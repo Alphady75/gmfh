@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+
+<div class="panel panel-default radius bg-white mb-3">
+
+	<div class="panel-heading wt-panel-heading p-a20 border-0">
+		<h4 class="panel-tittle m-0">
+			<i class="fa fa-bell text-primary"></i>
+			Alerte emplois
+		</h4>
+        <p class="mb-0">Les offres d'emploi peuvent être publiées à tout moment et être pourvues rapidement. Recevoir une alerte dès qu'une nouvelle offre correspond à vos critères vous permet d'être réactif et de postuler rapidement, ce qui peut augmenter vos chances d'être remarqué par les recruteurs.</p>
+	</div>
+
+	<div class="panel-body wt-panel-body py-2 p-a20 m-b30 bg-white radius">
+
+		{{ form_widget(form) }}
+
+		<div class="py-4">
+            <button class="custom-button button" formnovalidate type="submit">
+                <span class="btnFetch d-block w-100">
+                    <i class="fas fa-save"></i> {{ button_label|default('Enregistrer') }}
+                </span>
+            </button>
+        </div>
+	</div>
+</div>
+
+{{ form_end(form) }}

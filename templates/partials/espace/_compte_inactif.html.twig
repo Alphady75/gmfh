@@ -1,0 +1,14 @@
+<div class="compte-inactif-wrapper">
+   <div class="text-center">
+      <img src="{{ asset('img/logo/trans/3.png') }}" height="100px" alt="Logo {{ appName }}" class="mb-3">
+      <p class="text-center">
+         Si vous voyez cette page ! <br> c'est parce que votre compte n'est pas actif, votre adresse email n'a jamais été confirmer <br>
+         Veuillez confirmer votre adresse e-mail <strong>{{ app.user.email }}</strong> pour accéder à votre espace et à
+         toute les fonctionnalités.
+      </p>
+      <form action="{{ path('app_send_new_code') }}" method="post" class="text-center">
+         <p>Je n'ai reçu aucun code de confirmation !</p>
+         <button type="submit" class="custom-button">Renvoyer de nouveau le code</button>
+      </form>
+   </div>
+</div>

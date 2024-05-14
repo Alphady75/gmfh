@@ -1,0 +1,65 @@
+<div class="card border user-admin-bloc radius text-center bg-white border-light">
+    <div class="card-header text-start bg-white border-0">
+        <small class="badge rounded-pill bg-{{ user.isVerified ? 'blue' : 'warning' }}">{{ user.isVerified ? 'Email
+            vérifiée' : 'Email non vérifiée' }}</small>
+    </div>
+    <div class="card-body">
+        {% if user.compte == 'ENTREPRISE' %}
+        <img src="{% if user.logo %}{{ vich_uploader_asset(user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}"
+            alt="{{ user }}" class="rounded-circle">
+        {% else %}
+        <img src="{% if user.photo %}{{ vich_uploader_asset(user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/avatar.jpg') | imagine_filter('largeavatar') }}{% endif %}"
+            alt="{{ user }}" class="rounded-circle">
+        {% endif %}
+        <div class="block-content py-2">
+            <span class="custom-badge text-primary">
+                COMPTE {{ user.compte }}
+            </span>
+
+            <strong class="d-block p-0">
+                {{ user.compte == 'ENTREPRISE' ? user.societe : user }}
+            </strong>
+
+            {% if user.compte == 'ADMINISTRATEUR' %}
+
+            {% else %}
+            <span class="text-muted">{{ user.compte == 'ENTREPRISE' ? "Secteur d'activité" : 'Qualification' }}</span>
+            <span class="d-block text-blue p-0">
+                {{ user.compte == 'ENTREPRISE' ? user.secteurActivite : user.qualification }}
+            </span>
+
+            {% endif %}
+
+        </div>
+
+        {% if user.compte == 'ENTREPRISE' or user.compte == 'PARTICULIER' %}
+        <span><i class="fa fa-suitcase text-primary"></i> {{ user.offres|length }} offre{{ user.offres|length > 1 ? 's'
+            : '' }}</span>
+        <span><i class="fa fa-bookmark text-primary"></i> {{ user.posts|length }} annonce{{ user.posts|length > 1 ? 's'
+            : '' }}</span>
+        {% endif %}
+
+    </div>
+    <div class="card-footer bg-white border-0 text-muted p-0">
+        <a href="{{ path('admin_user_edit', {nameSlug: user.nameSlug}) }}" class="btn btn-sm btn-light"><i
+                class="fa fa-edit text-primary"></i></a>
+        {% if user.compte == 'ENTREPRISE' or user.compte == 'PARTICULIER' %}
+        <a href="{{ path('annuaire_profile', {nameSlug: user.nameSlug}) }}" target="_blank"
+            class="btn btn-sm btn-light"><i class="fa fa-user text-primary"></i> profil</a>
+        {% endif %}
+
+        <div class="pb-3">
+            {% if user.annuaire %}
+            <span class="text-success custom-badge"><i class="fa fa-eye"></i> Profil visible sur annuaire</span>
+            {% include "admin/user/_masque_annuaire_form.html.twig" %}
+            {% else %}
+            <span class="text-warning custom-badge"><i class="fa fa-eye-slash"></i> Profil non visible sur annuaire</span>
+            
+            {% if user.compte == 'ENTREPRISE' or user.compte == 'PARTICULIER' %}
+                {% include "admin/user/_active_annuaire_form.html.twig" %}
+            {% endif %}
+
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="blog-post twm-blog-post-1-outer">
+	{% if article.image %}
+		<div class="wt-post-media">
+			<a href="{{ path('blog_details', {slug: article.slug}) }}"><img src="{{ vich_uploader_asset(article, 'imageFile' ) | imagine_filter('blog') }}" alt=""></a>
+		</div>
+	{% endif %}
+	<div class="wt-post-info">
+		<div class="wt-post-meta ">
+			<ul>
+				<li class="post-date">{{ article.created|date('d/m/Y', null, 'fr') }}</li>
+				<li class="post-author">Par
+					<a href="#" title="{{ article.user }}">{{ article.user }}</a>
+				</li>
+			</ul>
+		</div>
+		<div class="wt-post-title ">
+			<h4 class="post-title">
+				<a href="{{ path('blog_details', {slug: article.slug}) }}">{{ article }}</a>
+			</h4>
+		</div>
+		<div class="wt-post-text ">
+			<p>
+				{{ article.resume|u.truncate(60, '...') }}
+			</p>
+		</div>
+		<div class="wt-post-readmore ">
+			<a href="{{ path('blog_details', {slug: article.slug}) }}" class="custom-button-link site-text-primary">En savoir plus</a>
+		</div>
+	</div>
+</div>

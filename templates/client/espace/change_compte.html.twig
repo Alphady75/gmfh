@@ -1,0 +1,55 @@
+{% extends 'client.html.twig' %}
+
+{% block title %}Changer le statut de votre compte{% endblock %}
+{% block titre %}Changer le statut de votre compte{% endblock %}
+{% block text %}Changer le statut de votre compte{% endblock %}
+
+{% block body %}
+
+<div class="p-3 radius bg-white">
+    {% include "partials/base/_terms.html.twig" %}
+
+    {{ form_start(form) }}
+
+    <div class="avatar-img">
+        <img src="{% if app.user.photo %}{{ vich_uploader_asset(app.user, 'photoFile' )  }}{% else %}{{ asset('img/avatar.jpg')  }}{% endif %}"
+            class="rounded-circle photo img-fluid" alt="Avatar de compte">
+    </div>
+    <div class="text-center pt-3 pb-4">
+        Statut acteul du compte <span class="badge bg-success rounded-pill">{{ app.user.compte }}</span>
+    </div>
+
+    <h4 class="">Choisissez un nouveau satut pour votre compte <span class="text-danger">*</span></h4>
+    {{ form_row(form.compte) }}
+
+    <h4>Raisons du changement de statut du compte :</h4>
+    <p class="mb-0 pb-0 text-muted">Expliquez brièvement la raison du changement, en mettant en avant les conditions ou
+        les événements qui ont conduit à
+        ce changement, par exemple : non-confirmation de l'adresse e-mail, expiration de l'abonnement, activité
+        suspecte,
+        etc.</p>
+    {{ form_row(form.raisons) }}
+    <div class="terms">
+        {{ form_widget(form.agreeTerms) }}
+        <label for="{{ app.user.compte == " PERSONNEL" ? 'become_particulier_or_entreprise_agreeTerms'
+            : 'become_entreprise_agreeTerms' }}">J'accepte les <a href="#">termes</a> et <a href="#">condititions
+                d'utilisation</a></label>
+    </div>
+    {{ form_errors(form.agreeTerms) }}
+
+    <div class="alert alert-primary d-flex align-items-center mb-4 mt-4" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+            <use xlink:href="#info-fill" />
+        </svg>
+        <div>
+            En cliquant sur <strong>Poursuivre</strong> vous serez rédiriger vers la page de connexion une fois que le
+            statut de votre compte est modifier
+        </div>
+    </div>
+
+    <button type="submit" class="custom-button">Poursuivre</button>
+
+    {{ form_end(form, {render_rest: false}) }}
+</div>
+
+{% endblock %}

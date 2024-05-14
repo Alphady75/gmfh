@@ -1,0 +1,36 @@
+<div class="twm-bnr-search-bar">
+	<div
+		class="row">
+		<!--Title-->
+		<div class="form-group col-xl-3 col-lg-6 col-md-6">
+			<label>Quoi ?</label>
+			{{ form_widget(form.query) }}
+		</div>
+
+		<!--All Category-->
+		<div class="form-group col-xl-3 col-lg-6 col-md-6 text-muted">
+			<label class="">Secteur d'activité</label>
+			{{ form_widget(form.secteur) }}
+		</div>
+
+		<!--Location-->
+		<div class="form-group col-xl-3 col-lg-6 col-md-6 col-8">
+			<label>Localisation</label>
+			<div class="twm-inputicon-box">
+				{{ form_widget(form.localisation) }}
+				<i class="twm-input-icon fas fa-map-marker-alt"></i>
+			</div>
+		</div>
+
+		<!--Find job btn-->
+		<div class="form-group col-xl-3 ps-0 col-lg-6 col-md-6 col-4 text-end">
+			<button type="submit" class="custom-button h-100">
+				<span class="btnFetch d-block w-100 text-center d-flex align-items-center">
+					<i class="fa fa-search me-2"></i>
+					<span class="none-mobile">{{ button_label|default('Rechercher') }}</span>
+				</span>
+			</button>
+		</div>
+
+	</div>
+</div>

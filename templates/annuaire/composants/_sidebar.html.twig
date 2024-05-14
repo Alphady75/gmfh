@@ -1,0 +1,48 @@
+<div class="side-bar annuaire-sidebar">
+
+	<div class="sidebar-elements search-bx">
+
+		<div class="twm-sidebar-ele-filter mt-0">
+			<h4 class="section-head-small mb-4">Compétences linguistiques</h4>
+			<ul>
+				<li>
+					{{ form_widget(form.langues) }}
+				</li>
+			</ul>
+		</div>
+
+		<div class="twm-sidebar-ele-filter">
+			<h4 class="section-head-small mb-4">Compétences</h4>
+			<ul>
+				<li>
+					{{ form_widget(form.competences) }}
+				</li>
+			</ul>
+		</div>
+
+		<div class="twm-sidebar-ele-filter">
+			<h4 class="section-head-small mb-4">Services</h4>
+			<ul>
+				<li>
+					{{ form_widget(form.services) }}
+				</li>
+			</ul>
+		</div>
+
+		<div class="twm-sidebar-ele-filter">
+			<h4 class="section-head-small mb-4">Périmetres</h4>
+			<ul>
+				<li>
+					{{ form_widget(form.villes) }}
+				</li>
+			</ul>
+		</div>
+		<button type="submit" class="custom-button-light my-3" data-turbo="false">
+			<span class="btnFetch d-block w-100">
+				<i class="feather-filter"></i> Trier
+			</span>
+		</button>
+
+	</div>
+
+</div>

@@ -1,0 +1,29 @@
+<div class="twm-employer-list-style1 mb-3 annonce box-shadow border-0">
+	<div class="">
+		<a href="{{ path('post_details', {slug: post.slug}) }}">
+			{% if post.medias|length >= 1 %}
+				<img src="{{ post.medias[0] ? vich_uploader_asset(post.medias[0], 'imageFile') | imagine_filter('medium') : asset('img/banner.png') | imagine_filter('medium') }}" alt="logo" class="radius">
+			{% else %}
+				<img src="{{ asset('img/banner.png') | imagine_filter('medium') }}" class="radius" alt="logo">
+			{% endif %}
+		</a>
+	</div>
+	<div class="twm-mid-content">
+		<a href="{{ path('post_details', {slug: post.slug}) }}" class="twm-job-title">
+			<h4 class="pt-2 price">
+				{% if post.promo %}
+					<del class="del">{{ post.tarif|number_format(0, '.', ' ') ~ ' ' ~ post.devise }}</del>
+					<strong>{{ post.tarifPromo|number_format(0, '.', ' ') ~ ' ' ~ post.devise }}</strong>
+				{% else %}
+					{{ post.tarif > 0 ? post.tarif|number_format(0, '.', ' ') ~ ' ' ~ post.devise : 'Prix sur demande' }}
+				{% endif %}
+			</h4>
+		</a>
+		<a href="{{ path('post_details', {slug: post.slug}) }}" class="d-block">{{ post }}</a>
+		<span class="categorie">{{ post.categorie }}</span>
+    <p><i class="far fa-clock"></i> {{ post.created|ago }}</p>
+	</div>
+	<div class="twm-right-content">
+		<div class="twm-jobs-vacancies">{% include "client/favoris/_delete_form.html.twig" %}</div>
+	</div>
+</div>

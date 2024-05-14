@@ -1,0 +1,33 @@
+<div class="twm-candidates-grid-style1 mb-5 box-shadow border-0">
+	<div class="twm-media">
+		<div class="twm-media-pic">
+			{% if user.compte == 'ENTREPRISE' %}
+				<img src="{% if user.logo %}{{ vich_uploader_asset(user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ user }}">
+			{% else %}
+				<img src="{% if user.photo %}{{ vich_uploader_asset(user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/avatar.jpg') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ user }}">
+			{% endif %}
+		</div>
+		<div class="twm-candidates-tag">
+			<span>{{ user.compte }}</span>
+		</div>
+	</div>
+	<div class="twm-mid-content">
+		<a href="{{ path('annuaire_profile', {nameSlug: user.nameSlug}) }}" class="twm-job-title">
+			<h4>
+				{{ user.compte == 'ENTREPRISE' ? user.societe : user }}
+			</h4>
+		</a>
+		<p>{{ user.compte == 'ENTREPRISE' ? user.secteuractivite : user.qualification }}</p>
+		<a href="{{ path('annuaire_profile', {nameSlug: user.nameSlug}) }}" class="twm-view-prifile site-text-primary">Voir le profil</a>
+		<div class="twm-fot-content bg-white">
+			<div class="twm-left-info">
+				<p class="twm-candidate-address">
+					<i class="feather-map-pin"></i>
+					{{ user.localisation|u.truncate(10, '...') }}
+				</p>
+			</div>
+
+		</div>
+	</div>
+
+</div>

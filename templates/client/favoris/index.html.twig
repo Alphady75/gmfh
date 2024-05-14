@@ -1,0 +1,40 @@
+{% extends 'client.html.twig' %}
+
+{% block title %}Mes favoris ({{ favoris.getTotalItemCount }})
+{% endblock %}
+{% block titre %}Mes favoris ({{ favoris.getTotalItemCount }})
+{% endblock %}
+{% block text %}Mes favoris ({{ favoris.getTotalItemCount }})
+{% endblock %}
+
+{% block body %}
+
+	<div class="row">
+		{% for favori in favoris %}
+			{% if favori.post %}
+				<div class="col-sm-12">
+					{% include "client/favoris/_post.html.twig" with {post: favori.post} %}
+				</div>
+			{% endif %}
+
+			{% if favori.offre %}
+				<div class="col-sm-12">
+					{% include "client/favoris/_offre.html.twig" with {offre: favori.offre} %}
+				</div>
+			{% endif %}
+		{% else %}
+			<div class="col-12">
+				{% include "partials/base/_nodata.html.twig" %}
+			</div>
+		{% endfor %}
+	</div>
+
+	<div class="">
+		{{ knp_pagination_render(favoris, null, {}, {
+        'align': 'center',
+        'size': 'medium',
+        'rounded': true,
+        }) }}
+	</div>
+
+{% endblock %}

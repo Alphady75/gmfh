@@ -1,0 +1,53 @@
+<div id="carouselExampleControls" class="post-slider carousel slide hide-over radius bg-dark mb-3 carousel-fade" data-bs-ride="carousel">
+							<div class="carousel-indicators">
+								<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+								{% for media in post.medias %}
+								<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ media.id }}"
+									aria-label="Slide 2"></button>
+								{% endfor %}
+							</div>
+							<div class="carousel-inner">
+
+								{% if post.medias|length > 1 %}
+
+								<div class="carousel-item active">
+									<div class="tw-service-gallery-thumb">
+										<a class="elem"
+											href="{{ post.medias[0] ? vich_uploader_asset(post.medias[0], 'imageFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}"
+											title="{{ post }}" data-lcl-author=""
+											data-lcl-thumb="{{ post.medias[0] ? vich_uploader_asset(post.medias[0], 'imageFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}">
+											<img
+												src="{{ post.medias[0] ? vich_uploader_asset(post.medias[0], 'imageFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}"
+												alt="" class="radius">
+										</a>
+									</div>
+								</div>
+
+								{% endif %}
+
+								{% for media in post.medias %}
+								<div class="carousel-item">
+									<div class="tw-service-gallery-thumb">
+										<a class="elem"
+											href="{{ media ? vich_uploader_asset(media, 'imageFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}"
+											title="{{ post }}" data-lcl-author=""
+											data-lcl-thumb="{{ media ? vich_uploader_asset(media, 'imageFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}">
+											<img
+												src="{{ media ? vich_uploader_asset(media, 'imageFile') | imagine_filter('large') : asset('img/banner.png') | imagine_filter('large') }}"
+												alt="" class="radius">
+										</a>
+									</div>
+								</div>
+								{% endfor %}
+							</div>
+							<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+								data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Précédent</span>
+							</button>
+							<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+								data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Suivant</span>
+							</button>
+						</div>

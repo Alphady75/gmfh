@@ -1,0 +1,57 @@
+<div class="blog-post twm-blog-post-h5-outer annonce box-shadow border-0">
+	<div class="wt-post-media">
+		<a href="{{ path('post_details', {slug: post.slug}) }}">
+			{% if post.user.abonnement %}
+				{% if post.medias|length >= 1 %}
+					<img src="{{ post.medias[0] ? vich_uploader_asset(post.medias[0], 'imageFile') | imagine_filter('medium') : asset('img/banner.png') | imagine_filter('medium') }}" alt="logo" class="radius">
+				{% else %}
+
+					<img src="{{ asset('img/banner.png') | imagine_filter('medium') }}" class="radius" alt="logo">
+				{% endif %}
+			{% else %}
+				<img src="{{ post.image ? vich_uploader_asset(post, 'imageFile') | imagine_filter('medium') : asset('img/banner.png') | imagine_filter('medium') }}" alt="logo" class="radius">
+			{% endif %}
+		</a>
+	</div>
+	<div class="wt-post-info">
+		<h5 class="pt-2 price">
+			{% if post.promo %}
+				<del class="del">{{ post.tarif|number_format(0, '.', ' ') ~ ' ' ~ post.devise }}</del>
+				<strong>{{ post.tarifPromo|number_format(0, '.', ' ') ~ ' ' ~ post.devise }}</strong>
+			{% else %}
+				{{ post.tarif > 0 ? post.tarif|number_format(0, '.', ' ') ~ ' ' ~ post.devise : 'Prix sur demande' }}
+			{% endif %}
+		</h5>
+		<div class="wt-post-title pb-0">
+			<h4 class="post-title">
+				<a href="{{ path('post_details', {slug: post.slug}) }}">{{ post.name|u.truncate(40, '...') }}</a>
+			</h4>
+		</div>
+		<a href="{{ path('post_details', {slug: post.slug}) }}" class="categorie">{{ post.categorie
+      }}</a>
+		<div class="row">
+			<div class="col-9 col-sm-10">
+				<div class="post-author">
+					<div class="post-author-pic">
+						<div class="p-a-pic">
+							{% if post.user.compte == 'ENTREPRISE' %}
+								<img src="{{ post.user.logo ? vich_uploader_asset(post.user, 'logoFile') | imagine_filter('mediumavatar') : asset('img/avatar.jpg') | imagine_filter('mediumavatar') }}" alt="{{ appName }} {{ post.user }}">
+
+							{% else %}
+								<img src="{{ post.user.photo ? vich_uploader_asset(post.user, 'photoFile') | imagine_filter('mediumavatar') : asset('img/avatar.jpg') | imagine_filter('mediumavatar') }}" alt="{{ appName }} {{ post.user }}">
+							{% endif %}
+
+						</div>
+						<div class="p-a-info">
+							<a href="{{ path('post_details', {slug: post.slug}) }}">{{ post.user }}</a>
+							<p>{{ post.created|ago }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-3 col-sm-2 text-end like">
+				{% include "post/composants/_favoris_btn.html.twig" %}
+			</div>
+		</div>
+	</div>
+</div>

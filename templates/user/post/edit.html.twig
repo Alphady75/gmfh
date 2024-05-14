@@ -1,0 +1,74 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Mettre à jour le service #{{ post }}
+{% endblock %}
+{% block titre %}Mettre à jour le service #{{ post }}
+{% endblock %}
+{% block text %}Mettre à jour le service #{{ post }}
+{% endblock %}
+
+{% block body %}
+
+	{% if app.user.abonnement %}
+
+		{{ include('user/post/_form_abonner.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+	{% else %}
+
+		{{ include('user/post/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+	{% endif %}
+
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="panel panel-defaulte bg-white">
+				<div class="panel-heading wt-panel-heading p-a20">
+					<h4 class="panel-tittle m-0">
+						<i class="fa fa-info-circle text-danger"></i>
+						Suppréssion du service
+					</h4>
+				</div>
+				<div class="panel-body wt-panel-body p-a20 m-b30">
+					<h5>Important : Avant de supprimer ce service</h5>
+
+					<p>Nous vous informons que la suppression de ce service de notre base de données peut
+													entraîner
+													plusieurs inconvénients :</p>
+
+					<ul class="ps-3">
+						<li>
+							<strong>Perte de candidatures qualifiées :</strong>Les candidats ayant postulé à ce service ne
+																	pourront plus être contactés ni pris en considération pour ce poste.
+						</li>
+						<li>
+							<strong>Difficulté à suivre l'historique : La conservation de ce service dans notre système permet de garder un historique précieux pour les besoins de rapports, d'analyses et de références ultérieures.</strong>
+						</li>
+						<li>
+							<strong>Image de l'entreprise :</strong>La suppression d'services d'emploi peut donner une
+																	impression d'instabilité ou de désorganisation aux candidats potentiels qui consultent notre plateforme.
+						</li>
+						<li>
+							<strong>Temps et efforts supplémentaires :</strong>
+							Si ce service doit être republiée ultérieurement, cela nécessitera une nouvelle saisie de données, ce qui implique des coûts en temps et en ressources.
+						</li>
+					</ul>
+
+					{% include "user/post/_delete_form.html.twig" %}
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('postimg') }}
+	{{ encore_entry_script_tags('annoncecategorie') }}
+	<script>
+		$('#post_promo').change(function () {
+$('.prixpromo').slideToggle();
+})
+	</script>
+{% endblock %}

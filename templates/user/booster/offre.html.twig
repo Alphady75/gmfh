@@ -1,0 +1,70 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Booster votre offre d'emploi #{{ offre }}{% endblock %}
+{% block titre %}Booster votre offre d'emploi #{{ offre }}{% endblock %}
+{% block text %}Booster votre offre{% endblock %}
+{% block right %}{% endblock %}
+
+{% block body %}
+
+{{ form_start(form) }}
+
+<div class="row">
+   <div class="col-sm-8">
+      <div class="create-banner bg-white">
+         <div class="d-flex align-items-center mb-3">
+            <img src="{{ asset('img/booster.svg') }}" class="img-fluid" alt="">
+            <h5 class="page-titre ms-auto">Booster votre offre
+               <br>
+               en choisissant un plan
+            </h5>
+         </div>
+
+         <p>Le boostage d'une offre d'emploi présente plusieurs avantages significatifs, tant pour l'entreprise
+            recrutant que pour les candidats potentiels</p>
+
+         {% include "partials/booster/_offre_modal.html.twig" %}
+
+         <h6 for="" class="page-titre d-block mb-3">Choisissez votre plan</h6>
+         {{ form_row(form.booster)|replace({'[-br]' : '</br>'})|raw }}
+
+      </div>
+   </div>
+   <div class="col-sm-4 rightSidebar">
+      <div class="side-bar-2">
+         <div class="panel panel-defaulte bg-white">
+            <div class="panel-heading wt-panel-heading p-a20">
+               <h4 class="panel-tittle m-0">
+                  <i class="fa fa-info-circle text-warning"></i>
+                  Avantage du Booster
+               </h4>
+            </div>
+            <div class="panel-body wt-panel-body p-a20 m-b30">
+					<div class="ps-3">
+						<ol class="mb-3">
+							<li>Visibilité accrue.</li>
+							<li>Attractivité renforcée.</li>
+							<li>Augmentation du nombre de candidatures.</li>
+							<li>Gain de temps.</li>
+							<li>Amélioration de la compétitivité.</li>
+							<li>Suivi des performances.</li>
+							<li>Flexibilité du budget.</li>
+						</ol>
+					</div>
+               <button class="custom-button w-100" formnovalidate type="submit">
+                  <span class="btnFetch d-block w-100">
+                     {{ button_label|default('Booster') }}
+                  </span>
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+{% endblock %}

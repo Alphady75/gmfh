@@ -1,0 +1,69 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Secteur d'activité ({{ secteurs_activites.getTotalItemCount }})
+{% endblock %}
+{% block titre %}Secteur d'activité ({{ secteurs_activites.getTotalItemCount }})
+{% endblock %}
+{% block text %}Secteur d'activité ({{ secteurs_activites.getTotalItemCount }})
+{% endblock %}
+
+{% block right %}
+	<a href="{{ path('admin_secteurs_activite_new') }}" class="custom-button text-center mt-3">
+		<i class="fa fa-plus"></i>
+		Ajouter un secteur
+	</a>
+{% endblock %}
+
+{% block body %}
+
+	<div class="table-responsive table-knp">
+		<table class="table twm-table table-hover table-borderless table-striped">
+			<thead>
+				<tr>
+					<th>#ID</th>
+					<th>Secteur d'activité</th>
+					<th>Entreprise(s)</th>
+					<th>Offre(s)</th>
+					<th class="text-end">actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for secteurs_activite in secteurs_activites %}
+					<tr>
+						<td>{{ secteurs_activite.id }}</td>
+						<td>
+							{{ secteurs_activite.name }}
+							<br>
+							{% for soussecteurs in secteurs_activite.sousSecteursActivites %}
+								<span class="custom-badge text-sussecc">{{soussecteurs.name|u.truncate(30, '...')}}</span>
+							{% endfor %}
+						</td>
+						<td>
+							<span class="text-primary">{{ secteurs_activite.users|length }}
+								entreprise{{ secteurs_activite.users|length > 1 ? 's' : '' }}</span>
+						</td>
+						<td>
+							<span class="text-primary">{{ secteurs_activite.offres|length }}
+								offre{{ secteurs_activite.offres|length > 1 ? 's' : '' }}</span>
+						</td>
+						<td class="text-end">
+							<div class="d-flex">
+								<a href="{{ path('admin_secteurs_activite_edit', {'id': secteurs_activite.id}) }}" class="btn btn-sm">
+									<i class="fa fa-edit"></i>
+								</a>
+								{% include "admin/secteurs_activite/_delete_form.html.twig" %}
+							</div>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="5">
+							{% include "partials/base/_nodata.html.twig" %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

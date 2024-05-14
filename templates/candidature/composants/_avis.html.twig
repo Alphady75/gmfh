@@ -1,0 +1,79 @@
+{% if conversation.terminee == 1 and app.user != candidature.offre.user %}
+
+	{% if checkuseravis(app.user, candidature.offre)|length <= 0 %}
+
+		{{ form_start(avisForm, {attr: {class: 'p-3' }}) }}
+		<h4 class="page-title text-dark text-start mb-0 pb-3">Laisser un avis d'appréciation du service</h4>
+
+		<label for="">Note(s)</label>
+		<div class="stars mb-3">
+			<i class="lar la-star" data-value="1"></i>
+			<i class="lar la-star" data-value="2"></i>
+			<i class="lar la-star" data-value="3"></i>
+			<i class="lar la-star" data-value="4"></i>
+			<i class="lar la-star" data-value="5"></i>
+		</div>
+
+		<label for="">Type d'avis</label>
+
+		{{ form_row(avisForm.type) }}
+
+		{{ form_row(avisForm.description) }}
+
+		<div class="hidden-element">{{ form_row(avisForm.note) }}</div>
+
+		<button type="submit" class="custom-button my-3 button" data-turbo="false">
+			<span class="btnFetch d-block w-100">
+				Envoyer
+				<i class="fa fa-paper-plane"></i>
+			</span>
+		</button>
+		{{ form_end(avisForm) }}
+
+	{% else %}
+
+		<div class="clear p-3" id="comment-list">
+			<div class="comments-area" id="comments">
+				<h3 class="section-head-small mb-4">Avis
+					{{ candidature.offre.avis|length }}</h3>
+				<div>
+					<!-- COMMENT LIST START -->
+					<ol class="comment-list">
+						{% for avis in checkuseravis(app.user, candidature.offre) %}
+							<li
+								class="comment">
+								<!-- COMMENT BLOCK -->
+								<div class="comment-body">
+
+									<div class="comment-author">
+										{% if avis.auteur.compte == 'ENTREPRISE' %}
+											<img src="{% if avis.auteur.logo %}{{ vich_uploader_asset(avis.auteur, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ avis.auteur }}" class="avatar photo">
+										{% else %}
+											<img src="{% if avis.auteur.photo %}{{ vich_uploader_asset(avis.auteur, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ avis.auteur }}" class="avatar photo">
+										{% endif %}
+										<div class="comment-meta">
+											<a href="javascript:void(0);">{{ avis.created|ago }}</a>
+										</div>
+									</div>
+									<div class="comment-info">
+										<div class="stars mb-3">
+											<i class="las la-star" style="color: red;" data-value="1"></i>({{ avis.note }})
+											<span>{{ avis.type }}</span>
+										</div>
+										<cite class="fn">{{ avis.auteur.compte == 'ENTREPRISE' ? avis.auteur.societe :
+                                    avis.auteur }}</cite>
+										<p>{{ avis.description }}</p>
+									</div>
+
+								</div>
+							</li>
+						{% endfor %}
+					</ol>
+					<!-- COMMENT LIST END -->
+				</div>
+			</div>
+		</div>
+
+	{% endif %}
+
+{% endif %}

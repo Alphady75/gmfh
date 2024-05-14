@@ -1,0 +1,151 @@
+<div class="side-bar mb-4">
+	<div class="twm-s-info2-wrap mb-2">
+		<div class="twm-s-info2">
+			<ul class="twm-job-hilites2">
+				<li>
+					<div class="twm-s-info-inner">
+
+						<i class="fas fa-money-bill-wave"></i>
+						<span class="twm-title">Prix</span>
+						<div class="twm-s-info-discription">
+							<h5 class="text-primary">
+								{% if post.promo %}
+									<del class="del">{{ post.tarif|number_format(0, '.', ' ') ~ ' ' ~ post.devise }}</del>
+									<strong>{{ post.tarifPromo|number_format(0, '.', ' ') ~ ' ' ~ post.devise }}</strong>
+								{% else %}
+									{{ post.tarif > 0 ? post.tarif|number_format(0, '.', ' ') ~ ' ' ~ post.devise : 'Prix sur
+                            demande' }}
+								{% endif %}
+							</h5>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-calendar-alt"></i>
+						<span class="twm-title">Date de publication</span>
+						<div class="twm-s-info-discription">{{ post.created|ago }}</div>
+					</div>
+				</li>
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-tags"></i>
+						<span class="twm-title">Catégorie</span>
+						<div class="twm-s-info-discription">
+							<span class="custom-badge text-primary">{{ post.categorie }}</span>
+						</div>
+					</div>
+				</li>
+				{% if post.negociable %}
+					<li>
+						<div class="twm-s-info-inner">
+							<i class="fa fa-wallet"></i>
+							<span class="twm-title">Type de prix</span>
+							<div class="twm-s-info-discription">Négociable</div>
+						</div>
+					</li>
+				{% endif %}
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-folder"></i>
+						<span class="twm-title">Etat</span>
+						<div class="twm-s-info-discription">{{ post.etat }}</div>
+					</div>
+				</li>
+				{% if post.vedette %}
+					<li>
+						<div class="twm-s-info-inner">
+							<i class="fas fa-certificate"></i>
+							<span class="twm-title">Top service</span>
+							<div class="twm-s-info-discription">En vedette</div>
+						</div>
+					</li>
+				{% endif %}
+				{% if post.promo %}
+					<li>
+						<div class="twm-s-info-inner">
+							<i class="fas fa-map-marker-alt"></i>
+							<span class="twm-title">Type d'service</span>
+							<div class="twm-s-info-discription">En promotion</div>
+						</div>
+					</li>
+				{% endif %}
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-car"></i>
+						<span class="twm-title">Service offerte</span>
+						<div class="twm-s-info-discription">{{ post.livraison ? 'Livraison gratuite' : 'Non mentionné' }}</div>
+					</div>
+				</li>
+			</ul>
+			<a href="#" class="custom-button-light text-dark mt-4" data-bs-toggle="modal" data-bs-target="#signaler-dash-modale">
+				<i class="fa fa-flag"></i>
+				Signaler l'service
+			</a>
+		</div>
+	</div>
+
+</div>
+
+<div class="twm-s-info3-wrap mb-5">
+	<div class="twm-s-info3">
+		<div class="twm-s-info-logo-section">
+			<div class="twm-media">
+				{% if post.user.compte == "ENTREPRISE" %}
+					<img src="{% if post.user.logo %}{{ vich_uploader_asset(post.user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ post.user }}">
+				{% else %}
+					<img src="{% if post.user.photo %}{{ vich_uploader_asset(post.user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ post.user }}">
+				{% endif %}
+			</div>
+			<h4 class="twm-title">{{ post.user.compte == "ENTREPRISE" ? post.user.societe : post.user }}</h4>
+		</div>
+		<ul>
+			{% if post.user.compte == "ENTREPRISE" %}
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-building"></i>
+						<span class="twm-title">Entreprise</span>
+						<div class="twm-s-info-discription">{{ post.user.societe }}</div>
+					</div>
+				</li>
+			{% endif %}
+			<li>
+				<div class="twm-s-info-inner">
+					<i class="fas fa-mobile-alt"></i>
+					<span class="twm-title">Téléphone</span>
+					<div class="twm-s-info-discription">{{ post.user.telephone ?? 'Non mentionné' }}</div>
+				</div>
+			</li>
+			<li>
+				<div class="twm-s-info-inner">
+					<i class="fas fa-at"></i>
+					<span class="twm-title">Email</span>
+					<div class="twm-s-info-discription">{{ post.user.email ?? 'Non mentionné' }}</div>
+				</div>
+			</li>
+			<li>
+				<div class="twm-s-info-inner">
+					<i class="fas fa-desktop"></i>
+					<span class="twm-title">Site Web</span>
+					<div class="twm-s-info-discription">{{ post.user.siteWeb ?? 'Non mentionné' }}</div>
+				</div>
+			</li>
+			<li>
+				<div class="twm-s-info-inner">
+					<i class="fas fa-map-marker-alt"></i>
+					<span class="twm-title">Addresse</span>
+					<div class="twm-s-info-discription">{{ post.user.localisation ?? 'Non mentionné' }}</div>
+				</div>
+			</li>
+
+		</ul>
+		{% if app.request.attributes.get('_route') == 'post_details' ? 'active' : '' %}
+		
+		<a href="{{ path('annuaire_profile', {nameSlug: post.user.nameSlug}) }}" class=" custom-button-light"><i class="far fa-user"></i> Profil</a>
+		<a href="#" class="custom-button outline-white none-mobile" data-bs-toggle="modal" data-bs-target="#contact-dash-modale">
+			<i class="far fa-comment"></i> Contacter
+		</a>
+
+		{% endif %}
+	</div>
+</div>

@@ -1,0 +1,20 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Publier un article dans le Blog
+{% endblock %}
+{% block titre %}Publier un article dans le Blog
+{% endblock %}
+{% block text %}Publier un article dans le Blog
+{% endblock %}
+
+{% block body %}
+
+{{ include('admin/article/_form.html.twig') }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% include "admin/article/_scripts.html.twig" %}
+
+{% endblock %}

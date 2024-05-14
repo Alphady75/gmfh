@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{{ post }}
+{% endblock %}
+
+{% block header %}
+{% include "partials/base/_post_header.html.twig" %}
+{% endblock %}
+
+{% block body %}
+<!-- Job Detail V.2 START -->
+<div class="section-full  p-t50 pt-3 p-b50 bg-white">
+	<div class="container">
+
+		<!-- BLOG SECTION START -->
+		<div class="section-content">
+			<div class="twm-job-detail-2-wrap">
+				<div class="row d-flex justify-content-center">
+
+					<div class="col-lg-8 col-md-12">
+						
+						{% if post.user.abonnement %}
+						{% include "post/composants/_slider_multiple.html.twig" %}
+
+						{% else %}
+							{% include "post/composants/_slider_simple.html.twig" %}
+						{% endif %}
+						
+						<!-- Candidate detail START -->
+						<div class="cabdidate-de-info">
+
+							<h4 class="twm-s-title m-t0">{{ post }}</h4>
+
+							<h4 class="twm-s-title">Partager le service</h4>
+							<div class="twm-social-tags mb-5">
+								<a href="https://www.facebook.com/sharer.php?u=" {{ absolute_url(path('post_details', {slug: post.slug}
+									)) }}" class=" fb-clr">
+									<i class="fab fa-facebook-f"></i>
+									Facebook
+								</a>
+								<a href="https://api.whatsapp.com/send?text=Salut ! J’ai trouvé cette service sur {{ appName }}, peut-être que ça pourrait t’intéresser. Consultez le service en cliquant sur le lien ci-dessous 👇{{ absolute_url(path('post_details', {slug: post.slug})) }}"
+									class="whats-clr">
+									<i class="fab fa-whatsapp"></i>
+									Whatsapp</a>
+								<a href="#" class="pinte-clr bg-dark" id="ShareButton">
+									<i class="fa fa-link"></i>
+									Copier le lien</a>
+							</div>
+
+							{% include "post/composants/_details.html.twig" %}
+
+						</div>
+					</div>
+
+					<div class="col-lg-4 col-md-12 rightSidebar">
+
+						{% include "post/composants/_infos.html.twig" %}
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- Job Detail V.2 END -->
+
+<!-- OUR POST START -->
+<div class="section-full p-b90 site-bg-white">
+	<div class="container">
+		<!-- TITLE START-->
+		<div class="section-head center wt-small-separator-outer">
+			<div class="wt-small-separator site-text-primary">
+				<div>Top services</div>
+			</div>
+			<h2 class="wt-title">services similaires</h2>
+		</div>
+		<!-- TITLE END-->
+
+		<!-- TITLE END-->
+		<div class="section-content">
+			<div class="twm-blog-post-1-outer-wrap">
+				<div class="owl-carousel twm-la-home-blog owl-btn-bottom-center">
+					{% for similar in similars %}
+
+					{% if similar != post %}
+
+					<div class="item home">
+						<!--Block one-->
+						{% include "post/composants/_card.html.twig" with {post: similar} %}
+					</div>
+
+					{% endif %}
+
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class="block-mobile py-3 text-center">
+			<a href="{{ path('posts') }}" class="custom-button">Tout afficher</a>
+		</div>
+	</div>
+</div>
+<!-- OUR POST END -->
+
+{% include "post/composants/_signaler_post.html.twig" %}
+
+{% include "annuaire/composants/_contact_form.html.twig" with {user: post.user} %}
+
+{% endblock %}
+
+{% block mobilenav %}
+<div class="fixed-bottom-sm block-mobile post">
+	<a href="#" class="custom-button mr" data-bs-toggle="modal" data-bs-target="#contact-dash-modale">
+		<i class="far fa-comment"></i>
+		Contacter
+	</a>
+	<a href="https://wa.me/{{ codepays }}/{{ post.user.telephone }}?text=Salut 👋, j'ai trouvé votre service sur *{{ appName }}*. S’il vous plaît, je peux avoir plus d'informations sur {{ post.name }}.%0D%0A %0D%0A Merci ! Le service se trouve ici : {{ absolute_url(path('post_details', {slug: post.slug})) }}"
+		class="custom-button whatsapp outline-white mr">
+		<i class="fab fa-whatsapp"></i> Ecrire
+	</a>
+	<a href="tel:{{ post.user.telephone }}" class="custom-button-light bg-blue text-light">
+		<i class="fas fa-phone"></i> Appeler
+	</a>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+<script>
+	$(() => $('#ShareButton').on("click", () => navigator.clipboard.writeText(window.location.href)));
+</script>
+
+{% endblock %}

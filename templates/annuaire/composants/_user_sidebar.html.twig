@@ -1,0 +1,89 @@
+<div class="side-bar-2">
+
+	<div class="twm-s-info-wrap mb-5">
+		<h4 class="section-head-small mb-4">Informations sur le profil</h4>
+		<div class="twm-s-info-3 bg-white">
+			<ul>
+				{% if user.compte == "PARTICULIER" %}
+					<li>
+						<div class="twm-s-info-inner">
+							<i class="fas fa-money-bill-wave"></i>
+							<span class="twm-title">Salaire</span>
+							<div class="twm-s-info-discription">{{ user.salaire ?? 'Non mentionné' }}
+								/
+								{{ user.periodicite ?? 'Non mentionné' }}</div>
+						</div>
+					</li>
+				{% endif %}
+				{% if user.anneeExperience %}
+					<li>
+						<div class="twm-s-info-inner">
+							<i class="fas fa-clock"></i>
+							<span class="twm-title">Experiences</span>
+							<div class="twm-s-info-discription">{{ user.anneeExperience }}
+								An{{ user.anneeExperience|length > 1 ? 's' : '' }}</div>
+						</div>
+					</li>
+				{% endif %}
+				{% if user.genre %}
+					<li>
+						<div class="twm-s-info-inner">
+							<i class="fas fa-venus-mars"></i>
+							<span class="twm-title">Genre</span>
+							<div class="twm-s-info-discription">{{ user.genre }}</div>
+						</div>
+					</li>
+				{% endif %}
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-mobile-alt"></i>
+						<span class="twm-title">Téléphone</span>
+						<div class="twm-s-info-discription">{{ user.telephone }}</div>
+					</div>
+				</li>
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-at"></i>
+						<span class="twm-title">Email</span>
+						<div class="twm-s-info-discription">{{ user.email }}</div>
+					</div>
+				</li>
+				{% if user.compte == "ENTREPRISE" %}
+					<li>
+						<div class="twm-s-info-inner">
+							<i class="fas fa-book-reader"></i>
+							<span class="twm-title">Secteur d'activité</span>
+							<div class="twm-s-info-discription">{{ user.secteuractivite }}</div>
+						</div>
+					</li>
+				{% else %}
+
+					<li>
+						<div class="twm-s-info-inner">
+							<i class="fas fa-book-reader"></i>
+							<span class="twm-title">Qualification</span>
+							<div class="twm-s-info-discription">{{ user.qualification }}</div>
+						</div>
+					</li>
+				{% endif %}
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-map-marker-alt"></i>
+						<span class="twm-title">Localisation</span>
+						<div class="twm-s-info-discription">{{ user.localisation }}</div>
+					</div>
+				</li>
+
+			</ul>
+
+		</div>
+	</div>
+
+	<div class="twm-s-map mb-5">
+		<h4 class="section-head-small mb-4">Emplacement</h4>
+		<div class="twm-s-map-iframe twm-s-map-iframe-2 bg-white">
+			<iframe height="270" src="https://maps.google.com/maps?&q={{ user.localisation|replace({' ':'+'}) }}&output=embed"></iframe>
+		</div>
+	</div>
+
+</div>

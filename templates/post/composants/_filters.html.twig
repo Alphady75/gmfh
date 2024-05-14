@@ -1,0 +1,43 @@
+<div class="row filter-form mb-4 text-center">
+	<div class="col-sm-12">
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+				data-bs-toggle="dropdown" aria-expanded="false">
+				Prix
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+				{{ form_row(form.minPrice) }}
+				{{ form_row(form.maxPrice) }}
+			</div>
+		</div>
+		<div class="dropdown me-auto">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+				data-bs-toggle="dropdown" aria-expanded="false">
+				Options
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+				{{ form_widget(form.etat) }}
+				{{ form_widget(form.promo) }}
+				{{ form_widget(form.negociable) }}
+				{{ form_widget(form.livraison) }}
+			</div>
+		</div>
+		
+		<div class="dropdown filter-form-select">
+			{{ form_widget(form.limit) }}
+		</div>
+		<div class="dropdown">
+			<button type="submit" class="btn">
+				<span class="btnFetch d-block w-100 text-center">
+					{{ button_label|default('Trier') }}&nbsp;
+					<i class="fa fa-filter"></i>
+				</span>
+			</button>
+		</div>
+		{% if clear == true %}
+		<div class="dropdown">
+			<a href="{{ path('posts') }}" class="btn text-danger"><span class="btnFetch"><i class="fa fa-filter me-0"></i>x</span></a>
+		</div>
+		{% endif %}
+	</div>
+</div>

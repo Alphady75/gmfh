@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Erreur 404{% endblock %}
+
+{% block body %}
+<!-- OUR BLOG START -->
+<div class="section-full p-t120  p-b90 site-bg-white">
+
+   <div class="container">
+      <div class="twm-error-wrap">
+         <div class="row">
+
+            <div class="col-lg-6 col-md-12">
+               <div class="twm-error-image">
+                  <img src="{{ asset('themes/base/images/error-404.png') }}" alt="#">
+               </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+               <div class="twm-error-content">
+                  <h2 class="twm-error-title">404</h2>
+                  <h4 class="twm-error-title2 site-text-primary">We Are Sorry, Page Not Found</h4>
+                  <p>The page you are looking for might have been removed had its name changed or is temporarily
+                     unavailable.</p>
+                  <a href="{{ path('accueil') }}" class="custom-button">Aller à la page d'accueil</a>
+               </div>
+            </div>
+
+         </div>
+      </div>
+   </div>
+</div>
+<!-- OUR BLOG END -->
+{% endblock %}

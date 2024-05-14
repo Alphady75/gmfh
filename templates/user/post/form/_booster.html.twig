@@ -1,0 +1,15 @@
+<div class="create-banner bg-white">
+	<div class="d-flex align-items-center mb-3">
+		<img src="{{ asset('img/booster.svg') }}" class="img-fluid" alt="">
+		<h5 class="page-titre ms-auto">Booster votre annonce
+		</h5>
+	</div>
+
+	<p>Le boostage d'une annonce d'emploi présente plusieurs avantages significatifs, tant pour l'entreprise
+						recrutant que pour les candidats potentiels</p>
+
+	{% include "partials/booster/_offre_modal.html.twig" %}
+
+	{{ form_row(form.boosted) }}
+
+</div>

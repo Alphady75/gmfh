@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Signaler{% endblock %}
+
+{% block body %}
+    <h1>Edit Signaler</h1>
+
+    {{ include('admin/signaler/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_signaler_index') }}">back to list</a>
+
+    {{ include('admin/signaler/_delete_form.html.twig') }}
+{% endblock %}

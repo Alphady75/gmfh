@@ -1,0 +1,36 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Publier votre annonce
+{% endblock %}
+{% block titre %}Publier votre annonce
+{% endblock %}
+{% block text %}Publier votre annonce
+{% endblock %}
+
+{% block body %}
+
+	{% if app.user.abonnement %}
+
+		{{ include('user/post/_form_abonner.html.twig') }}
+
+	{% else %}
+
+		{{ include('user/post/_form.html.twig') }}
+
+	{% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+
+	{{ parent() }}
+
+	{{ encore_entry_script_tags('postimg') }}
+	{{ encore_entry_script_tags('annoncecategorie') }}
+
+	<script>
+		$('#post_promo').change(function () {
+		$('.prixpromo').slideToggle();
+		})
+	</script>
+{% endblock %}

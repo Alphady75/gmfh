@@ -1,0 +1,23 @@
+{{ form_start(userForm, {class: ''}) }}
+
+<div class="text-center py-3">
+	{% if user.compte == 'ENTREPRISE' %}
+		<img src="{% if user.logo %}{{ vich_uploader_asset(user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ user }}" class="rounded-circle photo img-fluid" width="100" height="100">
+	{% else %}
+		<img src="{% if user.photo %}{{ vich_uploader_asset(user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ user }}" class="rounded-circle photo img-fluid" width="100" height="100">
+	{% endif %}
+</div>
+<div class="row">
+	<div class="col-6">{{ form_row(userForm.nom) }}</div>
+	<div class="col-6">{{ form_row(userForm.prenom) }}</div>
+</div>
+
+{{ form_rest(userForm) }}
+
+<button type="submit" class="custom-button {{ app.request.attributes.get('_route') != 'admin_user_edit' ? 'button' : '' }} w-100 bg-blue">
+	<span class="btnFetch d-block w-100">
+		{{ button_label|default('Enregistrer') }}
+	</span>
+</button>
+
+{{ form_end(userForm) }}

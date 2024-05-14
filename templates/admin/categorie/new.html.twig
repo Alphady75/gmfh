@@ -1,0 +1,15 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Créer une nouvelle catégorie d'annonce{% endblock %}
+{% block titre %}Créer une nouvelle catégorie d'annonce{% endblock %}
+{% block text %}Créer une nouvelle catégorie d'annonce{% endblock %}
+
+{% block body %}
+
+    {{ include('admin/categorie/_form.html.twig') }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {% include "admin/categorie/_scripts.html.twig" %}
+{% endblock %}

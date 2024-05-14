@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog - {{ categorie }}{% endblock %}
+
+{% block body %}
+<div class="twm-home3-banner-section site-bg-white bg-cover" style="background-image:url({{ asset('img/h7-banner.jpg') }})">
+  <div class="twm-home3-inner-section">
+    <div class="twm-bnr-mid-section">
+      <h1 class="twm-bnr-title-light">Blog {{ categorie }}</h1>
+      <div>
+        <ul class="wt-breadcrumb breadcrumb-style-2">
+          <li>
+            <a href="{{ path('accueil') }}" class="text-light">Accueil</a>
+          </li>
+          <li>Blog {{ categorie }}</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- OUR BLOG START -->
+<div class="section-full p-t120  p-b90 site-bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-12">
+
+        {% for article in articles %}
+        <!--Block one-->
+        {% include "blog/composants/_card_liste.html.twig" with {article: article} %}
+
+        {% endfor %}
+
+        <div class="">
+          {{ knp_pagination_render(articles, null, {}, {
+          'align': 'center',
+          'size': 'medium',
+          'rounded': true,
+          }) }}
+        </div>
+
+      </div>
+
+      <div class="col-lg-4 col-md-12 rightSidebar">
+
+        {% include "blog/composants/_sidebar.html.twig" %}
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- OUR BLOG END -->
+{% endblock %}

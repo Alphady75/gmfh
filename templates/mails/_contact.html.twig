@@ -1,0 +1,19 @@
+{% extends "mails.html.twig" %}
+
+{% block body %}
+
+	<p>Cher(e) Administrateur/Administratrice,</p>
+
+	<p>Vous recevez ce message car un utilisateur a soumis un nouveau formulaire de contact sur
+		{{ appName }}. Voici les détails de la demande :</p>
+
+	<p>Nom de l'utilisateur : {{ nom }}</p>
+	<p>Adresse e-mail de l'utilisateur : {{ useremail }}</p>
+	<p>Sujet : {{ sujet }}</p>
+
+	<p>Message :</p>
+	<p>{{ message }}</p>
+
+	<p>Merci de prendre en charge cette demande dès que possible et de contacter l'utilisateur pour lui fournir une réponse appropriée.</p>
+
+{% endblock %}

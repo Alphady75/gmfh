@@ -1,0 +1,21 @@
+<h4 class="twm-s-title m-t0">Description #{{ post }}</h4>
+
+{{ post.description|raw }}
+
+<h4 class="twm-s-title">Réalisations</h4>
+<div class="twm-m-map">
+  <div class="row d-flex align-content-stretch">
+    {% for realisation in post.realisations %}
+      <div class="col-sm-4">
+        {% include "post/composants/_realisation.html.twig" %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<h4 class="twm-s-title">Localisation</h4>
+<div class="twm-m-map mb-5">
+	<div class="twm-m-map-iframe">
+		<iframe height="310" src="https://maps.google.com/maps?&q={{ post.user.localisation|replace({' ':'+'}) }}&output=embed"></iframe>
+	</div>
+</div>

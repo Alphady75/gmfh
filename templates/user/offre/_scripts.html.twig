@@ -1,0 +1,93 @@
+{{ encore_entry_script_tags("app") }}
+{{ encore_entry_script_tags("collection") }}
+{{ encore_entry_script_tags("mce") }}
+{{ encore_entry_script_tags("loadbtn") }}
+{{ encore_entry_script_tags("desablebtn") }}
+{{ encore_entry_script_tags("offresecteurs") }}
+
+<script>
+  $(function () {
+     $(".js-select2-langues").select2({ tags: true, tokenSeparators: [','] }).on('change', function (e) {
+        let langueLabel = $(this).find("[data-select2-tag=true]");
+        if (langueLabel.length && $.inArray(langueLabel.val(), $(this).val() !== -1)) {
+           $.ajax({
+              url: '/langues/ajax/add/' + langueLabel.val() + '/' + {{ offre.id }},
+              type: "POST"
+           }).done(function (data) {
+              console.log(data)
+              langueLabel.replaceWith(`<option selected value="${data.id
+                 }">${langueLabel.val()
+                 }</option>`)
+           })
+        }
+     })
+  })
+
+  $(function () {
+     $(".js-select2-experiences").select2({ tags: true, tokenSeparators: [','] }).on('change', function (e) {
+        let experienceLabel = $(this).find("[data-select2-tag=true]");
+        if (experienceLabel.length && $.inArray(experienceLabel.val(), $(this).val() !== -1)) {
+           $.ajax({
+              url: '/experiences/ajax/add/' + experienceLabel.val() + '/' + {{ offre.id }},
+               type: "POST"
+            }).done(function (data) {
+               console.log(data)
+               experienceLabel.replaceWith(`<option selected value="${data.id
+                  }">${experienceLabel.val()
+                  }</option>`)
+            })
+         }
+      })
+
+   })
+
+  $(function () {
+     $(".js-select2-responsabilites").select2({ tags: true, tokenSeparators: [','] }).on('change', function (e) {
+        let responsabiliteLabel = $(this).find("[data-select2-tag=true]");
+        if (responsabiliteLabel.length && $.inArray(responsabiliteLabel.val(), $(this).val() !== -1)) {
+           $.ajax({
+              url: '/responsabilites/ajax/add/' + responsabiliteLabel.val() + '/' + {{ offre.id }},
+              type: "POST"
+           }).done(function (data) {
+              console.log(data)
+              responsabiliteLabel.replaceWith(`<option selected value="${data.id
+                 }">${responsabiliteLabel.val()
+                 }</option>`)
+           })
+        }
+     })
+  })
+
+  $(function () {
+     $(".js-select2-horaires").select2({ tags: true, tokenSeparators: [','] }).on('change', function (e) {
+        let horaireLabel = $(this).find("[data-select2-tag=true]");
+        if (horaireLabel.length && $.inArray(horaireLabel.val(), $(this).val() !== -1)) {
+           $.ajax({
+              url: '/horaires/ajax/add/' + horaireLabel.val() + '/' + {{ offre.id }},
+              type: "POST"
+           }).done(function (data) {
+              console.log(data)
+              horaireLabel.replaceWith(`<option selected value="${data.id
+                 }">${horaireLabel.val()
+                 }</option>`)
+           })
+        }
+     })
+  })
+
+  $('#offre_lieuTravail_0').change(function () {
+     $('.localisation').slideToggle();
+  })
+  $('#offre_lieuTravail_1').change(function () {
+     $('.localisation').slideUp();
+  })
+  $('#offre_lieuTravail_2').change(function () {
+     $('.localisation').slideUp();
+  })
+  $('#offre_lieuTravail_3').change(function () {
+     $('.localisation').slideUp();
+  })
+  $('#offre_lieuTravail_4').change(function () {
+     $('.localisation').slideUp();
+  })
+</script>

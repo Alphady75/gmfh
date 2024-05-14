@@ -1,0 +1,48 @@
+{% if clear == true %}
+<a href="{{ path('annuaire') }}" class="custom-button-light text-danger">
+  <span class="btnFetch"><i class="fa fa-filter me-0"></i>x</span>
+</a>
+{% endif %}
+<a href="#" class="custom-button-light btn-outline-light" data-bs-toggle="modal" data-bs-target="#trier-dash-modale">
+  <i class="feather-filter me-0"></i>
+</a>
+<!--Logout Profile Popup-->
+<div class="modal fade twm-model-popup" id="trier-dash-modale" data-bs-backdrop="static" data-bs-keyboard="false"
+  tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header border-bottom">
+        <h4 class="modal-title text-start">Filtrer les resultats</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-2 text-start filter">
+        <div class="twm-sidebar-ele-filter mt-0">
+          <h4 class="section-head-small mb-3">Compétences linguistiques</h4>
+          <div class="mb-4">
+            {{ form_widget(form.langues) }}
+          </div>
+          <h4 class="section-head-small mb-3">Compétences</h4>
+          <div class="mb-4">
+            {{ form_widget(form.competences) }}
+          </div>
+
+          <h4 class="section-head-small mb-3">Services</h4>
+          <div class="mb-4">
+            {{ form_widget(form.services) }}
+          </div>
+
+          <h4 class="section-head-small mb-3">Périmetres</h4>
+          <div class="mb-4">
+            {{ form_widget(form.villes) }}
+          </div>
+        </div>
+        <button type="submit" class="custom-button-light my-3 w-100" data-turbo="false">
+          <span class="btnFetch d-block w-100">
+            <i class="feather-filter"></i>
+            Trier
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

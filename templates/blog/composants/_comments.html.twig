@@ -1,0 +1,75 @@
+<div class="clear" id="comment-list">
+   <div class="comments-area" id="comments">
+      <h3 class="section-head-small mb-4">Commentaires ({{ comments|length }})</h3>
+      <div>
+         <!-- COMMENT LIST START -->
+         <ol class="comment-list">
+            {% for comment in comments %}
+            <li class="comment">
+               <!-- COMMENT BLOCK -->
+               <div class="comment-body">
+
+                  <div class="comment-author">
+                     {% if comment.user %}
+                        
+                     <img class="avatar photo" src="{{ asset('img/avatar.jpg') }}" alt="">
+
+                     {% else %}
+
+                     <img class="avatar photo" src="{{ asset('img/avatar.jpg') }}" alt="">
+
+                     {% endif %}
+                     <div class="comment-meta">
+                        <a href="javascript:void(0);">{{ comment.created|ago }}</a>
+                     </div>
+                  </div>
+                  <div class="comment-info">
+                     <cite class="fn">{{ comment }}</cite>
+                     <p>{{ comment.contenu }}</p>
+                  </div>
+
+               </div>
+            </li>
+            {% else %}
+            <p>Laisser un commentaire...</p>
+            {% endfor %}
+         </ol>
+         <!-- COMMENT LIST END -->
+
+         <!-- LEAVE A REPLY START -->
+         <div class="comment-respond m-t30" id="respond">
+
+            <h3 class="comment-reply-title section-head-small mb-4" id="reply-title">Laisser un commentaire
+               <small>
+                  <a style="display:none;" href="#" id="cancel-comment-reply-link" rel="nofollow">Cancel reply</a>
+               </small>
+            </h3>
+
+            {{ form_start(form, {attr: {class: 'comment-form'}}) }}
+            <div class="row">
+               <div class="comment-form-author col-md-6 mb-3">
+                  {{ form_row(form.nom) }}
+               </div>
+
+               <div class="comment-form-email col-md-6 mb-3">
+                  {{ form_row(form.email) }}
+               </div>
+
+               <div class="comment-form-comment col-md-12 mb-3">
+                  {{ form_row(form.contenu) }}
+               </div>
+
+               <div class="form-submit">
+                  <button type="submit" class="custom-button mb-3 button" data-turbo="false">
+                     <span class="btnFetch d-block w-100">
+                        Soumettre maintenant
+                     </span>
+                 </button>
+               </div>
+            </div>
+            {{ form_end(form) }}
+         </div>
+         <!-- LEAVE A REPLY END -->
+      </div>
+   </div>
+</div>

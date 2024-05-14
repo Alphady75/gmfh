@@ -1,0 +1,39 @@
+{% extends 'client.html.twig' %}
+
+{% block title %}Mes alertes emplois ({{ alerts.getTotalItemCount }})
+{% endblock %}
+{% block titre %}Mes alertes emplois ({{ alerts.getTotalItemCount }})
+{% endblock %}
+{% block text %}Mes alertes emplois ({{ alerts.getTotalItemCount }})
+{% endblock %}
+
+{% block body %}
+
+<div class="row pb-4">
+    <div class="col-sm-6">
+        <div class="">
+            {{ knp_pagination_render(alerts, null, {}, {
+            'align': 'left',
+            'size': 'medium',
+            'rounded': true,
+            }) }}
+        </div>
+    </div>
+    <div class="col-sm-6 text-end">
+        <a href="{{ path('client_alert_new') }}" class="custom-button-light"><i class="fa fa-bell"></i> Créer une
+            alerte</a>
+    </div>
+</div>
+
+
+{% include "client/alert/composants/_data.html.twig" %}
+
+<div class="">
+    {{ knp_pagination_render(alerts, null, {}, {
+    'align': 'right',
+    'size': 'medium',
+    'rounded': true,
+    }) }}
+</div>
+
+{% endblock %}

@@ -1,0 +1,4 @@
+<form method="post" class="d-inline text-center" action="{{ path('admin_user_annuaire', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir masquer ce profil sur annuaire?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('annuaire' ~ user.id) }}">
+    <button class="btn custom-badge bg-warning"><i class="fa fa-eye-slash"></i> Masquer</button>
+</form>

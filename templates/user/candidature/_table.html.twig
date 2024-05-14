@@ -1,0 +1,20 @@
+{% include "user/candidature/_filters.html.twig" %}
+
+<div class="twm-candidates-grid-wrap pt-4">
+   <div class="row">
+      {% for candidature in candidatures %}
+      <div class="col-sm-4">
+         {% include "user/candidature/composants/_client.html.twig" with {user: candidature.user} %}
+      </div>
+      {% else %}
+      <div class="col-sm-12">
+         {% include "partials/base/_nodata.html.twig" %}
+      </div>
+      {% endfor %}
+   </div>
+</div>
+{{ knp_pagination_render(candidatures, null, {}, {
+'align': 'center',
+'size': 'large',
+'rounded': true,
+}) }}

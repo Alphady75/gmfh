@@ -1,0 +1,45 @@
+<!--Logout Profile Popup-->
+<div class="modal fade twm-model-popup" id="signaler-dash-modale" data-bs-backdrop="static" data-bs-keyboard="false"
+	tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-md modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header border-bottom">
+				<h4 class="modal-title text-start">Veuillez noter que cette fonction n'est pas à utiliser pour postuler
+					à une offre mais uniquement pour signaler un abus lié aux catégories ci-dessous</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body p-2">
+
+				{{ form_start(signalerForm, {attr: {class: 'form bg-white radius p-3'}}) }}
+				<strong class="d-block mb-3">{{ post.name }}</strong>
+
+				{{ form_widget(signalerForm) }}
+
+				<div class="alert alert-primary radius">
+					<div class="d-flex">
+						<i class="fa fa-info-circle me-2"></i>
+						<div>
+							<strong>Protégez votre confidentialité</strong>
+							<small class="d-block">
+								Évitez de divulguer des données personnelles telles que votre nom, votre numéro de
+								téléphone ou toute autre information qui permette de vous identifier.
+							</small>
+						</div>
+					</div>
+				</div>
+
+				<button type="submit" class="custom-button bg-blue my-3 button w-100" data-turbo="false">
+					<span class="btnFetch d-block w-100">
+						{{ button_label|default('Envoyer') }}
+					</span>
+				</button>
+
+				<small>
+					Toutes les offres d'emploi sont soumises aux conditions d'utilisation de {{ appName }}. Nous autorisons les utilisateurs à signaler tout service qui contreviendrait à ces termes. Les offres d'emploi peuvent également être signalées par Indeed. Cependant, aucun système de modération n'est parfait, et le fait de signaler un service ne suffit pas à garantir que celle-ci sera supprimée.
+				</small>
+
+				{{ form_end(signalerForm) }}
+			</div>
+		</div>
+	</div>
+</div>

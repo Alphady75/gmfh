@@ -1,0 +1,109 @@
+<footer class="footer-dark bottom-padding" style="background-image: url({{ asset('img/f-bg.jpg') }});">
+      <div class="container">
+        <!-- FOOTER BLOCKES START -->
+        <div class="footer-top border-0 pt-0">
+          <div class="row">
+
+            <div class="col-lg-3 col-md-12">
+
+              <div class="widget widget_about">
+                <div class="logo-footer clearfix">
+                  <a href="{{ path('accueil') }}"><img src="{{ asset('img/logo/trans/3.png') }}" alt=""></a>
+                </div>
+                <ul class="ftr-list">
+                  <li>
+                    <p><span>Addresse :</span>69 Adresse de {{ appName }} </p>
+                  </li>
+                  <li>
+                    <p><span>Email :</span>example@max.com</p>
+                  </li>
+                  <li>
+                    <p><span>Téléphone :</span>555-555-1234</p>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+
+            <div class="col-lg-9 col-md-12">
+              <div class="row">
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="widget widget_services ftr-list-center">
+                    <h3 class="widget-title">Liens rapides</h3>
+                    <ul>
+                      <li><a href="{{ path('accueil') }}">Accueil</a></li>
+                      <li><a href="{{ path('apropos') }}">A propos</a></li>
+                      <li><a href="{{ path('posts') }}">Services</a></li>
+                      <li><a href="{{ path('offres') }}">Recrutement</a></li>
+                      <li><a href="{{ path('annuaire') }}">Annuaires</a></li>
+                      <li><a href="{{ path('blog') }}">Blog</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="widget widget_services ftr-list-center">
+                    <h3 class="widget-title">Employeurs</h3>
+                    <ul>
+                      <li><a href="#">Publier une offre</a></li>
+                      <li><a href="{{ path('blog') }}">Blog</a></li>
+                      <li><a href="{{ path('contact') }}">Contact</a></li>
+                      <li><a href="{{ path('offres') }}">Offres d'emplois</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="widget widget_services ftr-list-center">
+                    <h3 class="widget-title">Ressources utiles</h3>
+                    <ul>
+                      <li><a href="{{ path('faqs') }}">FAQs</a></li>
+                      <li><a href="{{ path('annuaire') }}">Annuaire</a></li>
+                      <li><a href="{{ path('user_complete_compte') }}">Profil</a></li>
+                      <li><a href="{{ path('abonnements') }}">Abonnement</a></li>
+                      <li><a href="{{ path('offres_recherche') }}">Rechercher un emploi</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="widget widget_services ftr-list-center">
+                    <h3 class="widget-title">Légales</h3>
+                    <ul>
+                      <li><a href="{{ path('mentions') }}">Mentions légales</a></li>
+                      <li><a href="{{ path('politiques') }}">Politique de confidentialité</a></li>
+                      <li><a href="{{ path('cgv') }}">CGV</a></li>
+                      <li><a href="{{ path('cgu') }}">CGU</a></li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- FOOTER COPYRIGHT -->
+        <div class="footer-bottom">
+
+          <div class="footer-bottom-info">
+
+            <div class="footer-copy-right">
+              <span class="copyrights-text">Copyright © {{ 'now'|date('Y') }} {{ appName }} Tous droits réservés.</span>
+            </div>
+            <ul class="social-icons">
+              <li><a href="javascript:void(0);" class="fab fa-facebook-f"></a></li>
+              <li><a href="javascript:void(0);" class="fab fa-twitter"></a></li>
+              <li><a href="javascript:void(0);" class="fab fa-instagram"></a></li>
+              <li><a href="javascript:void(0);" class="fab fa-youtube"></a></li>
+            </ul>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </footer>

@@ -1,0 +1,15 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Créer un secteur d'activité{% endblock %}
+{% block titre %}Créer un secteur d'activité{% endblock %}
+{% block text %}Créer un secteur d'activité{% endblock %}
+
+{% block body %}
+
+    {{ include('admin/secteurs_activite/_form.html.twig') }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {% include "admin/secteurs_activite/_scripts.html.twig" %}
+{% endblock %}

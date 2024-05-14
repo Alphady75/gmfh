@@ -1,0 +1,47 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}
+	{{ app.user.completed == false ? "Completer votre profil" : "Mon compte" }}
+{% endblock %}
+
+{% block titre %}
+	{{ app.user.completed == false ? "Completer votre profil" : "Mon compte" }}
+{% endblock %}
+
+{% block text %}
+	{{ app.user.completed == false ? "Completer votre profil" : "Mon compte" }}
+{% endblock %}
+
+{% block body %}
+
+	{% if userCompte == 'PERSONNEL' %}
+
+		{% include "user/espace/form/_personnel.html.twig" %}
+
+	{% endif %}
+
+	{% if userCompte == 'PARTICULIER' %}
+
+		{% include "user/espace/form/_particulier.html.twig" %}
+
+	{% endif %}
+
+	{% if userCompte == 'ADMINISTRATEUR' %}
+
+		{% include "user/espace/form/_personnel.html.twig" %}
+
+	{% endif %}
+
+	{% if userCompte == 'ENTREPRISE' %}
+
+		{% include "user/espace/form/_entreprise.html.twig" %}
+
+	{% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+
+	{% include "partials/espace/_script_complete_profil.html.twig" %}
+
+{% endblock %}

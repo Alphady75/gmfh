@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ offre }}
+{% endblock %}
+
+{% block body %}
+	<!-- INNER PAGE BANNER -->
+	<div class="wt-bnr-inr overlay-wraper bg-center" style="background-image:url({{ asset('img/service/5.jpg') }});">
+		<div class="overlay-main site-bg-white"></div>
+	</div>
+	<!-- INNER PAGE BANNER END -->
+
+	<!-- OUR BLOG START -->
+	<div class="section-full p-t120 p-b90 section-top-less">
+		<div class="container">
+			<h1 class="page-title text-center pb-3">{{ offre }}</h1>
+			<!-- BLOG SECTION START -->
+			<div class="section-content">
+				<div class="row d-flex justify-content-center">
+
+					<div class="col-lg-8 col-md-12">
+						<!-- Candidate detail START -->
+						<div class="cabdidate-de-info bg-white radius p-3">
+							<div class="twm-job-self-wrap">
+								<div class="twm-job-self-info">
+									<div class="twm-job-self-top">
+
+										{% if offre.user.compte == "ENTREPRISE" %}
+											<div class="twm-media-bg">
+												<img src="{% if offre.user.photo %}{{ vich_uploader_asset(offre.user, 'photoFile' ) | imagine_filter('entreprisebanner') }}{% else %}{{ asset('img/banner.png') | imagine_filter('entreprisebanner') }}{% endif %}" alt="#">
+											</div>
+										{% endif %}
+
+										<div class="twm-mid-content">
+
+											<div class="twm-media">
+												{% if offre.user.compte == "ENTREPRISE" %}
+													<img src="{% if offre.user.logo %}{{ vich_uploader_asset(offre.user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="#">
+												{% else %}
+
+													<img src="{% if offre.user.photo %}{{ vich_uploader_asset(offre.user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="#">
+
+												{% endif %}
+											</div>
+
+											<h4 class="twm-job-title">{{ offre }}
+												<span class="twm-job-post-duration">/
+													{{ offre.created|ago }}</span>
+											</h4>
+											<p class="twm-job-address">
+												<i class="feather-map-pin"></i>
+												{{ offre.localisation ? offre.localisation : offre.user.localisation }}</p>
+											<div class="twm-job-self-mid">
+												<div class="twm-job-self-mid-left">
+													<a href="{{ offre.user.siteWeb ?? '#' }}" target="_blank" class="twm-job-websites site-text-primary">{{ offre.user.siteWeb ?? 'Aucun site internet...' }}</a>
+												</div>
+												<div class="twm-job-apllication-area">Fin de la candidature:
+													<span class="twm-job-apllication-date">{{ offre.dateFin|date('d/m/Y') }}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+							{% include "offre/composants/_description.html.twig" %}
+
+						</div>
+
+
+					</div>
+
+					<div class="col-lg-4 col-md-12 rightSidebar">
+
+						{% include "offre/composants/_infos.html.twig" %}
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+	<!-- OUR BLOG END -->
+	{% include "offre/composants/_signaler_offre.html.twig" %}
+
+{% endblock %}
+
+{% block mobilenav %}{% endblock %}

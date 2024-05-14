@@ -1,0 +1,70 @@
+{{ form_start(form, {attr: {class: ''}}) }}
+
+{{ form_errors(form) }}
+
+{{ form_start(form, {attr: {class: ''}}) }}
+<div class="espace-membre my-4">
+	<div class="row">
+		<div class="col-sm-8">
+
+			{% include "user/espace/form/_particulier_form.html.twig" %}
+
+			<div class="text-center pt-3 mb-3">
+				<button class="custom-button button" formnovalidate type="submit">
+					<span class="btnFetch d-block w-100">
+						{{ button_label|default('Enregistrer les modifications') }}
+					</span>
+				</button>
+			</div>
+		</div>
+		<div class="col-sm-4 rightSidebar">
+			<div class="side-bar-2">
+				<div class="panel panel-default bg-white">
+					<div class="panel-heading wt-panel-heading p-a20">
+						<div class="row">
+							<div class="col-7">
+								<h4 class="panel-tittle mb-0 pb-1">Statut du compte</h4>
+								<span class="custom-badge bg-blue text-light shadow border border-light mt-0 status">
+									COMPTE
+									{{ app.user.compte }}
+								</span>
+							</div>
+							<div class="col-5 text-end">
+								<a href="{{ path('user_change_compte') }}" class="ms-auto custom-badge">
+									<i class="fa fa-edit"></i>
+									Modifier</a>
+							</div>
+						</div>
+					</div>
+					<div class="panel-body wt-panel-body py-2 p-a20 m-b30 bg-white radius">
+
+						<p class="new-compte-text">Vendez vos services de manière efficace et rentable avec
+							<strong>{{ appName }}</strong>
+							!
+							<strong>publier</strong>
+							vos annonces, atteindre une audience ciblée et gérer vos offres en toute simplicité. Maximisez vos ventes et développez votre activité dès aujourd'hui !</p>
+					</div>
+				</div>
+				<div class="panel panel-defaulte bg-white">
+					<div class="panel-heading wt-panel-heading p-a20">
+						<h4 class="panel-tittle m-0">
+							<i class="fa fa-info-circle text-primary"></i>
+							Suppression du compte
+						</h4>
+					</div>
+					<div class="panel-body wt-panel-body p-a20 m-b30">
+
+						{% include "user/espace/composants/_delete_politique.html.twig" %}
+
+						<a href="{{ path('user_delete') }}" class="text-danger ms-3">
+							<i class="fa fa-user-lock"></i>
+							Supprimer mon compte</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{ form_end(form, {render_rest: false}) }}

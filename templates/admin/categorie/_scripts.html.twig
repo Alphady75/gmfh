@@ -1,0 +1,27 @@
+{{ encore_entry_script_tags('app') }}
+{{ encore_entry_script_tags('mce') }}
+{{ encore_entry_script_tags('loadbtn') }}
+{{ encore_entry_script_tags('desablebtn') }}
+{{ encore_entry_script_tags('articleimg') }}
+
+<script>
+
+   $(function () {
+     $(".js-select2-souscategories").select2({ tags: true, tokenSeparators: [','] }).on('change', function (e) {
+        let categorieLabel = $(this).find("[data-select2-tag=true]");
+        if (categorieLabel.length && $.inArray(categorieLabel.val(), $(this).val() !== -1)) {
+           $.ajax({
+              url: '/souscategories/ajax/add/' + categorieLabel.val() + '/' + {{ categorie.id }},
+               type: "POST"
+            }).done(function (data) {
+               console.log(data)
+               categorieLabel.replaceWith(`<option selected value="${data.id
+                  }">${categorieLabel.val()
+                  }</option>`)
+            })
+         }
+      })
+
+   })
+
+</script>

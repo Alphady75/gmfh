@@ -1,0 +1,22 @@
+{% extends 'check.html.twig' %}
+
+{% block title %}Echec de soumission!.
+{% endblock %}
+
+{% block img %}
+	{{ asset('img/success.svg') }}
+{% endblock %}
+
+{% block body %}
+
+	<h5 class="mb-0 pb-1 mt-3">Echec de soumission!.</h5>
+
+	<p class="mb-0 pb-1">
+		Nous sommes désolé de vous informer que votre candidature pour le poste de
+		<strong>{{ candidature.offre.intitulePoste }}</strong>
+		n'a pas été soumise, du faite que vous avez déjà postuler pour ce poste.
+	</p>
+
+	<a href="{{ path('offres') }}" class="custom-button-light text-blue me-2">Continuer votre exploration</a>
+
+{% endblock %}

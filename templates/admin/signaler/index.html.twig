@@ -1,0 +1,78 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Notifications ({{ signalers.getTotalItemCount }}){% endblock %}
+{% block titre %}Notifications ({{ signalers.getTotalItemCount }}){% endblock %}
+{% block text %}Notifications ({{ signalers.getTotalItemCount }}){% endblock %}
+
+{% block right %}{% endblock %}
+
+{% block body %}
+
+<div class="table-responsive table-knp">
+    <table class="table twm-table table-hover table-borderless table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Auteur</th>
+                <th>Motif</th>
+                <th>Statut</th>
+                <th class="text-end">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for signaler in signalers %}
+            <tr>
+                <td>{{ signaler.id }}</td>
+                <td>{{ signaler.created ? signaler.created|date('d/m/Y') : '' }}</td>
+                <td><strong><i class="fa fa-user-circle"></i> {{ signaler.user }}</strong></td>
+                <td>{{ signaler.abus }}</td>
+                <td>
+                    {% if signaler.offre %}
+                    <span
+                        class="custom-badge mt-0 bg-{{ signaler.offre.bloquer ? 'warning' : 'success text-light' }}">Offre
+                        {{ signaler.offre.bloquer ? 'Bloquée' : 'Visible sur le site' }}</span>
+                    {% endif %}
+
+                    {% if signaler.post %}
+                    <span
+                        class="custom-badge mt-0 bg-{{ signaler.post.bloquer ? 'warning' : 'success text-light' }}">Annonce
+                        {{ signaler.post.bloquer ? 'Bloquée' : 'Visible sur le site' }}</span>
+                    {% endif %}
+                </td>
+                <td class="text-end">
+                    <div class="d-flex justify-content-end">
+                        <a href="{{ path('admin_signaler_show', {'id': signaler.id}) }}" class="btn btn-sm">
+                            <i class="fa fa-eye"></i>
+                        </a>
+
+                        {% include "admin/signaler/_delete_form.html.twig" %}
+
+                        {% if signaler.offre %}
+                        {{ include('admin/signaler/_gerer_offre_form.html.twig') }}
+                        {% endif %}
+
+                        {% if signaler.post %}
+                        {{ include('admin/signaler/_gerer_post_form.html.twig') }}
+                        {% endif %}
+
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">{% include "partials/base/_nodata.html.twig" %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="mt-3">
+    {{ knp_pagination_render(signalers, null, {}, {
+    'align': 'center',
+    'size': 'medium',
+    'rounded': true,
+    }) }}
+</div>
+
+{% endblock %}

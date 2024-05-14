@@ -1,0 +1,166 @@
+<div class="side-bar mb-0">
+	<div class="twm-s-info2-wrap mb-0">
+		<div class="twm-s-info2">
+			<h4 class="section-head-small mb-3">Informations sur l'offre</h4>
+			<ul class="twm-job-hilites pb-2">
+				<li>
+					<i class="fas fa-align-left"></i>
+					<span class="twm-title">{{ offre }}</span>
+				</li>
+				<li>
+					<i class="fas fa-calendar-alt"></i>
+					<span class="twm-title">Date de publication</span>
+					<div class="twm-s-info-discription">{{ offre.created|date('d/m/Y') }}</div>
+				</li>
+				<li>
+					<i class="fas fa-eye"></i>
+					<span class="twm-title">Nombre de vues</span>
+					<div class="twm-s-info-discription">{{ offre.vues|length }}</div>
+				</li>
+				<li>
+					<i class="fas fa-file-signature"></i>
+					<span class="twm-title">Poste(s) vacant(s)</span>
+					<div class="twm-s-info-discription">{{ offre.effectifRecrutement }}
+						poste{{ offre.effectifRecrutement|length > 1 ? 's' : '' }}</div>
+				</li>
+			</ul>
+			<ul class="twm-job-hilites2 pb-2">
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-map-marker-alt"></i>
+						<span class="twm-title">Localisation</span>
+						<div class="twm-s-info-discription">{{ offre.localisation ? offre.localisation : offre.user.localisation }}</div>
+					</div>
+				</li>
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-user-tie"></i>
+						<span class="twm-title">Intitulé du poste</span>
+						<div class="twm-s-info-discription">{{ offre.intitulePoste }}</div>
+					</div>
+				</li>
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-clock"></i>
+						<span class="twm-title">Années d'experiences</span>
+						<div class="twm-s-info-discription">{{ offre.anneeExperience ?? 'Non requise' }}</div>
+					</div>
+				</li>
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-suitcase"></i>
+						<span class="twm-title">Qualification</span>
+						<div class="twm-s-info-discription">{{ offre.qualification ?? 'Non requise' }}
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-venus-mars"></i>
+						<span class="twm-title">Genre</span>
+						<div class="twm-s-info-discription">{{ offre.genre ?? 'Tout le monde' }}</div>
+					</div>
+				</li>
+				<li>
+					<div class="twm-s-info-inner">
+
+						<i class="fas fa-money-bill-wave"></i>
+						<span class="twm-title">Salaire offert</span>
+						<div class="twm-s-info-discription">{{ offre.salaire }}
+							{{ offre.devise ? offre.devise : currency }} {{ offre.periodicite ? '/' ~ offre.periodicite : '' }}</div>
+					</div>
+				</li>
+
+			</ul>
+
+			{% if app.request.attributes.get('_route') == 'offre_details' ? 'active' : '' %}
+
+				<div class="twm-job-self-bottom pt-3 fixed-bottom-sm">
+
+					{% if app.user and offre.user %}
+
+						{% if offre.isCandidateByUser(app.user) %}
+
+							<button type="'button" class="custom-button desactive bg-secondary" data-turbo="false">
+
+								<i class="fas fa-check-circle small"></i>
+								Déjà postuler
+
+							</button>
+						{% else %}
+							{% include "offre/composants/_postuler_btn.html.twig" %}
+						{% endif %}
+
+					{% else %}
+						{% include "offre/composants/_postuler_btn.html.twig" %}
+					{% endif %}
+
+					<a href="#" class="custom-button-light text-dark mt-3" data-bs-toggle="modal" data-bs-target="#signaler-dash-modale">
+						<i class="fa fa-flag"></i>
+						Signaler
+						<span class="none-mobile">l'offre</span>
+					</a>
+				</div>
+
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+<div class="twm-s-info3-wrap mb-5">
+	<div class="twm-s-info3">
+		<div class="twm-s-info-logo-section">
+			<div class="twm-media">
+				{% if offre.user.compte == "ENTREPRISE" %}
+					<img src="{% if offre.user.logo %}{{ vich_uploader_asset(offre.user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ offre.user }}">
+				{% else %}
+
+					<img src="{% if offre.user.photo %}{{ vich_uploader_asset(offre.user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}" alt="{{ offre.user }}">
+
+				{% endif %}
+			</div>
+			<h4 class="twm-title">{{ offre.user.compte == "ENTREPRISE" ? offre.user.societe : offre.user }}</h4>
+		</div>
+		<ul>
+			{% if offre.user.compte == "ENTREPRISE" %}
+				<li>
+					<div class="twm-s-info-inner">
+						<i class="fas fa-building"></i>
+						<span class="twm-title">Entreprise</span>
+						<div class="twm-s-info-discription">{{ offre.user.societe }}</div>
+					</div>
+				</li>
+			{% endif %}
+			<li>
+				<div class="twm-s-info-inner">
+					<i class="fas fa-mobile-alt"></i>
+					<span class="twm-title">Téléphone</span>
+					<div class="twm-s-info-discription">{{ offre.user.telephone ?? 'Non mentionné' }}</div>
+				</div>
+			</li>
+			<li>
+				<div class="twm-s-info-inner">
+					<i class="fas fa-at"></i>
+					<span class="twm-title">Email</span>
+					<div class="twm-s-info-discription">{{ offre.user.email ?? 'Non mentionné' }}</div>
+				</div>
+			</li>
+			<li>
+				<div class="twm-s-info-inner">
+					<i class="fas fa-desktop"></i>
+					<span class="twm-title">Site Web</span>
+					<div class="twm-s-info-discription">{{ offre.user.siteWeb ?? 'Non mentionné' }}</div>
+				</div>
+			</li>
+			<li>
+				<div class="twm-s-info-inner">
+					<i class="fas fa-map-marker-alt"></i>
+					<span class="twm-title">Addresse</span>
+					<div class="twm-s-info-discription">{{ offre.user.localisation ?? 'Non mentionné' }}</div>
+				</div>
+			</li>
+
+		</ul>
+		<a href="{{ path('annuaire_profile', {nameSlug: offre.user.nameSlug}) }}" class=" custom-button-light">Voir le profil</a>
+	</div>
+</div>

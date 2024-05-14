@@ -1,0 +1,39 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Alert{% endblock %}
+
+{% block body %}
+    <h1>Alert</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ alert.id }}</td>
+            </tr>
+            <tr>
+                <th>Query</th>
+                <td>{{ alert.query }}</td>
+            </tr>
+            <tr>
+                <th>Localisation</th>
+                <td>{{ alert.localisation }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{{ alert.created ? alert.created|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated</th>
+                <td>{{ alert.updated ? alert.updated|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_alert_index') }}">back to list</a>
+
+    <a href="{{ path('user_alert_edit', {'id': alert.id}) }}">edit</a>
+
+    {{ include('user/alert/_delete_form.html.twig') }}
+    
+{% endblock %}

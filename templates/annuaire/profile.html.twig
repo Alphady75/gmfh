@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ user }}
+{% endblock %}
+
+{% block body %}
+	<!-- Employer Detail START -->
+	<div class="section-full  pt-3 p-b90 bg-white">
+
+		<div class="container-fluid">
+			<div class="row">
+				<div
+					class="col-sm-11 mx-auto">
+					<!--Top Wide banner Start-->
+					{% include "annuaire/composants/_user_banner.html.twig" %}
+				</div>
+			</div>
+		</div>
+
+		<!--Top Wide banner End-->
+		<div class="container">
+
+			<div class="section-content">
+				<div class="row d-flex justify-content-center">
+
+					<div class="col-lg-4 col-md-12 rightSidebar">
+
+						{% include "annuaire/composants/_user_sidebar.html.twig" %}
+
+					</div>
+
+					<div
+						class="col-lg-8 col-md-12">
+						<!-- Candidate detail START -->
+						{% include "annuaire/composants/_user_description.html.twig" %}
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- Employer Detail END -->
+
+	{% include "annuaire/composants/_contact_form.html.twig" %}
+
+{% endblock %}
+
+{% block mobilenav %}
+	<nav class="fixed-bottom-sm block-mobile large-btn">
+		<a href="#" class="custom-button-light" data-bs-toggle="modal" data-bs-target="#contact-dash-modale">
+			<i class="fa fa-comment me-2"></i>
+			Contacter
+			{{ user.compte == 'ENTREPRISE' ? user.societe : user }}
+		</a>
+	</nav>
+{% endblock %}

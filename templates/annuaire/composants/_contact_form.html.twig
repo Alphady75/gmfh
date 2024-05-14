@@ -1,0 +1,97 @@
+<!--Logout Profile Popup-->
+<div class="modal fade twm-model-popup" id="contact-dash-modale" data-bs-backdrop="static" data-bs-keyboard="false"
+  tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header border-bottom">
+        <h4 class="modal-title text-start">Contacter {{ user.compte == 'ENTREPRISE' ? user.societe : user }}</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-2">
+        <div class="text-center py-3">
+          {% if user.compte == 'ENTREPRISE' %}
+          <img
+            src="{% if user.logo %}{{ vich_uploader_asset(user, 'logoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}"
+            alt="{{ user }}" class="rounded-circle" width="90">
+          {% else %}
+          <img
+            src="{% if user.photo %}{{ vich_uploader_asset(user, 'photoFile' ) | imagine_filter('largeavatar') }}{% else %}{{ asset('img/banner.png') | imagine_filter('largeavatar') }}{% endif %}"
+            alt="{{ user }}" class="rounded-circle" width="90">
+          {% endif %}
+          <strong class="d-block text-center py-2">{{ user.compte == 'ENTREPRISE' ? user.societe : user }}</strong>
+        </div>
+
+        {{ form_start(contactForm) }}
+        <div class="row">
+
+          <div class="col-lg-12">
+            <div class="form-group mb-3">
+              {{ form_row(contactForm.nom) }}
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="form-group mb-3">
+              {{ form_row(contactForm.email) }}
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="form-group mb-3">
+              {{ form_row(contactForm.telephone) }}
+            </div>
+          </div>
+
+
+          <div class="col-lg-12">
+            <div class="form-group mb-3">
+              {{ form_row(contactForm.message) }}
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="alert alert-primary radius p-2">
+              <div class="d-flex">
+                <i class="fa fa-info-circle me-2"></i>
+                <div>
+                  <strong>Protégez votre confidentialité</strong>
+                  <small class="d-block">
+                    Nous tenons à vous rappeler l'importance de vérifier attentivement l'authenticité et la légitimité
+                    de tout prestataire avec lequel vous envisagez de communiquer ou de faire affaire. Malheureusement,
+                    il existe des individus malveillants qui pourraient essayer d'exploiter notre plateforme à des fins
+                    frauduleuses.
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="custom-button mt-0 mb-1 button w-100" data-turbo="false">
+              <span class="btnFetch d-block w-100">
+                Envoyer maintenant
+                <i class="fa fa-paper-plane"></i>
+              </span>
+            </button>
+            
+            <div class="small-text">
+              <strong class="small">Avant de contacter un prestataire, veuillez prendre les précautions suivantes :</strong>
+            <ul class="ps-3 mb-1 pb-0">
+              <li><small>Vérifiez les avis et les témoignages d'autres clients sur le profil du
+                  prestataire.</small></li>
+              <li><small>Assurez-vous que le prestataire possède des informations de contact valides et
+                  vérifiables.</small></li>
+              <li><small>Évitez de partager des informations personnelles sensibles ou financières via des canaux
+                  non sécurisés.</small></li>
+              <li><small>En cas de doute, n'hésitez pas à nous contacter directement pour obtenir de l'aide et des
+                  conseils supplémentaires.</small></li>
+            </ul>
+            <small>La confiance et la sécurité de nos clients sont notre priorité absolue. Nous apprécions votre
+              vigilance et votre collaboration pour maintenir un environnement sûr et fiable pour tous.</small>
+            </div>
+          </div>
+
+        </div>
+        {{ form_end(contactForm) }}
+      </div>
+    </div>
+  </div>
+</div>

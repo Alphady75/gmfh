@@ -1,0 +1,9 @@
+<div class="blog-post twm-blog-post-h5-outer annonce realisation box-shadow border-0">
+	<div class="wt-post-media">
+		<img src="{{ realisation.image ? vich_uploader_asset(realisation, 'imageFile') | imagine_filter('realisation') : asset('img/banner.png') | imagine_filter('realisation') }}" alt="{{ realisation }}" class="img-fluid">
+	</div>
+	<div class="wt-post-info">
+		<h5 class="pt-2 price">{{ realisation }}</h5>
+		<a href="{{ realisation.lien }}" class="">{{ realisation.lien }}</a>
+	</div>
+</div>

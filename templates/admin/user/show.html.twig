@@ -1,0 +1,142 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ user.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>IsVerified</th>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CodeIsVerified</th>
+                <td>{{ user.codeIsVerified }}</td>
+            </tr>
+            <tr>
+                <th>ResetPasswordCode</th>
+                <td>{{ user.resetPasswordCode }}</td>
+            </tr>
+            <tr>
+                <th>Compte</th>
+                <td>{{ user.compte }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Logo</th>
+                <td>{{ user.logo }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td>{{ user.photo }}</td>
+            </tr>
+            <tr>
+                <th>Niu</th>
+                <td>{{ user.niu }}</td>
+            </tr>
+            <tr>
+                <th>Localisation</th>
+                <td>{{ user.localisation }}</td>
+            </tr>
+            <tr>
+                <th>NomResponsable</th>
+                <td>{{ user.nomResponsable }}</td>
+            </tr>
+            <tr>
+                <th>SiteWeb</th>
+                <td>{{ user.siteWeb }}</td>
+            </tr>
+            <tr>
+                <th>Cv</th>
+                <td>{{ user.cv }}</td>
+            </tr>
+            <tr>
+                <th>Completed</th>
+                <td>{{ user.completed ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Apropo</th>
+                <td>{{ user.apropo }}</td>
+            </tr>
+            <tr>
+                <th>NameSlug</th>
+                <td>{{ user.nameSlug }}</td>
+            </tr>
+            <tr>
+                <th>Societe</th>
+                <td>{{ user.societe }}</td>
+            </tr>
+            <tr>
+                <th>Genre</th>
+                <td>{{ user.genre }}</td>
+            </tr>
+            <tr>
+                <th>Qualification</th>
+                <td>{{ user.qualification }}</td>
+            </tr>
+            <tr>
+                <th>AnneeExperience</th>
+                <td>{{ user.anneeExperience }}</td>
+            </tr>
+            <tr>
+                <th>Salaire</th>
+                <td>{{ user.salaire }}</td>
+            </tr>
+            <tr>
+                <th>Periodicite</th>
+                <td>{{ user.periodicite }}</td>
+            </tr>
+            <tr>
+                <th>Devise</th>
+                <td>{{ user.devise }}</td>
+            </tr>
+            <tr>
+                <th>Annuaire</th>
+                <td>{{ user.annuaire ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{{ user.created ? user.created|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated</th>
+                <td>{{ user.updated ? user.updated|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_user_index') }}">back to list</a>
+
+    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('admin/user/_delete_form.html.twig') }}
+{% endblock %}

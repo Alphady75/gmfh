@@ -1,0 +1,138 @@
+{{ encore_entry_script_tags('app') }}
+{{ encore_entry_script_tags('loadbtn') }}
+{{ encore_entry_script_tags('desablebtn') }}
+{{ encore_entry_script_tags('googlemap') }}
+
+{% if app.user.compte == 'PARTICULIER' %}
+{{ encore_entry_script_tags('collection') }}
+<script>
+   const img = document.querySelector('.photo');
+   const file = document.querySelector('#profil_particulier_photoFile_file');
+
+   file.addEventListener('change', function () {
+      const choosefile = this.files[0];
+      if (choosefile) {
+         const reader = new FileReader();
+         reader.addEventListener('load', function () {
+            img.setAttribute('src', reader.result);
+         })
+         reader.readAsDataURL(choosefile);
+      }
+   })
+</script>
+{% endif %}
+
+{% if app.user.compte == 'ENTREPRISE' %}
+{{ encore_entry_script_tags('mce') }}
+{{ encore_entry_script_tags('usersecteurs') }}
+{{ encore_entry_script_tags('collection') }}
+<script>
+
+   const logoImg = document.querySelector('.logo-img');
+   const logofile = document.querySelector('#profil_entreprise_logoFile_file');
+
+   logofile.addEventListener('change', function () {
+      const logochoosefile = this.files[0];
+      if (logochoosefile) {
+         const reader = new FileReader();
+         reader.addEventListener('load', function () {
+            logoImg.setAttribute('src', reader.result);
+         })
+         reader.readAsDataURL(logochoosefile);
+      }
+   })
+
+   const photobanner = document.querySelector('.photo-banner');
+   const photofile = document.querySelector('#profil_entreprise_photoFile_file');
+
+   photofile.addEventListener('change', function () {
+      const photochoosefile = this.files[0];
+      if (photochoosefile) {
+         const reader = new FileReader();
+         reader.addEventListener('load', function () {
+            photobanner.setAttribute('src', reader.result);
+         })
+         reader.readAsDataURL(photochoosefile);
+      }
+   })
+</script>
+{% endif %}
+
+{% if app.user.compte == 'PERSONNEL' or app.user.compte == 'ADMINISTRATEUR' %}
+{{ encore_entry_script_tags('collection') }}
+<script>
+   const photo = document.querySelector('.photo');
+   const fichier = document.querySelector('#profil_personnel_photoFile_file');
+
+   fichier.addEventListener('change', function () {
+      const choosefile = this.files[0];
+      if (choosefile) {
+         const reader = new FileReader();
+         reader.addEventListener('load', function () {
+            photo.setAttribute('src', reader.result);
+         })
+         reader.readAsDataURL(choosefile);
+      }
+   })
+</script>
+{% endif %}
+
+<script>
+   $(function () {
+      $(".js-select2-competences").select2({
+         tags: true,
+         tokenSeparators: [',']
+      }).on('change', function (e) {
+         let competenceLabel = $(this).find("[data-select2-tag=true]");
+         if (competenceLabel.length && $.inArray(competenceLabel.val(), $(this).val() !== -1)) {
+            $.ajax({
+               url: '/competence/ajax/add/' + competenceLabel.val(),
+               type: "POST"
+            }).done(function (data) {
+               console.log(data)
+               competenceLabel.replaceWith(`<option selected value="${data.id}">${competenceLabel.val()}</option>`)
+            })
+         }
+      })
+   })
+</script>
+
+<script>
+   $(function () {
+      $(".js-select2-services").select2({
+         tags: true,
+         tokenSeparators: [',']
+      }).on('change', function (e) {
+         let serviceLabel = $(this).find("[data-select2-tag=true]");
+         if (serviceLabel.length && $.inArray(serviceLabel.val(), $(this).val() !== -1)) {
+            $.ajax({
+               url: '/service/ajax/add/' + serviceLabel.val(),
+               type: "POST"
+            }).done(function (data) {
+               console.log(data)
+               serviceLabel.replaceWith(`<option selected value="${data.id}">${serviceLabel.val()}</option>`)
+            })
+         }
+      })
+   })
+</script>
+
+<script>
+   $(function () {
+      $(".js-select2-villes").select2({
+         tags: true,
+         tokenSeparators: [',']
+      }).on('change', function (e) {
+         let villeLabel = $(this).find("[data-select2-tag=true]");
+         if (villeLabel.length && $.inArray(villeLabel.val(), $(this).val() !== -1)) {
+            $.ajax({
+               url: '/ville/ajax/add/' + villeLabel.val(),
+               type: "POST"
+            }).done(function (data) {
+               console.log(data)
+               villeLabel.replaceWith(`<option selected value="${data.id}">${villeLabel.val()}</option>`)
+            })
+         }
+      })
+   })
+</script>

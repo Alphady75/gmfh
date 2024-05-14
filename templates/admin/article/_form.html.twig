@@ -1,0 +1,71 @@
+{{ form_start(form, {attr: {class: 'form article-form'}}) }}
+
+<div class="row">
+	<div class="col-sm-8">
+
+		<div class="panel panel-defaulte bg-white">
+			<div class="panel-heading wt-panel-heading p-a20">
+				<h4 class="panel-tittle m-0">
+					<i class="fa fa-camera"></i>
+					Image</h4>
+			</div>
+			<div class="panel-body wt-panel-body p-a20 m-b30">
+				<label for="article_imageFile_file" class="article-img">
+					<img src="{% if article.image %}{{ vich_uploader_asset(article, 'imageFile' ) }}{% else %}{{ asset('img/banner.png') }}{% endif %}" class="photo img-fluid" alt="Avatar de compte">
+					<label class="btn" for="article_imageFile_file">
+						<i class="text-blue fa fa-camera"></i>
+					</label>
+				</label>
+
+				<div class="hidden-file">{{ form_widget(form.imageFile) }}</div>
+				{{ form_errors(form.imageFile) }}
+			</div>
+		</div>
+
+		<div class="panel panel-defaulte bg-white">
+			<div class="panel-heading wt-panel-heading p-a20">
+				<h4 class="panel-tittle m-0">Détails</h4>
+			</div>
+			<div class="panel-body wt-panel-body p-a20 m-b30">
+				{{ form_row(form.name) }}
+				{{ form_row(form.categorie) }}
+				{{ form_row(form.tags) }}
+				{{ form_row(form.resume) }}
+				{{ form_row(form.description) }}
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-4 rightSidebar">
+		<div class="side-bar-2">
+			<div class="panel panel-defaulte bg-white">
+				<div class="panel-heading wt-panel-heading p-a20">
+					<h4 class="panel-tittle m-0">
+						<i class="fa fa-info-circle text-warning"></i>
+						Conseils de sécurité
+					</h4>
+				</div>
+				<div class="panel-body wt-panel-body p-a20 m-b30">
+					<div class="ps-3">
+						<ul class="mb-3 new-compte-text">
+							<li>Assurez-vous que le service que vous publiez est légitime et conforme aux politiques de votre plateforme de publication.</li>
+							<li>Évitez de promouvoir des produits ou des services frauduleux ou illégaux.</li>
+							<li>Assurez-vous de ne pas inclure d'informations sensibles telles que des numéros de carte de crédit, des mots de passe ou d'autres informations personnelles dans le service.</li>
+							<li>
+								Limitez-vous à fournir les détails nécessaires pour promouvoir votre produit ou service de manière sûre.</li>
+							<li>Évitez d'utiliser des images ou des contenus offensants, trompeurs ou inappropriés.</li>
+							<li>Assurez-vous de fournir des informations précises et transparentes.</li>
+						</ul>
+					</div>
+					<p class="text-muted new-compte-text">Vérifiez bien toute les informations de l'élément avant de le publier</p>
+					<button class="custom-button button w-100" type="submit">
+						<span class="btnFetch d-block w-100">
+							{{ button_label|default('Publier') }}
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{ form_end(form, {render_rest: false}) }}

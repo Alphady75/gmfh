@@ -1,0 +1,12 @@
+<a href="{{ path('partenaire_posts_favoris') }}" class="btn custom-button-light p-2 {{ app.request.attributes.get('_route') == 'partenaire_posts_favoris' ? 'bg-blue' : '' }} mb-2">
+	<i class="fa fa-user-friends"></i>
+	Annonces
+</a>
+<a href="{{ path('partenaire_offres_favoris') }}" class="btn custom-button-light p-2 {{ app.request.attributes.get('_route') == 'partenaire_offres_favoris' ? 'bg-blue' : '' }} mb-2">
+	<i class="fa fa-user-check"></i>
+	Offres d'emplois
+</a>
+<a href="{{ path('partenaire_users_favoris') }}" class="btn custom-button-light p-2 {{ app.request.attributes.get('_route') == 'partenaire_users_favoris' ? 'bg-blue' : '' }} mb-2">
+	<i class="fa fa-user-tag"></i>
+	Suivis
+</a>

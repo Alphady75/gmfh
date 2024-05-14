@@ -1,0 +1,55 @@
+<div class="section-full p-t90 p-b90 site-bg-white twm-recommended-Jobs-wrap7">
+		<div class="container">
+			<div class="wt-separator-two-part">
+				<div class="row wt-separator-two-part-row">
+					<div
+						class="col-xl-6 col-lg-6 col-md-12 wt-separator-two-part-left">
+						<!-- TITLE START-->
+						<div class="section-head left wt-small-separator-outer">
+							<div class="wt-small-separator site-text-primary">
+								<div>Recommandées</div>
+							</div>
+							<h2 class="wt-title">Annuaire</h2>
+						</div>
+						<!-- TITLE END-->
+					</div>
+					<div class="col-xl-6 col-lg-6 col-md-12 wt-separator-two-part-right text-right none-mobile">
+						<a href="{{ path('annuaire') }}" class="custom-button">Tout afficher</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="twm-recommended-Jobs-mid-wrap">
+			<div class="twm-recommended-Jobs-mid">
+				<div class="container">
+					<div class="filter-carousal">
+						<!-- Filter Menu -->
+						<div class="twm-jobs-filter">
+							<ul class="btn-filter-wrap">
+								<li class="btn-filter btn-active" data-filter="*">Tout</li>
+								{% for secteur in secteurs(4) %}
+									<li class="btn-filter" data-filter=".secteur-{{ secteur.id }}">{{ secteur.name|u.truncate(15, '...') }}</li>
+								{% endfor %}
+							</ul>
+						</div>
+						<!-- Filter Menu -->
+
+						<!-- IMAGE CAROUSEL START -->
+						<div class="section-content ">
+							<div class="owl-carousel owl-carousel-filter mfp-gallery owl-btn-vertical-center">
+								<!-- COLUMNS 1 -->
+								{% for entreprise in entreprises(12) %}
+									<div class="item secteur-{{ entreprise.secteuractivite.id }}">
+										{% include "annuaire/composants/_entreprise.html.twig" with {user: entreprise} %}
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block-mobile py-3 text-center">
+			<a href="{{ path('annuaire') }}" class="custom-button">Tout afficher</a>
+		</div>
+	</div>

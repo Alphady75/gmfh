@@ -1,0 +1,6 @@
+<form method="post" class="d-inline" action="{{ path('user_offre_delete', {'id': offre.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer cette offre d'emploi?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ offre.id) }}">
+	<button title="Supprimer" class="custom-button bg-danger" data-bs-toggle="tooltip" data-bs-placement="top" type="submit">
+		<span class="far fa-trash-alt"></span> Supprimer 
+	</button>
+</form>

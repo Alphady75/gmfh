@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Services
+{% endblock %}
+
+{% block body %}
+{{ form_start(form, {attr: {class: 'mb-4'}}) }}
+<!--Banner Start-->
+<div class="twm-home3-banner-section site-bg-white bg-cover"
+  style="background-image:url({{ asset('img/service/4.webp') }})">
+  <div class="twm-home3-inner-section">
+    <div class="twm-bnr-mid-section">
+      <h1 class="twm-bnr-title-light">{{ appName }} Services ( {{ posts|length }} resultat{{ posts|length > 1 ? 's' : '' }})</h1>
+      <div class="twm-bnr-discription">Tapez votre mot-clé, puis cliquez sur Rechercher pour trouver votre service idéal.
+      </div>
+      <div class="row">
+        <div class="col-sm-10 mx-auto">
+          <div class="twm-bnr-search-bar">
+            <div class="row">
+              <!--Title-->
+              <div class="form-group col-xl-4 col-lg-6 col-md-6">
+                <label>Quoi ?</label>
+                {{ form_widget(form.query) }}
+              </div>
+
+              <!--All Category-->
+              <div class="form-group col-xl-4 col-lg-6 col-md-6 col-7">
+                <label class="ps-2">Catégories</label>
+                {{ form_widget(form.categorie) }}
+              </div>
+
+              <!--Location--
+                <div class="form-group col-xl-3 col-lg-6 col-md-6">
+                  <label>Emplacement</label>
+                  <div class="twm-inputicon-box">
+                     form_widget(form.localisation) }}
+                    <i class="twm-input-icon fas fa-map-marker-alt"></i>
+                  </div>
+                </div-->
+
+              <!--Find job btn-->
+              <div class="form-group col-xl-4 col-lg-6 col-md-6 col-5 text-end">
+                <button type="submit" class="custom-button">
+                  <span class="btnFetch d-block w-100 text-center">
+                    <i class="fa fa-search me-2"></i>
+                    <span class="none-mobile">{{ button_label|default('Rechercher') }}</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Banner End-->
+
+<!-- OUR BLOG START -->
+<div class="section-full p-t50 p-b50">
+  <div class="container">
+    {% include "post/composants/_filters.html.twig" %}
+    <div class="grid-four">
+
+      {% for post in posts %}
+      {% include "post/composants/_card.html.twig" %}
+      {% endfor %}
+
+    </div>
+
+    {% include "post/composants/_pagination.html.twig" %}
+  </div>
+</div>
+<!-- OUR BLOG END -->
+{{ form_end(form) }}
+{% endblock %}

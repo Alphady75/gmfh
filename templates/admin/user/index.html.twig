@@ -1,0 +1,53 @@
+{% extends 'espace.html.twig' %}
+
+{% block title %}Comptes utilisateurs ({{ users.getTotalItemCount }})
+{% endblock %}
+{% block titre %}Comptes utilisateurs ({{ users.getTotalItemCount }})
+{% endblock %}
+{% block text %}Comptes utilisateurs ({{ users.getTotalItemCount }})
+{% endblock %}
+
+{% block right %}
+	<a href="#" class="custom-button text-center mt-3" data-bs-toggle="modal" data-bs-target="#categorie-dash-modale">
+		<i class="fa fa-plus"></i>
+		Nouveau compte
+	</a>
+{% endblock %}
+
+{% block body %}
+
+<!--Logout Profile Popup-->
+<div class="modal fade twm-model-popup" id="categorie-dash-modale" data-bs-backdrop="static" data-bs-keyboard="false"
+   tabindex="-1" aria-hidden="true">
+   <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title text-start">Créer un nouveau compte</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            {% include "admin/user/_form.html.twig" %}
+         </div>
+      </div>
+   </div>
+</div>
+
+	{% include "admin/user/_filters.html.twig" %}
+
+	<div class="grid-five mb-4">
+		{% for user in users %}
+			{% include "admin/user/_card.html.twig" %}
+		{% else %}
+			<div class="">
+				{% include "partials/base/_nodata.html.twig" %}
+			</div>
+		{% endfor %}
+	</div>
+	{{ knp_pagination_render(users, null, {}, {
+        'align': 'center',
+        'size': 'medium',
+        'rounded': true,
+        })
+    }}
+
+{% endblock %}

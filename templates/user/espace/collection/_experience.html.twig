@@ -1,0 +1,15 @@
+<div class="collection-form bg-white">
+	<div class="row">
+        <div class="col-6">{{ form_row(form.startAt) }}</div>
+        <div class="col-6">{{ form_row(form.endAt) }}</div>
+	</div>
+	{{ form_row(form.poste) }}
+	{{ form_row(form.entreprise) }}
+	{{ form_row(form.description) }}
+	<div class="text-end pb-0 pt-2">
+		<button type="button" class="btn btn-outline-danger btn-remove btn-sm">
+			<i class="fa fa-trash"></i>
+			<span class="hidden">Supprimer</span>
+		</button>
+	</div>
+</div>

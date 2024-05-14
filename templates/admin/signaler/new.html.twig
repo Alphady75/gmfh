@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Signaler{% endblock %}
+
+{% block body %}
+    <h1>Create new Signaler</h1>
+
+    {{ include('admin/signaler/_form.html.twig') }}
+
+    <a href="{{ path('admin_signaler_index') }}">back to list</a>
+{% endblock %}
